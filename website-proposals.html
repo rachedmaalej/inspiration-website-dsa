@@ -1,0 +1,2780 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propositions Site Web — Domaine Sidi Abdallah</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+SC:wght@400;600&family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&family=EB+Garamond:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=Instrument+Serif&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&family=Space+Mono&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+/* ============================================================
+   LAYER 1: BASE RESET & SHARED UTILITIES
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #f5f4f0;
+    color: #1a1a1a;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Page Header --- */
+.page-header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: #fff;
+    border-bottom: 1px solid #e8e5dc;
+}
+.page-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #2d5016;
+    margin-bottom: 8px;
+}
+.page-header .page-subtitle {
+    font-size: 15px;
+    color: #666;
+    font-weight: 400;
+    margin-bottom: 4px;
+}
+.page-header .page-meta {
+    font-size: 12px;
+    color: #aaa;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* --- Proposal Navigator (Sticky Tabs) --- */
+.proposal-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid #e0ddd5;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+}
+.proposal-nav-inner {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.proposal-nav-inner::-webkit-scrollbar { display: none; }
+
+.proposal-nav-item {
+    flex: 1;
+    min-width: 170px;
+    padding: 14px 18px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+.proposal-nav-item:hover {
+    background: rgba(45,80,22,0.03);
+}
+.proposal-nav-item.active {
+    border-bottom-color: #2d5016;
+    background: rgba(45,80,22,0.05);
+}
+.nav-number {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #aaa;
+    margin-bottom: 2px;
+}
+.proposal-nav-item.active .nav-number { color: #2d5016; }
+.nav-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 1px;
+}
+.nav-style {
+    display: block;
+    font-size: 11px;
+    color: #999;
+    font-weight: 400;
+}
+
+/* --- Proposals Container --- */
+.proposals-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.proposal-section {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+.proposal-section.active { display: block; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Rationale Panel (shared structure) --- */
+.rationale-panel {
+    background: #fff;
+    border-radius: 12px;
+    padding: 36px 40px;
+    margin-bottom: 32px;
+    border: 1px solid #e8e5dc;
+}
+.rationale-panel h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #2d5016;
+    margin-bottom: 6px;
+}
+.rationale-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-style: italic;
+    color: #333;
+    margin-bottom: 20px;
+}
+.rationale-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+.rationale-item strong {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 4px;
+}
+.rationale-item span {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.5;
+}
+.rationale-colors {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 16px;
+}
+.color-swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px #ddd;
+    position: relative;
+}
+.color-swatch .swatch-label {
+    position: absolute;
+    top: 38px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    color: #999;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+}
+.rationale-fonts {
+    display: flex;
+    gap: 32px;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #f0ede5;
+}
+.font-sample {
+    flex: 1;
+}
+.font-sample label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 6px;
+}
+
+/* --- Browser Chrome Frame --- */
+.mockup-frame {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e0ddd5;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+.browser-chrome {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    background: #f0ede8;
+    border-bottom: 1px solid #e0ddd5;
+    gap: 12px;
+}
+.browser-dots {
+    display: flex;
+    gap: 6px;
+}
+.browser-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.browser-dots span:nth-child(1) { background: #ff5f57; }
+.browser-dots span:nth-child(2) { background: #febd2e; }
+.browser-dots span:nth-child(3) { background: #28c840; }
+.browser-url {
+    flex: 1;
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    background: #fff;
+    padding: 5px 12px;
+    border-radius: 6px;
+    border: 1px solid #e0ddd5;
+}
+
+.mockup-content {
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- Scroll Reveal --- */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.animate-on-scroll.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Icon-Flip Interaction (Elyssa's concept: pillar icon → sub-brand logo) --- */
+.flip-card {
+    perspective: 600px;
+    cursor: pointer;
+    display: inline-block;
+}
+.flip-card-inner {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+.flip-card:hover .flip-card-inner,
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+.flip-card-front {
+    font-size: 28px;
+}
+.flip-card-back {
+    transform: rotateY(180deg);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.3;
+    padding: 8px;
+}
+
+/* Flip card color variants per proposal */
+.hd-flip .flip-card-back {
+    background: #2D5016;
+    color: #FAF6F0;
+    font-family: 'Cormorant SC', serif;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+}
+.ta-flip .flip-card-back {
+    background: #C2703E;
+    color: #fff;
+    font-family: 'Caveat', cursive;
+    font-size: 13px;
+    letter-spacing: 0;
+    text-transform: none;
+}
+.ls-flip .flip-card-back {
+    background: #3D2B1F;
+    color: #D4A843;
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 1px;
+}
+
+/* --- Image/Video Placeholders (progressive content loading) --- */
+.placeholder-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 12px;
+    color: #999;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.placeholder-img.landscape {
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(0,0,0,0.02),
+        rgba(0,0,0,0.02) 10px,
+        transparent 10px,
+        transparent 20px
+    ), linear-gradient(135deg, #f0ede5, #e8e5dc);
+}
+.placeholder-img .ph-icon {
+    font-size: 28px;
+    opacity: 0.4;
+}
+
+/* --- Page Footer --- */
+.page-footer {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid #e8e5dc;
+    background: #fff;
+    margin-top: 40px;
+}
+.page-footer p {
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 4px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 1023px) {
+    .rationale-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 767px) {
+    .page-header h1 { font-size: 22px; letter-spacing: 2px; }
+    .proposal-nav-item { min-width: 130px; padding: 10px 14px; }
+    .rationale-panel { padding: 24px 20px; }
+    .rationale-grid { grid-template-columns: 1fr; }
+    .rationale-fonts { flex-direction: column; gap: 16px; }
+    .proposals-container { padding: 20px 12px; }
+}
+
+
+/* ============================================================
+   PROPOSAL 1: HERITAGE DOREE — Classic Luxury
+   ============================================================ */
+
+/* --- Nav --- */
+.hd-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 32px;
+    background: #FAF6F0;
+    border-bottom: 1px solid #E0D5C1;
+}
+.hd-nav-links {
+    font-family: 'Cormorant SC', serif;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #555;
+}
+.hd-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #2D5016;
+    margin: 0 40px;
+    white-space: nowrap;
+}
+
+/* --- Hero --- */
+.hd-hero {
+    position: relative;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 40px;
+    text-align: center;
+    background:
+        radial-gradient(ellipse at 50% 120%, rgba(184,134,11,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 30% 80%, rgba(45,80,22,0.06) 0%, transparent 45%),
+        linear-gradient(180deg, #FAF6F0 0%, #FFF8EE 100%);
+    /* Subtle diagonal pinstripe */
+    background-image:
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 20px,
+            rgba(184,134,11,0.03) 20px,
+            rgba(184,134,11,0.03) 21px
+        ),
+        radial-gradient(ellipse at 50% 120%, rgba(184,134,11,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 30% 80%, rgba(45,80,22,0.06) 0%, transparent 45%),
+        linear-gradient(180deg, #FAF6F0 0%, #FFF8EE 100%);
+}
+
+/* Gold corner ornaments on hero */
+.hd-hero::before,
+.hd-hero::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-color: #B8860B;
+    border-style: solid;
+}
+.hd-hero::before { top: 24px; left: 24px; border-width: 2px 0 0 2px; }
+.hd-hero::after { top: 24px; right: 24px; border-width: 2px 2px 0 0; }
+.hd-hero-bl, .hd-hero-br {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-color: #B8860B;
+    border-style: solid;
+}
+.hd-hero-bl { bottom: 24px; left: 24px; border-width: 0 0 2px 2px; }
+.hd-hero-br { bottom: 24px; right: 24px; border-width: 0 2px 2px 0; }
+
+.hd-hero-kicker {
+    font-family: 'Cormorant SC', serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #B8860B;
+    margin-bottom: 16px;
+}
+.hd-hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 400;
+    line-height: 1.15;
+    color: #2D5016;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+}
+.hd-hero-subtitle {
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    font-style: italic;
+}
+.hd-btn-primary {
+    font-family: 'Cormorant SC', serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 14px 36px;
+    background: #2D5016;
+    color: #FAF6F0;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.hd-btn-primary:hover {
+    background: #B8860B;
+}
+
+/* --- Season Bar --- */
+.hd-season-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: #2D5016;
+    color: #FAF6F0;
+    font-family: 'Cormorant SC', serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* --- Pillars Section --- */
+.hd-pillars {
+    padding: 60px 40px;
+    background: #FAF6F0;
+}
+.hd-section-title {
+    font-family: 'Cormorant SC', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #B8860B;
+    text-align: center;
+    margin-bottom: 40px;
+}
+.hd-section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: #B8860B;
+    margin: 12px auto 0;
+}
+.hd-pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.hd-pillar-card {
+    position: relative;
+    background: #FFFDF7;
+    padding: 40px 32px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.hd-pillar-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+}
+/* Gold corner ornaments */
+.hd-pillar-card::before,
+.hd-pillar-card::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: #B8860B;
+    border-style: solid;
+}
+.hd-pillar-card::before { top: 8px; left: 8px; border-width: 1.5px 0 0 1.5px; }
+.hd-pillar-card::after { top: 8px; right: 8px; border-width: 1.5px 1.5px 0 0; }
+.hd-pillar-ornament-bl, .hd-pillar-ornament-br {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: #B8860B;
+    border-style: solid;
+}
+.hd-pillar-ornament-bl { bottom: 8px; left: 8px; border-width: 0 0 1.5px 1.5px; }
+.hd-pillar-ornament-br { bottom: 8px; right: 8px; border-width: 0 1.5px 1.5px 0; }
+
+.hd-pillar-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+.hd-pillar-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #2D5016;
+    margin-bottom: 4px;
+}
+.hd-pillar-sub {
+    font-family: 'Cormorant SC', serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #B8860B;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+.hd-pillar-card p:not(.hd-pillar-sub) {
+    font-family: 'EB Garamond', serif;
+    font-size: 15px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+.hd-pillar-link {
+    font-family: 'Cormorant SC', serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #B8860B;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+.hd-pillar-link:hover { color: #2D5016; }
+
+/* --- Quote --- */
+.hd-quote {
+    padding: 60px 40px;
+    text-align: center;
+    background: #FAF6F0;
+}
+.hd-quote-rule {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #B8860B, transparent);
+    margin: 0 auto 24px;
+}
+.hd-quote-rule:last-child { margin: 24px auto 0; }
+.hd-quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    color: #444;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* --- Booking Bar --- */
+.hd-booking-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 16px 32px;
+    background: #FFFDF7;
+    border-top: 2px solid #B8860B;
+}
+.hd-booking-bar span {
+    font-family: 'Cormorant SC', serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #555;
+    text-transform: uppercase;
+}
+.hd-btn-book {
+    font-family: 'Cormorant SC', serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 28px;
+    background: #2D5016;
+    color: #FAF6F0;
+    border: none;
+    cursor: pointer;
+}
+.hd-btn-secondary {
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    color: #888;
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   PROPOSAL 2: AGRUME — Quiet Luxury / Minimalist
+   ============================================================ */
+
+.ag-mockup {
+    background: #FEFDFB;
+    min-height: 800px;
+}
+
+/* --- Nav --- */
+.ag-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 40px;
+    background: transparent;
+}
+.ag-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: #1C1C1A;
+    letter-spacing: 1px;
+}
+.ag-hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+.ag-hamburger span {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: #1C1C1A;
+}
+
+/* --- Hero --- */
+.ag-hero {
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 40px 80px;
+    text-align: center;
+    position: relative;
+    background: #FEFDFB;
+}
+.ag-hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 64px;
+    font-weight: 400;
+    color: #1C1C1A;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+.ag-hero-subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: #8A8680;
+    max-width: 400px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+.ag-hero-line {
+    width: 1px;
+    height: 60px;
+    background: #E5E0D8;
+    margin-bottom: 16px;
+}
+.ag-hero-season {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #8A8680;
+}
+/* Citrus wheel decoration */
+.ag-citrus-wheel {
+    position: absolute;
+    top: 60px;
+    right: 60px;
+    width: 100px;
+    height: 100px;
+    border: 1px solid rgba(58,107,34,0.12);
+    border-radius: 50%;
+    animation: ag-spin 60s linear infinite;
+}
+.ag-citrus-wheel::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 70%;
+    height: 70%;
+    border: 1px solid rgba(58,107,34,0.08);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+.ag-citrus-wheel::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    width: 1px; height: 100%;
+    background: rgba(58,107,34,0.06);
+    transform-origin: center;
+}
+.ag-citrus-segment {
+    position: absolute;
+    top: 0; left: 50%;
+    width: 1px; height: 100%;
+    background: rgba(58,107,34,0.06);
+}
+.ag-citrus-segment:nth-child(2) { transform: rotate(45deg); }
+.ag-citrus-segment:nth-child(3) { transform: rotate(90deg); }
+.ag-citrus-segment:nth-child(4) { transform: rotate(135deg); }
+
+@keyframes ag-spin { to { transform: rotate(360deg); } }
+
+/* --- Pillar Sections (vertical, full-height) --- */
+.ag-pillar-section {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 40px;
+    text-align: center;
+    position: relative;
+    border-top: 0.5px solid #E5E0D8;
+}
+.ag-pillar-section:nth-child(even) {
+    background: #F5F2ED;
+}
+.ag-pillar-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 160px;
+    line-height: 1;
+    color: rgba(58,107,34,0.04);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+.ag-pillar-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: #1C1C1A;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+}
+.ag-pillar-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #8A8680;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+.ag-pillar-desc {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: #666;
+    max-width: 440px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+.ag-pillar-link {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #3A6B22;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Floating Booking Circle --- */
+.ag-booking-circle {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #3A6B22;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.ag-booking-circle:hover {
+    width: 160px;
+    border-radius: 24px;
+}
+.ag-booking-circle .ag-book-text {
+    opacity: 0;
+    transition: opacity 0.3s 0.1s;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-left: 6px;
+}
+.ag-booking-circle:hover .ag-book-text { opacity: 1; }
+
+
+/* ============================================================
+   PROPOSAL 3: TERRE D'AGRUMES — Warm Mediterranean
+   ============================================================ */
+
+.ta-mockup {
+    background: #FFF8F0;
+    min-height: 800px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Paper texture overlay */
+.ta-texture {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Organic blob backgrounds */
+.ta-blob {
+    position: absolute;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    animation: ta-morph 10s ease-in-out infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+.ta-blob-1 {
+    width: 300px; height: 300px;
+    background: rgba(194,112,62,0.06);
+    top: -50px; right: -80px;
+}
+.ta-blob-2 {
+    width: 200px; height: 200px;
+    background: rgba(91,111,71,0.05);
+    bottom: 200px; left: -60px;
+    animation-delay: -5s;
+}
+@keyframes ta-morph {
+    0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    33% { border-radius: 50% 50% 30% 70% / 60% 40% 60% 40%; }
+    66% { border-radius: 70% 30% 50% 50% / 40% 60% 40% 60%; }
+}
+
+/* --- Nav --- */
+.ta-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    background: rgba(255,248,240,0.9);
+    border-bottom: 1px solid rgba(194,112,62,0.15);
+    position: relative;
+    z-index: 1;
+}
+.ta-logo {
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    color: #3D2B1F;
+}
+.ta-nav-links {
+    display: flex;
+    gap: 24px;
+}
+.ta-nav-link {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    color: #666;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+}
+.ta-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 2.5px;
+    background: #C2703E;
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+.ta-nav-link:hover::after { width: 100%; }
+.ta-btn-nav {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    padding: 8px 20px;
+    background: #C2703E;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.ta-btn-nav:hover { background: #A85C2E; }
+
+/* --- Hero (Split) --- */
+.ta-hero {
+    display: flex;
+    min-height: 380px;
+    position: relative;
+    z-index: 1;
+}
+.ta-hero-text {
+    flex: 1.2;
+    padding: 60px 40px 60px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.ta-hero-welcome {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: #C2703E;
+    margin-bottom: 8px;
+}
+.ta-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 700;
+    color: #3D2B1F;
+    line-height: 1.15;
+    margin-bottom: 16px;
+}
+.ta-hero-desc {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: #666;
+    line-height: 1.7;
+    max-width: 380px;
+    margin-bottom: 28px;
+}
+.ta-btn-hero {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 32px;
+    background: #5B6F47;
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background 0.3s;
+}
+.ta-btn-hero:hover { background: #4A5D3A; }
+
+/* CSS collage */
+.ta-hero-collage {
+    flex: 0.8;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+.ta-collage-shape {
+    position: absolute;
+    border-radius: 24px;
+}
+.ta-shape-1 {
+    width: 180px; height: 220px;
+    background: linear-gradient(135deg, #C2703E, #E8913A);
+    top: 40px; left: 20px;
+    transform: rotate(-5deg);
+}
+.ta-shape-2 {
+    width: 140px; height: 170px;
+    background: linear-gradient(135deg, #5B6F47, #7A9463);
+    top: 80px; left: 120px;
+    transform: rotate(3deg);
+    z-index: 1;
+}
+.ta-shape-3 {
+    width: 120px; height: 140px;
+    background: linear-gradient(135deg, #F0E6D4, #E8D5B8);
+    bottom: 40px; left: 60px;
+    transform: rotate(-2deg);
+}
+/* CSS Citrus fruit */
+.ta-citrus-fruit {
+    position: absolute;
+    bottom: 80px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, #FFD54F, #E8913A 70%, #C2703E);
+    z-index: 2;
+}
+.ta-citrus-fruit::after {
+    content: '';
+    position: absolute;
+    top: -8px; left: 50%;
+    width: 12px; height: 16px;
+    background: #5B6F47;
+    border-radius: 0 80% 0 80%;
+    transform: translateX(-50%) rotate(-15deg);
+}
+
+/* --- Pillars (Staggered Cards) --- */
+.ta-pillars {
+    padding: 48px 32px 60px;
+    position: relative;
+    z-index: 1;
+}
+.ta-pillars-title {
+    font-family: 'Caveat', cursive;
+    font-size: 18px;
+    color: #C2703E;
+    text-align: center;
+    margin-bottom: 8px;
+}
+.ta-pillars-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #3D2B1F;
+    text-align: center;
+    margin-bottom: 36px;
+}
+.ta-pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 720px;
+    margin: 0 auto;
+}
+.ta-pillar-card {
+    background: #FFFDFB;
+    border-radius: 20px;
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+.ta-pillar-card:nth-child(odd) { transform: rotate(-1.5deg); }
+.ta-pillar-card:nth-child(even) { transform: rotate(1.5deg); }
+.ta-pillar-card:hover {
+    transform: rotate(0deg) translateY(-4px) !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+.ta-pillar-card:nth-child(1) { border-top: 4px solid #C2703E; }
+.ta-pillar-card:nth-child(2) { border-top: 4px solid #5B6F47; }
+.ta-pillar-card:nth-child(3) { border-top: 4px solid #E8913A; }
+.ta-pillar-card:nth-child(4) { border-top: 4px solid #F0E6D4; }
+
+.ta-pillar-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #3D2B1F;
+    margin-bottom: 4px;
+}
+.ta-pillar-script {
+    font-family: 'Caveat', cursive;
+    font-size: 15px;
+    color: #C2703E;
+    margin-bottom: 10px;
+}
+.ta-pillar-card p:not(.ta-pillar-script) {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* --- Booking Bar (context-aware) --- */
+.ta-booking-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 14px 24px;
+    background: #C2703E;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+}
+.ta-booking-bar span {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+}
+.ta-booking-bar .ta-whatsapp {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    padding: 8px 20px;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.ta-btn-book-warm {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 24px;
+    background: #fff;
+    color: #C2703E;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+/* ============================================================
+   PROPOSAL 4: EDITO — Bold Contemporary / Editorial
+   ============================================================ */
+
+.ed-mockup {
+    background: #FFFFFF;
+    min-height: 800px;
+}
+
+/* --- Nav --- */
+.ed-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    background: #FFFFFF;
+    border-bottom: 2px solid #0F0F0F;
+}
+.ed-logo {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    color: #0F0F0F;
+}
+.ed-nav-links {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+}
+.ed-nav-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.15s;
+}
+.ed-nav-link:hover { color: #2D5016; }
+.ed-btn-pill {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    background: #2D5016;
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.ed-btn-pill:hover { background: #B8860B; }
+
+/* --- Hero (Split) --- */
+.ed-hero {
+    display: flex;
+    min-height: 420px;
+}
+.ed-hero-left {
+    flex: 1;
+    background: #2D5016;
+    padding: 60px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.ed-hero-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+.ed-hero-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 56px;
+    color: #FFFFFF;
+    line-height: 1.05;
+    margin-bottom: 20px;
+}
+.ed-hero-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    max-width: 360px;
+}
+
+/* Geometric composition */
+.ed-hero-right {
+    flex: 1;
+    background: #F2F2F2;
+    position: relative;
+    overflow: hidden;
+}
+.ed-geo {
+    position: absolute;
+    border-radius: 0;
+}
+.ed-geo-1 {
+    width: 200px; height: 200px;
+    background: #2D5016;
+    opacity: 0.08;
+    top: 20px; right: 20px;
+}
+.ed-geo-2 {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: #B8860B;
+    opacity: 0.12;
+    bottom: 60px; left: 40px;
+}
+.ed-geo-3 {
+    width: 100px; height: 300px;
+    background: #2D5016;
+    opacity: 0.05;
+    top: 40px; left: 50%;
+    transform: rotate(15deg);
+}
+.ed-geo-4 {
+    width: 80px; height: 80px;
+    background: #E8F5E0;
+    bottom: 20px; right: 40px;
+}
+.ed-geo-line {
+    width: 1px; height: 200px;
+    background: #0F0F0F;
+    opacity: 0.1;
+    top: 30px; left: 30%;
+}
+
+/* --- Marquee Ticker --- */
+.ed-ticker {
+    overflow: hidden;
+    white-space: nowrap;
+    border-top: 1px solid #0F0F0F;
+    border-bottom: 1px solid #0F0F0F;
+    padding: 14px 0;
+    background: #fff;
+}
+.ed-ticker-inner {
+    display: inline-block;
+    animation: ed-scroll 25s linear infinite;
+}
+.ed-ticker-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #333;
+}
+.ed-ticker-sep {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #B8860B;
+    border-radius: 50%;
+    margin: 0 24px;
+    vertical-align: middle;
+}
+@keyframes ed-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* --- Editorial Sections --- */
+.ed-sections {
+    padding: 0;
+}
+.ed-spread {
+    display: flex;
+    min-height: 260px;
+    border-bottom: 1px solid #eee;
+}
+.ed-spread:nth-child(even) { flex-direction: row-reverse; }
+.ed-spread-num-side {
+    flex: 0.4;
+    padding: 40px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+}
+.ed-section-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 140px;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px #2D5016;
+    opacity: 0.12;
+}
+.ed-spread-content {
+    flex: 0.6;
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.ed-spread-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 8px;
+}
+.ed-spread-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px;
+    color: #0F0F0F;
+    margin-bottom: 12px;
+}
+.ed-spread-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #555;
+    line-height: 1.7;
+    max-width: 55ch;
+    margin-bottom: 16px;
+}
+.ed-spread-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #2D5016;
+    cursor: pointer;
+    transition: color 0.15s;
+}
+.ed-spread-link:hover { color: #B8860B; }
+
+/* --- Booking Bar (Full-width green) --- */
+.ed-booking-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 18px 32px;
+    background: #2D5016;
+}
+.ed-booking-bar .ed-book-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+}
+.ed-booking-input {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.7);
+    border-radius: 4px;
+}
+.ed-booking-input::placeholder { color: rgba(255,255,255,0.5); }
+.ed-btn-book-white {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 10px 28px;
+    background: #fff;
+    color: #2D5016;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.ed-btn-book-white:hover { background: #E8F5E0; }
+
+
+/* ============================================================
+   PROPOSAL 5: LES SAISONS — Immersive Storytelling
+   ============================================================ */
+
+.ls-mockup {
+    min-height: 800px;
+    overflow: hidden;
+}
+
+/* --- Nav --- */
+.ls-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px;
+    position: relative;
+    z-index: 10;
+}
+.ls-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #3D2B1F;
+    letter-spacing: 0.5px;
+}
+.ls-nav-dots {
+    display: flex;
+    gap: 12px;
+}
+.ls-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(61,43,31,0.15);
+    transition: all 0.3s;
+}
+.ls-dot.active { background: #D4A843; transform: scale(1.3); }
+.ls-nav-cta {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #3D2B1F;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* --- Hero (Dawn Sky) --- */
+.ls-hero {
+    min-height: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 40px;
+    background:
+        radial-gradient(ellipse at 50% 100%, rgba(212,168,67,0.2) 0%, transparent 50%),
+        linear-gradient(180deg, #F7E8D4 0%, #FFF0DD 40%, #FFFDF8 100%);
+}
+.ls-hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: #3D2B1F;
+    line-height: 1.2;
+    max-width: 600px;
+    margin-bottom: 24px;
+}
+.ls-hero-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: #B8860B;
+}
+.ls-scroll-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 40px;
+}
+.ls-scroll-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #999;
+}
+.ls-scroll-arrow {
+    width: 1px;
+    height: 32px;
+    background: linear-gradient(to bottom, #ccc, transparent);
+    animation: ls-bounce 2s ease-in-out infinite;
+}
+@keyframes ls-bounce {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(8px); opacity: 0.4; }
+}
+
+/* --- Chapter Sections (color-shifting) --- */
+.ls-chapter {
+    padding: 60px 40px;
+    text-align: center;
+    position: relative;
+    transition: background-color 0.6s ease;
+}
+.ls-chapter-1 { background: #FFF8EE; }
+.ls-chapter-2 { background: #EEF4F0; }
+.ls-chapter-3 { background: #FFF5E6; }
+.ls-chapter-4 { background: #1A2E0D; }
+
+.ls-time-marker {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+.ls-chapter-1 .ls-time-marker { color: #4A7C2E; }
+.ls-chapter-2 .ls-time-marker { color: #3D7A7A; }
+.ls-chapter-3 .ls-time-marker { color: #B8860B; }
+.ls-chapter-4 .ls-time-marker { color: #D4A843; }
+
+.ls-chapter-title {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+.ls-chapter-1 .ls-chapter-title { color: #2D3B1F; }
+.ls-chapter-2 .ls-chapter-title { color: #1C3A3A; }
+.ls-chapter-3 .ls-chapter-title { color: #3D2B1F; }
+.ls-chapter-4 .ls-chapter-title { color: #F5F2ED; }
+
+.ls-chapter-label {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    margin-bottom: 16px;
+}
+.ls-chapter-1 .ls-chapter-label { color: #888; }
+.ls-chapter-2 .ls-chapter-label { color: #7A9A9A; }
+.ls-chapter-3 .ls-chapter-label { color: #999; }
+.ls-chapter-4 .ls-chapter-label { color: rgba(245,242,237,0.5); }
+
+.ls-chapter-desc {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 auto 24px;
+}
+.ls-chapter-1 .ls-chapter-desc { color: #555; }
+.ls-chapter-2 .ls-chapter-desc { color: #556; }
+.ls-chapter-3 .ls-chapter-desc { color: #555; }
+.ls-chapter-4 .ls-chapter-desc { color: rgba(245,242,237,0.7); }
+
+.ls-chapter-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+}
+.ls-chapter-1 .ls-chapter-link { color: #4A7C2E; }
+.ls-chapter-2 .ls-chapter-link { color: #3D7A7A; }
+.ls-chapter-3 .ls-chapter-link { color: #B8860B; }
+.ls-chapter-4 .ls-chapter-link { color: #D4A843; }
+
+/* SVG Wave Dividers */
+.ls-wave {
+    display: block;
+    width: 100%;
+    height: 40px;
+}
+.ls-wave-1 path { fill: #EEF4F0; }
+.ls-wave-2 path { fill: #FFF5E6; }
+.ls-wave-3 path { fill: #1A2E0D; }
+
+/* --- Composable Booking --- */
+.ls-booking-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 20px 32px;
+    background: #0F1A06;
+}
+.ls-booking-label {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: #D4A843;
+}
+.ls-btn-compose {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    background: #D4A843;
+    color: #0F1A06;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.ls-btn-compose:hover {
+    background: #E8C060;
+}
+.ls-btn-contact {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 12px;
+    color: rgba(245,242,237,0.5);
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+/* ============================================================
+   IMAGE INTEGRATION — Photos from Photos/web/
+   ============================================================ */
+
+/* --- P1: Heritage Doree Images --- */
+.hd-hero-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("Photos/web/P1-HERO — Property Wide Shot.webp") center/cover no-repeat;
+    opacity: 0.28;
+    z-index: 0;
+}
+.hd-hero > *:not(.hd-hero-bg):not(.hd-hero-bl):not(.hd-hero-br) {
+    position: relative;
+    z-index: 1;
+}
+.hd-gallery-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    transition: transform 0.4s ease;
+}
+.hd-gallery-img:hover { transform: scale(1.03); }
+.hd-gallery-caption {
+    font-family: 'EB Garamond', serif;
+    font-size: 13px;
+    color: #999;
+    text-align: center;
+    margin-top: 6px;
+    font-style: italic;
+}
+
+/* --- P2: Agrume Images --- */
+.ag-hero-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("Photos/web/P2-HERO — Dawn Property Shot.webp") center/cover no-repeat;
+    opacity: 0.22;
+    z-index: 0;
+}
+.ag-pillar-img {
+    width: 180px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 2px;
+    margin-bottom: 24px;
+    filter: saturate(0.85);
+    position: relative;
+    z-index: 1;
+}
+
+/* --- P3: Terre d'Agrumes Images (collage shapes + card headers) --- */
+.ta-shape-1 {
+    background: url("Photos/web/P3-COLLAGE-1 — Architecture  Courtyard.webp") center/cover no-repeat !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+.ta-shape-2 {
+    background: url("Photos/web/P3-COLLAGE-2 — Gardens  Grounds.webp") center/cover no-repeat !important;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+}
+.ta-shape-3 {
+    background: url("Photos/web/P3-COLLAGE-3 — Produce Detail.webp") center/cover no-repeat !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.ta-card-img {
+    width: calc(100% + 48px);
+    margin: -32px -24px 16px;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 16px 16px 0 0;
+    display: block;
+}
+
+/* --- P4: Edito Images (hero + editorial spreads) --- */
+.ed-hero-right-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("Photos/web/P4-HERO — Editorial Property Shot.webp") center/cover no-repeat;
+    z-index: 0;
+}
+.ed-hero-right .ed-geo { z-index: 1; }
+
+.ed-spread-num-side[style*="background-image"] {
+    background-size: cover;
+    background-position: center;
+}
+.ed-spread-num-side[style*="background-image"] .ed-section-num {
+    -webkit-text-stroke-color: rgba(255,255,255,0.8);
+    opacity: 0.25;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+/* --- P5: Les Saisons Images (video + chapter backgrounds) --- */
+.ls-video-img {
+    width: 100%;
+    max-width: 640px;
+    aspect-ratio: 21/9;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+}
+.ls-video-container {
+    position: relative;
+    max-width: 640px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+.ls-video-play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 56px; height: 56px;
+    background: rgba(61,43,31,0.7);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #F7E8D4;
+    backdrop-filter: blur(4px);
+}
+.ls-chapter-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+.ls-chapter-1 .ls-chapter-bg {
+    background-image: url("Photos/web/P5-CHAPTER-1 — Morning  Sejourner.webp");
+    opacity: 0.12;
+}
+.ls-chapter-2 .ls-chapter-bg {
+    background-image: url("Photos/web/P5-CHAPTER-2 — Midday  Se Detendre.webp");
+    opacity: 0.12;
+}
+.ls-chapter-3 .ls-chapter-bg {
+    background-image: url("Photos/web/P5-CHAPTER-3 — Afternoon  Deguster.webp");
+    opacity: 0.12;
+}
+.ls-chapter-4 .ls-chapter-bg {
+    background-image: url("Photos/web/P5-CHAPTER-4 — Evening  S'evader.webp");
+    opacity: 0.15;
+}
+.ls-chapter > *:not(.ls-chapter-bg) {
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Responsive overrides for all proposals --- */
+@media (max-width: 767px) {
+    .hd-hero-title { font-size: 34px; }
+    .hd-pillars-grid { grid-template-columns: 1fr; }
+    .hd-pillars { padding: 40px 20px; }
+    .hd-booking-bar { flex-wrap: wrap; gap: 12px; }
+    .hd-nav { flex-wrap: wrap; gap: 8px; }
+    .hd-gallery-grid { grid-template-columns: 1fr !important; }
+
+    .ag-hero-title { font-size: 40px; }
+    .ag-citrus-wheel { display: none; }
+    .ag-pillar-num { font-size: 100px; }
+    .ag-pillar-img { width: 140px; height: 180px; }
+
+    .ta-hero { flex-direction: column; }
+    .ta-hero-title { font-size: 32px; }
+    .ta-hero-collage { min-height: 200px; }
+    .ta-pillars-grid { grid-template-columns: 1fr; }
+    .ta-pillar-card:nth-child(odd),
+    .ta-pillar-card:nth-child(even) { transform: rotate(0deg); }
+    .ta-card-img { border-radius: 20px 20px 0 0; }
+
+    .ed-hero { flex-direction: column; }
+    .ed-hero-title { font-size: 36px; }
+    .ed-spread { flex-direction: column !important; }
+    .ed-spread-num-side[style*="background-image"] { min-height: 180px; }
+    .ed-section-num { font-size: 80px; }
+    .ed-booking-bar { flex-wrap: wrap; gap: 10px; }
+
+    .ls-hero-title { font-size: 32px; }
+    .ls-video-img { aspect-ratio: 16/9; }
+}
+    </style>
+</head>
+<body>
+
+    <!-- ====== PAGE HEADER ====== -->
+    <header class="page-header">
+        <h1>Domaine Sidi Abdallah</h1>
+        <p class="page-subtitle">5 Propositions de Direction Artistique pour le Site Web</p>
+        <p class="page-meta">Prepare par Rached &mdash; Fevrier 2026</p>
+    </header>
+
+    <!-- ====== PROPOSAL NAVIGATOR ====== -->
+    <nav class="proposal-nav">
+        <div class="proposal-nav-inner">
+            <button class="proposal-nav-item active" data-nav="heritage-doree">
+                <span class="nav-number">01</span>
+                <span class="nav-name">Heritage Dor&eacute;e</span>
+                <span class="nav-style">Luxe Classique</span>
+            </button>
+            <button class="proposal-nav-item" data-nav="agrume">
+                <span class="nav-number">02</span>
+                <span class="nav-name">Agrume</span>
+                <span class="nav-style">Minimaliste</span>
+            </button>
+            <button class="proposal-nav-item" data-nav="terre-dagrumes">
+                <span class="nav-number">03</span>
+                <span class="nav-name">Terre d'Agrumes</span>
+                <span class="nav-style">M&eacute;diterran&eacute;en</span>
+            </button>
+            <button class="proposal-nav-item" data-nav="edito">
+                <span class="nav-number">04</span>
+                <span class="nav-name">&Eacute;dito</span>
+                <span class="nav-style">&Eacute;ditorial</span>
+            </button>
+            <button class="proposal-nav-item" data-nav="les-saisons">
+                <span class="nav-number">05</span>
+                <span class="nav-name">Les Saisons</span>
+                <span class="nav-style">Immersif</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ====== PROPOSALS CONTAINER ====== -->
+    <div class="proposals-container">
+
+        <!-- ============================================================
+             PROPOSAL 1: HERITAGE DOREE — Classic Luxury
+             ============================================================ -->
+        <section class="proposal-section active" data-proposal="heritage-doree">
+
+            <!-- Rationale Panel -->
+            <div class="rationale-panel">
+                <h2>01 &mdash; Heritage Dor&eacute;e</h2>
+                <p class="rationale-tagline">&laquo; Un h&eacute;ritage d'exception, une &eacute;l&eacute;gance intemporelle &raquo;</p>
+                <div class="rationale-grid">
+                    <div class="rationale-item">
+                        <strong>Direction</strong>
+                        <span>Luxe classique. Sym&eacute;trie, ornements dor&eacute;s, typographie serif. Le domaine comme demeure patrimoniale.</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Inspiration</strong>
+                        <span>Aman Resorts, Relais &amp; Ch&acirc;teaux, grands riads tunisiens</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Cible principale</strong>
+                        <span>Touristes internationaux (40%) qui s'attendent aux codes du luxe classique</span>
+                    </div>
+                </div>
+                <div class="rationale-colors">
+                    <div class="color-swatch" style="background:#FAF6F0;"><span class="swatch-label">Cream</span></div>
+                    <div class="color-swatch" style="background:#B8860B;"><span class="swatch-label">Gold</span></div>
+                    <div class="color-swatch" style="background:#2D5016;"><span class="swatch-label">Forest</span></div>
+                    <div class="color-swatch" style="background:#2C2C2C;"><span class="swatch-label">Charcoal</span></div>
+                    <div class="color-swatch" style="background:#FFFDF7;"><span class="swatch-label">Ivory</span></div>
+                </div>
+                <div class="rationale-fonts">
+                    <div class="font-sample">
+                        <label>Titres</label>
+                        <span style="font-family:'Cormorant Garamond',serif; font-size:28px; color:#2D5016;">Cormorant Garamond</span>
+                    </div>
+                    <div class="font-sample">
+                        <label>Corps</label>
+                        <span style="font-family:'EB Garamond',serif; font-size:18px; color:#444;">EB Garamond &mdash; serif classique et lisible</span>
+                    </div>
+                    <div class="font-sample">
+                        <label>Labels</label>
+                        <span style="font-family:'Cormorant SC',serif; font-size:12px; letter-spacing:2px; color:#888;">CORMORANT SC &mdash; PETITES CAPITALES</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mockup Frame -->
+            <div class="mockup-frame">
+                <div class="browser-chrome">
+                    <div class="browser-dots"><span></span><span></span><span></span></div>
+                    <div class="browser-url">domaine-sidiabdallah.com</div>
+                </div>
+                <div class="mockup-content hd-mockup">
+                    <!-- Nav -->
+                    <nav class="hd-nav">
+                        <span class="hd-nav-links">S&eacute;journer &nbsp;&middot;&nbsp; Se D&eacute;tendre</span>
+                        <span class="hd-logo">Domaine Sidi Abdallah</span>
+                        <span class="hd-nav-links">D&eacute;guster &nbsp;&middot;&nbsp; S'&eacute;vader &nbsp;&middot;&nbsp; FR|EN</span>
+                    </nav>
+
+                    <!-- Hero -->
+                    <div class="hd-hero">
+                        <div class="hd-hero-bg"></div>
+                        <div class="hd-hero-bl"></div>
+                        <div class="hd-hero-br"></div>
+                        <p class="hd-hero-kicker">G&icirc;te Rural &amp; Centre de Bien-&Ecirc;tre</p>
+                        <h1 class="hd-hero-title">Domaine<br>Sidi Abdallah</h1>
+                        <p class="hd-hero-subtitle">Un h&eacute;ritage d'exception,<br>une &eacute;l&eacute;gance intemporelle</p>
+                        <div><button class="hd-btn-primary">R&eacute;server votre s&eacute;jour</button></div>
+                    </div>
+
+                    <!-- Season Bar -->
+                    <div class="hd-season-bar">
+                        <span>&#127818;</span>
+                        <span>Saison des Agrumes &mdash; Novembre &agrave; Mars</span>
+                    </div>
+
+                    <!-- 4 Pillars -->
+                    <div class="hd-pillars">
+                        <h2 class="hd-section-title">Nos Quatre Exp&eacute;riences</h2>
+                        <div class="hd-pillars-grid">
+                            <div class="hd-pillar-card animate-on-scroll">
+                                <div class="hd-pillar-ornament-bl"></div>
+                                <div class="hd-pillar-ornament-br"></div>
+                                <div class="flip-card hd-flip" title="Cliquez pour r&eacute;v&eacute;ler le logo">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">&#127969;</div>
+                                        <div class="flip-card-back">Dar Saad</div>
+                                    </div>
+                                </div>
+                                <h3>S&eacute;journer</h3>
+                                <p class="hd-pillar-sub">Dar Saad</p>
+                                <p>Six chambres raffin&eacute;es aux noms d'agrumes, o&ugrave; le confort rencontre l'authenticit&eacute; tunisienne.</p>
+                                <a class="hd-pillar-link">D&eacute;couvrir &rarr;</a>
+                            </div>
+                            <div class="hd-pillar-card animate-on-scroll">
+                                <div class="hd-pillar-ornament-bl"></div>
+                                <div class="hd-pillar-ornament-br"></div>
+                                <div class="flip-card hd-flip" title="Cliquez pour r&eacute;v&eacute;ler le logo">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">&#127807;</div>
+                                        <div class="flip-card-back">Agrumia</div>
+                                    </div>
+                                </div>
+                                <h3>Se D&eacute;tendre</h3>
+                                <p class="hd-pillar-sub">Centre Agrumia</p>
+                                <p>Spa, hammam traditionnel, yoga et fitness au c&oelig;ur des vergers d'orangers.</p>
+                                <a class="hd-pillar-link">D&eacute;couvrir &rarr;</a>
+                            </div>
+                            <div class="hd-pillar-card animate-on-scroll">
+                                <div class="hd-pillar-ornament-bl"></div>
+                                <div class="hd-pillar-ornament-br"></div>
+                                <div class="flip-card hd-flip" title="Cliquez pour r&eacute;v&eacute;ler le logo">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">&#127860;</div>
+                                        <div class="flip-card-back">La Table</div>
+                                    </div>
+                                </div>
+                                <h3>D&eacute;guster</h3>
+                                <p class="hd-pillar-sub">Table d'H&ocirc;tes</p>
+                                <p>Cuisine du terroir, des vergers &agrave; l'assiette. Sur r&eacute;servation uniquement.</p>
+                                <a class="hd-pillar-link">D&eacute;couvrir &rarr;</a>
+                            </div>
+                            <div class="hd-pillar-card animate-on-scroll">
+                                <div class="hd-pillar-ornament-bl"></div>
+                                <div class="hd-pillar-ornament-br"></div>
+                                <div class="flip-card hd-flip" title="Cliquez pour r&eacute;v&eacute;ler le logo">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">&#127749;</div>
+                                        <div class="flip-card-back">Retraites</div>
+                                    </div>
+                                </div>
+                                <h3>S'&eacute;vader</h3>
+                                <p class="hd-pillar-sub">Retraites &amp; Programmes</p>
+                                <p>Retraites spa, fitness et bien-&ecirc;tre de 2 &agrave; 5 nuits au c&oelig;ur du domaine.</p>
+                                <a class="hd-pillar-link">D&eacute;couvrir &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quote -->
+                    <div class="hd-quote">
+                        <div class="hd-quote-rule"></div>
+                        <blockquote>&laquo; Ici, chaque saison a son parfum, chaque chambre son agrume, chaque repas son histoire. &raquo;</blockquote>
+                        <div class="hd-quote-rule"></div>
+                    </div>
+
+                    <!-- Gallery Placeholders (progressive content) -->
+                    <div style="padding: 40px; background: #FAF6F0;">
+                        <h2 class="hd-section-title">Galerie</h2>
+                        <div class="hd-gallery-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 800px; margin: 0 auto;">
+                            <div>
+                                <img class="hd-gallery-img" src="Photos/web/P1-GALLERY-1 — Domaine Exterior.webp" alt="Fa&ccedil;ade du domaine">
+                                <p class="hd-gallery-caption">Le Domaine</p>
+                            </div>
+                            <div>
+                                <img class="hd-gallery-img" src="Photos/web/P1-GALLERY-2 — Chambre.webp" alt="Chambre Dar Saad">
+                                <p class="hd-gallery-caption">Les Chambres</p>
+                            </div>
+                            <div>
+                                <img class="hd-gallery-img" src="Photos/web/P1-GALLERY-3 — Wellness Spa.webp" alt="Centre Wellness">
+                                <p class="hd-gallery-caption">Le Wellness</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Booking Bar -->
+                    <div class="hd-booking-bar">
+                        <span>R&eacute;server votre s&eacute;jour</span>
+                        <button class="hd-btn-book">R&eacute;server</button>
+                        <span class="hd-btn-secondary">&#128222; Appeler</span>
+                        <span class="hd-btn-secondary">WhatsApp</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             PROPOSAL 2: AGRUME — Quiet Luxury / Minimalist
+             ============================================================ -->
+        <section class="proposal-section" data-proposal="agrume">
+
+            <!-- Rationale Panel -->
+            <div class="rationale-panel">
+                <h2>02 &mdash; Agrume</h2>
+                <p class="rationale-tagline">&laquo; L'essentiel, avec gr&acirc;ce &raquo;</p>
+                <div class="rationale-grid">
+                    <div class="rationale-item">
+                        <strong>Direction</strong>
+                        <span>Quiet luxury. Espace n&eacute;gatif comme &eacute;l&eacute;ment de design. Le calme du wellness refl&eacute;t&eacute; dans chaque pixel.</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Inspiration</strong>
+                        <span>Aman Resorts, Six Senses, minimalisme &eacute;ditorial scandinave</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Cible principale</strong>
+                        <span>Voyageurs design-conscious, audience wellness Agrumia (20%)</span>
+                    </div>
+                </div>
+                <div class="rationale-colors">
+                    <div class="color-swatch" style="background:#FEFDFB;"><span class="swatch-label">White</span></div>
+                    <div class="color-swatch" style="background:#F5F2ED;"><span class="swatch-label">Stone</span></div>
+                    <div class="color-swatch" style="background:#3A6B22;"><span class="swatch-label">Green</span></div>
+                    <div class="color-swatch" style="background:#C49A2C;"><span class="swatch-label">Gold</span></div>
+                    <div class="color-swatch" style="background:#1C1C1A;"><span class="swatch-label">Text</span></div>
+                </div>
+                <div class="rationale-fonts">
+                    <div class="font-sample">
+                        <label>Titres</label>
+                        <span style="font-family:'DM Serif Display',serif; font-size:32px; color:#1C1C1A;">DM Serif Display</span>
+                    </div>
+                    <div class="font-sample">
+                        <label>Corps</label>
+                        <span style="font-family:'DM Sans',sans-serif; font-size:16px; font-weight:300; color:#666;">DM Sans Light &mdash; ultra-clean, a&eacute;r&eacute;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mockup Frame -->
+            <div class="mockup-frame">
+                <div class="browser-chrome">
+                    <div class="browser-dots"><span></span><span></span><span></span></div>
+                    <div class="browser-url">domaine-sidiabdallah.com</div>
+                </div>
+                <div class="mockup-content ag-mockup">
+                    <!-- Nav -->
+                    <nav class="ag-nav">
+                        <span class="ag-logo">Domaine Sidi Abdallah</span>
+                        <div class="ag-hamburger"><span></span><span></span></div>
+                    </nav>
+
+                    <!-- Hero -->
+                    <div class="ag-hero">
+                        <div class="ag-hero-bg"></div>
+                        <div class="ag-citrus-wheel">
+                            <div class="ag-citrus-segment"></div>
+                            <div class="ag-citrus-segment"></div>
+                            <div class="ag-citrus-segment"></div>
+                            <div class="ag-citrus-segment"></div>
+                        </div>
+                        <h1 class="ag-hero-title">O&ugrave; le temps<br>s'arr&ecirc;te</h1>
+                        <p class="ag-hero-subtitle">Un domaine agrumicole transform&eacute; en refuge de bien-&ecirc;tre, entre vergers d'orangers et traditions tunisiennes.</p>
+                        <div class="ag-hero-line"></div>
+                        <p class="ag-hero-season">Saison des agrumes &mdash; Novembre &agrave; Mars</p>
+                    </div>
+
+                    <!-- Pillar Sections (vertical) -->
+                    <div class="ag-pillar-section">
+                        <span class="ag-pillar-num">01</span>
+                        <img class="ag-pillar-img" src="Photos/web/P2-PILLAR-1 — Bedroom Detail.webp" alt="D&eacute;tail chambre">
+                        <h2 class="ag-pillar-title">S&eacute;journer</h2>
+                        <p class="ag-pillar-label">Dar Saad &mdash; Six chambres</p>
+                        <p class="ag-pillar-desc">R&eacute;veillez-vous au parfum des fleurs d'oranger. Six chambres raffin&eacute;es, chacune inspir&eacute;e d'un agrume du domaine.</p>
+                        <a class="ag-pillar-link">En savoir plus &rarr;</a>
+                    </div>
+                    <div class="ag-pillar-section">
+                        <span class="ag-pillar-num">02</span>
+                        <img class="ag-pillar-img" src="Photos/web/P2-PILLAR-2 — Wellness Detail.webp" alt="Rituel wellness">
+                        <h2 class="ag-pillar-title">Se D&eacute;tendre</h2>
+                        <p class="ag-pillar-label">Centre Agrumia</p>
+                        <p class="ag-pillar-desc">Hammam, sauna, yoga et massages. Un ancien hangar r&eacute;invent&eacute; en sanctuaire de s&eacute;r&eacute;nit&eacute;.</p>
+                        <a class="ag-pillar-link">En savoir plus &rarr;</a>
+                    </div>
+                    <div class="ag-pillar-section">
+                        <span class="ag-pillar-num">03</span>
+                        <img class="ag-pillar-img" src="Photos/web/P2-PILLAR-3 — Dining Detail.webp" alt="D&eacute;tail gastronomie">
+                        <h2 class="ag-pillar-title">D&eacute;guster</h2>
+                        <p class="ag-pillar-label">Table d'h&ocirc;tes</p>
+                        <p class="ag-pillar-desc">Des vergers &agrave; l'assiette. Cuisine tunisienne de saison, sur r&eacute;servation uniquement.</p>
+                        <a class="ag-pillar-link">En savoir plus &rarr;</a>
+                    </div>
+                    <div class="ag-pillar-section">
+                        <span class="ag-pillar-num">04</span>
+                        <img class="ag-pillar-img" src="Photos/web/P2-PILLAR-4 — Retreat Activity.webp" alt="Retraite yoga">
+                        <h2 class="ag-pillar-title">S'&eacute;vader</h2>
+                        <p class="ag-pillar-label">Retraites &amp; programmes</p>
+                        <p class="ag-pillar-desc">Retraites de 2 &agrave; 5 nuits. Yoga, bien-&ecirc;tre, r&eacute;colte d'agrumes. Un s&eacute;jour &agrave; votre image.</p>
+                        <a class="ag-pillar-link">En savoir plus &rarr;</a>
+                    </div>
+
+                    <!-- Floating booking circle -->
+                    <div class="ag-booking-circle">
+                        R
+                        <span class="ag-book-text">&eacute;server</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             PROPOSAL 3: TERRE D'AGRUMES — Warm Mediterranean
+             ============================================================ -->
+        <section class="proposal-section" data-proposal="terre-dagrumes">
+
+            <!-- Rationale Panel -->
+            <div class="rationale-panel">
+                <h2>03 &mdash; Terre d'Agrumes</h2>
+                <p class="rationale-tagline">&laquo; De la terre &agrave; la table, du verger &agrave; l'&acirc;me &raquo;</p>
+                <div class="rationale-grid">
+                    <div class="rationale-item">
+                        <strong>Direction</strong>
+                        <span>Chaleureux, tactile, artisanal. C&eacute;l&egrave;bre les racines agricoles avec terracotta, formes organiques et accents manuscrits.</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Inspiration</strong>
+                        <span>Babylonstoren (Afrique du Sud), Casa Lawa (Sicile), agritourismes toscans</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Cible principale</strong>
+                        <span>Tunisiens day-pass (25%) + amateurs farm-to-table + familles</span>
+                    </div>
+                </div>
+                <div class="rationale-colors">
+                    <div class="color-swatch" style="background:#C2703E;"><span class="swatch-label">Terracotta</span></div>
+                    <div class="color-swatch" style="background:#5B6F47;"><span class="swatch-label">Olive</span></div>
+                    <div class="color-swatch" style="background:#F0E6D4;"><span class="swatch-label">Sable</span></div>
+                    <div class="color-swatch" style="background:#E8913A;"><span class="swatch-label">Agrume</span></div>
+                    <div class="color-swatch" style="background:#3D2B1F;"><span class="swatch-label">Bark</span></div>
+                </div>
+                <div class="rationale-fonts">
+                    <div class="font-sample">
+                        <label>Titres</label>
+                        <span style="font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:#3D2B1F;">Playfair Display</span>
+                    </div>
+                    <div class="font-sample">
+                        <label>Corps</label>
+                        <span style="font-family:'Source Sans 3',sans-serif; font-size:16px; font-weight:300; color:#666;">Source Sans 3 Light</span>
+                    </div>
+                    <div class="font-sample">
+                        <label>Accents</label>
+                        <span style="font-family:'Caveat',cursive; font-size:22px; color:#C2703E;">Caveat &mdash; accent manuscrit</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mockup Frame -->
+            <div class="mockup-frame">
+                <div class="browser-chrome">
+                    <div class="browser-dots"><span></span><span></span><span></span></div>
+                    <div class="browser-url">domaine-sidiabdallah.com</div>
+                </div>
+                <div class="mockup-content ta-mockup">
+                    <div class="ta-texture"></div>
+                    <div class="ta-blob ta-blob-1"></div>
+                    <div class="ta-blob ta-blob-2"></div>
+
+                    <!-- Nav -->
+                    <nav class="ta-nav">
+                        <span class="ta-logo">Domaine Sidi Abdallah</span>
+                        <div class="ta-nav-links">
+                            <a class="ta-nav-link">S&eacute;journer</a>
+                            <a class="ta-nav-link">Wellness</a>
+                            <a class="ta-nav-link">Restaurant</a>
+                            <a class="ta-nav-link">Retraites</a>
+                            <button class="ta-btn-nav">R&eacute;server</button>
+                        </div>
+                    </nav>
+
+                    <!-- Hero (Split) -->
+                    <div class="ta-hero">
+                        <div class="ta-hero-text">
+                            <p class="ta-hero-welcome">Bienvenue au</p>
+                            <h1 class="ta-hero-title">Domaine<br>Sidi Abdallah</h1>
+                            <p class="ta-hero-desc">Un g&icirc;te rural nich&eacute; dans les vergers d'orangers, o&ugrave; l'on cultive le bien-&ecirc;tre, la saveur et l'authenticit&eacute; tunisienne.</p>
+                            <button class="ta-btn-hero">D&eacute;couvrir le domaine</button>
+                        </div>
+                        <div class="ta-hero-collage">
+                            <div class="ta-collage-shape ta-shape-1"></div>
+                            <div class="ta-collage-shape ta-shape-2"></div>
+                            <div class="ta-collage-shape ta-shape-3"></div>
+                            <div class="ta-citrus-fruit"></div>
+                        </div>
+                    </div>
+
+                    <!-- Pillars (Staggered) -->
+                    <div class="ta-pillars">
+                        <p class="ta-pillars-title">Nos exp&eacute;riences</p>
+                        <h2 class="ta-pillars-heading">Quatre fa&ccedil;ons de vivre le domaine</h2>
+                        <div class="ta-pillars-grid">
+                            <div class="ta-pillar-card animate-on-scroll">
+                                <img class="ta-card-img" src="Photos/web/P3-CARD-1 — Sejourner Card Header.webp" alt="S&eacute;journer">
+                                <div class="flip-card ta-flip" title="Cliquez">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">&#127969;</div>
+                                        <div class="flip-card-back">Dar Saad</div>
+                                    </div>
+                                </div>
+                                <h3>S&eacute;journer</h3>
+                                <p class="ta-pillar-script">Dar Saad</p>
+                                <p>Six chambres aux noms d'agrumes, petit-d&eacute;jeuner terroir face aux orangers, piscine et espaces de d&eacute;tente.</p>
+                            </div>
+                            <div class="ta-pillar-card animate-on-scroll">
+                                <img class="ta-card-img" src="Photos/web/P3-CARD-2 — Se Detendre Card Header.webp" alt="Se D&eacute;tendre">
+                                <div class="flip-card ta-flip" title="Cliquez">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">&#127807;</div>
+                                        <div class="flip-card-back">Agrumia</div>
+                                    </div>
+                                </div>
+                                <h3>Se D&eacute;tendre</h3>
+                                <p class="ta-pillar-script">Centre Agrumia</p>
+                                <p>Hammam traditionnel, sauna, massages, yoga et fitness dans un ancien hangar r&eacute;invent&eacute;.</p>
+                            </div>
+                            <div class="ta-pillar-card animate-on-scroll">
+                                <img class="ta-card-img" src="Photos/web/P3-CARD-3 — Deguster Card Header.webp" alt="D&eacute;guster">
+                                <div class="flip-card ta-flip" title="Cliquez">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">&#127860;</div>
+                                        <div class="flip-card-back">La Table</div>
+                                    </div>
+                                </div>
+                                <h3>D&eacute;guster</h3>
+                                <p class="ta-pillar-script">Notre table</p>
+                                <p>Cuisine farm-to-table, menus de saison et exp&eacute;riences culinaires. Sur r&eacute;servation uniquement.</p>
+                            </div>
+                            <div class="ta-pillar-card animate-on-scroll">
+                                <img class="ta-card-img" src="Photos/web/P3-CARD-4 — S'evader Card Header.webp" alt="S'&eacute;vader">
+                                <div class="flip-card ta-flip" title="Cliquez">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">&#127749;</div>
+                                        <div class="flip-card-back">Retraites</div>
+                                    </div>
+                                </div>
+                                <h3>S'&eacute;vader</h3>
+                                <p class="ta-pillar-script">Retraites &amp; programmes</p>
+                                <p>Yoga, crochet, r&eacute;colte d'agrumes, bien-&ecirc;tre. De 1 journ&eacute;e &agrave; 5 nuits.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Booking Bar -->
+                    <div class="ta-booking-bar">
+                        <span>&#127818; R&eacute;servez votre exp&eacute;rience</span>
+                        <button class="ta-btn-book-warm">R&eacute;server</button>
+                        <button class="ta-whatsapp">&#128172; WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             PROPOSAL 4: EDITO — Bold Contemporary / Editorial
+             ============================================================ -->
+        <section class="proposal-section" data-proposal="edito">
+
+            <!-- Rationale Panel -->
+            <div class="rationale-panel">
+                <h2>04 &mdash; &Eacute;dito</h2>
+                <p class="rationale-tagline">&laquo; Quatre saisons, une exp&eacute;rience &raquo;</p>
+                <div class="rationale-grid">
+                    <div class="rationale-item">
+                        <strong>Direction</strong>
+                        <span>Magazine &eacute;ditorial. Typographie audacieuse, contrastes forts, le site comme publication premium.</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Inspiration</strong>
+                        <span>Monocle, Cereal Magazine, Kinfolk, Casa Lawa (marquee)</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Cible principale</strong>
+                        <span>Voyageurs internationaux design-conscious, presse &amp; RP</span>
+                    </div>
+                </div>
+                <div class="rationale-colors">
+                    <div class="color-swatch" style="background:#0F0F0F;"><span class="swatch-label">Black</span></div>
+                    <div class="color-swatch" style="background:#FFFFFF; border: 1px solid #ddd;"><span class="swatch-label">White</span></div>
+                    <div class="color-swatch" style="background:#2D5016;"><span class="swatch-label">Green</span></div>
+                    <div class="color-swatch" style="background:#E8F5E0;"><span class="swatch-label">Mint</span></div>
+                    <div class="color-swatch" style="background:#B8860B;"><span class="swatch-label">Amber</span></div>
+                </div>
+                <div class="rationale-fonts">
+                    <div class="font-sample">
+                        <label>Display</label>
+                        <span style="font-family:'Instrument Serif',serif; font-size:36px; color:#0F0F0F;">Instrument Serif</span>
+                    </div>
+                    <div class="font-sample">
+                        <label>Corps</label>
+                        <span style="font-family:'Inter',sans-serif; font-size:15px; font-weight:400; color:#333;">Inter &mdash; neutre, professionnel</span>
+                    </div>
+                    <div class="font-sample">
+                        <label>Labels</label>
+                        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:2px; color:#999;">JETBRAINS MONO &mdash; EDITORIAL</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mockup Frame -->
+            <div class="mockup-frame">
+                <div class="browser-chrome">
+                    <div class="browser-dots"><span></span><span></span><span></span></div>
+                    <div class="browser-url">domaine-sidiabdallah.com</div>
+                </div>
+                <div class="mockup-content ed-mockup">
+                    <!-- Nav -->
+                    <nav class="ed-nav">
+                        <span class="ed-logo">Domaine Sidi Abdallah</span>
+                        <div class="ed-nav-links">
+                            <a class="ed-nav-link">S&eacute;journer</a>
+                            <a class="ed-nav-link">Wellness</a>
+                            <a class="ed-nav-link">Table</a>
+                            <a class="ed-nav-link">Retraites</a>
+                            <button class="ed-btn-pill">R&eacute;server</button>
+                        </div>
+                    </nav>
+
+                    <!-- Hero (Split) -->
+                    <div class="ed-hero">
+                        <div class="ed-hero-left">
+                            <p class="ed-hero-kicker">G&icirc;te Rural &bull; Tunisie</p>
+                            <h1 class="ed-hero-title">Domaine<br>Sidi<br>Abdallah</h1>
+                            <p class="ed-hero-subtitle">Six chambres, un spa, une table d'h&ocirc;tes. Au c&oelig;ur des vergers d'orangers de Mohammedia.</p>
+                        </div>
+                        <div class="ed-hero-right">
+                            <div class="ed-hero-right-bg"></div>
+                            <div class="ed-geo ed-geo-1"></div>
+                            <div class="ed-geo ed-geo-2"></div>
+                            <div class="ed-geo ed-geo-3"></div>
+                            <div class="ed-geo ed-geo-4"></div>
+                            <div class="ed-geo ed-geo-line"></div>
+                        </div>
+                    </div>
+
+                    <!-- Marquee Ticker -->
+                    <div class="ed-ticker">
+                        <div class="ed-ticker-inner">
+                            <span class="ed-ticker-text">Vergers d'agrumes</span><span class="ed-ticker-sep"></span>
+                            <span class="ed-ticker-text">Spa &amp; Hammam</span><span class="ed-ticker-sep"></span>
+                            <span class="ed-ticker-text">Table d'h&ocirc;tes</span><span class="ed-ticker-sep"></span>
+                            <span class="ed-ticker-text">Retraites bien-&ecirc;tre</span><span class="ed-ticker-sep"></span>
+                            <span class="ed-ticker-text">Yoga &amp; Fitness</span><span class="ed-ticker-sep"></span>
+                            <span class="ed-ticker-text">R&eacute;colte d'agrumes</span><span class="ed-ticker-sep"></span>
+                            <span class="ed-ticker-text">Vergers d'agrumes</span><span class="ed-ticker-sep"></span>
+                            <span class="ed-ticker-text">Spa &amp; Hammam</span><span class="ed-ticker-sep"></span>
+                            <span class="ed-ticker-text">Table d'h&ocirc;tes</span><span class="ed-ticker-sep"></span>
+                            <span class="ed-ticker-text">Retraites bien-&ecirc;tre</span><span class="ed-ticker-sep"></span>
+                            <span class="ed-ticker-text">Yoga &amp; Fitness</span><span class="ed-ticker-sep"></span>
+                            <span class="ed-ticker-text">R&eacute;colte d'agrumes</span><span class="ed-ticker-sep"></span>
+                        </div>
+                    </div>
+
+                    <!-- Editorial Spreads -->
+                    <div class="ed-sections">
+                        <div class="ed-spread">
+                            <div class="ed-spread-num-side" style="background-image: url('Photos/web/P4-SPREAD-1 — Sejourner Editorial.webp'); background-size: cover; background-position: center;">
+                                <span class="ed-section-num">01</span>
+                            </div>
+                            <div class="ed-spread-content">
+                                <p class="ed-spread-label">Dar Saad</p>
+                                <h2 class="ed-spread-title">S&eacute;journer</h2>
+                                <p class="ed-spread-desc">Six chambres aux noms d'agrumes &mdash; Orange, Citron, Tangerine, Mandarine, Cl&eacute;mentine, Bergamote. Petit-d&eacute;jeuner terroir, piscine, et acc&egrave;s au centre wellness.</p>
+                                <a class="ed-spread-link">Explorer les chambres &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="ed-spread">
+                            <div class="ed-spread-num-side" style="background-image: url('Photos/web/P4-SPREAD-2 — Se Detendre Editorial.webp'); background-size: cover; background-position: center;">
+                                <span class="ed-section-num">02</span>
+                            </div>
+                            <div class="ed-spread-content">
+                                <p class="ed-spread-label">Centre Agrumia</p>
+                                <h2 class="ed-spread-title">Se D&eacute;tendre</h2>
+                                <p class="ed-spread-desc">Hammam traditionnel tunisien, hydromassage, sauna, salles de massage, studio yoga et fitness. Day pass disponible.</p>
+                                <a class="ed-spread-link">D&eacute;couvrir le spa &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="ed-spread">
+                            <div class="ed-spread-num-side" style="background-image: url('Photos/web/P4-SPREAD-3 — Deguster Editorial.webp'); background-size: cover; background-position: center;">
+                                <span class="ed-section-num">03</span>
+                            </div>
+                            <div class="ed-spread-content">
+                                <p class="ed-spread-label">Restaurant</p>
+                                <h2 class="ed-spread-title">D&eacute;guster</h2>
+                                <p class="ed-spread-desc">Cuisine farm-to-table. Menus de saison, exp&eacute;riences culinaires, &eacute;v&eacute;nements priv&eacute;s. R&eacute;servation requise.</p>
+                                <a class="ed-spread-link">Voir le menu &rarr;</a>
+                            </div>
+                        </div>
+                        <div class="ed-spread">
+                            <div class="ed-spread-num-side" style="background-image: url('Photos/web/P4-SPREAD-4 — S\'evader Editorial.webp'); background-size: cover; background-position: center;">
+                                <span class="ed-section-num">04</span>
+                            </div>
+                            <div class="ed-spread-content">
+                                <p class="ed-spread-label">Retraites &amp; Programmes</p>
+                                <h2 class="ed-spread-title">S'&eacute;vader</h2>
+                                <p class="ed-spread-desc">Forfaits 2 &agrave; 4 nuits. Retraites spa, fitness, yoga, crochet, r&eacute;colte d'agrumes. Programmes d'une journ&eacute;e avec transport depuis Tunis.</p>
+                                <a class="ed-spread-link">Voir les retraites &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Booking Bar -->
+                    <div class="ed-booking-bar">
+                        <span class="ed-book-label">R&eacute;server</span>
+                        <input class="ed-booking-input" type="text" placeholder="Arriv&eacute;e">
+                        <input class="ed-booking-input" type="text" placeholder="D&eacute;part">
+                        <input class="ed-booking-input" type="text" placeholder="Voyageurs" style="width:100px;">
+                        <button class="ed-btn-book-white">R&eacute;server</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             PROPOSAL 5: LES SAISONS — Immersive Storytelling
+             ============================================================ -->
+        <section class="proposal-section" data-proposal="les-saisons">
+
+            <!-- Rationale Panel -->
+            <div class="rationale-panel">
+                <h2>05 &mdash; Les Saisons</h2>
+                <p class="rationale-tagline">&laquo; Chaque saison raconte une histoire &raquo;</p>
+                <div class="rationale-grid">
+                    <div class="rationale-item">
+                        <strong>Direction</strong>
+                        <span>Storytelling immersif. Un voyage de l'aube au cr&eacute;puscule. Les couleurs changent en scrollant &mdash; chaque pilier est un chapitre.</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Inspiration</strong>
+                        <span>Six Senses, sites cin&eacute;matiques, scroll storytelling (GSAP)</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Cible principale</strong>
+                        <span>Mobile-first (60%+ des r&eacute;servations), voyageurs exp&eacute;rientiels</span>
+                    </div>
+                </div>
+                <div class="rationale-colors">
+                    <div class="color-swatch" style="background:#F7E8D4;"><span class="swatch-label">Aube</span></div>
+                    <div class="color-swatch" style="background:#FFF8EE;"><span class="swatch-label">Matin</span></div>
+                    <div class="color-swatch" style="background:#EEF4F0;"><span class="swatch-label">Midi</span></div>
+                    <div class="color-swatch" style="background:#FFF5E6;"><span class="swatch-label">Apr&egrave;s-midi</span></div>
+                    <div class="color-swatch" style="background:#1A2E0D;"><span class="swatch-label">Soir</span></div>
+                </div>
+                <div class="rationale-fonts">
+                    <div class="font-sample">
+                        <label>Titres</label>
+                        <span style="font-family:'Fraunces',serif; font-size:30px; font-weight:500; color:#3D2B1F;">Fraunces &mdash; variable, chaleureuse</span>
+                    </div>
+                    <div class="font-sample">
+                        <label>Corps</label>
+                        <span style="font-family:'Work Sans',sans-serif; font-size:15px; font-weight:300; color:#555;">Work Sans Light</span>
+                    </div>
+                    <div class="font-sample">
+                        <label>Marqueurs</label>
+                        <span style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:2px; color:#999;">SPACE MONO &mdash; 06:00 / L'AUBE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mockup Frame -->
+            <div class="mockup-frame">
+                <div class="browser-chrome">
+                    <div class="browser-dots"><span></span><span></span><span></span></div>
+                    <div class="browser-url">domaine-sidiabdallah.com</div>
+                </div>
+                <div class="mockup-content ls-mockup">
+                    <!-- Nav -->
+                    <nav class="ls-nav" style="background:transparent;">
+                        <span class="ls-logo">Domaine Sidi Abdallah</span>
+                        <div class="ls-nav-dots">
+                            <span class="ls-dot active"></span>
+                            <span class="ls-dot"></span>
+                            <span class="ls-dot"></span>
+                            <span class="ls-dot"></span>
+                        </div>
+                        <a class="ls-nav-cta">R&eacute;server</a>
+                    </nav>
+
+                    <!-- Hero (Dawn) -->
+                    <div class="ls-hero">
+                        <h1 class="ls-hero-title">O&ugrave; le temps s'arr&ecirc;te<br>parmi les <em>orangers</em></h1>
+                        <div class="ls-scroll-indicator">
+                            <span class="ls-scroll-text">D&eacute;couvrir</span>
+                            <div class="ls-scroll-arrow"></div>
+                        </div>
+                    </div>
+
+                    <!-- Video Section (aerial drone shot) -->
+                    <div style="padding: 24px 40px; background: #FFF8EE; text-align: center;">
+                        <div class="ls-video-container">
+                            <img class="ls-video-img" src="Photos/web/P5-VIDEO — Aerial Drone Shot.webp" alt="Vue a&eacute;rienne du Domaine Sidi Abdallah">
+                            <div class="ls-video-play">&#9654;</div>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 1: Morning / Sejourner -->
+                    <svg class="ls-wave ls-wave-1" viewBox="0 0 1200 40" preserveAspectRatio="none">
+                        <path d="M0,20 C200,40 400,0 600,20 C800,40 1000,0 1200,20 L1200,40 L0,40 Z"/>
+                    </svg>
+                    <div class="ls-chapter ls-chapter-1">
+                        <div class="ls-chapter-bg"></div>
+                        <p class="ls-time-marker">07:00 &mdash; Le Matin</p>
+                        <h2 class="ls-chapter-title">S&eacute;journer</h2>
+                        <p class="ls-chapter-label">Dar Saad &mdash; R&eacute;veil au parfum des orangers</p>
+                        <p class="ls-chapter-desc">Six chambres raffin&eacute;es, chacune inspir&eacute;e d'un agrume du domaine. Petit-d&eacute;jeuner terroir face aux vergers, piscine, et le silence de la campagne tunisienne.</p>
+                        <a class="ls-chapter-link">D&eacute;couvrir les chambres &rarr;</a>
+                    </div>
+
+                    <!-- Chapter 2: Midday / Se Detendre -->
+                    <svg class="ls-wave ls-wave-2" viewBox="0 0 1200 40" preserveAspectRatio="none">
+                        <path d="M0,20 C300,0 500,40 700,20 C900,0 1100,40 1200,20 L1200,40 L0,40 Z"/>
+                    </svg>
+                    <div class="ls-chapter ls-chapter-2">
+                        <div class="ls-chapter-bg"></div>
+                        <p class="ls-time-marker">11:00 &mdash; La Matin&eacute;e</p>
+                        <h2 class="ls-chapter-title">Se D&eacute;tendre</h2>
+                        <p class="ls-chapter-label">Centre Agrumia &mdash; Quand le corps respire</p>
+                        <p class="ls-chapter-desc">Hammam traditionnel, sauna, hydromassage, massages aux huiles essentielles d'agrumes. Yoga et pilates dans un studio baign&eacute; de lumi&egrave;re naturelle.</p>
+                        <a class="ls-chapter-link">Explorer le wellness &rarr;</a>
+                    </div>
+
+                    <!-- Chapter 3: Afternoon / Deguster -->
+                    <svg class="ls-wave ls-wave-3" viewBox="0 0 1200 40" preserveAspectRatio="none">
+                        <path d="M0,20 C150,40 350,0 550,20 C750,40 950,0 1200,20 L1200,40 L0,40 Z"/>
+                    </svg>
+                    <div class="ls-chapter ls-chapter-3">
+                        <div class="ls-chapter-bg"></div>
+                        <p class="ls-time-marker">14:00 &mdash; L'Apr&egrave;s-midi</p>
+                        <h2 class="ls-chapter-title">D&eacute;guster</h2>
+                        <p class="ls-chapter-label">Table d'h&ocirc;tes &mdash; Des vergers &agrave; l'assiette</p>
+                        <p class="ls-chapter-desc">Cuisine tunisienne de saison, pr&eacute;par&eacute;e avec soin par nos chefs. D&eacute;jeuners sous les orangers, d&icirc;ners intimes, &eacute;v&eacute;nements culinaires exclusifs.</p>
+                        <a class="ls-chapter-link">R&eacute;server une table &rarr;</a>
+                    </div>
+
+                    <!-- Chapter 4: Evening / S'evader -->
+                    <div class="ls-chapter ls-chapter-4">
+                        <div class="ls-chapter-bg"></div>
+                        <p class="ls-time-marker">19:00 &mdash; Le Soir</p>
+                        <h2 class="ls-chapter-title">S'&eacute;vader</h2>
+                        <p class="ls-chapter-label">Retraites &amp; Programmes &mdash; Quand le temps n'existe plus</p>
+                        <p class="ls-chapter-desc">Retraites yoga, bien-&ecirc;tre, crochet, r&eacute;colte d'agrumes. Forfaits 2 &agrave; 4 nuits ou programmes d'une journ&eacute;e avec transport depuis Tunis.</p>
+                        <a class="ls-chapter-link">Voir les retraites &rarr;</a>
+                    </div>
+
+                    <!-- Composable Booking -->
+                    <div class="ls-booking-bar">
+                        <span class="ls-booking-label">Composez votre s&eacute;jour</span>
+                        <button class="ls-btn-compose">Cr&eacute;er mon exp&eacute;rience</button>
+                        <button class="ls-btn-contact">Nous contacter</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ====== PAGE FOOTER ====== -->
+    <footer class="page-footer">
+        <p>Pr&eacute;par&eacute; par Rached &mdash; F&eacute;vrier 2026</p>
+        <p>Document de discussion interne &mdash; Domaine Sidi Abdallah</p>
+    </footer>
+
+    <!-- ====== JAVASCRIPT ====== -->
+    <script>
+    (function() {
+        'use strict';
+
+        // === PROPOSAL SWITCHING ===
+        const navItems = document.querySelectorAll('.proposal-nav-item');
+        const sections = document.querySelectorAll('.proposal-section');
+
+        function switchProposal(id) {
+            sections.forEach(s => s.classList.remove('active'));
+            navItems.forEach(n => n.classList.remove('active'));
+            const targetSection = document.querySelector('[data-proposal="' + id + '"]');
+            const targetNav = document.querySelector('[data-nav="' + id + '"]');
+            if (targetSection) targetSection.classList.add('active');
+            if (targetNav) targetNav.classList.add('active');
+            // Scroll to top of proposals
+            document.querySelector('.proposals-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Re-initialize scroll animations for new section
+            initScrollReveal(targetSection);
+        }
+
+        navItems.forEach(function(item) {
+            item.addEventListener('click', function() {
+                switchProposal(item.dataset.nav);
+            });
+        });
+
+        // === SCROLL REVEAL ===
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        function initScrollReveal(container) {
+            if (!container) container = document;
+            var elements = container.querySelectorAll('.animate-on-scroll');
+            elements.forEach(function(el) {
+                el.classList.remove('revealed');
+                observer.observe(el);
+            });
+        }
+
+        // Init on load
+        initScrollReveal(document.querySelector('.proposal-section.active'));
+
+        // === FLIP CARDS (click to toggle on mobile) ===
+        document.querySelectorAll('.flip-card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                card.classList.toggle('flipped');
+            });
+        });
+
+        // === PROPOSAL 4: Marquee duplication for seamless loop ===
+        var ticker = document.querySelector('.ed-ticker-inner');
+        if (ticker) {
+            // Content is already duplicated in HTML for seamless loop
+        }
+
+    })();
+    </script>
+</body>
+</html>

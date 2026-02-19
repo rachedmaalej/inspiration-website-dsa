@@ -1,0 +1,6 @@
+node_modules/
+Photos/*.png
+*.ogg
+package-lock.json
+.claude/
+strategie-digitale-dsa/

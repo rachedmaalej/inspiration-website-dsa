@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Options — Stratégie Digitale</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #fafaf8;
+            color: #1a1a1a;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; }
+
+        /* ============ LAYOUT SWITCHER ============ */
+        .switcher {
+            position: sticky;
+            top: 0;
+            z-index: 300;
+            background: #1a1a1a;
+            display: flex;
+            margin: -40px -20px 0;
+            padding: 0;
+        }
+        .switcher button {
+            flex: 1;
+            padding: 14px 8px;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border: none;
+            background: none;
+            color: #777;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 3px solid transparent;
+        }
+        .switcher button.active {
+            color: #fff;
+            border-bottom-color: #2d5016;
+        }
+        .switcher button:hover { color: #ccc; }
+        .switcher-label {
+            display: none;
+            background: #2d5016;
+            color: white;
+            padding: 10px 16px;
+            font-size: 12px;
+            margin: -40px -20px 0;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        /* ============ TAB BAR (Option B only) ============ */
+        .tab-bar {
+            display: none;
+        }
+
+        /* ============ HEADER ============ */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 30px 0;
+            border-bottom: 1px solid #e0ddd5;
+        }
+        .header h1 {
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #2d5016;
+            margin-bottom: 8px;
+        }
+        .header .subtitle { font-size: 15px; color: #888; font-weight: 400; }
+        .header .date { font-size: 13px; color: #aaa; margin-top: 12px; }
+
+        /* ============ SECTIONS ============ */
+        .section { margin-bottom: 45px; }
+        .section-title {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #2d5016;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #2d5016;
+        }
+
+        /* Agenda */
+        .agenda { display: grid; grid-template-columns: 60px 1fr; gap: 0; }
+        .agenda-time {
+            font-size: 12px; font-weight: 600; color: #2d5016;
+            padding: 12px 0; border-right: 2px solid #e8e5dc;
+            padding-right: 15px; text-align: right;
+        }
+        .agenda-item { padding: 12px 0 12px 20px; border-bottom: 1px solid #f0ede5; }
+        .agenda-item strong { font-weight: 600; font-size: 14px; }
+        .agenda-item p { font-size: 13px; color: #666; margin-top: 2px; }
+
+        /* Status */
+        .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
+        .status-card { background: white; border: 1px solid #e8e5dc; border-radius: 8px; padding: 16px; }
+        .status-card .label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #999; margin-bottom: 4px; }
+        .status-card .value { font-size: 14px; font-weight: 500; }
+        .status-card .value.ready { color: #2d5016; }
+        .status-card .value.pending { color: #b8860b; }
+        .status-card .value.notyet { color: #999; }
+
+        /* Asset Tables */
+        .asset-category { margin-bottom: 30px; }
+        .asset-category-title {
+            font-size: 14px; font-weight: 600; color: #1a1a1a;
+            margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+        }
+        .asset-category-title .badge {
+            background: #2d5016; color: white; font-size: 10px; font-weight: 600;
+            padding: 2px 8px; border-radius: 10px; letter-spacing: 0.5px;
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th {
+            text-align: left; font-size: 10px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 1px; color: #999; padding: 8px 12px; border-bottom: 2px solid #e8e5dc;
+        }
+        td { padding: 10px 12px; border-bottom: 1px solid #f0ede5; vertical-align: top; }
+        td:first-child { font-weight: 600; color: #2d5016; white-space: nowrap; width: 30px; }
+        td:nth-child(2) { font-weight: 500; width: 200px; }
+        td:last-child { text-align: center; width: 80px; }
+        .complexity-high { color: #c0392b; font-weight: 600; }
+        .complexity-mid { color: #b8860b; font-weight: 500; }
+        .complexity-low { color: #2d5016; font-weight: 400; }
+        .complexity-cont { color: #666; font-style: italic; }
+
+        /* Phasing */
+        .phases { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        .phase { background: white; border: 1px solid #e8e5dc; border-radius: 10px; padding: 20px; }
+        .phase-title { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
+        .phase-1 .phase-title { color: #2d5016; }
+        .phase-2 .phase-title { color: #b8860b; }
+        .phase-3 .phase-title { color: #888; }
+        .phase-subtitle { font-size: 12px; color: #999; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #f0ede5; }
+        .phase ul { list-style: none; padding: 0; }
+        .phase li { font-size: 12px; padding: 3px 0; color: #444; }
+        .phase li .code { font-weight: 600; color: #2d5016; font-size: 11px; margin-right: 4px; }
+
+        /* Questions */
+        .questions { counter-reset: question; }
+        .question {
+            background: white; border: 1px solid #e8e5dc; border-radius: 8px;
+            padding: 16px 20px; margin-bottom: 10px; display: flex; gap: 14px; align-items: start;
+        }
+        .question-number {
+            font-size: 14px; font-weight: 700; color: #2d5016; background: #f0ede5;
+            min-width: 28px; width: 28px; height: 28px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .question-content { flex: 1; min-width: 0; }
+        .question-content strong { font-weight: 600; font-size: 14px; display: block; margin-bottom: 2px; }
+        .question-content span { font-size: 13px; color: #666; }
+
+        /* Challenge */
+        .challenge { background: #fff8e1; border: 1px solid #f0e0a0; border-radius: 10px; padding: 24px; margin: 20px 0; }
+        .challenge-title { font-size: 13px; font-weight: 600; color: #b8860b; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .challenge-diagram {
+            font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.8;
+            color: #555; margin: 12px 0; padding: 16px; background: rgba(255,255,255,0.6); border-radius: 6px;
+        }
+
+        /* Section body wrapper (used by JS for accordion) */
+        .section-body { display: contents; }
+
+        /* ======================================================
+           MOBILE STYLES — All 3 options
+           ====================================================== */
+        @media (max-width: 700px) {
+            body { padding: 0; padding-top: 48px; }
+            .container { padding: 20px 16px; }
+
+            .header { margin-bottom: 30px; padding: 20px 0; }
+            .header h1 { font-size: 20px; letter-spacing: 1.5px; }
+            .header .subtitle { font-size: 13px; }
+            .header .date { font-size: 11px; }
+
+            .section { margin-bottom: 30px; }
+            .challenge { padding: 16px; }
+            .challenge-diagram { font-size: 11px; padding: 12px; }
+
+            /* Common: status + phases stack */
+            .status-grid { grid-template-columns: 1fr; }
+            .phases { grid-template-columns: 1fr; gap: 10px; }
+            .phase { padding: 16px; }
+
+            /* ---- OPTION A: STACKED CARDS ---- */
+            body.layout-cards .agenda { display: block; }
+            body.layout-cards .agenda-time {
+                border-right: none; text-align: left;
+                padding: 10px 0 0 0; font-size: 10px;
+                color: #999; letter-spacing: 0.5px;
+            }
+            body.layout-cards .agenda-item { padding: 2px 0 14px 0; }
+
+            body.layout-cards table thead { display: none; }
+            body.layout-cards table { display: block; }
+            body.layout-cards table tbody { display: block; }
+            body.layout-cards table tr {
+                display: block; background: white; border: 1px solid #e8e5dc;
+                border-radius: 8px; padding: 14px 16px; margin-bottom: 8px;
+                position: relative;
+            }
+            body.layout-cards table td {
+                display: inline; border: none; padding: 0;
+                width: auto !important; white-space: normal !important; text-align: left !important;
+            }
+            body.layout-cards table td:first-child { font-size: 12px; margin-right: 6px; }
+            body.layout-cards table td:nth-child(2) { font-size: 14px; width: auto !important; }
+            body.layout-cards table td:nth-child(3) {
+                display: block; margin-top: 6px; font-size: 12px;
+                color: #666; line-height: 1.5; font-weight: 400;
+            }
+            body.layout-cards table td:last-child {
+                display: inline-block; margin-top: 8px; font-size: 10px;
+                padding: 2px 10px; border-radius: 12px; background: #f5f3ee;
+            }
+
+            /* ---- OPTION B: TABBED NAVIGATION ---- */
+            body.layout-tabs .tab-bar {
+                display: flex; position: sticky; top: 48px; z-index: 200;
+                background: white; border-bottom: 1px solid #e8e5dc;
+                overflow-x: auto; -webkit-overflow-scrolling: touch;
+                padding: 0; margin: 0 -16px 20px; scrollbar-width: none;
+            }
+            body.layout-tabs .tab-bar::-webkit-scrollbar { display: none; }
+            body.layout-tabs .tab-bar .tab {
+                flex-shrink: 0; padding: 12px 16px; font-family: inherit;
+                font-size: 11px; font-weight: 500; border: none; background: none;
+                color: #999; cursor: pointer; border-bottom: 2px solid transparent;
+                white-space: nowrap;
+            }
+            body.layout-tabs .tab-bar .tab.active {
+                color: #2d5016; border-bottom-color: #2d5016; font-weight: 600;
+            }
+            body.layout-tabs .section { display: none; }
+            body.layout-tabs .section.tab-visible { display: block; }
+
+            /* Tab mode also uses card-style tables */
+            body.layout-tabs table thead { display: none; }
+            body.layout-tabs table { display: block; }
+            body.layout-tabs table tbody { display: block; }
+            body.layout-tabs table tr {
+                display: block; background: white; border: 1px solid #e8e5dc;
+                border-radius: 8px; padding: 14px 16px; margin-bottom: 8px;
+            }
+            body.layout-tabs table td {
+                display: inline; border: none; padding: 0;
+                width: auto !important; white-space: normal !important; text-align: left !important;
+            }
+            body.layout-tabs table td:first-child { font-size: 12px; margin-right: 6px; }
+            body.layout-tabs table td:nth-child(2) { font-size: 14px; width: auto !important; }
+            body.layout-tabs table td:nth-child(3) {
+                display: block; margin-top: 6px; font-size: 12px;
+                color: #666; line-height: 1.5; font-weight: 400;
+            }
+            body.layout-tabs table td:last-child {
+                display: inline-block; margin-top: 8px; font-size: 10px;
+                padding: 2px 10px; border-radius: 12px; background: #f5f3ee;
+            }
+
+            /* ---- OPTION C: COLLAPSIBLE ACCORDION ---- */
+            body.layout-accordion .section-title {
+                cursor: pointer; position: relative; padding-right: 28px;
+                -webkit-tap-highlight-color: transparent;
+            }
+            body.layout-accordion .section-title::after {
+                content: '+'; position: absolute; right: 0; top: 0;
+                font-size: 18px; font-weight: 300; color: #2d5016;
+                line-height: 1;
+            }
+            body.layout-accordion .section.expanded .section-title::after { content: '\2212'; }
+
+            body.layout-accordion .section-body {
+                display: none; overflow: hidden;
+            }
+            body.layout-accordion .section.expanded .section-body {
+                display: block;
+            }
+
+            /* Accordion also uses card-style tables */
+            body.layout-accordion table thead { display: none; }
+            body.layout-accordion table { display: block; }
+            body.layout-accordion table tbody { display: block; }
+            body.layout-accordion table tr {
+                display: block; background: white; border: 1px solid #e8e5dc;
+                border-radius: 8px; padding: 14px 16px; margin-bottom: 8px;
+            }
+            body.layout-accordion table td {
+                display: inline; border: none; padding: 0;
+                width: auto !important; white-space: normal !important; text-align: left !important;
+            }
+            body.layout-accordion table td:first-child { font-size: 12px; margin-right: 6px; }
+            body.layout-accordion table td:nth-child(2) { font-size: 14px; width: auto !important; }
+            body.layout-accordion table td:nth-child(3) {
+                display: block; margin-top: 6px; font-size: 12px;
+                color: #666; line-height: 1.5; font-weight: 400;
+            }
+            body.layout-accordion table td:last-child {
+                display: inline-block; margin-top: 8px; font-size: 10px;
+                padding: 2px 10px; border-radius: 12px; background: #f5f3ee;
+            }
+        }
+
+        /* Desktop notice */
+        @media (min-width: 701px) {
+            .switcher-label { display: block !important; }
+            .switcher { display: none; }
+        }
+    </style>
+</head>
+<body class="layout-cards">
+
+    <!-- Desktop notice -->
+    <div class="switcher-label">Ouvrir sur mobile (ou redimensionner &lt; 700px) pour voir les 3 options</div>
+
+    <!-- Layout Switcher -->
+    <div class="switcher">
+        <button class="active" data-layout="cards">A. Cards</button>
+        <button data-layout="tabs">B. Tabs</button>
+        <button data-layout="accordion">C. Accordion</button>
+    </div>
+
+    <!-- Tab Bar (Option B only) -->
+    <nav class="tab-bar">
+        <button class="tab active" data-tab="0">Agenda</button>
+        <button class="tab" data-tab="1">État</button>
+        <button class="tab" data-tab="2">Assets</button>
+        <button class="tab" data-tab="3">Défi</button>
+        <button class="tab" data-tab="4">Phases</button>
+        <button class="tab" data-tab="5">Questions</button>
+    </nav>
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+            <h1>Domaine Sidi Abdallah</h1>
+            <div class="subtitle">Stratégie Digitale — Document de Discussion</div>
+            <div class="date">Appel Lilia &middot; Elyssa &middot; Rached &mdash; 20 Février 2026 @12:00</div>
+        </div>
+
+        <!-- Agenda -->
+        <div class="section" data-section="0">
+            <div class="section-title">Agenda de l'appel</div>
+            <div class="section-body">
+                <div class="agenda">
+                    <div class="agenda-time">5 min</div>
+                    <div class="agenda-item">
+                        <strong>1. État des lieux</strong>
+                        <p>Ou en sont le texte, les logos, les photos, la rénovation ?</p>
+                    </div>
+                    <div class="agenda-time">20 min</div>
+                    <div class="agenda-item">
+                        <strong>2. Les assets digitaux</strong>
+                        <p>Passer en revue chaque asset : on le fait, plus tard, ou pas du tout ?</p>
+                    </div>
+                    <div class="agenda-time">15 min</div>
+                    <div class="agenda-item">
+                        <strong>3. Priorités et phasage</strong>
+                        <p>Classer en Phase 1 (lancement) / Phase 2 (6 mois) / Phase 3 (année 1)</p>
+                    </div>
+                    <div class="agenda-time">10 min</div>
+                    <div class="agenda-item">
+                        <strong>4. Dépendances et planning</strong>
+                        <p>Ce dont Rached a besoin pour avancer + calendrier réaliste</p>
+                    </div>
+                    <div class="agenda-time">5 min</div>
+                    <div class="agenda-item">
+                        <strong>5. Prochaines étapes</strong>
+                        <p>Qui fait quoi, pour quand</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status -->
+        <div class="section" data-section="1">
+            <div class="section-title">État des lieux — A confirmer</div>
+            <div class="section-body">
+                <div class="status-grid">
+                    <div class="status-card">
+                        <div class="label">Texte du site</div>
+                        <div class="value pending">En attente validation</div>
+                    </div>
+                    <div class="status-card">
+                        <div class="label">Logos & icones</div>
+                        <div class="value pending">Graphiste en cours &rarr; fin fév / mi-mars</div>
+                    </div>
+                    <div class="status-card">
+                        <div class="label">Photos & vidéos</div>
+                        <div class="value pending">Shooting démarré, contenu progressif</div>
+                    </div>
+                    <div class="status-card">
+                        <div class="label">Rénovation</div>
+                        <div class="value notyet">Pas encore commencée</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assets -->
+        <div class="section" data-section="2">
+            <div class="section-title">Assets digitaux a considérer — 26 éléments</div>
+            <div class="section-body">
+
+                <div class="asset-category">
+                    <div class="asset-category-title">A. Site Web <span class="badge">4 assets</span></div>
+                    <table>
+                        <tr><th>#</th><th>Asset</th><th>Description</th><th>Effort</th></tr>
+                        <tr><td>A1</td><td>Site vitrine</td><td>Les 4 piliers, galerie, ambiance. Mobile-first, bilingue FR/EN.</td><td class="complexity-mid">Moyen</td></tr>
+                        <tr><td>A2</td><td>Blog / Journal</td><td>Articles sur la vie du domaine, les saisons, la rénovation.</td><td class="complexity-low">Faible</td></tr>
+                        <tr><td>A3</td><td>Page événements</td><td>Mariages, team buildings, anniversaires + formulaire de devis.</td><td class="complexity-low">Faible</td></tr>
+                        <tr><td>A4</td><td>SEO</td><td>"gite rural Tunisie", "retraite bien-être Tunis", etc.</td><td class="complexity-cont">Continu</td></tr>
+                    </table>
+                </div>
+
+                <div class="asset-category">
+                    <div class="asset-category-title">B. Système de Réservation <span class="badge">6 assets</span></div>
+                    <table>
+                        <tr><th>#</th><th>Asset</th><th>Description</th><th>Effort</th></tr>
+                        <tr><td>B1</td><td>Réservation chambres</td><td>Calendrier, choix de chambre, dates, paiement. 6 chambres Dar Saad.</td><td class="complexity-mid">Moyen</td></tr>
+                        <tr><td>B2</td><td>Réservation retraites</td><td>Chambre + activités au choix + repas + transfert &rarr; 1 prix.</td><td class="complexity-high">Élevé</td></tr>
+                        <tr><td>B3</td><td>Activités à la carte</td><td>Yoga, massage, hammam. Créneaux, capacité limitée.</td><td class="complexity-mid">Moyen</td></tr>
+                        <tr><td>B4</td><td>Restaurant</td><td>Table pour X, date, heure. Sur réservation uniquement.</td><td class="complexity-low">Faible</td></tr>
+                        <tr><td>B5</td><td>Day Pass & bons cadeaux</td><td>Achat en ligne, génération d'un code/QR. 40-360 TND.</td><td class="complexity-mid">Moyen</td></tr>
+                        <tr><td>B6</td><td>Événements privés</td><td>Formulaire de demande (pas de réservation instantanée).</td><td class="complexity-low">Faible</td></tr>
+                    </table>
+                </div>
+
+                <div class="asset-category">
+                    <div class="asset-category-title">C. Espace Membre — Agrumia <span class="badge">3 assets</span></div>
+                    <table>
+                        <tr><th>#</th><th>Asset</th><th>Description</th><th>Effort</th></tr>
+                        <tr><td>C1</td><td>Page membership</td><td>Les 3 tiers (100 / 200 / 400 TND), avantages, inscription.</td><td class="complexity-low">Faible</td></tr>
+                        <tr><td>C2</td><td>Portail membre</td><td>Espace connecté : paiement mensuel, réservation cours, pass invités.</td><td class="complexity-high">Élevé</td></tr>
+                        <tr><td>C3</td><td>Gestion abonnements</td><td>Paiement récurrent, upgrades, suspension, renouvellement.</td><td class="complexity-high">Élevé</td></tr>
+                    </table>
+                </div>
+
+                <div class="asset-category">
+                    <div class="asset-category-title">D. Paiement & Facturation <span class="badge">3 assets</span></div>
+                    <table>
+                        <tr><th>#</th><th>Asset</th><th>Description</th><th>Effort</th></tr>
+                        <tr><td>D1</td><td>Paiement en ligne</td><td>Cartes internationales (Stripe), cartes tunisiennes (Flouci, Konnect).</td><td class="complexity-mid">Moyen</td></tr>
+                        <tr><td>D2</td><td>Facturation & reçus</td><td>Reçus automatiques post-réservation. Requis pour les entreprises.</td><td class="complexity-low">Faible</td></tr>
+                        <tr><td>D3</td><td>Acomptes</td><td>Acompte à la réservation, solde à l'arrivée.</td><td class="complexity-mid">Moyen</td></tr>
+                    </table>
+                </div>
+
+                <div class="asset-category">
+                    <div class="asset-category-title">E. Communication Client <span class="badge">4 assets</span></div>
+                    <table>
+                        <tr><th>#</th><th>Asset</th><th>Description</th><th>Effort</th></tr>
+                        <tr><td>E1</td><td>Emails transactionnels</td><td>Confirmation, rappel J-7, instructions d'accès, post-séjour.</td><td class="complexity-mid">Moyen</td></tr>
+                        <tr><td>E2</td><td>Newsletter</td><td>Emails saisonniers : nouvelles retraites, saison agrumes.</td><td class="complexity-low">Faible</td></tr>
+                        <tr><td>E3</td><td>WhatsApp Business</td><td>Numéro dédié, réponses auto, catalogue.</td><td class="complexity-low">Faible</td></tr>
+                        <tr><td>E4</td><td>Gestion des avis</td><td>Email automatique post-séjour &rarr; avis Google / TripAdvisor.</td><td class="complexity-low">Faible</td></tr>
+                    </table>
+                </div>
+
+                <div class="asset-category">
+                    <div class="asset-category-title">F. Back-Office / Gestion <span class="badge">4 assets</span></div>
+                    <table>
+                        <tr><th>#</th><th>Asset</th><th>Description</th><th>Effort</th></tr>
+                        <tr><td>F1</td><td>Tableau de bord</td><td>Réservations du jour, taux d'occupation, revenus.</td><td class="complexity-mid">Moyen</td></tr>
+                        <tr><td>F2</td><td>Calendrier unifié</td><td>Chambres + spa + fitness + événements. Éviter doubles réservations.</td><td class="complexity-high">Élevé</td></tr>
+                        <tr><td>F3</td><td>Fiches clients (CRM)</td><td>Historique séjours, préférences, allergies.</td><td class="complexity-mid">Moyen</td></tr>
+                        <tr><td>F4</td><td>Gestion des tarifs</td><td>Prix par saison, promotions, offres spéciales.</td><td class="complexity-mid">Moyen</td></tr>
+                    </table>
+                </div>
+
+                <div class="asset-category">
+                    <div class="asset-category-title">G. Expérience Sur Place <span class="badge">2 assets</span></div>
+                    <table>
+                        <tr><th>#</th><th>Asset</th><th>Description</th><th>Effort</th></tr>
+                        <tr><td>G1</td><td>Guide digital (PWA)</td><td>QR code à l'arrivée : planning, menu, carte du domaine.</td><td class="complexity-mid">Moyen</td></tr>
+                        <tr><td>G2</td><td>Check-in en ligne</td><td>Nom, passeport, heure d'arrivée — avant le séjour.</td><td class="complexity-low">Faible</td></tr>
+                    </table>
+                </div>
+
+                <div class="asset-category">
+                    <div class="asset-category-title">H. Infrastructure <span class="badge">4 assets</span></div>
+                    <table>
+                        <tr><th>#</th><th>Asset</th><th>Description</th><th>Effort</th></tr>
+                        <tr><td>H1</td><td>Nom de domaine</td><td>domaine-sidiabdallah.com ? agrumia.tn ? darsaad.tn ?</td><td class="complexity-low">Immédiat</td></tr>
+                        <tr><td>H2</td><td>Emails professionnels</td><td>contact@, réservations@, elyssa@, etc.</td><td class="complexity-low">Immédiat</td></tr>
+                        <tr><td>H3</td><td>Hébergement web</td><td>Où héberger le site et les services (Vercel, Railway...).</td><td class="complexity-low">Technique</td></tr>
+                        <tr><td>H4</td><td>Analytics</td><td>Trafic, conversions, pages vues. Google Analytics ou Plausible.</td><td class="complexity-low">Faible</td></tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Challenge -->
+        <div class="section" data-section="3">
+            <div class="section-title">Le défi technique clé</div>
+            <div class="section-body">
+                <div class="challenge">
+                    <p style="font-size: 14px; margin-bottom: 10px;">Un client qui réserve une <strong>Retraite Spa 3 nuits</strong> fait simultanément :</p>
+                    <div class="challenge-diagram">
+1 réservation = chambre (3 nuits)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ hammam (1 séance)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ 4 activités au choix<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ restaurant (3 dîners)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ transfert aéroport<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rarr; <strong>1 seul paiement</strong>
+                    </div>
+                    <p style="font-size: 13px; color: #666;">C'est l'asset le plus complexe et le plus stratégique (B2). Aucun outil existant ne gère ce type de réservation composite.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phasing -->
+        <div class="section" data-section="4">
+            <div class="section-title">Proposition de phasage — À valider ensemble</div>
+            <div class="section-body">
+                <div class="phases">
+                    <div class="phase phase-1">
+                        <div class="phase-title">Phase 1</div>
+                        <div class="phase-subtitle">Lancement</div>
+                        <ul>
+                            <li><span class="code">A1</span> Site vitrine</li>
+                            <li><span class="code">B1</span> Résa chambres</li>
+                            <li><span class="code">B2</span> Résa retraites</li>
+                            <li><span class="code">D1</span> Paiement en ligne</li>
+                            <li><span class="code">E1</span> Emails auto</li>
+                            <li><span class="code">E3</span> WhatsApp Business</li>
+                            <li><span class="code">H1</span> Nom de domaine</li>
+                            <li><span class="code">H2</span> Emails pro</li>
+                            <li><span class="code">H3</span> Hébergement</li>
+                            <li><span class="code">H4</span> Analytics</li>
+                        </ul>
+                    </div>
+                    <div class="phase phase-2">
+                        <div class="phase-title">Phase 2</div>
+                        <div class="phase-subtitle">3-6 mois après</div>
+                        <ul>
+                            <li><span class="code">A3</span> Page événements</li>
+                            <li><span class="code">B3</span> Résa activités</li>
+                            <li><span class="code">B4</span> Résa restaurant</li>
+                            <li><span class="code">B5</span> Day Pass & cadeaux</li>
+                            <li><span class="code">E2</span> Newsletter</li>
+                            <li><span class="code">E4</span> Gestion avis</li>
+                            <li><span class="code">F1</span> Dashboard admin</li>
+                            <li><span class="code">F2</span> Calendrier unifié</li>
+                        </ul>
+                    </div>
+                    <div class="phase phase-3">
+                        <div class="phase-title">Phase 3</div>
+                        <div class="phase-subtitle">Année 1, si demande</div>
+                        <ul>
+                            <li><span class="code">A2</span> Blog</li>
+                            <li><span class="code">A4</span> SEO avancé</li>
+                            <li><span class="code">B6</span> Form. événements</li>
+                            <li><span class="code">C1-3</span> Portail Agrumia</li>
+                            <li><span class="code">D2-3</span> Facturation</li>
+                            <li><span class="code">F3-4</span> CRM & tarifs</li>
+                            <li><span class="code">G1-2</span> Guide sur place</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Questions -->
+        <div class="section" data-section="5">
+            <div class="section-title">Questions ouvertes</div>
+            <div class="section-body">
+                <div class="questions">
+                    <div class="question">
+                        <div class="question-number">1</div>
+                        <div class="question-content">
+                            <strong>Noms de domaine</strong>
+                            <span>Un seul site ou des sous-domaines par entité ?</span>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <div class="question-number">2</div>
+                        <div class="question-content">
+                            <strong>Paiement en ligne</strong>
+                            <span>On accepte les paiements dès le début ? En quelle(s) devise(s) ?</span>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <div class="question-number">3</div>
+                        <div class="question-content">
+                            <strong>Langues</strong>
+                            <span>FR + EN confirmé ? L'arabe est-il nécessaire ?</span>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <div class="question-number">4</div>
+                        <div class="question-content">
+                            <strong>Calendrier</strong>
+                            <span>Si brief + texte + logos prêts en avril, site fonctionnel pour quand ?</span>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <div class="question-number">5</div>
+                        <div class="question-content">
+                            <strong>Photos provisoires</strong>
+                            <span>Lancer avec des photos de l'existant en attendant post-rénovation ?</span>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <div class="question-number">6</div>
+                        <div class="question-content">
+                            <strong>Budget mensuel</strong>
+                            <span>Hébergement, emails, paiement — estimation : 50-100 TND/mois.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; padding-top: 30px; border-top: 1px solid #e0ddd5; margin-top: 40px;">
+            <div style="font-size: 11px; color: #bbb; letter-spacing: 1px; text-transform: uppercase;">Préparé par Rached &middot; Février 2026</div>
+        </div>
+
+    </div>
+
+    <script>
+        // ============ LAYOUT SWITCHER ============
+        const sections = document.querySelectorAll('.section');
+        const tabs = document.querySelectorAll('.tab-bar .tab');
+
+        document.querySelectorAll('.switcher button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.switcher button').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const layout = btn.dataset.layout;
+                document.body.className = 'layout-' + layout;
+
+                // Reset states when switching
+                if (layout === 'tabs') {
+                    initTabs();
+                } else if (layout === 'accordion') {
+                    initAccordion();
+                } else {
+                    // Cards mode: show all sections
+                    sections.forEach(s => {
+                        s.classList.remove('tab-visible', 'expanded');
+                        s.style.display = '';
+                    });
+                }
+            });
+        });
+
+        // ============ OPTION B: TAB NAVIGATION ============
+        function initTabs() {
+            sections.forEach(s => s.classList.remove('tab-visible', 'expanded'));
+            // Show first section
+            if (sections[0]) sections[0].classList.add('tab-visible');
+            // Reset tab active state
+            tabs.forEach((t, i) => t.classList.toggle('active', i === 0));
+        }
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                if (!document.body.classList.contains('layout-tabs')) return;
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                const idx = tab.dataset.tab;
+                sections.forEach(s => s.classList.remove('tab-visible'));
+                const target = document.querySelector(`.section[data-section="${idx}"]`);
+                if (target) target.classList.add('tab-visible');
+            });
+        });
+
+        // ============ OPTION C: COLLAPSIBLE ACCORDION ============
+        function initAccordion() {
+            sections.forEach(s => {
+                s.classList.remove('tab-visible');
+                s.classList.remove('expanded');
+            });
+            // Expand first section by default
+            if (sections[0]) sections[0].classList.add('expanded');
+        }
+
+        sections.forEach(section => {
+            const title = section.querySelector('.section-title');
+            if (!title) return;
+            title.addEventListener('click', () => {
+                if (!document.body.classList.contains('layout-accordion')) return;
+                const isExpanded = section.classList.contains('expanded');
+                // Close all, then open clicked (or just toggle clicked)
+                sections.forEach(s => s.classList.remove('expanded'));
+                if (!isExpanded) section.classList.add('expanded');
+            });
+        });
+
+        // ============ INIT ============
+        // On mobile, default to cards. On desktop, show all normally.
+        if (window.innerWidth <= 700) {
+            document.body.classList.add('layout-cards');
+        }
+    </script>
+
+</body>
+</html>

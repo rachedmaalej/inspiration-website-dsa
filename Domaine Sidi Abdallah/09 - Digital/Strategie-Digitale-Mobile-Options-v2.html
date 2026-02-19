@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Options v2 — Stratégie Digitale</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --green: #2d5016;
+            --green-light: #e8f5e0;
+            --amber: #b8860b;
+            --red: #c0392b;
+            --bg: #fafaf8;
+            --card: #ffffff;
+            --border: #e8e5dc;
+            --text: #1a1a1a;
+            --text-muted: #666;
+            --text-faint: #999;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 40px 20px;
+            transition: background 0.3s, color 0.3s;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+
+        /* ============ LAYOUT SWITCHER ============ */
+        .switcher {
+            position: sticky; top: 0; z-index: 300;
+            background: #1a1a1a; display: flex; margin: -40px -20px 0;
+            overflow-x: auto; scrollbar-width: none;
+        }
+        .switcher::-webkit-scrollbar { display: none; }
+        .switcher button {
+            flex-shrink: 0; flex: 1; min-width: 0;
+            padding: 12px 6px; font-family: inherit; font-size: 10px;
+            font-weight: 600; letter-spacing: 0.3px; text-transform: uppercase;
+            border: none; background: none; color: #666; cursor: pointer;
+            border-bottom: 3px solid transparent; transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .switcher button.active { color: #fff; border-bottom-color: #2d5016; }
+        .switcher button:hover { color: #aaa; }
+        .switcher-label {
+            display: none; background: #2d5016; color: white;
+            padding: 10px 16px; font-size: 12px; margin: -40px -20px 0;
+            text-align: center; letter-spacing: 0.5px;
+        }
+
+        /* ============ EXTRA UI ELEMENTS (hidden by default) ============ */
+        .search-bar, .fab, .slide-counter, .bottom-bar, .bento-overview,
+        .sticky-progress, .summary-badge { display: none; }
+
+        /* ============ BASE STYLES ============ */
+        .header { text-align: center; margin-bottom: 50px; padding: 30px 0; border-bottom: 1px solid var(--border); }
+        .header h1 { font-size: 28px; font-weight: 300; letter-spacing: 3px; text-transform: uppercase; color: var(--green); margin-bottom: 8px; }
+        .header .subtitle { font-size: 15px; color: #888; }
+        .header .date { font-size: 13px; color: #aaa; margin-top: 12px; }
+
+        .section { margin-bottom: 45px; }
+        .section-title {
+            font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+            text-transform: uppercase; color: var(--green);
+            margin-bottom: 20px; padding-bottom: 8px; border-bottom: 2px solid var(--green);
+        }
+
+        .agenda { display: grid; grid-template-columns: 60px 1fr; }
+        .agenda-time { font-size: 12px; font-weight: 600; color: var(--green); padding: 12px 0; border-right: 2px solid var(--border); padding-right: 15px; text-align: right; }
+        .agenda-item { padding: 12px 0 12px 20px; border-bottom: 1px solid #f0ede5; }
+        .agenda-item strong { font-weight: 600; font-size: 14px; }
+        .agenda-item p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+        .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .status-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+        .status-card .label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-faint); margin-bottom: 4px; }
+        .status-card .value { font-size: 14px; font-weight: 500; }
+        .value.pending { color: var(--amber); } .value.notyet { color: var(--text-faint); }
+
+        .asset-category { margin-bottom: 30px; }
+        .asset-category-title { font-size: 14px; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .badge { background: var(--green); color: white; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { text-align: left; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-faint); padding: 8px 12px; border-bottom: 2px solid var(--border); }
+        td { padding: 10px 12px; border-bottom: 1px solid #f0ede5; vertical-align: top; }
+        td:first-child { font-weight: 600; color: var(--green); white-space: nowrap; width: 30px; }
+        td:nth-child(2) { font-weight: 500; width: 200px; }
+        td:last-child { text-align: center; width: 80px; }
+        .complexity-high { color: var(--red); font-weight: 600; }
+        .complexity-mid { color: var(--amber); font-weight: 500; }
+        .complexity-low { color: var(--green); }
+        .complexity-cont { color: var(--text-muted); font-style: italic; }
+
+        .phases { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        .phase { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+        .phase-title { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
+        .phase-1 .phase-title { color: var(--green); }
+        .phase-2 .phase-title { color: var(--amber); }
+        .phase-3 .phase-title { color: #888; }
+        .phase-subtitle { font-size: 12px; color: var(--text-faint); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #f0ede5; }
+        .phase ul { list-style: none; }
+        .phase li { font-size: 12px; padding: 3px 0; color: #444; }
+        .phase li .code { font-weight: 600; color: var(--green); font-size: 11px; margin-right: 4px; }
+
+        .questions { counter-reset: question; }
+        .question { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin-bottom: 10px; display: flex; gap: 14px; align-items: start; }
+        .question-number { font-size: 14px; font-weight: 700; color: var(--green); background: #f0ede5; min-width: 28px; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .question-content { flex: 1; min-width: 0; }
+        .question-content strong { font-weight: 600; font-size: 14px; display: block; margin-bottom: 2px; }
+        .question-content span { font-size: 13px; color: var(--text-muted); }
+
+        .challenge { background: #fff8e1; border: 1px solid #f0e0a0; border-radius: 10px; padding: 24px; margin: 20px 0; }
+        .challenge-title { font-size: 13px; font-weight: 600; color: var(--amber); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .challenge-diagram { font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.8; color: #555; margin: 12px 0; padding: 16px; background: rgba(255,255,255,0.6); border-radius: 6px; }
+        .section-body { display: contents; }
+
+        /* ======================================================
+           MOBILE STYLES — 5 ALTERNATIVE DESIGNS
+           ====================================================== */
+        @media (max-width: 700px) {
+            body { padding: 0; padding-top: 44px; }
+            .container { padding: 20px 16px; }
+            .header { margin-bottom: 24px; padding: 20px 0; }
+            .header h1 { font-size: 20px; letter-spacing: 1.5px; }
+            .header .subtitle { font-size: 13px; }
+            .header .date { font-size: 11px; }
+            .section { margin-bottom: 28px; }
+            .status-grid { grid-template-columns: 1fr; }
+            .phases { grid-template-columns: 1fr; gap: 10px; }
+            .challenge { padding: 16px; }
+            .challenge-diagram { font-size: 11px; padding: 12px; }
+
+            /* Shared: card-style tables for all layouts */
+            table thead { display: none; }
+            table, table tbody { display: block; }
+            table tr {
+                display: block; background: var(--card); border: 1px solid var(--border);
+                border-radius: 8px; padding: 14px 16px; margin-bottom: 8px;
+            }
+            table td {
+                display: inline; border: none; padding: 0;
+                width: auto !important; white-space: normal !important; text-align: left !important;
+            }
+            table td:first-child { font-size: 12px; margin-right: 6px; }
+            table td:nth-child(2) { font-size: 14px; width: auto !important; }
+            table td:nth-child(3) { display: block; margin-top: 6px; font-size: 12px; color: var(--text-muted); line-height: 1.5; font-weight: 400; }
+            table td:last-child { display: inline-block; margin-top: 8px; font-size: 10px; padding: 2px 10px; border-radius: 12px; background: #f5f3ee; }
+
+            /* ============================================
+               1. DASHBOARD (Bento Grid)
+               ============================================ */
+            body.layout-dashboard .bento-overview {
+                display: grid; grid-template-columns: 1fr 1fr;
+                gap: 10px; margin-bottom: 24px;
+            }
+            body.layout-dashboard .bento-card {
+                background: var(--card); border: 1px solid var(--border);
+                border-radius: 12px; padding: 16px; cursor: pointer;
+                transition: transform 0.15s, box-shadow 0.15s;
+                -webkit-tap-highlight-color: transparent;
+            }
+            body.layout-dashboard .bento-card:active { transform: scale(0.97); }
+            body.layout-dashboard .bento-card.wide { grid-column: 1 / -1; }
+            body.layout-dashboard .bento-card .bento-num {
+                font-size: 28px; font-weight: 800; color: var(--green); line-height: 1;
+            }
+            body.layout-dashboard .bento-card .bento-label {
+                font-size: 11px; font-weight: 600; text-transform: uppercase;
+                letter-spacing: 1px; color: var(--text-faint); margin-top: 4px;
+            }
+            body.layout-dashboard .bento-card .bento-sub {
+                font-size: 12px; color: var(--text-muted); margin-top: 6px; line-height: 1.4;
+            }
+            body.layout-dashboard .header { margin-bottom: 16px; padding-bottom: 16px; }
+            body.layout-dashboard .section { scroll-margin-top: 60px; }
+
+            /* ============================================
+               2. SLIDES (Full-screen scroll-snap)
+               ============================================ */
+            body.layout-slides { overflow: hidden; }
+            body.layout-slides .container {
+                height: calc(100vh - 44px); overflow-y: auto;
+                scroll-snap-type: y mandatory; padding: 0;
+            }
+            body.layout-slides .header {
+                height: calc(100vh - 44px); scroll-snap-align: start;
+                display: flex; flex-direction: column; justify-content: center;
+                margin: 0; padding: 40px 24px; border: none;
+            }
+            body.layout-slides .section {
+                min-height: calc(100vh - 44px); scroll-snap-align: start;
+                display: flex; flex-direction: column; justify-content: flex-start;
+                padding: 24px 20px; margin: 0;
+                border-bottom: 1px solid var(--border);
+            }
+            body.layout-slides .section-body { display: block; overflow-y: auto; flex: 1; }
+            body.layout-slides .slide-counter {
+                display: block; position: fixed; top: 50px; right: 12px;
+                background: rgba(45,80,22,0.9); color: white;
+                font-size: 11px; font-weight: 600; padding: 4px 10px;
+                border-radius: 20px; z-index: 200;
+            }
+            body.layout-slides .phases { gap: 8px; }
+            body.layout-slides .phase { padding: 14px; }
+
+            /* ============================================
+               3. EXPLORER (Search + FAB + Hub Cards)
+               ============================================ */
+            body.layout-explorer .search-bar {
+                display: block; position: sticky; top: 44px; z-index: 200;
+                margin: 0 -16px 20px; padding: 10px 16px;
+                background: var(--bg); border-bottom: 1px solid var(--border);
+            }
+            body.layout-explorer .search-bar input {
+                width: 100%; padding: 10px 14px 10px 36px;
+                border: 1px solid var(--border); border-radius: 10px;
+                font-family: inherit; font-size: 14px; background: var(--card);
+                outline: none; -webkit-appearance: none;
+            }
+            body.layout-explorer .search-bar input:focus { border-color: var(--green); }
+            body.layout-explorer .search-bar::before {
+                content: '\2315'; position: absolute; left: 28px; top: 50%;
+                transform: translateY(-50%); font-size: 18px; color: var(--text-faint);
+            }
+            body.layout-explorer .section { scroll-margin-top: 110px; }
+            body.layout-explorer .section.search-hidden { display: none; }
+            body.layout-explorer .fab {
+                display: flex; position: fixed; bottom: 24px; right: 20px;
+                width: 52px; height: 52px; background: var(--green);
+                color: white; border: none; border-radius: 50%;
+                font-size: 22px; align-items: center; justify-content: center;
+                cursor: pointer; z-index: 250; box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+                -webkit-tap-highlight-color: transparent;
+            }
+            body.layout-explorer .fab-menu {
+                display: none; position: fixed; bottom: 86px; right: 20px;
+                z-index: 250; flex-direction: column; gap: 8px; align-items: flex-end;
+            }
+            body.layout-explorer .fab-menu.open { display: flex; }
+            body.layout-explorer .fab-item {
+                background: var(--card); border: 1px solid var(--border);
+                padding: 8px 14px; border-radius: 20px; font-size: 12px;
+                font-weight: 500; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                white-space: nowrap; font-family: inherit;
+            }
+
+            /* ============================================
+               4. STORY (Scrollytelling + Animations)
+               ============================================ */
+            body.layout-story .section {
+                opacity: 0; transform: translateY(30px);
+                transition: opacity 0.6s ease, transform 0.6s ease;
+            }
+            body.layout-story .section.revealed {
+                opacity: 1; transform: translateY(0);
+            }
+            body.layout-story .sticky-progress {
+                display: block; position: sticky; top: 44px; z-index: 200;
+                background: var(--bg); padding: 10px 16px 8px;
+                margin: 0 -16px 16px; border-bottom: 1px solid var(--border);
+            }
+            body.layout-story .sticky-progress .sp-title {
+                font-size: 11px; font-weight: 600; color: var(--green);
+                text-transform: uppercase; letter-spacing: 1.5px;
+            }
+            body.layout-story .sticky-progress .sp-bar {
+                height: 3px; background: var(--border); border-radius: 2px;
+                margin-top: 6px; overflow: hidden;
+            }
+            body.layout-story .sticky-progress .sp-fill {
+                height: 100%; background: var(--green); border-radius: 2px;
+                width: 0%; transition: width 0.3s;
+            }
+            body.layout-story .summary-badge {
+                display: block; background: var(--green-light); border-left: 3px solid var(--green);
+                padding: 10px 14px; margin-bottom: 16px; border-radius: 0 8px 8px 0;
+                font-size: 12px; color: var(--green); font-weight: 500; line-height: 1.5;
+            }
+            body.layout-story .header {
+                margin-bottom: 16px; padding-bottom: 16px;
+            }
+
+            /* ============================================
+               5. OPS (Dark + Status Borders + Compact)
+               ============================================ */
+            body.layout-ops {
+                --bg: #121212; --card: #1e1e1e; --border: #333;
+                --text: #e0e0e0; --text-muted: #999; --text-faint: #666;
+                --green: #4ade80; --amber: #fcd34d; --red: #f87171;
+                background: var(--bg); color: var(--text);
+            }
+            body.layout-ops .header { border-color: #333; }
+            body.layout-ops .header h1 { color: var(--green); }
+            body.layout-ops .section-title { color: var(--green); border-color: #333; }
+            body.layout-ops table tr { background: var(--card); border-color: var(--border); }
+            body.layout-ops table td:last-child { background: #252525; }
+            body.layout-ops .complexity-high { color: var(--red); }
+            body.layout-ops .complexity-mid { color: var(--amber); }
+            body.layout-ops .complexity-low { color: var(--green); }
+            body.layout-ops .status-card { background: var(--card); border-color: var(--border); }
+            body.layout-ops .status-card .label { color: var(--text-faint); }
+            body.layout-ops .value.pending { color: var(--amber); }
+            body.layout-ops .value.notyet { color: var(--text-faint); }
+            body.layout-ops .phase { background: var(--card); border-color: var(--border); }
+            body.layout-ops .phase li { color: var(--text-muted); }
+            body.layout-ops .phase li .code { color: var(--green); }
+            body.layout-ops .phase-subtitle { border-color: #333; color: var(--text-faint); }
+            body.layout-ops .question { background: var(--card); border-color: var(--border); }
+            body.layout-ops .question-number { background: #252525; color: var(--green); }
+            body.layout-ops .question-content span { color: var(--text-muted); }
+            body.layout-ops .challenge { background: #1e1a0e; border-color: #3a3520; }
+            body.layout-ops .challenge-diagram { background: rgba(0,0,0,0.3); color: var(--text-muted); }
+            body.layout-ops .badge { background: var(--green); color: #121212; }
+            body.layout-ops .switcher { background: #0a0a0a; }
+            body.layout-ops .agenda-time { color: var(--green); border-color: #333; }
+            body.layout-ops .agenda-item { border-color: #2a2a2a; }
+            body.layout-ops .agenda-item p { color: var(--text-muted); }
+
+            /* Ops: status border on asset cards */
+            body.layout-ops table tr { border-left: 3px solid var(--border); }
+            body.layout-ops table tr:has(.complexity-high) { border-left-color: var(--red); }
+            body.layout-ops table tr:has(.complexity-mid) { border-left-color: var(--amber); }
+            body.layout-ops table tr:has(.complexity-low) { border-left-color: var(--green); }
+            body.layout-ops table tr:has(.complexity-cont) { border-left-color: var(--text-faint); }
+
+            /* Ops: compact bottom action bar */
+            body.layout-ops .bottom-bar {
+                display: flex; position: fixed; bottom: 0; left: 0; right: 0;
+                background: #0a0a0a; border-top: 1px solid #333;
+                padding: 10px 16px; z-index: 200; gap: 8px;
+                justify-content: space-around;
+            }
+            body.layout-ops .bottom-bar button {
+                background: none; border: 1px solid #333; color: var(--text-muted);
+                padding: 8px 12px; border-radius: 8px; font-family: inherit;
+                font-size: 10px; font-weight: 600; text-transform: uppercase;
+                letter-spacing: 0.5px; cursor: pointer;
+            }
+            body.layout-ops .bottom-bar button:active { background: #252525; color: var(--green); }
+            body.layout-ops .container { padding-bottom: 70px; }
+            body.layout-ops .section { scroll-margin-top: 60px; }
+
+            /* Ops: font weight bump for dark mode */
+            body.layout-ops { font-weight: 450; }
+            body.layout-ops strong, body.layout-ops .section-title,
+            body.layout-ops .asset-category-title { font-weight: 700; }
+        }
+
+        /* Desktop notice */
+        @media (min-width: 701px) {
+            .switcher-label { display: block !important; }
+            .switcher { display: none; }
+        }
+    </style>
+</head>
+<body class="layout-dashboard">
+
+    <div class="switcher-label">Ouvrir sur mobile (ou redimensionner &lt; 700px) pour voir les 5 designs</div>
+
+    <div class="switcher">
+        <button class="active" data-layout="dashboard">Dashboard</button>
+        <button data-layout="slides">Slides</button>
+        <button data-layout="explorer">Explorer</button>
+        <button data-layout="story">Story</button>
+        <button data-layout="ops">Ops</button>
+    </div>
+
+    <!-- Slide counter (Design 2) -->
+    <div class="slide-counter"><span id="slide-num">1</span> / 7</div>
+
+    <!-- Search bar (Design 3) -->
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Rechercher un asset, une phase...">
+    </div>
+
+    <!-- FAB + Menu (Design 3) -->
+    <button class="fab" id="fab-btn" aria-label="Navigation rapide">&uarr;</button>
+    <div class="fab-menu" id="fab-menu">
+        <button class="fab-item" data-jump="0">Agenda</button>
+        <button class="fab-item" data-jump="1">État</button>
+        <button class="fab-item" data-jump="2">Assets</button>
+        <button class="fab-item" data-jump="3">Défi</button>
+        <button class="fab-item" data-jump="4">Phases</button>
+        <button class="fab-item" data-jump="5">Questions</button>
+    </div>
+
+    <!-- Sticky progress (Design 4) -->
+    <div class="sticky-progress">
+        <div class="sp-title" id="sp-title">Agenda de l'appel</div>
+        <div class="sp-bar"><div class="sp-fill" id="sp-fill"></div></div>
+    </div>
+
+    <!-- Bottom bar (Design 5) -->
+    <div class="bottom-bar">
+        <button data-jump="0">Agenda</button>
+        <button data-jump="2">Assets</button>
+        <button data-jump="4">Phases</button>
+        <button data-jump="5">Questions</button>
+    </div>
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="header">
+            <h1>Domaine Sidi Abdallah</h1>
+            <div class="subtitle">Stratégie Digitale — Document de Discussion</div>
+            <div class="date">20 Février 2026 @12:00</div>
+        </div>
+
+        <!-- Bento Overview (Design 1 only) -->
+        <div class="bento-overview">
+            <div class="bento-card" data-jump="2">
+                <div class="bento-num">26</div>
+                <div class="bento-label">Assets digitaux</div>
+                <div class="bento-sub">8 catégories A-H</div>
+            </div>
+            <div class="bento-card" data-jump="4">
+                <div class="bento-num">3</div>
+                <div class="bento-label">Phases</div>
+                <div class="bento-sub">Lancement &rarr; Année 1</div>
+            </div>
+            <div class="bento-card" data-jump="5">
+                <div class="bento-num">6</div>
+                <div class="bento-label">Questions ouvertes</div>
+                <div class="bento-sub">Domaine, paiement, langues...</div>
+            </div>
+            <div class="bento-card" data-jump="3">
+                <div class="bento-num">B2</div>
+                <div class="bento-label">Défi technique clé</div>
+                <div class="bento-sub">Réservation composite</div>
+            </div>
+        </div>
+
+        <!-- Section 0: Agenda -->
+        <div class="section" data-section="0" data-title="Agenda de l'appel">
+            <div class="section-title">Agenda de l'appel</div>
+            <div class="section-body">
+                <div class="summary-badge">5 points en 55 minutes — État des lieux, assets, phasage, dépendances, prochaines étapes.</div>
+                <div class="agenda">
+                    <div class="agenda-time">5 min</div>
+                    <div class="agenda-item"><strong>1. État des lieux</strong><p>Texte, logos, photos, rénovation</p></div>
+                    <div class="agenda-time">20 min</div>
+                    <div class="agenda-item"><strong>2. Assets digitaux</strong><p>Revue de chaque asset : on le fait, plus tard, ou pas ?</p></div>
+                    <div class="agenda-time">15 min</div>
+                    <div class="agenda-item"><strong>3. Priorités et phasage</strong><p>Phase 1 / Phase 2 / Phase 3</p></div>
+                    <div class="agenda-time">10 min</div>
+                    <div class="agenda-item"><strong>4. Dépendances</strong><p>Ce dont Rached a besoin + calendrier réaliste</p></div>
+                    <div class="agenda-time">5 min</div>
+                    <div class="agenda-item"><strong>5. Prochaines étapes</strong><p>Qui fait quoi, pour quand</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 1: Status -->
+        <div class="section" data-section="1" data-title="État des lieux">
+            <div class="section-title">État des lieux — À confirmer</div>
+            <div class="section-body">
+                <div class="summary-badge">2 éléments en cours, 1 en attente, 1 pas commencé.</div>
+                <div class="status-grid">
+                    <div class="status-card"><div class="label">Texte du site</div><div class="value pending">En attente validation</div></div>
+                    <div class="status-card"><div class="label">Logos & icônes</div><div class="value pending">Graphiste &rarr; fin fév / mi-mars</div></div>
+                    <div class="status-card"><div class="label">Photos & vidéos</div><div class="value pending">Shooting démarré</div></div>
+                    <div class="status-card"><div class="label">Rénovation</div><div class="value notyet">Pas encore commencée</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Assets -->
+        <div class="section" data-section="2" data-title="Assets digitaux">
+            <div class="section-title">Assets digitaux — 26 éléments</div>
+            <div class="section-body">
+                <div class="summary-badge">26 assets en 8 catégories. 10 en Phase 1, 8 en Phase 2, 8 en Phase 3.</div>
+
+                <div class="asset-category"><div class="asset-category-title">A. Site Web <span class="badge">4</span></div>
+                <table><tr><td>A1</td><td>Site vitrine</td><td>4 piliers, galerie, bilingue FR/EN.</td><td class="complexity-mid">Moyen</td></tr>
+                <tr><td>A2</td><td>Blog / Journal</td><td>Vie du domaine, saisons, rénovation.</td><td class="complexity-low">Faible</td></tr>
+                <tr><td>A3</td><td>Page événements</td><td>Mariages, team buildings + devis.</td><td class="complexity-low">Faible</td></tr>
+                <tr><td>A4</td><td>SEO</td><td>"gîte rural Tunisie", "retraite bien-être"</td><td class="complexity-cont">Continu</td></tr></table></div>
+
+                <div class="asset-category"><div class="asset-category-title">B. Réservation <span class="badge">6</span></div>
+                <table><tr><td>B1</td><td>Chambres</td><td>Calendrier, 6 chambres Dar Saad.</td><td class="complexity-mid">Moyen</td></tr>
+                <tr><td>B2</td><td>Retraites</td><td>Chambre + activités + repas + transfert &rarr; 1 prix.</td><td class="complexity-high">Élevé</td></tr>
+                <tr><td>B3</td><td>Activités à la carte</td><td>Yoga, massage, hammam. Créneaux.</td><td class="complexity-mid">Moyen</td></tr>
+                <tr><td>B4</td><td>Restaurant</td><td>Sur réservation uniquement.</td><td class="complexity-low">Faible</td></tr>
+                <tr><td>B5</td><td>Day Pass & cadeaux</td><td>Code/QR, 40-360 TND.</td><td class="complexity-mid">Moyen</td></tr>
+                <tr><td>B6</td><td>Événements privés</td><td>Formulaire de demande.</td><td class="complexity-low">Faible</td></tr></table></div>
+
+                <div class="asset-category"><div class="asset-category-title">C. Espace Membre <span class="badge">3</span></div>
+                <table><tr><td>C1</td><td>Page membership</td><td>3 tiers, avantages, inscription.</td><td class="complexity-low">Faible</td></tr>
+                <tr><td>C2</td><td>Portail membre</td><td>Paiement mensuel, réservation cours.</td><td class="complexity-high">Élevé</td></tr>
+                <tr><td>C3</td><td>Gestion abonnements</td><td>Récurrent, upgrades, suspension.</td><td class="complexity-high">Élevé</td></tr></table></div>
+
+                <div class="asset-category"><div class="asset-category-title">D. Paiement <span class="badge">3</span></div>
+                <table><tr><td>D1</td><td>Paiement en ligne</td><td>Stripe + Flouci / Konnect.</td><td class="complexity-mid">Moyen</td></tr>
+                <tr><td>D2</td><td>Facturation</td><td>Reçus automatiques.</td><td class="complexity-low">Faible</td></tr>
+                <tr><td>D3</td><td>Acomptes</td><td>Acompte à la réservation.</td><td class="complexity-mid">Moyen</td></tr></table></div>
+
+                <div class="asset-category"><div class="asset-category-title">E. Communication <span class="badge">4</span></div>
+                <table><tr><td>E1</td><td>Emails transactionnels</td><td>Confirmation, rappel, post-séjour.</td><td class="complexity-mid">Moyen</td></tr>
+                <tr><td>E2</td><td>Newsletter</td><td>Emails saisonniers.</td><td class="complexity-low">Faible</td></tr>
+                <tr><td>E3</td><td>WhatsApp Business</td><td>Réponses auto, catalogue.</td><td class="complexity-low">Faible</td></tr>
+                <tr><td>E4</td><td>Gestion avis</td><td>Google / TripAdvisor post-séjour.</td><td class="complexity-low">Faible</td></tr></table></div>
+
+                <div class="asset-category"><div class="asset-category-title">F. Back-Office <span class="badge">4</span></div>
+                <table><tr><td>F1</td><td>Tableau de bord</td><td>Réservations, occupation, revenus.</td><td class="complexity-mid">Moyen</td></tr>
+                <tr><td>F2</td><td>Calendrier unifié</td><td>Chambres + spa + fitness + événements.</td><td class="complexity-high">Élevé</td></tr>
+                <tr><td>F3</td><td>CRM</td><td>Historique, préférences, allergies.</td><td class="complexity-mid">Moyen</td></tr>
+                <tr><td>F4</td><td>Gestion tarifs</td><td>Saison, promotions, offres.</td><td class="complexity-mid">Moyen</td></tr></table></div>
+
+                <div class="asset-category"><div class="asset-category-title">G. Sur Place <span class="badge">2</span></div>
+                <table><tr><td>G1</td><td>Guide digital (PWA)</td><td>QR code, planning, menu, carte.</td><td class="complexity-mid">Moyen</td></tr>
+                <tr><td>G2</td><td>Check-in en ligne</td><td>Avant le séjour.</td><td class="complexity-low">Faible</td></tr></table></div>
+
+                <div class="asset-category"><div class="asset-category-title">H. Infrastructure <span class="badge">4</span></div>
+                <table><tr><td>H1</td><td>Nom de domaine</td><td>À décider.</td><td class="complexity-low">Immédiat</td></tr>
+                <tr><td>H2</td><td>Emails pro</td><td>contact@, réservations@...</td><td class="complexity-low">Immédiat</td></tr>
+                <tr><td>H3</td><td>Hébergement</td><td>Vercel, Railway...</td><td class="complexity-low">Technique</td></tr>
+                <tr><td>H4</td><td>Analytics</td><td>Google Analytics ou Plausible.</td><td class="complexity-low">Faible</td></tr></table></div>
+            </div>
+        </div>
+
+        <!-- Section 3: Challenge -->
+        <div class="section" data-section="3" data-title="Défi technique clé">
+            <div class="section-title">Défi technique clé</div>
+            <div class="section-body">
+                <div class="summary-badge">L'asset B2 (réservation retraites) est le plus complexe — réservation composite multi-services.</div>
+                <div class="challenge">
+                    <p style="font-size: 14px; margin-bottom: 10px;">Une <strong>Retraite Spa 3 nuits</strong> = :</p>
+                    <div class="challenge-diagram">
+1 réservation = chambre (3 nuits)<br>
+&nbsp;&nbsp;+ hammam (1 séance)<br>
+&nbsp;&nbsp;+ 4 activités au choix<br>
+&nbsp;&nbsp;+ restaurant (3 dîners)<br>
+&nbsp;&nbsp;+ transfert aéroport<br>
+&nbsp;&nbsp;&rarr; <strong>1 seul paiement</strong>
+                    </div>
+                    <p style="font-size: 13px; color: var(--text-muted);">Aucun outil existant ne gère ce type de réservation composite. C'est là où le développement sur mesure a le plus de valeur.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Phases -->
+        <div class="section" data-section="4" data-title="Phasage">
+            <div class="section-title">Proposition de phasage</div>
+            <div class="section-body">
+                <div class="summary-badge">10 assets au lancement, 8 à 6 mois, 8 en année 1.</div>
+                <div class="phases">
+                    <div class="phase phase-1"><div class="phase-title">Phase 1</div><div class="phase-subtitle">Lancement</div>
+                    <ul><li><span class="code">A1</span> Site vitrine</li><li><span class="code">B1</span> Résa chambres</li><li><span class="code">B2</span> Résa retraites</li><li><span class="code">D1</span> Paiement</li><li><span class="code">E1</span> Emails auto</li><li><span class="code">E3</span> WhatsApp</li><li><span class="code">H1</span> Domaine</li><li><span class="code">H2</span> Emails pro</li><li><span class="code">H3</span> Hébergement</li><li><span class="code">H4</span> Analytics</li></ul></div>
+                    <div class="phase phase-2"><div class="phase-title">Phase 2</div><div class="phase-subtitle">3-6 mois après</div>
+                    <ul><li><span class="code">A3</span> Événements</li><li><span class="code">B3</span> Activités</li><li><span class="code">B4</span> Restaurant</li><li><span class="code">B5</span> Day Pass</li><li><span class="code">E2</span> Newsletter</li><li><span class="code">E4</span> Gestion avis</li><li><span class="code">F1</span> Dashboard</li><li><span class="code">F2</span> Calendrier</li></ul></div>
+                    <div class="phase phase-3"><div class="phase-title">Phase 3</div><div class="phase-subtitle">Année 1</div>
+                    <ul><li><span class="code">A2</span> Blog</li><li><span class="code">A4</span> SEO avancé</li><li><span class="code">B6</span> Form. événements</li><li><span class="code">C1-3</span> Agrumia</li><li><span class="code">D2-3</span> Facturation</li><li><span class="code">F3-4</span> CRM & tarifs</li><li><span class="code">G1-2</span> Sur place</li></ul></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Questions -->
+        <div class="section" data-section="5" data-title="Questions ouvertes">
+            <div class="section-title">Questions ouvertes</div>
+            <div class="section-body">
+                <div class="summary-badge">6 décisions à prendre : domaine, paiement, langues, calendrier, photos, budget.</div>
+                <div class="questions">
+                    <div class="question"><div class="question-number">1</div><div class="question-content"><strong>Noms de domaine</strong><span>Un seul site ou sous-domaines par entité ?</span></div></div>
+                    <div class="question"><div class="question-number">2</div><div class="question-content"><strong>Paiement en ligne</strong><span>Dès le début ? Devise(s) ? Prestataire ?</span></div></div>
+                    <div class="question"><div class="question-number">3</div><div class="question-content"><strong>Langues</strong><span>FR + EN confirmé ? Arabe nécessaire ?</span></div></div>
+                    <div class="question"><div class="question-number">4</div><div class="question-content"><strong>Calendrier</strong><span>Brief + logos prêts en avril &rarr; site pour quand ?</span></div></div>
+                    <div class="question"><div class="question-number">5</div><div class="question-content"><strong>Photos provisoires</strong><span>Lancer avec l'existant en attendant post-rénovation ?</span></div></div>
+                    <div class="question"><div class="question-number">6</div><div class="question-content"><strong>Budget mensuel</strong><span>Estimation : 50-100 TND/mois. Prévu ?</span></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; padding-top: 30px; border-top: 1px solid var(--border); margin-top: 40px;">
+            <div style="font-size: 11px; color: var(--text-faint); letter-spacing: 1px; text-transform: uppercase;">Préparé par Rached &middot; Février 2026</div>
+        </div>
+    </div>
+
+    <script>
+    const sections = document.querySelectorAll('.section');
+    const sectionTitles = Array.from(sections).map(s => s.dataset.title || '');
+    let currentLayout = 'dashboard';
+
+    // ============ LAYOUT SWITCHER ============
+    document.querySelectorAll('.switcher button').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.switcher button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentLayout = btn.dataset.layout;
+            document.body.className = 'layout-' + currentLayout;
+            resetAllStates();
+            if (currentLayout === 'story') initStory();
+            if (currentLayout === 'slides') initSlides();
+            if (currentLayout === 'explorer') initExplorer();
+        });
+    });
+
+    function resetAllStates() {
+        sections.forEach(s => {
+            s.classList.remove('tab-visible', 'expanded', 'revealed', 'search-hidden');
+            s.style.display = '';
+        });
+        document.getElementById('fab-menu').classList.remove('open');
+    }
+
+    // ============ JUMP TO SECTION ============
+    document.querySelectorAll('[data-jump]').forEach(el => {
+        el.addEventListener('click', () => {
+            const idx = el.dataset.jump;
+            const target = document.querySelector(`.section[data-section="${idx}"]`);
+            if (!target) return;
+            if (currentLayout === 'slides') {
+                target.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            document.getElementById('fab-menu').classList.remove('open');
+        });
+    });
+
+    // ============ 2. SLIDES — counter ============
+    function initSlides() {
+        const container = document.querySelector('.container');
+        updateSlideCounter();
+        container.addEventListener('scroll', updateSlideCounter);
+    }
+    function updateSlideCounter() {
+        if (currentLayout !== 'slides') return;
+        const container = document.querySelector('.container');
+        const scrollTop = container.scrollTop;
+        const slideH = container.clientHeight;
+        const num = Math.round(scrollTop / slideH) + 1;
+        document.getElementById('slide-num').textContent = Math.min(num, 7);
+    }
+
+    // ============ 3. EXPLORER — search + FAB ============
+    function initExplorer() {}
+    document.getElementById('search-input').addEventListener('input', function() {
+        const q = this.value.toLowerCase().trim();
+        sections.forEach(s => {
+            if (!q) { s.classList.remove('search-hidden'); return; }
+            const text = s.textContent.toLowerCase();
+            s.classList.toggle('search-hidden', !text.includes(q));
+        });
+    });
+    document.getElementById('fab-btn').addEventListener('click', () => {
+        document.getElementById('fab-menu').classList.toggle('open');
+    });
+
+    // ============ 4. STORY — scroll reveals + progress ============
+    function initStory() {
+        sections.forEach(s => s.classList.remove('revealed'));
+        observeSections();
+    }
+    const observer = new IntersectionObserver((entries) => {
+        if (currentLayout !== 'story') return;
+        entries.forEach(e => {
+            if (e.isIntersecting) e.target.classList.add('revealed');
+        });
+    }, { threshold: 0.15 });
+
+    function observeSections() {
+        sections.forEach(s => observer.observe(s));
+    }
+
+    // Story: sticky progress bar
+    window.addEventListener('scroll', () => {
+        if (currentLayout !== 'story') return;
+        let activeSection = sections[0];
+        sections.forEach(s => {
+            const rect = s.getBoundingClientRect();
+            if (rect.top < 120) activeSection = s;
+        });
+        const title = activeSection.dataset.title || '';
+        document.getElementById('sp-title').textContent = title;
+
+        // Calculate progress within section
+        const rect = activeSection.getBoundingClientRect();
+        const h = activeSection.offsetHeight;
+        const progress = Math.min(100, Math.max(0, ((120 - rect.top) / h) * 100));
+        document.getElementById('sp-fill').style.width = progress + '%';
+    });
+
+    // ============ 5. OPS — bottom bar jump ============
+    // (uses the shared [data-jump] handler above)
+
+    // ============ INIT ============
+    if (window.innerWidth <= 700) {
+        document.body.classList.add('layout-dashboard');
+    }
+    </script>
+</body>
+</html>
