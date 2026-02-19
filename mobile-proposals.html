@@ -1,0 +1,2208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propositions Mobile — Domaine Sidi Abdallah</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+SC:wght@400;600&family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&family=EB+Garamond:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=Instrument+Serif&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&family=Space+Mono&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+/* ============================================================
+   LAYER 1: BASE RESET & SHARED UTILITIES
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #f5f4f0;
+    color: #1a1a1a;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- Page Header --- */
+.page-header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: #fff;
+    border-bottom: 1px solid #e8e5dc;
+}
+.page-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #2d5016;
+    margin-bottom: 8px;
+}
+.page-header .page-subtitle {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 4px;
+}
+.page-header .page-meta {
+    font-size: 12px;
+    color: #aaa;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* --- Proposal Navigator (Sticky Tabs) --- */
+.proposal-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid #e0ddd5;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+}
+.proposal-nav-inner {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.proposal-nav-inner::-webkit-scrollbar { display: none; }
+.proposal-nav-item {
+    flex: 1;
+    min-width: 170px;
+    padding: 14px 18px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: center;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.proposal-nav-item:hover { background: rgba(45,80,22,0.04); }
+.proposal-nav-item.active {
+    border-bottom-color: #2d5016;
+    background: rgba(45,80,22,0.06);
+}
+.nav-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #aaa;
+    letter-spacing: 2px;
+}
+.proposal-nav-item.active .nav-number { color: #2d5016; }
+.nav-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+.nav-style {
+    font-size: 10px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* --- Proposal Sections --- */
+.proposals-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+}
+.proposal-section {
+    display: none;
+}
+.proposal-section.active {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* --- Rationale Panel --- */
+.rationale-panel {
+    flex: 0 0 340px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    position: sticky;
+    top: 80px;
+}
+.rationale-panel h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #2d5016;
+    margin-bottom: 4px;
+}
+.rationale-tagline {
+    font-style: italic;
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+.rationale-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+.rationale-item strong {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #999;
+    margin-bottom: 2px;
+}
+.rationale-item span {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.5;
+}
+.rationale-colors {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+.color-swatch {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #eee;
+    position: relative;
+}
+.swatch-label {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    color: #aaa;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.rationale-fonts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.font-sample label {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #bbb;
+    margin-bottom: 2px;
+}
+.rationale-mobile-patterns {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #eee;
+}
+.rationale-mobile-patterns strong {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #999;
+    margin-bottom: 8px;
+}
+.pattern-tag {
+    display: inline-block;
+    font-size: 11px;
+    color: #666;
+    background: #f5f4f0;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin: 0 4px 6px 0;
+}
+
+/* ============================================================
+   LAYER 2: PHONE FRAME (iPhone 15 Mockup)
+   ============================================================ */
+.phone-frame-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+.phone-frame {
+    width: 393px;
+    height: 852px;
+    border-radius: 50px;
+    background: #000;
+    padding: 12px;
+    position: relative;
+    box-shadow:
+        0 0 0 2px #333,
+        0 20px 60px rgba(0,0,0,0.3),
+        0 0 0 8px #1a1a1a,
+        inset 0 0 4px rgba(255,255,255,0.05);
+    flex-shrink: 0;
+}
+/* Dynamic Island */
+.phone-frame::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 126px;
+    height: 36px;
+    background: #000;
+    border-radius: 20px;
+    z-index: 100;
+}
+/* Home Indicator */
+.phone-frame::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 134px;
+    height: 5px;
+    background: #666;
+    border-radius: 3px;
+    z-index: 100;
+}
+.phone-screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    scrollbar-width: none;
+}
+.phone-screen::-webkit-scrollbar { display: none; }
+
+/* ============================================================
+   LAYER 3: SHARED MOBILE PATTERNS
+   ============================================================ */
+.m-sticky-cta {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.m-hamburger {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+}
+.m-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+    transition: all 0.3s;
+}
+.m-card {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+}
+.m-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+.m-dot-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 0;
+}
+.m-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.2);
+    transition: all 0.3s;
+}
+.m-dot.active {
+    background: rgba(0,0,0,0.6);
+    transform: scale(1.2);
+}
+.m-overlay-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
+.m-overlay-menu.open {
+    opacity: 1;
+    pointer-events: all;
+}
+.m-overlay-menu a {
+    font-size: 24px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+.m-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.m-fade-in.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================================
+   LAYER 4: CSS VARIABLES PER PROPOSAL
+   ============================================================ */
+[data-proposal="heritage-doree"] {
+    --primary: #B8860B;
+    --primary-light: #D4A843;
+    --bg: #FAF6F0;
+    --bg-dark: #2C2C2C;
+    --accent: #2D5016;
+    --text: #2C2C2C;
+    --text-muted: #888;
+}
+[data-proposal="agrume"] {
+    --primary: #3A6B22;
+    --primary-light: #C49A2C;
+    --bg: #FEFDFB;
+    --bg-warm: #F5F2ED;
+    --text: #1a1a1a;
+    --text-muted: #999;
+}
+[data-proposal="terre-dagrumes"] {
+    --terracotta: #C2703E;
+    --olive: #5B6F47;
+    --sand: #F0E6D4;
+    --orange: #E8913A;
+    --bark: #3D2B1F;
+    --text: #3D2B1F;
+}
+[data-proposal="edito"] {
+    --black: #0F0F0F;
+    --white: #FFFFFF;
+    --green: #2D5016;
+    --green-light: #E8F5E0;
+    --amber: #B8860B;
+}
+[data-proposal="les-saisons"] {
+    --dawn: #F7E8D4;
+    --morning: #FFF8EE;
+    --midday: #E8F0F2;
+    --afternoon: #FFF0E0;
+    --evening: #1A2E0D;
+}
+
+/* ============================================================
+   LAYER 5: PROPOSAL-SCOPED STYLES
+   ============================================================ */
+
+/* --- PROPOSAL 1: Heritage Doree Mobile --- */
+.m-hd-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    height: 56px;
+    background: rgba(250,246,240,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(184,134,11,0.15);
+    position: sticky;
+    top: 0;
+    z-index: 60;
+}
+.m-hd-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #2D5016;
+    letter-spacing: 1px;
+}
+.m-hd-hamburger span { background: #B8860B; }
+.m-hd-hero {
+    position: relative;
+    height: 520px;
+    background: linear-gradient(135deg, #FAF6F0 0%, #F0E0C0 30%, #D4A843 60%, #B8860B 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 30px;
+    overflow: hidden;
+}
+.m-hd-hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('Photos/web/P1-HERO — Property Wide Shot.webp') center/cover no-repeat;
+    opacity: 0.35;
+}
+.m-hd-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(250,246,240,0.3) 0%, rgba(184,134,11,0.2) 100%);
+}
+.m-hd-hero-content {
+    position: relative;
+    z-index: 2;
+}
+.m-hd-hero-kicker {
+    font-family: 'Cormorant SC', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #B8860B;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+.m-hd-hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: #2C2C2C;
+    line-height: 1.15;
+    margin-bottom: 12px;
+}
+.m-hd-hero-subtitle {
+    font-family: 'EB Garamond', serif;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 32px;
+    font-style: italic;
+}
+.m-hd-btn {
+    font-family: 'Cormorant SC', serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 36px;
+    border: 1.5px solid #B8860B;
+    background: rgba(184,134,11,0.08);
+    color: #B8860B;
+    border-radius: 0;
+    cursor: pointer;
+}
+.m-hd-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    text-align: center;
+    color: #2D5016;
+    padding: 32px 20px 20px;
+    background: var(--bg);
+}
+.m-hd-pillars {
+    background: var(--bg);
+    padding: 0 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.m-hd-pillar-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    position: relative;
+}
+.m-hd-pillar-card::before,
+.m-hd-pillar-card::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: #B8860B;
+    border-style: solid;
+    z-index: 2;
+}
+.m-hd-pillar-card::before {
+    top: 8px; left: 8px;
+    border-width: 1.5px 0 0 1.5px;
+}
+.m-hd-pillar-card::after {
+    bottom: 8px; right: 8px;
+    border-width: 0 1.5px 1.5px 0;
+}
+.m-hd-pillar-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+.m-hd-pillar-body {
+    padding: 16px 20px 20px;
+}
+.m-hd-pillar-icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+.m-hd-pillar-body h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #2D5016;
+    margin-bottom: 2px;
+}
+.m-hd-pillar-sub {
+    font-family: 'Cormorant SC', serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #B8860B;
+    margin-bottom: 8px;
+}
+.m-hd-pillar-body p:last-of-type {
+    font-family: 'EB Garamond', serif;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+}
+.m-hd-quote {
+    background: #FFFDF7;
+    padding: 32px 24px;
+    text-align: center;
+    border-top: 1px solid rgba(184,134,11,0.15);
+    border-bottom: 1px solid rgba(184,134,11,0.15);
+}
+.m-hd-quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-style: italic;
+    color: #2D5016;
+    line-height: 1.5;
+}
+.m-hd-quote cite {
+    display: block;
+    margin-top: 12px;
+    font-family: 'Cormorant SC', serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #B8860B;
+    font-style: normal;
+}
+.m-hd-cta {
+    background: linear-gradient(135deg, #B8860B, #D4A843);
+    color: #fff;
+    font-family: 'Cormorant SC', serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 18px;
+    cursor: pointer;
+}
+
+/* --- PROPOSAL 2: Agrume Mobile --- */
+.m-ag-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 16px;
+    height: 56px;
+    background: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 60;
+    transition: transform 0.3s;
+}
+.m-ag-nav.hidden { transform: translateY(-100%); }
+.m-ag-hamburger span { background: #3A6B22; }
+.m-ag-hero {
+    min-height: 600px;
+    background: #FEFDFB;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 30px 60px;
+    position: relative;
+    overflow: hidden;
+}
+.m-ag-hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('Photos/web/P2-HERO — Dawn Property Shot.webp') center/cover no-repeat;
+    opacity: 0.08;
+}
+.m-ag-citrus-wheel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    border: 0.5px solid rgba(58,107,34,0.06);
+    border-radius: 50%;
+    animation: ag-rotate 60s linear infinite;
+}
+.m-ag-citrus-wheel::before {
+    content: '';
+    position: absolute;
+    inset: 40px;
+    border: 0.5px solid rgba(58,107,34,0.04);
+    border-radius: 50%;
+}
+@keyframes ag-rotate { to { transform: translate(-50%, -50%) rotate(360deg); } }
+.m-ag-hero-content {
+    position: relative;
+    z-index: 2;
+}
+.m-ag-hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 38px;
+    color: #1a1a1a;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    font-weight: 400;
+}
+.m-ag-hero-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #999;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+}
+.m-ag-scroll-hint {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: #bbb;
+    letter-spacing: 2px;
+    animation: ag-bounce 2s ease-in-out infinite;
+}
+@keyframes ag-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+}
+.m-ag-pillar-section {
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    position: relative;
+}
+.m-ag-pillar-img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    display: block;
+}
+.m-ag-pillar-content {
+    padding: 32px 30px 40px;
+    background: #FEFDFB;
+    text-align: center;
+}
+.m-ag-pillar-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+}
+.m-ag-pillar-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #C49A2C;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+.m-ag-pillar-desc {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #777;
+    line-height: 1.7;
+}
+.m-ag-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(58,107,34,0.12), transparent);
+    margin: 0 40px;
+}
+.m-ag-float-btn {
+    position: sticky;
+    bottom: 24px;
+    float: right;
+    margin-right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #3A6B22;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(58,107,34,0.3);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: ag-pulse 3s ease-in-out infinite;
+}
+@keyframes ag-pulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(58,107,34,0.3); }
+    50% { box-shadow: 0 4px 30px rgba(58,107,34,0.5); }
+}
+
+/* --- PROPOSAL 3: Terre d'Agrumes Mobile --- */
+.m-ta-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    height: 56px;
+    background: var(--sand);
+    position: sticky;
+    top: 0;
+    z-index: 60;
+}
+.m-ta-logo {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--bark);
+}
+.m-ta-hamburger span { background: var(--terracotta); }
+.m-ta-hero {
+    background: var(--sand);
+    padding: 32px 24px 40px;
+    position: relative;
+    overflow: hidden;
+}
+.m-ta-hero-blob {
+    position: absolute;
+    top: -30px;
+    right: -40px;
+    width: 200px;
+    height: 200px;
+    background: rgba(194,112,62,0.08);
+    border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
+    animation: ta-morph 8s ease-in-out infinite;
+}
+@keyframes ta-morph {
+    0%, 100% { border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%; }
+    50% { border-radius: 40% 60% 50% 50% / 60% 40% 50% 50%; }
+}
+.m-ta-hero-welcome {
+    font-family: 'Caveat', cursive;
+    font-size: 24px;
+    color: var(--terracotta);
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 2;
+}
+.m-ta-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--bark);
+    line-height: 1.2;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 2;
+}
+.m-ta-hero-img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 24px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 8px 30px rgba(61,43,31,0.15);
+}
+.m-ta-hero-strip {
+    height: 4px;
+    background: linear-gradient(90deg, var(--terracotta), var(--orange), var(--olive));
+    margin-top: 20px;
+    border-radius: 2px;
+}
+.m-ta-carousel {
+    padding: 24px 0 0;
+    background: #FDFAF5;
+}
+.m-ta-carousel-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--bark);
+    text-align: center;
+    margin-bottom: 16px;
+    padding: 0 24px;
+}
+.m-ta-carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding: 0 24px 20px;
+    scrollbar-width: none;
+}
+.m-ta-carousel-track::-webkit-scrollbar { display: none; }
+.m-ta-pillar-card {
+    flex: 0 0 280px;
+    scroll-snap-align: center;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    transform: rotate(-1.5deg);
+    box-shadow: 0 4px 20px rgba(61,43,31,0.12);
+}
+.m-ta-pillar-card:nth-child(even) { transform: rotate(1.5deg); }
+.m-ta-pillar-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.m-ta-pillar-overlay {
+    padding: 16px 20px;
+    background: #fff;
+}
+.m-ta-pillar-label {
+    font-family: 'Caveat', cursive;
+    font-size: 14px;
+    color: var(--terracotta);
+    margin-bottom: 2px;
+}
+.m-ta-pillar-overlay h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--bark);
+    margin-bottom: 4px;
+}
+.m-ta-pillar-overlay p {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    color: #777;
+    line-height: 1.5;
+}
+.m-ta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 24px;
+    background: #FDFAF5;
+}
+.m-ta-grid img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 16px;
+}
+.m-ta-cta {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.m-ta-cta.sejourner { background: var(--terracotta); }
+.m-ta-cta.detendre { background: var(--olive); }
+.m-ta-cta.deguster { background: var(--orange); }
+.m-ta-cta.sevader { background: var(--bark); }
+.m-ta-whatsapp {
+    position: sticky;
+    bottom: 80px;
+    float: left;
+    margin-left: 16px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #25D366;
+    border: none;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- PROPOSAL 4: Edito Mobile --- */
+.m-ed-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    height: 56px;
+    background: #0F0F0F;
+    position: sticky;
+    top: 0;
+    z-index: 60;
+}
+.m-ed-logo {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px;
+    color: #fff;
+    font-style: italic;
+}
+.m-ed-nav-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    background: #2D5016;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+}
+.m-ed-hero {
+    background: #2D5016;
+    padding: 60px 24px 50px;
+    position: relative;
+    overflow: hidden;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.m-ed-hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('Photos/web/P4-HERO — Editorial Property Shot.webp') center/cover no-repeat;
+    opacity: 0.12;
+}
+.m-ed-hero-shape1 {
+    position: absolute;
+    top: 20px;
+    right: -20px;
+    width: 100px;
+    height: 100px;
+    border: 2px solid rgba(255,255,255,0.08);
+    border-radius: 50%;
+}
+.m-ed-hero-shape2 {
+    position: absolute;
+    bottom: 40px;
+    left: -30px;
+    width: 80px;
+    height: 80px;
+    background: rgba(184,134,11,0.1);
+    transform: rotate(45deg);
+}
+.m-ed-hero-content {
+    position: relative;
+    z-index: 2;
+}
+.m-ed-hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+.m-ed-hero-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 44px;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 16px;
+}
+.m-ed-hero-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+}
+.m-ed-ticker {
+    background: #0F0F0F;
+    padding: 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.m-ed-ticker-inner {
+    display: inline-block;
+    animation: ed-scroll 20s linear infinite;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #555;
+    text-transform: uppercase;
+}
+@keyframes ed-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.m-ed-spreads {
+    background: #fff;
+}
+.m-ed-spread {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-bottom: 1px solid #eee;
+}
+.m-ed-spread-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+.m-ed-spread-content {
+    padding: 24px;
+    position: relative;
+}
+.m-ed-spread-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 100px;
+    color: transparent;
+    -webkit-text-stroke: 1.5px #ddd;
+    position: absolute;
+    top: -20px;
+    right: 16px;
+    line-height: 1;
+    z-index: 0;
+}
+.m-ed-spread-content h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 28px;
+    color: #0F0F0F;
+    margin-bottom: 4px;
+    position: relative;
+    z-index: 1;
+}
+.m-ed-spread-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #B8860B;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+}
+.m-ed-spread-content p {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: #666;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+}
+.m-ed-cta {
+    background: #2D5016;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    padding: 18px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+/* --- PROPOSAL 5: Les Saisons Mobile --- */
+.m-ls-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 56px;
+    background: transparent;
+    position: sticky;
+    top: 0;
+    z-index: 60;
+}
+.m-ls-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: #5B4A2A;
+}
+.m-ls-progress-dots {
+    display: flex;
+    gap: 8px;
+}
+.m-ls-progress-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(0,0,0,0.2);
+    background: transparent;
+    transition: all 0.5s;
+}
+.m-ls-progress-dot.active { border-color: transparent; }
+.m-ls-progress-dot.ch1 { background: #D4A843; border-color: #D4A843; }
+.m-ls-progress-dot.ch2 { background: #5B8C3E; border-color: #5B8C3E; }
+.m-ls-progress-dot.ch3 { background: #6BA3B0; border-color: #6BA3B0; }
+.m-ls-progress-dot.ch4 { background: #2D5016; border-color: #2D5016; }
+.m-ls-hero {
+    min-height: 560px;
+    background: linear-gradient(180deg, #F7E8D4 0%, #FFD9A0 40%, #F0C080 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 30px 60px;
+    position: relative;
+}
+.m-ls-time-marker {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: rgba(91,74,42,0.5);
+    margin-bottom: 24px;
+}
+.m-ls-hero-title {
+    font-family: 'Fraunces', serif;
+    font-size: 34px;
+    font-weight: 300;
+    color: #3D2B1F;
+    line-height: 1.25;
+    margin-bottom: 20px;
+}
+.m-ls-hero-title em {
+    font-style: italic;
+    font-weight: 500;
+    color: #2D5016;
+}
+.m-ls-scroll-hint {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 12px;
+    color: rgba(91,74,42,0.4);
+    letter-spacing: 2px;
+}
+.m-ls-chapter {
+    min-height: 480px;
+    position: relative;
+    padding: 48px 24px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+.m-ls-chapter-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+}
+.m-ls-chapter-overlay {
+    position: absolute;
+    inset: 0;
+}
+.m-ls-chapter-content {
+    position: relative;
+    z-index: 2;
+}
+.m-ls-chapter .m-ls-time-marker {
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 12px;
+}
+.m-ls-chapter-title {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 4px;
+}
+.m-ls-chapter-label {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 12px;
+}
+.m-ls-chapter-desc {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+.m-ls-chapter-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 12px 24px;
+    border-radius: 0;
+    cursor: pointer;
+    width: fit-content;
+}
+.m-ls-chapter-1 { background: #FFF8EE; }
+.m-ls-chapter-1 .m-ls-chapter-bg {
+    background-image: url('Photos/web/P5-CHAPTER-1 — Morning  Sejourner.webp');
+    opacity: 0.9;
+}
+.m-ls-chapter-1 .m-ls-chapter-overlay {
+    background: linear-gradient(180deg, rgba(255,248,238,0.1) 0%, rgba(91,74,42,0.7) 100%);
+}
+.m-ls-chapter-2 { background: #E8F0F2; }
+.m-ls-chapter-2 .m-ls-chapter-bg {
+    background-image: url('Photos/web/P5-CHAPTER-2 — Midday  Se Detendre.webp');
+    opacity: 0.9;
+}
+.m-ls-chapter-2 .m-ls-chapter-overlay {
+    background: linear-gradient(180deg, rgba(232,240,242,0.1) 0%, rgba(42,74,60,0.7) 100%);
+}
+.m-ls-chapter-3 { background: #FFF0E0; }
+.m-ls-chapter-3 .m-ls-chapter-bg {
+    background-image: url('Photos/web/P5-CHAPTER-3 — Afternoon  Deguster.webp');
+    opacity: 0.9;
+}
+.m-ls-chapter-3 .m-ls-chapter-overlay {
+    background: linear-gradient(180deg, rgba(255,240,224,0.1) 0%, rgba(91,60,42,0.7) 100%);
+}
+.m-ls-chapter-4 { background: #1A2E0D; }
+.m-ls-chapter-4 .m-ls-chapter-bg {
+    background-image: url("Photos/web/P5-CHAPTER-4 — Evening  S'evader.webp");
+    opacity: 0.9;
+}
+.m-ls-chapter-4 .m-ls-chapter-overlay {
+    background: linear-gradient(180deg, rgba(26,46,13,0.2) 0%, rgba(26,46,13,0.85) 100%);
+}
+.m-ls-wave {
+    display: block;
+    width: 100%;
+    height: 24px;
+}
+.m-ls-wave-1 path { fill: #FFF8EE; }
+.m-ls-wave-2 path { fill: #E8F0F2; }
+.m-ls-wave-3 path { fill: #FFF0E0; }
+.m-ls-booking-sheet {
+    background: #1A2E0D;
+    padding: 32px 24px;
+    text-align: center;
+}
+.m-ls-booking-label {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+.m-ls-booking-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.m-ls-booking-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.m-ls-booking-card:hover {
+    background: rgba(255,255,255,0.15);
+}
+.m-ls-booking-card-icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+.m-ls-booking-card-name {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+}
+.m-ls-booking-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1A2E0D;
+    background: #F7E8D4;
+    border: none;
+    padding: 14px 32px;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* ============================================================
+   RESPONSIVE — SHOWCASE PAGE ITSELF
+   ============================================================ */
+@media (max-width: 1023px) {
+    .proposal-section.active {
+        flex-direction: column;
+        align-items: center;
+    }
+    .rationale-panel {
+        flex: none;
+        width: 100%;
+        max-width: 500px;
+        position: static;
+    }
+}
+@media (max-width: 767px) {
+    .page-header { padding: 40px 16px 24px; }
+    .page-header h1 { font-size: 22px; letter-spacing: 2px; }
+    .proposal-nav-item { min-width: 140px; padding: 10px 12px; }
+    .proposals-container { padding: 24px 12px 40px; }
+    .phone-frame {
+        width: 90vw;
+        max-width: 393px;
+        height: calc(90vw * 2.168);
+        max-height: 852px;
+        border-radius: calc(90vw * 0.127);
+        padding: calc(90vw * 0.03);
+    }
+    .phone-frame::before {
+        width: calc(90vw * 0.32);
+        height: calc(90vw * 0.092);
+        top: calc(90vw * 0.04);
+    }
+    .phone-frame::after {
+        width: calc(90vw * 0.34);
+        bottom: calc(90vw * 0.025);
+    }
+    .phone-screen {
+        border-radius: calc(90vw * 0.1);
+    }
+    .rationale-panel { padding: 20px; }
+}
+
+/* --- Page Footer --- */
+.page-footer {
+    text-align: center;
+    padding: 40px 20px;
+    background: #fff;
+    border-top: 1px solid #e8e5dc;
+    font-size: 13px;
+    color: #999;
+}
+.page-footer p + p { margin-top: 4px; }
+    </style>
+</head>
+<body>
+
+    <!-- ====== PAGE HEADER ====== -->
+    <header class="page-header">
+        <h1>Domaine Sidi Abdallah</h1>
+        <p class="page-subtitle">5 Propositions Mobile &mdash; Direction Artistique</p>
+        <p class="page-meta">Pr&eacute;par&eacute; par Rached &mdash; F&eacute;vrier 2026</p>
+    </header>
+
+    <!-- ====== PROPOSAL NAVIGATOR ====== -->
+    <nav class="proposal-nav">
+        <div class="proposal-nav-inner">
+            <button class="proposal-nav-item active" data-nav="heritage-doree">
+                <span class="nav-number">01</span>
+                <span class="nav-name">Heritage Dor&eacute;e</span>
+                <span class="nav-style">Luxe Classique</span>
+            </button>
+            <button class="proposal-nav-item" data-nav="agrume">
+                <span class="nav-number">02</span>
+                <span class="nav-name">Agrume</span>
+                <span class="nav-style">Minimaliste</span>
+            </button>
+            <button class="proposal-nav-item" data-nav="terre-dagrumes">
+                <span class="nav-number">03</span>
+                <span class="nav-name">Terre d'Agrumes</span>
+                <span class="nav-style">M&eacute;diterran&eacute;en</span>
+            </button>
+            <button class="proposal-nav-item" data-nav="edito">
+                <span class="nav-number">04</span>
+                <span class="nav-name">&Eacute;dito</span>
+                <span class="nav-style">&Eacute;ditorial</span>
+            </button>
+            <button class="proposal-nav-item" data-nav="les-saisons">
+                <span class="nav-number">05</span>
+                <span class="nav-name">Les Saisons</span>
+                <span class="nav-style">Immersif</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ====== PROPOSALS CONTAINER ====== -->
+    <div class="proposals-container">
+
+        <!-- ============================================================
+             PROPOSAL 1: HERITAGE DOREE MOBILE
+             ============================================================ -->
+        <section class="proposal-section active" data-proposal="heritage-doree">
+            <div class="rationale-panel">
+                <h2>01 &mdash; Heritage Dor&eacute;e</h2>
+                <p class="rationale-tagline">&laquo; L'&eacute;l&eacute;gance intemporelle, adapt&eacute;e au creux de la main &raquo;</p>
+                <div class="rationale-grid">
+                    <div class="rationale-item">
+                        <strong>Direction Mobile</strong>
+                        <span>Luxe classique adapt&eacute; pour une navigation &agrave; une main. Ornements dor&eacute;s simplifi&eacute;s, cartes empil&eacute;es, CTA sticky en bas.</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Patterns UX</strong>
+                        <span>Barre sticky dorée, cartes verticales avec ornements, menu hamburger avec overlay plein &eacute;cran</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Cible</strong>
+                        <span>Touristes internationaux (40%) — habitu&eacute;s aux codes du luxe sur mobile</span>
+                    </div>
+                </div>
+                <div class="rationale-colors">
+                    <div class="color-swatch" style="background:#FAF6F0;"><span class="swatch-label">Cream</span></div>
+                    <div class="color-swatch" style="background:#B8860B;"><span class="swatch-label">Gold</span></div>
+                    <div class="color-swatch" style="background:#2D5016;"><span class="swatch-label">Forest</span></div>
+                    <div class="color-swatch" style="background:#2C2C2C;"><span class="swatch-label">Charcoal</span></div>
+                </div>
+                <div class="rationale-fonts">
+                    <div class="font-sample">
+                        <label>Titres</label>
+                        <span style="font-family:'Cormorant Garamond',serif; font-size:22px; color:#2D5016;">Cormorant Garamond</span>
+                    </div>
+                    <div class="font-sample">
+                        <label>Corps</label>
+                        <span style="font-family:'EB Garamond',serif; font-size:16px; color:#444;">EB Garamond</span>
+                    </div>
+                </div>
+                <div class="rationale-mobile-patterns">
+                    <strong>Patterns Mobile</strong>
+                    <span class="pattern-tag">Sticky CTA</span>
+                    <span class="pattern-tag">Hamburger + Overlay</span>
+                    <span class="pattern-tag">Cartes empil&eacute;es</span>
+                    <span class="pattern-tag">Coins dor&eacute;s</span>
+                    <span class="pattern-tag">48px touch targets</span>
+                </div>
+            </div>
+            <div class="phone-frame-wrapper">
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <!-- P1 Mobile Nav -->
+                        <nav class="m-hd-nav">
+                            <button class="m-hamburger m-hd-hamburger"><span></span><span></span><span></span></button>
+                            <span class="m-hd-logo">Domaine Sidi Abdallah</span>
+                            <div style="width:48px;"></div>
+                        </nav>
+                        <!-- P1 Mobile Hero -->
+                        <div class="m-hd-hero">
+                            <div class="m-hd-hero-bg"></div>
+                            <div class="m-hd-hero-overlay"></div>
+                            <div class="m-hd-hero-content">
+                                <p class="m-hd-hero-kicker">G&icirc;te Rural &amp; Centre de Bien-&Ecirc;tre</p>
+                                <h1 class="m-hd-hero-title">Domaine<br>Sidi Abdallah</h1>
+                                <p class="m-hd-hero-subtitle">Un h&eacute;ritage d'exception,<br>une &eacute;l&eacute;gance intemporelle</p>
+                                <button class="m-hd-btn">R&eacute;server</button>
+                            </div>
+                        </div>
+                        <!-- P1 Pillars -->
+                        <h2 class="m-hd-section-title">Nos Quatre Exp&eacute;riences</h2>
+                        <div class="m-hd-pillars">
+                            <div class="m-hd-pillar-card m-fade-in">
+                                <img src="Photos/web/P1-GALLERY-1 — Domaine Exterior.webp" alt="S&eacute;journer" loading="lazy">
+                                <div class="m-hd-pillar-body">
+                                    <div class="m-hd-pillar-icon">&#127969;</div>
+                                    <h3>S&eacute;journer</h3>
+                                    <p class="m-hd-pillar-sub">DAR SAAD</p>
+                                    <p>Six chambres raffin&eacute;es aux noms d'agrumes, o&ugrave; le confort rencontre l'authenticit&eacute; tunisienne.</p>
+                                </div>
+                            </div>
+                            <div class="m-hd-pillar-card m-fade-in">
+                                <img src="Photos/web/P1-GALLERY-3 — Wellness Spa.webp" alt="Se D&eacute;tendre" loading="lazy">
+                                <div class="m-hd-pillar-body">
+                                    <div class="m-hd-pillar-icon">&#127807;</div>
+                                    <h3>Se D&eacute;tendre</h3>
+                                    <p class="m-hd-pillar-sub">CENTRE AGRUMIA</p>
+                                    <p>Spa, hammam traditionnel, yoga et fitness au c&oelig;ur des vergers d'orangers.</p>
+                                </div>
+                            </div>
+                            <div class="m-hd-pillar-card m-fade-in">
+                                <img src="Photos/web/P1-GALLERY-2 — Chambre.webp" alt="D&eacute;guster" loading="lazy">
+                                <div class="m-hd-pillar-body">
+                                    <div class="m-hd-pillar-icon">&#127860;</div>
+                                    <h3>D&eacute;guster</h3>
+                                    <p class="m-hd-pillar-sub">TABLE D'H&Ocirc;TES</p>
+                                    <p>Cuisine du terroir, des vergers &agrave; l'assiette. Sur r&eacute;servation uniquement.</p>
+                                </div>
+                            </div>
+                            <div class="m-hd-pillar-card m-fade-in">
+                                <img src="Photos/web/SHARED-1 — Orange Blossom Close-Up.webp" alt="S'&eacute;vader" loading="lazy">
+                                <div class="m-hd-pillar-body">
+                                    <div class="m-hd-pillar-icon">&#127749;</div>
+                                    <h3>S'&eacute;vader</h3>
+                                    <p class="m-hd-pillar-sub">RETRAITES &amp; PROGRAMMES</p>
+                                    <p>Retraites bien-&ecirc;tre de 2 &agrave; 5 nuits au c&oelig;ur du domaine.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- P1 Quote -->
+                        <div class="m-hd-quote">
+                            <blockquote>&laquo; Ici, le temps suspend son vol parmi les orangers centenaires &raquo;</blockquote>
+                            <cite>Domaine Sidi Abdallah</cite>
+                        </div>
+                        <!-- P1 Sticky CTA -->
+                        <div class="m-hd-cta">R&eacute;server votre s&eacute;jour &rarr;</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             PROPOSAL 2: AGRUME MOBILE
+             ============================================================ -->
+        <section class="proposal-section" data-proposal="agrume">
+            <div class="rationale-panel">
+                <h2>02 &mdash; Agrume</h2>
+                <p class="rationale-tagline">&laquo; Le minimalisme port&eacute; &agrave; son essence &raquo;</p>
+                <div class="rationale-grid">
+                    <div class="rationale-item">
+                        <strong>Direction Mobile</strong>
+                        <span>Minimalisme radical amplifi&eacute; sur mobile. Espaces blancs extr&ecirc;mes, typographie g&eacute;ante, rythme de scroll m&eacute;ditatif.</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Patterns UX</strong>
+                        <span>Nav invisible (show-on-scroll-up), bouton flottant circulaire, sections plein &eacute;cran avec scroll-snap</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Cible</strong>
+                        <span>Voyageurs design-savvy &amp; client&egrave;le wellness (20%)</span>
+                    </div>
+                </div>
+                <div class="rationale-colors">
+                    <div class="color-swatch" style="background:#FEFDFB;"><span class="swatch-label">White</span></div>
+                    <div class="color-swatch" style="background:#F5F2ED;"><span class="swatch-label">Stone</span></div>
+                    <div class="color-swatch" style="background:#3A6B22;"><span class="swatch-label">Green</span></div>
+                    <div class="color-swatch" style="background:#C49A2C;"><span class="swatch-label">Gold</span></div>
+                </div>
+                <div class="rationale-fonts">
+                    <div class="font-sample">
+                        <label>Titres</label>
+                        <span style="font-family:'DM Serif Display',serif; font-size:22px; color:#1a1a1a;">DM Serif Display</span>
+                    </div>
+                    <div class="font-sample">
+                        <label>Corps</label>
+                        <span style="font-family:'DM Sans',sans-serif; font-size:14px; font-weight:300; color:#777;">DM Sans Light</span>
+                    </div>
+                </div>
+                <div class="rationale-mobile-patterns">
+                    <strong>Patterns Mobile</strong>
+                    <span class="pattern-tag">Show-on-scroll-up</span>
+                    <span class="pattern-tag">Bouton flottant</span>
+                    <span class="pattern-tag">Scroll m&eacute;ditatif</span>
+                    <span class="pattern-tag">Micro-animations</span>
+                    <span class="pattern-tag">Whitespace extr&ecirc;me</span>
+                </div>
+            </div>
+            <div class="phone-frame-wrapper">
+                <div class="phone-frame">
+                    <div class="phone-screen" data-screen="agrume">
+                        <!-- P2 Nav (hidden initially) -->
+                        <nav class="m-ag-nav">
+                            <button class="m-hamburger m-ag-hamburger"><span></span><span></span><span></span></button>
+                        </nav>
+                        <!-- P2 Hero -->
+                        <div class="m-ag-hero">
+                            <div class="m-ag-hero-bg"></div>
+                            <div class="m-ag-citrus-wheel"></div>
+                            <div class="m-ag-hero-content">
+                                <h1 class="m-ag-hero-title">Domaine<br>Sidi Abdallah</h1>
+                                <p class="m-ag-hero-sub">Le silence des orangers</p>
+                                <p class="m-ag-scroll-hint">&darr;</p>
+                            </div>
+                        </div>
+                        <!-- P2 Pillars -->
+                        <div class="m-ag-divider"></div>
+                        <div class="m-ag-pillar-section m-fade-in">
+                            <img class="m-ag-pillar-img" src="Photos/web/P2-PILLAR-1 — Bedroom Detail.webp" alt="S&eacute;journer" loading="lazy">
+                            <div class="m-ag-pillar-content">
+                                <h2 class="m-ag-pillar-name">S&eacute;journer</h2>
+                                <p class="m-ag-pillar-sub">DAR SAAD</p>
+                                <p class="m-ag-pillar-desc">Six chambres o&ugrave; chaque d&eacute;tail &eacute;voque la s&eacute;r&eacute;nit&eacute; des vergers.</p>
+                            </div>
+                        </div>
+                        <div class="m-ag-divider"></div>
+                        <div class="m-ag-pillar-section m-fade-in">
+                            <img class="m-ag-pillar-img" src="Photos/web/P2-PILLAR-2 — Wellness Detail.webp" alt="Se D&eacute;tendre" loading="lazy">
+                            <div class="m-ag-pillar-content">
+                                <h2 class="m-ag-pillar-name">Se D&eacute;tendre</h2>
+                                <p class="m-ag-pillar-sub">CENTRE AGRUMIA</p>
+                                <p class="m-ag-pillar-desc">Un espace o&ugrave; le corps et l'esprit retrouvent leur &eacute;quilibre.</p>
+                            </div>
+                        </div>
+                        <div class="m-ag-divider"></div>
+                        <div class="m-ag-pillar-section m-fade-in">
+                            <img class="m-ag-pillar-img" src="Photos/web/P2-PILLAR-3 — Dining Detail.webp" alt="D&eacute;guster" loading="lazy">
+                            <div class="m-ag-pillar-content">
+                                <h2 class="m-ag-pillar-name">D&eacute;guster</h2>
+                                <p class="m-ag-pillar-sub">TABLE D'H&Ocirc;TES</p>
+                                <p class="m-ag-pillar-desc">Des vergers &agrave; l'assiette, une cuisine qui raconte le terroir.</p>
+                            </div>
+                        </div>
+                        <div class="m-ag-divider"></div>
+                        <div class="m-ag-pillar-section m-fade-in">
+                            <img class="m-ag-pillar-img" src="Photos/web/P2-PILLAR-4 — Retreat Activity.webp" alt="S'&eacute;vader" loading="lazy">
+                            <div class="m-ag-pillar-content">
+                                <h2 class="m-ag-pillar-name">S'&eacute;vader</h2>
+                                <p class="m-ag-pillar-sub">RETRAITES</p>
+                                <p class="m-ag-pillar-desc">Quand le temps n'existe plus, seul reste l'essentiel.</p>
+                            </div>
+                        </div>
+                        <!-- P2 Float Button -->
+                        <div style="height:20px; clear:both;"></div>
+                        <button class="m-ag-float-btn">&rarr;</button>
+                        <div style="height:40px; clear:both;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             PROPOSAL 3: TERRE D'AGRUMES MOBILE
+             ============================================================ -->
+        <section class="proposal-section" data-proposal="terre-dagrumes">
+            <div class="rationale-panel">
+                <h2>03 &mdash; Terre d'Agrumes</h2>
+                <p class="rationale-tagline">&laquo; La chaleur de la terre, au bout des doigts &raquo;</p>
+                <div class="rationale-grid">
+                    <div class="rationale-item">
+                        <strong>Direction Mobile</strong>
+                        <span>Chaleureux, tactile, artisanal. Le plus &laquo; instagrammable &raquo;. Carrousel de piliers, formes organiques, int&eacute;gration WhatsApp.</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Patterns UX</strong>
+                        <span>Carrousel horizontal scroll-snap, CTA contextuel, bouton WhatsApp flottant, grille Instagram</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Cible</strong>
+                        <span>Tunisiens day-pass (25%) &mdash; mobile-first, Instagram/WhatsApp natifs</span>
+                    </div>
+                </div>
+                <div class="rationale-colors">
+                    <div class="color-swatch" style="background:#C2703E;"><span class="swatch-label">Terracotta</span></div>
+                    <div class="color-swatch" style="background:#5B6F47;"><span class="swatch-label">Olive</span></div>
+                    <div class="color-swatch" style="background:#F0E6D4;"><span class="swatch-label">Sand</span></div>
+                    <div class="color-swatch" style="background:#E8913A;"><span class="swatch-label">Orange</span></div>
+                    <div class="color-swatch" style="background:#3D2B1F;"><span class="swatch-label">Bark</span></div>
+                </div>
+                <div class="rationale-fonts">
+                    <div class="font-sample">
+                        <label>Titres</label>
+                        <span style="font-family:'Playfair Display',serif; font-size:20px; color:#3D2B1F;">Playfair Display</span>
+                    </div>
+                    <div class="font-sample">
+                        <label>Accents</label>
+                        <span style="font-family:'Caveat',cursive; font-size:20px; color:#C2703E;">Caveat &mdash; manuscrit</span>
+                    </div>
+                    <div class="font-sample">
+                        <label>Corps</label>
+                        <span style="font-family:'Source Sans 3',sans-serif; font-size:14px; color:#777;">Source Sans 3</span>
+                    </div>
+                </div>
+                <div class="rationale-mobile-patterns">
+                    <strong>Patterns Mobile</strong>
+                    <span class="pattern-tag">Carrousel swipe</span>
+                    <span class="pattern-tag">WhatsApp CTA</span>
+                    <span class="pattern-tag">Grille Instagram</span>
+                    <span class="pattern-tag">CTA contextuel</span>
+                    <span class="pattern-tag">Formes organiques</span>
+                </div>
+            </div>
+            <div class="phone-frame-wrapper">
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <!-- P3 Nav -->
+                        <nav class="m-ta-nav">
+                            <span class="m-ta-logo">DSA</span>
+                            <button class="m-hamburger m-ta-hamburger"><span></span><span></span><span></span></button>
+                        </nav>
+                        <!-- P3 Hero -->
+                        <div class="m-ta-hero">
+                            <div class="m-ta-hero-blob"></div>
+                            <p class="m-ta-hero-welcome">Bienvenue au</p>
+                            <h1 class="m-ta-hero-title">Domaine<br>Sidi Abdallah</h1>
+                            <img class="m-ta-hero-img" src="Photos/web/P3-COLLAGE-1 — Architecture  Courtyard.webp" alt="Le Domaine" loading="lazy">
+                            <div class="m-ta-hero-strip"></div>
+                        </div>
+                        <!-- P3 Carousel -->
+                        <div class="m-ta-carousel">
+                            <h2 class="m-ta-carousel-title">Quatre Exp&eacute;riences</h2>
+                            <div class="m-ta-carousel-track">
+                                <div class="m-ta-pillar-card">
+                                    <img src="Photos/web/P3-CARD-1 — Sejourner Card Header.webp" alt="S&eacute;journer" loading="lazy">
+                                    <div class="m-ta-pillar-overlay">
+                                        <p class="m-ta-pillar-label">Dar Saad</p>
+                                        <h3>S&eacute;journer</h3>
+                                        <p>Six chambres aux noms d'agrumes</p>
+                                    </div>
+                                </div>
+                                <div class="m-ta-pillar-card">
+                                    <img src="Photos/web/P3-CARD-2 — Se Detendre Card Header.webp" alt="Se D&eacute;tendre" loading="lazy">
+                                    <div class="m-ta-pillar-overlay">
+                                        <p class="m-ta-pillar-label">Centre Agrumia</p>
+                                        <h3>Se D&eacute;tendre</h3>
+                                        <p>Spa &amp; wellness sous les orangers</p>
+                                    </div>
+                                </div>
+                                <div class="m-ta-pillar-card">
+                                    <img src="Photos/web/P3-CARD-3 — Deguster Card Header.webp" alt="D&eacute;guster" loading="lazy">
+                                    <div class="m-ta-pillar-overlay">
+                                        <p class="m-ta-pillar-label">Table d'h&ocirc;tes</p>
+                                        <h3>D&eacute;guster</h3>
+                                        <p>Des vergers &agrave; l'assiette</p>
+                                    </div>
+                                </div>
+                                <div class="m-ta-pillar-card">
+                                    <img src="Photos/web/P3-CARD-4 — S'evader Card Header.webp" alt="S'&eacute;vader" loading="lazy">
+                                    <div class="m-ta-pillar-overlay">
+                                        <p class="m-ta-pillar-label">Retraites</p>
+                                        <h3>S'&eacute;vader</h3>
+                                        <p>Yoga, bien-&ecirc;tre &amp; nature</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m-dot-indicators" data-carousel="p3">
+                                <span class="m-dot active"></span>
+                                <span class="m-dot"></span>
+                                <span class="m-dot"></span>
+                                <span class="m-dot"></span>
+                            </div>
+                        </div>
+                        <!-- P3 Photo Grid -->
+                        <div class="m-ta-grid">
+                            <img src="Photos/web/P3-COLLAGE-2 — Gardens  Grounds.webp" alt="Jardins" loading="lazy">
+                            <img src="Photos/web/P3-COLLAGE-3 — Produce Detail.webp" alt="Produits" loading="lazy">
+                            <img src="Photos/web/SHARED-2 — Zellige Tile Pattern.webp" alt="Zellige" loading="lazy">
+                            <img src="Photos/web/SHARED-3 — Hammered Copper Detail.webp" alt="Cuivre" loading="lazy">
+                        </div>
+                        <!-- P3 CTA -->
+                        <div class="m-ta-cta sejourner">R&eacute;server &rarr;</div>
+                        <!-- P3 WhatsApp -->
+                        <button class="m-ta-whatsapp" title="WhatsApp">&#128172;</button>
+                        <div style="height:20px; clear:both;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             PROPOSAL 4: EDITO MOBILE
+             ============================================================ -->
+        <section class="proposal-section" data-proposal="edito">
+            <div class="rationale-panel">
+                <h2>04 &mdash; &Eacute;dito</h2>
+                <p class="rationale-tagline">&laquo; Un magazine dans votre poche &raquo;</p>
+                <div class="rationale-grid">
+                    <div class="rationale-item">
+                        <strong>Direction Mobile</strong>
+                        <span>Magazine &eacute;ditorial audacieux. Monocle/Cereal dans la poche. Contraste noir/vert, typographie dramatique.</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Patterns UX</strong>
+                        <span>Nav noire bold, ticker d&eacute;filant, spreads alternés, num&eacute;ros surdimensionn&eacute;s, barre verte fixe</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Cible</strong>
+                        <span>Voyageurs internationaux design-conscious &mdash; habitu&eacute;s aux apps premium</span>
+                    </div>
+                </div>
+                <div class="rationale-colors">
+                    <div class="color-swatch" style="background:#0F0F0F;"><span class="swatch-label">Black</span></div>
+                    <div class="color-swatch" style="background:#FFFFFF; border:1px solid #ddd;"><span class="swatch-label">White</span></div>
+                    <div class="color-swatch" style="background:#2D5016;"><span class="swatch-label">Green</span></div>
+                    <div class="color-swatch" style="background:#B8860B;"><span class="swatch-label">Amber</span></div>
+                </div>
+                <div class="rationale-fonts">
+                    <div class="font-sample">
+                        <label>Display</label>
+                        <span style="font-family:'Instrument Serif',serif; font-size:24px; color:#0F0F0F;">Instrument Serif</span>
+                    </div>
+                    <div class="font-sample">
+                        <label>Corps</label>
+                        <span style="font-family:'Inter',sans-serif; font-size:13px; font-weight:300; color:#666;">Inter Light</span>
+                    </div>
+                    <div class="font-sample">
+                        <label>Labels</label>
+                        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px; color:#999;">JETBRAINS MONO</span>
+                    </div>
+                </div>
+                <div class="rationale-mobile-patterns">
+                    <strong>Patterns Mobile</strong>
+                    <span class="pattern-tag">Nav bold noire</span>
+                    <span class="pattern-tag">Ticker d&eacute;filant</span>
+                    <span class="pattern-tag">Num&eacute;ros outlined</span>
+                    <span class="pattern-tag">Spreads alternés</span>
+                    <span class="pattern-tag">CTA vert fixe</span>
+                </div>
+            </div>
+            <div class="phone-frame-wrapper">
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <!-- P4 Nav -->
+                        <nav class="m-ed-nav">
+                            <span class="m-ed-logo">DSA</span>
+                            <button class="m-ed-nav-btn">R&eacute;server</button>
+                        </nav>
+                        <!-- P4 Hero -->
+                        <div class="m-ed-hero">
+                            <div class="m-ed-hero-bg"></div>
+                            <div class="m-ed-hero-shape1"></div>
+                            <div class="m-ed-hero-shape2"></div>
+                            <div class="m-ed-hero-content">
+                                <p class="m-ed-hero-label">Gite Rural &amp; Wellness</p>
+                                <h1 class="m-ed-hero-title">Domaine<br>Sidi<br>Abdallah</h1>
+                                <p class="m-ed-hero-sub">Quatre exp&eacute;riences. Un domaine d'exception.</p>
+                            </div>
+                        </div>
+                        <!-- P4 Ticker -->
+                        <div class="m-ed-ticker">
+                            <div class="m-ed-ticker-inner">S&Eacute;JOURNER &nbsp;&middot;&nbsp; SE D&Eacute;TENDRE &nbsp;&middot;&nbsp; D&Eacute;GUSTER &nbsp;&middot;&nbsp; S'&Eacute;VADER &nbsp;&middot;&nbsp; S&Eacute;JOURNER &nbsp;&middot;&nbsp; SE D&Eacute;TENDRE &nbsp;&middot;&nbsp; D&Eacute;GUSTER &nbsp;&middot;&nbsp; S'&Eacute;VADER &nbsp;&middot;&nbsp; S&Eacute;JOURNER &nbsp;&middot;&nbsp; SE D&Eacute;TENDRE &nbsp;&middot;&nbsp; D&Eacute;GUSTER &nbsp;&middot;&nbsp; S'&Eacute;VADER &nbsp;&middot;&nbsp;</div>
+                        </div>
+                        <!-- P4 Spreads -->
+                        <div class="m-ed-spreads">
+                            <div class="m-ed-spread m-fade-in">
+                                <img class="m-ed-spread-img" src="Photos/web/P4-SPREAD-1 — Sejourner Editorial.webp" alt="S&eacute;journer" loading="lazy">
+                                <div class="m-ed-spread-content">
+                                    <span class="m-ed-spread-num">01</span>
+                                    <h3>S&eacute;journer</h3>
+                                    <p class="m-ed-spread-label">DAR SAAD</p>
+                                    <p>Six chambres raffin&eacute;es. Chaque matin, le parfum des orangers traverse les fen&ecirc;tres.</p>
+                                </div>
+                            </div>
+                            <div class="m-ed-spread m-fade-in">
+                                <img class="m-ed-spread-img" src="Photos/web/P4-SPREAD-2 — Se Detendre Editorial.webp" alt="Se D&eacute;tendre" loading="lazy">
+                                <div class="m-ed-spread-content">
+                                    <span class="m-ed-spread-num">02</span>
+                                    <h3>Se D&eacute;tendre</h3>
+                                    <p class="m-ed-spread-label">CENTRE AGRUMIA</p>
+                                    <p>Hammam, spa, yoga. Le bien-&ecirc;tre comme art de vivre au milieu des vergers.</p>
+                                </div>
+                            </div>
+                            <div class="m-ed-spread m-fade-in">
+                                <img class="m-ed-spread-img" src="Photos/web/P4-SPREAD-3 — Deguster Editorial.webp" alt="D&eacute;guster" loading="lazy">
+                                <div class="m-ed-spread-content">
+                                    <span class="m-ed-spread-num">03</span>
+                                    <h3>D&eacute;guster</h3>
+                                    <p class="m-ed-spread-label">TABLE D'H&Ocirc;TES</p>
+                                    <p>Cuisine tunisienne de saison. Les agrumes du domaine, de la branche &agrave; l'assiette.</p>
+                                </div>
+                            </div>
+                            <div class="m-ed-spread m-fade-in">
+                                <img class="m-ed-spread-img" src="Photos/web/P4-SPREAD-4 — S'evader Editorial.webp" alt="S'&eacute;vader" loading="lazy">
+                                <div class="m-ed-spread-content">
+                                    <span class="m-ed-spread-num">04</span>
+                                    <h3>S'&eacute;vader</h3>
+                                    <p class="m-ed-spread-label">RETRAITES</p>
+                                    <p>Programmes immersifs de 2 &agrave; 5 nuits. Yoga, r&eacute;colte, bien-&ecirc;tre.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- P4 CTA -->
+                        <div class="m-ed-cta">R&eacute;server &rarr;</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             PROPOSAL 5: LES SAISONS MOBILE
+             ============================================================ -->
+        <section class="proposal-section" data-proposal="les-saisons">
+            <div class="rationale-panel">
+                <h2>05 &mdash; Les Saisons</h2>
+                <p class="rationale-tagline">&laquo; Une journ&eacute;e au domaine, de l'aube au cr&eacute;puscule &raquo;</p>
+                <div class="rationale-grid">
+                    <div class="rationale-item">
+                        <strong>Direction Mobile</strong>
+                        <span>Voyage cin&eacute;matique de l'aube au cr&eacute;puscule. Le t&eacute;l&eacute;phone devient une fen&ecirc;tre sur le domaine. Transitions de couleur au scroll.</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Patterns UX</strong>
+                        <span>Dots de progression, chapitres plein &eacute;cran, marqueurs temporels, overlay de r&eacute;servation style sheet</span>
+                    </div>
+                    <div class="rationale-item">
+                        <strong>Cible</strong>
+                        <span>Voyageurs exp&eacute;rientiels, mobile-first (60%+ des r&eacute;servations)</span>
+                    </div>
+                </div>
+                <div class="rationale-colors">
+                    <div class="color-swatch" style="background:#F7E8D4;"><span class="swatch-label">Dawn</span></div>
+                    <div class="color-swatch" style="background:#FFF8EE;"><span class="swatch-label">Morning</span></div>
+                    <div class="color-swatch" style="background:#E8F0F2;"><span class="swatch-label">Midday</span></div>
+                    <div class="color-swatch" style="background:#FFF0E0;"><span class="swatch-label">Afternoon</span></div>
+                    <div class="color-swatch" style="background:#1A2E0D;"><span class="swatch-label">Evening</span></div>
+                </div>
+                <div class="rationale-fonts">
+                    <div class="font-sample">
+                        <label>Titres</label>
+                        <span style="font-family:'Fraunces',serif; font-size:22px; font-weight:300; color:#3D2B1F;">Fraunces Variable</span>
+                    </div>
+                    <div class="font-sample">
+                        <label>Corps</label>
+                        <span style="font-family:'Work Sans',sans-serif; font-size:14px; font-weight:300; color:#555;">Work Sans Light</span>
+                    </div>
+                    <div class="font-sample">
+                        <label>Marqueurs</label>
+                        <span style="font-family:'Space Mono',monospace; font-size:11px; letter-spacing:2px; color:#999;">SPACE MONO</span>
+                    </div>
+                </div>
+                <div class="rationale-mobile-patterns">
+                    <strong>Patterns Mobile</strong>
+                    <span class="pattern-tag">Progress dots</span>
+                    <span class="pattern-tag">Chapitres plein &eacute;cran</span>
+                    <span class="pattern-tag">Transitions couleur</span>
+                    <span class="pattern-tag">Marqueurs temporels</span>
+                    <span class="pattern-tag">Booking sheet</span>
+                </div>
+            </div>
+            <div class="phone-frame-wrapper">
+                <div class="phone-frame">
+                    <div class="phone-screen" data-screen="les-saisons">
+                        <!-- P5 Nav -->
+                        <nav class="m-ls-nav">
+                            <span class="m-ls-logo">DSA</span>
+                            <div class="m-ls-progress-dots">
+                                <span class="m-ls-progress-dot"></span>
+                                <span class="m-ls-progress-dot"></span>
+                                <span class="m-ls-progress-dot"></span>
+                                <span class="m-ls-progress-dot"></span>
+                            </div>
+                            <span style="font-family:'Space Mono',monospace; font-size:10px; color:rgba(91,74,42,0.4);">FR</span>
+                        </nav>
+                        <!-- P5 Hero (Dawn) -->
+                        <div class="m-ls-hero">
+                            <p class="m-ls-time-marker">06:00 &mdash; L'AUBE</p>
+                            <h1 class="m-ls-hero-title">O&ugrave; le temps<br>s'arr&ecirc;te parmi<br>les <em>orangers</em></h1>
+                            <p class="m-ls-scroll-hint">&darr; D&Eacute;COUVRIR</p>
+                        </div>
+                        <!-- P5 Chapter 1: Morning / Sejourner -->
+                        <svg class="m-ls-wave m-ls-wave-1" viewBox="0 0 400 20" preserveAspectRatio="none">
+                            <path d="M0,10 C66,20 133,0 200,10 C266,20 333,0 400,10 L400,20 L0,20 Z"/>
+                        </svg>
+                        <div class="m-ls-chapter m-ls-chapter-1">
+                            <div class="m-ls-chapter-bg"></div>
+                            <div class="m-ls-chapter-overlay"></div>
+                            <div class="m-ls-chapter-content m-fade-in">
+                                <p class="m-ls-time-marker">07:00 &mdash; LE MATIN</p>
+                                <h2 class="m-ls-chapter-title">S&eacute;journer</h2>
+                                <p class="m-ls-chapter-label">Dar Saad &mdash; R&eacute;veil au parfum des orangers</p>
+                                <p class="m-ls-chapter-desc">Six chambres raffin&eacute;es, petit-d&eacute;jeuner terroir face aux vergers.</p>
+                                <button class="m-ls-chapter-btn">D&eacute;couvrir &rarr;</button>
+                            </div>
+                        </div>
+                        <!-- P5 Chapter 2: Midday / Se Detendre -->
+                        <svg class="m-ls-wave m-ls-wave-2" viewBox="0 0 400 20" preserveAspectRatio="none">
+                            <path d="M0,10 C100,0 166,20 233,10 C300,0 366,20 400,10 L400,20 L0,20 Z"/>
+                        </svg>
+                        <div class="m-ls-chapter m-ls-chapter-2">
+                            <div class="m-ls-chapter-bg"></div>
+                            <div class="m-ls-chapter-overlay"></div>
+                            <div class="m-ls-chapter-content m-fade-in">
+                                <p class="m-ls-time-marker">11:00 &mdash; LA MATIN&Eacute;E</p>
+                                <h2 class="m-ls-chapter-title">Se D&eacute;tendre</h2>
+                                <p class="m-ls-chapter-label">Centre Agrumia &mdash; Quand le corps respire</p>
+                                <p class="m-ls-chapter-desc">Hammam, spa, yoga et pilates au c&oelig;ur des vergers.</p>
+                                <button class="m-ls-chapter-btn">Explorer &rarr;</button>
+                            </div>
+                        </div>
+                        <!-- P5 Chapter 3: Afternoon / Deguster -->
+                        <svg class="m-ls-wave m-ls-wave-3" viewBox="0 0 400 20" preserveAspectRatio="none">
+                            <path d="M0,10 C50,20 116,0 183,10 C250,20 316,0 400,10 L400,20 L0,20 Z"/>
+                        </svg>
+                        <div class="m-ls-chapter m-ls-chapter-3">
+                            <div class="m-ls-chapter-bg"></div>
+                            <div class="m-ls-chapter-overlay"></div>
+                            <div class="m-ls-chapter-content m-fade-in">
+                                <p class="m-ls-time-marker">14:00 &mdash; L'APR&Egrave;S-MIDI</p>
+                                <h2 class="m-ls-chapter-title">D&eacute;guster</h2>
+                                <p class="m-ls-chapter-label">Table d'h&ocirc;tes &mdash; Des vergers &agrave; l'assiette</p>
+                                <p class="m-ls-chapter-desc">Cuisine tunisienne de saison, d&eacute;jeuners sous les orangers.</p>
+                                <button class="m-ls-chapter-btn">R&eacute;server &rarr;</button>
+                            </div>
+                        </div>
+                        <!-- P5 Chapter 4: Evening / S'evader -->
+                        <div class="m-ls-chapter m-ls-chapter-4">
+                            <div class="m-ls-chapter-bg"></div>
+                            <div class="m-ls-chapter-overlay"></div>
+                            <div class="m-ls-chapter-content m-fade-in">
+                                <p class="m-ls-time-marker">19:00 &mdash; LE SOIR</p>
+                                <h2 class="m-ls-chapter-title">S'&eacute;vader</h2>
+                                <p class="m-ls-chapter-label">Retraites &amp; Programmes</p>
+                                <p class="m-ls-chapter-desc">Retraites yoga, bien-&ecirc;tre, r&eacute;colte. Forfaits 2 &agrave; 4 nuits.</p>
+                                <button class="m-ls-chapter-btn">Voir les retraites &rarr;</button>
+                            </div>
+                        </div>
+                        <!-- P5 Booking Sheet -->
+                        <div class="m-ls-booking-sheet">
+                            <p class="m-ls-booking-label">Composez votre s&eacute;jour</p>
+                            <div class="m-ls-booking-cards">
+                                <div class="m-ls-booking-card">
+                                    <div class="m-ls-booking-card-icon">&#127969;</div>
+                                    <p class="m-ls-booking-card-name">S&eacute;journer</p>
+                                </div>
+                                <div class="m-ls-booking-card">
+                                    <div class="m-ls-booking-card-icon">&#127807;</div>
+                                    <p class="m-ls-booking-card-name">Se D&eacute;tendre</p>
+                                </div>
+                                <div class="m-ls-booking-card">
+                                    <div class="m-ls-booking-card-icon">&#127860;</div>
+                                    <p class="m-ls-booking-card-name">D&eacute;guster</p>
+                                </div>
+                                <div class="m-ls-booking-card">
+                                    <div class="m-ls-booking-card-icon">&#127749;</div>
+                                    <p class="m-ls-booking-card-name">S'&eacute;vader</p>
+                                </div>
+                            </div>
+                            <button class="m-ls-booking-btn">Cr&eacute;er mon exp&eacute;rience</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ====== PAGE FOOTER ====== -->
+    <footer class="page-footer">
+        <p>Pr&eacute;par&eacute; par Rached &mdash; F&eacute;vrier 2026</p>
+        <p>Document de discussion interne &mdash; Domaine Sidi Abdallah</p>
+    </footer>
+
+    <!-- ====== JAVASCRIPT ====== -->
+    <script>
+    (function() {
+        'use strict';
+
+        // === PROPOSAL SWITCHING ===
+        var navItems = document.querySelectorAll('.proposal-nav-item');
+        var sections = document.querySelectorAll('.proposal-section');
+
+        function switchProposal(id) {
+            sections.forEach(function(s) { s.classList.remove('active'); });
+            navItems.forEach(function(n) { n.classList.remove('active'); });
+            var targetSection = document.querySelector('[data-proposal="' + id + '"]');
+            var targetNav = document.querySelector('[data-nav="' + id + '"]');
+            if (targetSection) targetSection.classList.add('active');
+            if (targetNav) targetNav.classList.add('active');
+            document.querySelector('.proposals-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            initScrollReveal(targetSection);
+            // Reset phone screen scroll to top
+            var screen = targetSection ? targetSection.querySelector('.phone-screen') : null;
+            if (screen) screen.scrollTop = 0;
+        }
+
+        navItems.forEach(function(item) {
+            item.addEventListener('click', function() {
+                switchProposal(item.dataset.nav);
+            });
+        });
+
+        // === SCROLL REVEAL (inside phone frames) ===
+        var observers = [];
+        function initScrollReveal(container) {
+            if (!container) container = document;
+            // Disconnect previous observers
+            observers.forEach(function(o) { o.disconnect(); });
+            observers = [];
+            var elements = container.querySelectorAll('.m-fade-in');
+            elements.forEach(function(el) { el.classList.remove('revealed'); });
+            // Create observer scoped to the phone screen
+            var phoneScreen = container.querySelector('.phone-screen');
+            var obs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, { root: phoneScreen, threshold: 0.15 });
+            elements.forEach(function(el) { obs.observe(el); });
+            observers.push(obs);
+        }
+
+        // Init on load
+        initScrollReveal(document.querySelector('.proposal-section.active'));
+
+        // === P3 CAROUSEL DOT INDICATORS ===
+        var carouselTrack = document.querySelector('.m-ta-carousel-track');
+        var carouselDots = document.querySelectorAll('[data-carousel="p3"] .m-dot');
+        if (carouselTrack && carouselDots.length) {
+            carouselTrack.addEventListener('scroll', function() {
+                var scrollLeft = carouselTrack.scrollLeft;
+                var cardWidth = 296; // 280 + 16 gap
+                var index = Math.round(scrollLeft / cardWidth);
+                carouselDots.forEach(function(d, i) {
+                    d.classList.toggle('active', i === index);
+                });
+            });
+        }
+
+        // === P5 CHAPTER PROGRESS DOTS ===
+        var lsScreen = document.querySelector('[data-screen="les-saisons"]');
+        var progressDots = document.querySelectorAll('.m-ls-progress-dot');
+        if (lsScreen && progressDots.length) {
+            var chapterColors = ['ch1', 'ch2', 'ch3', 'ch4'];
+            lsScreen.addEventListener('scroll', function() {
+                var chapters = lsScreen.querySelectorAll('.m-ls-chapter');
+                var scrollTop = lsScreen.scrollTop;
+                var screenH = lsScreen.clientHeight;
+                chapters.forEach(function(ch, i) {
+                    var rect = ch.getBoundingClientRect();
+                    var phoneRect = lsScreen.getBoundingClientRect();
+                    var relTop = rect.top - phoneRect.top;
+                    if (relTop < screenH * 0.6) {
+                        progressDots.forEach(function(d) {
+                            chapterColors.forEach(function(c) { d.classList.remove(c, 'active'); });
+                        });
+                        for (var j = 0; j <= i; j++) {
+                            progressDots[j].classList.add(chapterColors[j], 'active');
+                        }
+                    }
+                });
+            });
+        }
+
+        // === P2 SHOW-ON-SCROLL-UP NAV ===
+        var agScreen = document.querySelector('[data-screen="agrume"]');
+        var agNav = document.querySelector('.m-ag-nav');
+        if (agScreen && agNav) {
+            var lastScrollTop = 0;
+            agScreen.addEventListener('scroll', function() {
+                var st = agScreen.scrollTop;
+                if (st > lastScrollTop && st > 60) {
+                    agNav.classList.add('hidden');
+                } else {
+                    agNav.classList.remove('hidden');
+                }
+                lastScrollTop = st;
+            });
+        }
+
+    })();
+    </script>
+</body>
+</html>
