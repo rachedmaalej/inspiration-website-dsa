@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domaine Sidi Abdallah — Tableau de bord</title>
+  <meta name="description" content="Tableau de bord projet digital — Domaine Sidi Abdallah">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍊</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #16120e;
+    --surface: #1f1a14;
+    --card: #26201a;
+    --card2: #2e2720;
+    --border: #3a3028;
+    --gold: #c49a6c;
+    --gold-light: #dbb98a;
+    --sage: #7d9e6a;
+    --terra: #b5624a;
+    --cream: #f0e6d6;
+    --muted: #8a7a6a;
+    --dim: #5a4e42;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-mono: 'DM Mono', monospace;
+    --font-body: 'Jost', sans-serif;
+  }
+  body { background: var(--bg); color: var(--cream); font-family: var(--font-body); }
+  .app { min-height: 100vh; }
+
+  /* Header */
+  .header {
+    border-bottom: 1px solid var(--border);
+    padding: 20px 36px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--surface);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-brand { display: flex; align-items: baseline; gap: 14px; }
+  .header-title { font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--cream); letter-spacing: 0.04em; }
+  .header-sub { font-family: var(--font-mono); font-size: 10px; color: var(--gold); letter-spacing: 0.12em; text-transform: uppercase; }
+  .header-date { font-family: var(--font-mono); font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+
+  /* Nav */
+  .nav {
+    display: flex; gap: 2px; padding: 0 36px;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+  .nav-tab {
+    padding: 14px 20px; font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+    border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s; white-space: nowrap;
+  }
+  .nav-tab:hover { color: var(--cream); }
+  .nav-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* Main */
+  .main { padding: 36px; max-width: 1400px; margin: 0 auto; }
+
+  /* Section title */
+  .section-title { font-family: var(--font-display); font-size: 32px; font-weight: 300; color: var(--cream); margin-bottom: 6px; }
+  .section-sub { font-family: var(--font-mono); font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 32px; }
+
+  /* Grid */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+  /* Card */
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 24px; }
+  .card-sm { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 16px; }
+  .card-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .card-value { font-family: var(--font-display); font-size: 36px; font-weight: 300; color: var(--cream); line-height: 1; }
+  .card-note { font-size: 12px; color: var(--muted); margin-top: 6px; font-family: var(--font-mono); }
+
+  /* Stat accent */
+  .stat-accent-gold { border-left: 3px solid var(--gold); }
+  .stat-accent-sage { border-left: 3px solid var(--sage); }
+  .stat-accent-terra { border-left: 3px solid var(--terra); }
+  .stat-accent-dim { border-left: 3px solid var(--dim); }
+
+  /* Phase bar */
+  .phase-block { margin-bottom: 20px; }
+  .phase-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .phase-name { font-family: var(--font-display); font-size: 16px; font-weight: 500; color: var(--cream); }
+  .phase-dates { font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: 0.06em; }
+  .phase-bar-track { height: 6px; background: var(--card2); border-radius: 3px; overflow: hidden; }
+  .phase-bar-fill { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+
+  /* Status badge */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 2px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .badge-todo { background: #2a2420; color: var(--muted); border: 1px solid var(--border); }
+  .badge-progress { background: #2a2010; color: var(--gold); border: 1px solid #4a3820; }
+  .badge-review { background: #1a2a30; color: #6ab0c0; border: 1px solid #2a4050; }
+  .badge-done { background: #1a2a1a; color: var(--sage); border: 1px solid #2a4a2a; }
+  .badge-blocked { background: #2a1a1a; color: var(--terra); border: 1px solid #4a2a2a; }
+
+  /* Owner badge */
+  .owner-r { background: #2a2010; color: var(--gold); border: 1px solid #4a3820; padding: 1px 7px; border-radius: 2px; font-family: var(--font-mono); font-size: 10px; }
+  .owner-e { background: #1a2a30; color: #6ab0c0; border: 1px solid #2a4050; padding: 1px 7px; border-radius: 2px; font-family: var(--font-mono); font-size: 10px; }
+  .owner-l { background: #2a1a2a; color: #c06ac0; border: 1px solid #4a2a4a; padding: 1px 7px; border-radius: 2px; font-family: var(--font-mono); font-size: 10px; }
+  .owner-all { background: #1a2520; color: var(--sage); border: 1px solid #2a4030; padding: 1px 7px; border-radius: 2px; font-family: var(--font-mono); font-size: 10px; }
+
+  /* Kanban */
+  .kanban { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: start; }
+  .kanban-col { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 14px; }
+  .kanban-col-header { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+  .kanban-count { background: var(--card2); color: var(--muted); padding: 1px 6px; border-radius: 10px; font-size: 10px; }
+  .task-card { background: var(--card); border: 1px solid var(--border); border-radius: 3px; padding: 12px; margin-bottom: 10px; cursor: pointer; transition: border-color 0.2s; }
+  .task-card:hover { border-color: var(--gold); }
+  .task-title { font-size: 13px; color: var(--cream); line-height: 1.4; margin-bottom: 8px; }
+  .task-meta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .task-due { font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+  .task-overdue { color: var(--terra); }
+  .phase-tag { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.06em; color: var(--dim); }
+
+  /* Budget */
+  .budget-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; flex-wrap: wrap; gap: 10px; }
+  .budget-name { font-family: var(--font-display); font-size: 18px; font-weight: 400; color: var(--cream); }
+  .budget-amounts { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+  .budget-bar-track { height: 8px; background: var(--card2); border-radius: 4px; overflow: hidden; margin-bottom: 10px; }
+  .budget-bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+  .budget-entries { display: flex; flex-direction: column; gap: 6px; }
+  .budget-entry { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--card2); border-radius: 3px; }
+  .budget-entry-name { font-size: 13px; color: var(--cream); }
+  .budget-entry-amount { font-family: var(--font-mono); font-size: 12px; color: var(--gold); }
+  .budget-entry-date { font-family: var(--font-mono); font-size: 10px; color: var(--muted); }
+
+  /* Decisions */
+  .decision-row { padding: 16px; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 120px 1fr 100px 90px; gap: 16px; align-items: start; cursor: pointer; }
+  .decision-row:last-child { border-bottom: none; }
+  .decision-row:hover { background: rgba(255,255,255,0.02); }
+  .decision-date { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+  .decision-text { font-size: 13px; color: var(--cream); line-height: 1.5; }
+  .decision-context { font-size: 12px; color: var(--muted); margin-top: 4px; font-style: italic; }
+  .decision-by { font-family: var(--font-mono); font-size: 11px; color: var(--gold); text-align: right; }
+  .decision-open { font-family: var(--font-mono); font-size: 10px; color: var(--terra); border: 1px solid var(--terra); padding: 2px 6px; border-radius: 2px; }
+  .decision-closed { font-family: var(--font-mono); font-size: 10px; color: var(--sage); border: 1px solid var(--sage); padding: 2px 6px; border-radius: 2px; }
+
+  /* Dependencies */
+  .dep-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .dep-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 18px; }
+  .dep-card-title { font-family: var(--font-display); font-size: 16px; color: var(--cream); margin-bottom: 4px; }
+  .dep-card-owner { font-family: var(--font-mono); font-size: 10px; color: var(--muted); margin-bottom: 14px; }
+  .dep-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .dep-item:last-child { border-bottom: none; }
+  .dep-item-name { font-size: 12px; color: var(--cream); }
+  .dep-item-status { font-family: var(--font-mono); font-size: 10px; }
+  .dep-ready { color: var(--sage); }
+  .dep-pending { color: var(--gold); }
+  .dep-waiting { color: var(--muted); }
+
+  /* Forms */
+  .btn { padding: 8px 18px; border-radius: 3px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border: none; transition: all 0.2s; }
+  .btn-primary { background: var(--gold); color: var(--bg); }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  .btn-ghost:hover { color: var(--cream); border-color: var(--muted); }
+  .btn-danger { background: transparent; color: var(--terra); border: 1px solid var(--terra); }
+
+  input, select, textarea {
+    background: var(--card2); border: 1px solid var(--border); color: var(--cream);
+    padding: 8px 12px; border-radius: 3px; font-family: var(--font-body); font-size: 13px;
+    outline: none; width: 100%;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+  select option { background: var(--card2); }
+  label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 6px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .form-field { margin-bottom: 14px; }
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 200; }
+  .modal { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 28px; width: 520px; max-width: 95vw; max-height: 90vh; overflow-y: auto; }
+  .modal-title { font-family: var(--font-display); font-size: 22px; margin-bottom: 20px; color: var(--cream); }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+
+  /* Filter bar */
+  .filter-bar { display: flex; gap: 10px; margin-bottom: 24px; align-items: center; flex-wrap: wrap; }
+  .filter-btn { padding: 5px 14px; border-radius: 20px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--muted); transition: all 0.2s; }
+  .filter-btn:hover, .filter-btn.active { color: var(--cream); border-color: var(--gold); background: rgba(196,154,108,0.1); }
+
+  .filter-label { font-family: var(--font-mono); font-size: 10px; color: var(--muted); text-transform: uppercase; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .kanban { grid-template-columns: 1fr 1fr; }
+    .grid-4 { grid-template-columns: 1fr 1fr; }
+    .grid-3 { grid-template-columns: 1fr; }
+    .dep-grid { grid-template-columns: 1fr; }
+    .decision-row { grid-template-columns: 1fr; gap: 6px; }
+  }
+  @media (max-width: 600px) {
+    .main { padding: 16px; }
+    .header { padding: 14px 16px; }
+    .nav { padding: 0 16px; }
+    .kanban { grid-template-columns: 1fr; }
+    .grid-2, .grid-4 { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .nav-tab { padding: 12px 14px; font-size: 10px; }
+  }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header-brand">
+        <div class="header-title">Domaine Sidi Abdallah</div>
+        <div class="header-sub">Tableau de bord projet</div>
+      </div>
+      <div class="header-date" id="sync-status">✦ Prêt</div>
+    </header>
+    <nav class="nav" id="nav"></nav>
+    <main class="main" id="main"></main>
+  </div>
+  <div id="modal-root"></div>
+
+<script>
+// ─── Data Constants ──────────────────────────────────────────────────────────
+
+const INITIAL_TASKS = [
+  { id: 1, title: "Enregistrer les domaines (.tn + .com)", phase: "0", status: "todo", owner: "R", due: "2026-03-05", block: "Infrastructure", notes: "" },
+  { id: 2, title: "Configurer Google Business Profile", phase: "0", status: "todo", owner: "R", due: "2026-03-05", block: "Infrastructure", notes: "" },
+  { id: 3, title: "Configurer WhatsApp Business", phase: "0", status: "todo", owner: "R", due: "2026-03-10", block: "Infrastructure", notes: "" },
+  { id: 4, title: "Lancer le compte Instagram + premiers posts making-of", phase: "0", status: "todo", owner: "E", due: "2026-03-31", block: "Contenu", notes: "" },
+  { id: 5, title: "Shooting photos Phase I (oranges sur les arbres)", phase: "0", status: "in-progress", owner: "E", due: "2026-03-15", block: "Contenu", notes: "À faire avant que les oranges tombent" },
+  { id: 6, title: "Relecture version FR des textes", phase: "0", status: "in-progress", owner: "L", due: "2026-03-01", block: "Contenu", notes: "Lilia → retours à Rached" },
+  { id: 7, title: "Valider les 5 propositions de logos (choix final)", phase: "0", status: "in-progress", owner: "ALL", due: "2026-03-15", block: "Branding", notes: "Mid-March deadline" },
+  { id: 8, title: "Choisir direction design site web (1 parmi 5)", phase: "0", status: "todo", owner: "ALL", due: "2026-03-20", block: "Design", notes: "Après résultats recherche concurrentielle" },
+  { id: 9, title: "Confirmer tech stack + CMS", phase: "0", status: "done", owner: "R", due: "2026-02-23", block: "Technique", notes: "React/Node/TypeScript décidé" },
+  { id: 10, title: "Recherche concurrentielle (propriétés intégrées)", phase: "0", status: "in-progress", owner: "R", due: "2026-03-05", block: "Stratégie", notes: "Aman, Babylonstoren, concurrents TN" },
+  { id: 11, title: "Développer le site vitrine (4 piliers)", phase: "1", status: "todo", owner: "R", due: "2026-04-30", block: "Développement", notes: "Démarrage après validation logo + design" },
+  { id: 12, title: "Intégrer photos Phase I au site", phase: "1", status: "todo", owner: "R", due: "2026-05-01", block: "Développement", notes: "" },
+  { id: 13, title: "Mise en ligne site web (showcase + contact)", phase: "1", status: "todo", owner: "R", due: "2026-05-15", block: "Lancement", notes: "" },
+  { id: 14, title: "Activer capture email Brevo", phase: "1", status: "todo", owner: "R", due: "2026-05-15", block: "Marketing", notes: "" },
+  { id: 15, title: "Démarrage rénovation maison principale", phase: "1", status: "todo", owner: "E", due: "2026-04-06", block: "Travaux", notes: "Semaine du 6 avril" },
+  { id: 16, title: "Étude bâtiment Wellness (ancienne étable)", phase: "1", status: "in-progress", owner: "E", due: "2026-04-30", block: "Travaux", notes: "Plans pas encore finalisés" },
+  { id: 17, title: "Shooting Phase II — Making-of rénovation", phase: "1", status: "todo", owner: "E", due: "2026-06-30", block: "Contenu", notes: "2 jours: début + milieu travaux" },
+  { id: 18, title: "Activer réservation restaurant + wellness", phase: "1b", status: "todo", owner: "R", due: "2026-08-01", block: "Développement", notes: "Soft launch piliers" },
+  { id: 19, title: "Système de réservation des chambres", phase: "2", status: "todo", owner: "R", due: "2026-11-01", block: "Développement", notes: "Dar Saad — 6 chambres" },
+  { id: 20, title: "Intégration paiement Konnect + Stripe", phase: "2", status: "todo", owner: "R", due: "2026-11-01", block: "Développement", notes: "" },
+  { id: 21, title: "Listings OTA (Booking.com, Airbnb)", phase: "2", status: "todo", owner: "E", due: "2026-11-15", block: "Distribution", notes: "" },
+  { id: 22, title: "Shooting Phase III — Produit final", phase: "2", status: "todo", owner: "E", due: "2026-10-01", block: "Contenu", notes: "Chambres décorées + espaces finis" },
+  { id: 23, title: "Lancement Agrumia + événement de lancement", phase: "2", status: "todo", owner: "ALL", due: "2026-07-01", block: "Stratégie", notes: "Summer 2026" },
+];
+
+const INITIAL_BUDGET = {
+  digital: { name: "Digital & Tech", total: 140000, currency: "TND", color: "#c49a6c", entries: [
+    { id: 1, name: "Développement site vitrine", amount: 25000, date: "2026-05-01", status: "prévu" },
+    { id: 2, name: "Système réservation + paiement", amount: 45000, date: "2026-11-01", status: "prévu" },
+    { id: 3, name: "Dashboard interne + systèmes avancés", amount: 40000, date: "2027-01-01", status: "prévu" },
+    { id: 4, name: "SaaS / outils (Brevo, Konnect, etc.)", amount: 8000, date: "2026-05-01", status: "prévu" },
+  ]},
+  renovation: { name: "Rénovation & Construction", total: 0, currency: "TND", color: "#b5624a", entries: [] },
+  content: { name: "Production Contenu", total: 0, currency: "TND", color: "#7d9e6a", entries: [] },
+  marketing: { name: "Opérations & Marketing", total: 0, currency: "TND", color: "#6ab0c0", entries: [] },
+};
+
+const INITIAL_DECISIONS = [
+  { id: 1, date: "2026-02-23", decision: "Rached développe tout lui-même (React/Node/TypeScript)", context: "Coût, contrôle, cohérence technique", by: "Rached", status: "closed" },
+  { id: 2, date: "2026-02-23", decision: "Site unique géo-adaptatif (une URL, contenu selon pays visiteur)", context: "FR pour Tunisie, EN pour international", by: "Rached + Elyssa", status: "closed" },
+  { id: 3, date: "2026-02-23", decision: "Lancement hybride: vitrine hôtel/retraites + réservation resto/wellness fonctionnelle", context: "Phase 1b quand les piliers ouvrent", by: "Rached + Elyssa", status: "closed" },
+  { id: 4, date: "2026-02-23", decision: "Suppression portail membre Agrumia (bloc C) — wellness en pay-per-visit", context: "Simplification Phase 1, no digital membership", by: "Rached + Elyssa", status: "closed" },
+  { id: 5, date: "2026-02-23", decision: "PM: Google Sheets + WhatsApp + screenshots pour Lilia", context: "Tooling minimal, Lilia via WhatsApp uniquement", by: "Rached + Elyssa", status: "closed" },
+  { id: 6, date: "", decision: "Nom de domaine: .tn primaire + .com redirect ?", context: "Recommandation: oui aux deux", by: "Rached + Elyssa", status: "open" },
+  { id: 7, date: "", decision: "Choix direction design (1 des 5 propositions)", context: "Après résultats recherche concurrentielle", by: "Lilia + Elyssa + Rached", status: "open" },
+  { id: 8, date: "", decision: "Approche CMS: Markdown ou Sanity.io ?", context: "Sanity si Elyssa doit éditer contenu elle-même", by: "Rached", status: "open" },
+  { id: 9, date: "", decision: "Budget SaaS Phase 2 (commissions OTA + passerelle paiement)", context: "Channex.io ~3-5$/chambre/mois vs iCal gratuit", by: "Lilia + Elyssa", status: "open" },
+  { id: 10, date: "", decision: "Fournisseur WhatsApp Business API (Twilio vs Meta direct)", context: "À décider à l'ouverture du restaurant", by: "Rached", status: "open" },
+];
+
+const INITIAL_DEPS = [
+  { id: 1, title: "Textes Site Web", owner: "Lilia → Rached", items: [
+    { name: "Version FR (structure + contenu)", status: "ready", note: "Prêt, en attente relecture Lilia" },
+    { name: "Relecture & validation Lilia", status: "pending", note: "En cours" },
+    { name: "Version EN", status: "ready", note: "Prête" },
+    { name: "Prix finalisés", status: "waiting", note: "À déterminer" },
+  ]},
+  { id: 2, title: "Logos & Identité", owner: "Agence → Rached", items: [
+    { name: "5 propositions livrées", status: "ready", note: "En revue" },
+    { name: "Feedback équipe", status: "pending", note: "En cours" },
+    { name: "Validation finale", status: "pending", note: "Mi-mars 2026" },
+    { name: "Fichiers finaux livrés", status: "waiting", note: "Post-validation" },
+  ]},
+  { id: 3, title: "Photos & Vidéos Phase I", owner: "Elyssa → Rached", items: [
+    { name: "Shooting propriété (oranges)", status: "pending", note: "Fév/Mars 2026" },
+    { name: "Édition + livrable Drive", status: "waiting", note: "Post-shooting" },
+    { name: "Intégration site web", status: "waiting", note: "Dépend Phase I photos" },
+  ]},
+  { id: 4, title: "Photos & Vidéos Phase II", owner: "Elyssa → Rached", items: [
+    { name: "Shooting Making-of (début travaux)", status: "waiting", note: "Avr/Mai 2026" },
+    { name: "Shooting Making-of (milieu travaux)", status: "waiting", note: "Mai/Juin 2026" },
+    { name: "Contenu teasers Instagram", status: "waiting", note: "En parallèle" },
+  ]},
+  { id: 5, title: "Rénovation & Espaces", owner: "Elyssa → équipe", items: [
+    { name: "Devis maison principale", status: "ready", note: "Obtenu" },
+    { name: "Démarrage travaux maison", status: "pending", note: "Semaine du 6 avril" },
+    { name: "Plans espace Wellness", status: "pending", note: "En cours d'études" },
+    { name: "Calendrier travaux Wellness", status: "waiting", note: "Pas encore finalisé" },
+  ]},
+  { id: 6, title: "Direction Design Site", owner: "Tous → Rached", items: [
+    { name: "Recherche concurrentielle", status: "pending", note: "En cours" },
+    { name: "Choix direction (1/5)", status: "waiting", note: "Réunion Mars 2026" },
+    { name: "Développement site", status: "waiting", note: "Post-décision design" },
+  ]},
+];
+
+const PHASES = [
+  { id: "0", label: "Phase 0 — Fondations", dates: "Fév – Mars 2026", color: "#c49a6c" },
+  { id: "1", label: "Phase 1 — Build & Lancement", dates: "Avr – Mai 2026", color: "#7d9e6a" },
+  { id: "1b", label: "Phase 1b — Soft Launch", dates: "Juin – Sep 2026", color: "#6ab0c0" },
+  { id: "2", label: "Phase 2 — Ouverture Hôtel", dates: "Oct – Déc 2026", color: "#b5624a" },
+  { id: "3", label: "Phase 3 — Systèmes Avancés", dates: "2027+", color: "#9a6ec4" },
+];
+
+const TABS = [
+  { id: "dashboard", label: "Vue d'ensemble" },
+  { id: "tasks", label: "Tâches" },
+  { id: "timeline", label: "Timeline" },
+  { id: "budget", label: "Budget" },
+  { id: "decisions", label: "Décisions" },
+  { id: "deps", label: "Dépendances" },
+];
+
+const TIMELINE_BARS = [
+  { label: "Phase 0 — Fondations", start: 0, span: 2, color: "#c49a6c" },
+  { label: "Shooting Phase I", start: 0, span: 1.5, color: "#7d9e6a" },
+  { label: "Logos & Design", start: 0.5, span: 1.5, color: "#c49a6c" },
+  { label: "Phase 1 — Build", start: 2, span: 2, color: "#7d9e6a" },
+  { label: "Site en ligne", start: 3.5, span: 0.5, color: "#7d9e6a" },
+  { label: "Rénovation maison", start: 2, span: 5, color: "#b5624a" },
+  { label: "Making-of Instagram", start: 2, span: 4, color: "#6ab0c0" },
+  { label: "Shooting Phase II", start: 3, span: 2, color: "#7d9e6a" },
+  { label: "Phase 1b — Soft Launch", start: 4, span: 4, color: "#6ab0c0" },
+  { label: "Lancement Agrumia", start: 5, span: 1, color: "#9a6ec4" },
+  { label: "Phase 2 — Hôtel", start: 8, span: 3, color: "#b5624a" },
+  { label: "Shooting Phase III", start: 7, span: 1, color: "#7d9e6a" },
+  { label: "OTA Listings", start: 9, span: 3, color: "#b5624a" },
+  { label: "Phase 3 — Systèmes", start: 11, span: 1, color: "#9a6ec4" },
+];
+
+const MILESTONES = [
+  { date: "Mi-mars 2026", label: "Logos validés", color: "var(--gold)" },
+  { date: "Mars 2026", label: "Direction design choisie", color: "var(--gold)" },
+  { date: "6 avril 2026", label: "Démarrage rénovations", color: "var(--terra)" },
+  { date: "Mai 2026", label: "Site web en ligne", color: "var(--sage)" },
+  { date: "Été 2026", label: "Ouverture restaurant + wellness", color: "var(--sage)" },
+  { date: "Été 2026", label: "Lancement Agrumia Club", color: "#9a6ec4" },
+  { date: "Post-Ramadan 2026", label: "Ouverture hôtel (Dar Saad)", color: "var(--terra)" },
+  { date: "T4 2026", label: "Réservation en ligne opérationnelle", color: "var(--terra)" },
+  { date: "2027+", label: "Systèmes avancés & fidélisation", color: "#9a6ec4" },
+];
+
+// ─── State ───────────────────────────────────────────────────────────────────
+
+function load(key, fallback) {
+  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
+  catch { return fallback; }
+}
+function persist(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch {}
+}
+
+let tasks = load("dsa-tasks", INITIAL_TASKS);
+let budget = load("dsa-budget", INITIAL_BUDGET);
+let decisions = load("dsa-decisions", INITIAL_DECISIONS);
+const deps = INITIAL_DEPS;
+let activeTab = "dashboard";
+let taskFilter = "ALL";
+let phaseFilter = "ALL";
+let decisionFilter = "ALL";
+let editingTotalKey = null;
+
+// ─── Utilities ───────────────────────────────────────────────────────────────
+
+const today = new Date();
+const fmt = (d) => d ? new Date(d).toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "2-digit" }) : "—";
+const isOverdue = (d) => d && new Date(d) < today;
+const monthStr = today.toLocaleString("fr-FR", { month: "long", year: "numeric" });
+const ownerLabel = { R: "Rached", E: "Elyssa", L: "Lilia", ALL: "Tous" };
+const ownerClass = { R: "owner-r", E: "owner-e", L: "owner-l", ALL: "owner-all" };
+const esc = (s) => s ? String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;") : "";
+
+function statusBadge(s) {
+  const map = { "todo": ["badge-todo","À faire"], "in-progress": ["badge-progress","En cours"], "review": ["badge-review","En revue"], "done": ["badge-done","Fait"], "blocked": ["badge-blocked","Bloqué"] };
+  const [cls, label] = map[s] || ["badge-todo", s];
+  return `<span class="badge ${cls}">${label}</span>`;
+}
+function ownerBadge(o) { return `<span class="${ownerClass[o] || ''}">${ownerLabel[o] || o}</span>`; }
+
+// ─── Tab Navigation ──────────────────────────────────────────────────────────
+
+function renderNav() {
+  document.getElementById("nav").innerHTML = TABS.map(t =>
+    `<button class="nav-tab${activeTab === t.id ? ' active' : ''}" onclick="switchTab('${t.id}')">${esc(t.label)}</button>`
+  ).join("");
+}
+
+function switchTab(id) {
+  activeTab = id;
+  renderNav();
+  renderActiveTab();
+}
+
+function renderActiveTab() {
+  const m = document.getElementById("main");
+  switch (activeTab) {
+    case "dashboard": m.innerHTML = renderDashboard(); break;
+    case "tasks": m.innerHTML = renderTasks(); break;
+    case "timeline": m.innerHTML = renderTimeline(); break;
+    case "budget": m.innerHTML = renderBudget(); break;
+    case "decisions": m.innerHTML = renderDecisions(); break;
+    case "deps": m.innerHTML = renderDeps(); break;
+  }
+}
+
+// ─── Dashboard ───────────────────────────────────────────────────────────────
+
+function renderDashboard() {
+  const done = tasks.filter(t => t.status === "done").length;
+  const inProg = tasks.filter(t => t.status === "in-progress").length;
+  const blocked = tasks.filter(t => t.status === "blocked").length;
+  const openDec = decisions.filter(d => d.status === "open").length;
+  const upcoming = tasks.filter(t => t.status !== "done" && t.due).sort((a,b) => new Date(a.due)-new Date(b.due)).slice(0, 5);
+
+  let phaseHtml = PHASES.map(p => {
+    const pt = tasks.filter(t => t.phase === p.id);
+    const pd = pt.filter(t => t.status === "done").length;
+    const pct = pt.length ? Math.round(pd / pt.length * 100) : 0;
+    return `<div class="phase-block">
+      <div class="phase-header"><span class="phase-name" style="font-size:13px">${esc(p.label)}</span><span class="phase-dates">${pd}/${pt.length} · ${esc(p.dates)}</span></div>
+      <div class="phase-bar-track"><div class="phase-bar-fill" style="width:${pct}%;background:${p.color}"></div></div>
+    </div>`;
+  }).join("");
+
+  let upcomingHtml = upcoming.map(t => `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
+      <div>
+        <div style="font-size:13px;color:var(--cream);margin-bottom:4px">${esc(t.title)}</div>
+        <div style="display:flex;gap:8px">${ownerBadge(t.owner)} ${statusBadge(t.status)}</div>
+      </div>
+      <div class="task-due ${isOverdue(t.due) ? 'task-overdue' : ''}">${fmt(t.due)}</div>
+    </div>
+  `).join("");
+
+  const grandTotal = Object.values(budget).reduce((s, t) => s + t.total, 0);
+  let budgetHtml = Object.entries(budget).map(([k, t]) => {
+    const spent = t.entries.filter(e => e.status === "payé").reduce((a,e) => a+e.amount, 0);
+    const committed = t.entries.filter(e => e.status !== "payé").reduce((a,e) => a+e.amount, 0);
+    const pct = t.total ? Math.round((spent + committed) / t.total * 100) : 0;
+    return `<div class="card-sm" style="border-top:3px solid ${t.color}">
+      <div class="card-label">${esc(t.name)}</div>
+      <div style="font-family:var(--font-mono);font-size:15px;color:var(--cream);margin-bottom:4px">${t.total > 0 ? t.total.toLocaleString() + ' TND' : 'À définir'}</div>
+      ${t.total > 0 ? `<div class="phase-bar-track" style="margin-top:8px"><div class="phase-bar-fill" style="width:${pct}%;background:${t.color}"></div></div>` : ''}
+      <div class="card-note">${spent.toLocaleString()} payé · ${committed.toLocaleString()} engagé</div>
+    </div>`;
+  }).join("");
+
+  return `
+    <div class="section-title">Vue d'ensemble</div>
+    <div class="section-sub">Domaine Sidi Abdallah · ${monthStr}</div>
+    <div class="grid-4" style="margin-bottom:32px">
+      <div class="card-sm stat-accent-gold"><div class="card-label">Tâches accomplies</div><div class="card-value">${done}<span style="font-size:16px;color:var(--muted)">/${tasks.length}</span></div><div class="card-note">${Math.round(done/tasks.length*100)}% du total</div></div>
+      <div class="card-sm stat-accent-sage"><div class="card-label">En cours</div><div class="card-value">${inProg}</div><div class="card-note">tâches actives</div></div>
+      <div class="card-sm stat-accent-terra"><div class="card-label">Décisions en attente</div><div class="card-value">${openDec}</div><div class="card-note">à trancher</div></div>
+      <div class="card-sm stat-accent-dim"><div class="card-label">Bloquées</div><div class="card-value">${blocked}</div><div class="card-note">nécessitent attention</div></div>
+    </div>
+    <div class="grid-2" style="margin-bottom:32px">
+      <div class="card"><div class="card-label" style="margin-bottom:20px">Avancement par phase</div>${phaseHtml}</div>
+      <div class="card"><div class="card-label" style="margin-bottom:14px">Prochaines échéances</div>${upcomingHtml}</div>
+    </div>
+    <div class="card"><div class="card-label" style="margin-bottom:20px">Récapitulatif budget</div><div class="grid-4">${budgetHtml}</div></div>
+  `;
+}
+
+// ─── Tasks (Kanban) ──────────────────────────────────────────────────────────
+
+function renderTasks() {
+  const filtered = tasks.filter(t =>
+    (taskFilter === "ALL" || t.owner === taskFilter) &&
+    (phaseFilter === "ALL" || t.phase === phaseFilter)
+  );
+  const cols = ["todo", "in-progress", "review", "done"];
+  const colLabels = { "todo": "À faire", "in-progress": "En cours", "review": "En revue", "done": "Fait" };
+
+  let kanbanHtml = cols.map(col => {
+    const colTasks = filtered.filter(t => t.status === col);
+    let cardsHtml = colTasks.map(t => `
+      <div class="task-card" data-task-id="${t.id}" onclick="openTaskModal(${t.id})">
+        <div class="task-title">${esc(t.title)}</div>
+        <div class="task-meta">
+          ${ownerBadge(t.owner)}
+          ${t.due ? `<span class="task-due ${isOverdue(t.due) && col !== 'done' ? 'task-overdue' : ''}">${fmt(t.due)}</span>` : ''}
+          ${t.block ? `<span class="phase-tag">#${esc(t.block)}</span>` : ''}
+        </div>
+        ${t.notes ? `<div style="font-size:11px;color:var(--muted);margin-top:6px;font-style:italic">${esc(t.notes)}</div>` : ''}
+      </div>
+    `).join("");
+    return `<div class="kanban-col">
+      <div class="kanban-col-header"><span>${colLabels[col]}</span><span class="kanban-count">${colTasks.length}</span></div>
+      ${cardsHtml}
+    </div>`;
+  }).join("");
+
+  let ownerFilters = ["ALL", "R", "E", "L"].map(o =>
+    `<button class="filter-btn${taskFilter === o ? ' active' : ''}" onclick="setTaskFilter('${o}')">${o === "ALL" ? "Tous" : ownerLabel[o]}</button>`
+  ).join("");
+
+  let phaseFilters = ["ALL", ...PHASES.map(p => p.id)].map(p =>
+    `<button class="filter-btn${phaseFilter === p ? ' active' : ''}" onclick="setPhaseFilter('${p}')">${p === "ALL" ? "Toutes" : "Phase " + p}</button>`
+  ).join("");
+
+  return `
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+      <div><div class="section-title">Tableau des tâches</div><div class="section-sub">Kanban · ${filtered.length} tâches</div></div>
+      <button class="btn btn-primary" style="margin-top:8px" onclick="openTaskModal()">+ Nouvelle tâche</button>
+    </div>
+    <div class="filter-bar">
+      <span class="filter-label">Responsable:</span> ${ownerFilters}
+      <span class="filter-label" style="margin-left:10px">Phase:</span> ${phaseFilters}
+    </div>
+    <div class="kanban">${kanbanHtml}</div>
+  `;
+}
+
+function setTaskFilter(f) { taskFilter = f; renderActiveTab(); }
+function setPhaseFilter(f) { phaseFilter = f; renderActiveTab(); }
+
+// ─── Timeline ────────────────────────────────────────────────────────────────
+
+function renderTimeline() {
+  const months = ["Fév 26","Mar 26","Avr 26","Mai 26","Jun 26","Jul 26","Aoû 26","Sep 26","Oct 26","Nov 26","Déc 26","2027+"];
+  const total = 12;
+
+  let monthHeaders = months.map((m, i) =>
+    `<div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.06em;color:${i === 0 ? 'var(--gold)' : 'var(--muted)'};padding:8px 4px;text-align:center;text-transform:uppercase;border-left:1px solid var(--border);background:${i === 0 ? 'rgba(196,154,108,0.08)' : 'transparent'}">${m}</div>`
+  ).join("");
+
+  let barsHtml = TIMELINE_BARS.map(b => {
+    let cells = Array.from({length: total}).map((_, ci) => {
+      const inBar = ci >= b.start && ci < b.start + b.span;
+      const isStart = ci === Math.floor(b.start);
+      const isEnd = ci === Math.floor(b.start + b.span - 0.01);
+      if (!inBar) return `<div style="height:24px;border-left:1px solid var(--border)"></div>`;
+      return `<div style="height:24px;border-left:1px solid var(--border);display:flex;align-items:center">
+        <div style="height:18px;width:100%;background:${b.color}33;border-top:2px solid ${b.color};border-bottom:2px solid ${b.color};border-left:${isStart ? '2px solid '+b.color : 'none'};border-right:${isEnd ? '2px solid '+b.color : 'none'};border-radius:${isStart && isEnd ? '4px' : isStart ? '4px 0 0 4px' : isEnd ? '0 4px 4px 0' : '0'}"></div>
+      </div>`;
+    }).join("");
+    return `<div style="display:grid;grid-template-columns:160px repeat(${total}, 1fr);margin-bottom:8px;align-items:center">
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);text-align:right;padding-right:12px;letter-spacing:0.04em">${esc(b.label)}</div>
+      ${cells}
+    </div>`;
+  }).join("");
+
+  let milestonesHtml = MILESTONES.map(m =>
+    `<div class="card-sm" style="border-left:3px solid ${m.color}">
+      <div style="font-family:var(--font-mono);font-size:10px;color:${m.color};margin-bottom:4px">${esc(m.date)}</div>
+      <div style="font-size:13px;color:var(--cream)">${esc(m.label)}</div>
+    </div>`
+  ).join("");
+
+  return `
+    <div class="section-title">Timeline du projet</div>
+    <div class="section-sub">Fév 2026 → 2027+</div>
+    <div class="card" style="overflow-x:auto">
+      <div style="min-width:700px">
+        <div style="display:grid;grid-template-columns:160px repeat(${total}, 1fr);border-bottom:1px solid var(--border);margin-bottom:16px">
+          <div></div>${monthHeaders}
+        </div>
+        ${barsHtml}
+        <div style="display:grid;grid-template-columns:160px repeat(${total}, 1fr);margin-top:8px">
+          <div style="font-family:var(--font-mono);font-size:10px;color:var(--gold);text-align:right;padding-right:12px">◆ Aujourd'hui</div>
+          <div style="border-left:2px dashed var(--gold);height:12px;opacity:0.6"></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:24px">
+      <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:16px">Jalons clés</div>
+      <div class="grid-3">${milestonesHtml}</div>
+    </div>
+  `;
+}
+
+// ─── Budget ──────────────────────────────────────────────────────────────────
+
+function renderBudget() {
+  const tracks = Object.entries(budget);
+  const grandTotal = tracks.reduce((s,[,t]) => s + t.total, 0);
+  const grandSpent = tracks.reduce((s,[,t]) => s + t.entries.filter(e => e.status === "payé").reduce((a,e) => a+e.amount, 0), 0);
+  const grandCommitted = tracks.reduce((s,[,t]) => s + t.entries.filter(e => e.status !== "payé").reduce((a,e) => a+e.amount, 0), 0);
+
+  let tracksHtml = tracks.map(([key, track]) => {
+    const spent = track.entries.filter(e => e.status === "payé").reduce((a,e) => a+e.amount, 0);
+    const committed = track.entries.filter(e => e.status !== "payé").reduce((a,e) => a+e.amount, 0);
+    const pct = track.total ? Math.min(100, Math.round((spent + committed) / track.total * 100)) : 0;
+
+    let totalDisplay;
+    if (editingTotalKey === key) {
+      totalDisplay = `<div style="display:flex;gap:8px"><input id="edit-total-input" style="width:140px" type="number" value="${track.total}" /><button class="btn btn-primary" onclick="saveBudgetTotal('${key}')">OK</button></div>`;
+    } else {
+      totalDisplay = `<span class="budget-amounts" style="cursor:pointer" onclick="startEditTotal('${key}')">${track.total > 0 ? track.total.toLocaleString() + ' TND' : 'Budget à définir — cliquer pour éditer'}</span>`;
+    }
+
+    let entriesHtml = track.entries.length > 0 ? `<div class="budget-entries">${track.entries.map(e => `
+      <div class="budget-entry">
+        <div>
+          <div class="budget-entry-name">${esc(e.name)}</div>
+          <div class="budget-entry-date">${e.date ? fmt(e.date) : ''} · <span style="color:${e.status === 'payé' ? 'var(--sage)' : e.status === 'engagé' ? 'var(--gold)' : 'var(--muted)'}">${esc(e.status)}</span></div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <span class="budget-entry-amount">${e.amount.toLocaleString()} TND</span>
+          <button class="btn btn-ghost" style="padding:2px 8px;font-size:10px" onclick="removeBudgetEntry('${key}',${e.id})">✕</button>
+        </div>
+      </div>
+    `).join("")}</div>` : `<div style="font-family:var(--font-mono);font-size:11px;color:var(--dim);font-style:italic">Aucune dépense enregistrée</div>`;
+
+    return `<div class="card" style="margin-bottom:20px">
+      <div class="budget-header">
+        <div class="budget-name" style="border-left:4px solid ${track.color};padding-left:12px">${esc(track.name)}</div>
+        <div style="display:flex;gap:12px;align-items:center">
+          ${totalDisplay}
+          <button class="btn btn-ghost" onclick="openBudgetModal('${key}')">+ Dépense</button>
+        </div>
+      </div>
+      ${track.total > 0 ? `
+        <div class="budget-bar-track" style="margin-bottom:6px"><div class="budget-bar-fill" style="width:${pct}%;background:${track.color}"></div></div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);margin-bottom:14px">${spent.toLocaleString()} TND payé · ${committed.toLocaleString()} TND prévu/engagé · ${pct}% utilisé</div>
+      ` : ''}
+      ${entriesHtml}
+    </div>`;
+  }).join("");
+
+  return `
+    <div class="section-title">Suivi budget</div>
+    <div class="section-sub">4 enveloppes · ${grandTotal.toLocaleString()} TND total estimé</div>
+    <div class="grid-3" style="margin-bottom:32px">
+      <div class="card-sm stat-accent-sage"><div class="card-label">Budget total</div><div class="card-value" style="font-size:28px">${grandTotal.toLocaleString()}<span style="font-size:14px;color:var(--muted);margin-left:6px">TND</span></div></div>
+      <div class="card-sm stat-accent-gold"><div class="card-label">Engagé / prévu</div><div class="card-value" style="font-size:28px">${grandCommitted.toLocaleString()}<span style="font-size:14px;color:var(--muted);margin-left:6px">TND</span></div></div>
+      <div class="card-sm stat-accent-terra"><div class="card-label">Payé</div><div class="card-value" style="font-size:28px">${grandSpent.toLocaleString()}<span style="font-size:14px;color:var(--muted);margin-left:6px">TND</span></div></div>
+    </div>
+    ${tracksHtml}
+  `;
+}
+
+function startEditTotal(key) { editingTotalKey = key; renderActiveTab(); setTimeout(() => { const el = document.getElementById("edit-total-input"); if (el) el.focus(); }, 0); }
+function saveBudgetTotal(key) { const el = document.getElementById("edit-total-input"); if (el) { budget[key].total = parseFloat(el.value) || 0; persist("dsa-budget", budget); } editingTotalKey = null; renderActiveTab(); }
+function removeBudgetEntry(key, entryId) { budget[key].entries = budget[key].entries.filter(e => e.id !== entryId); persist("dsa-budget", budget); renderActiveTab(); }
+
+// ─── Decisions ───────────────────────────────────────────────────────────────
+
+function renderDecisions() {
+  const filtered = decisions.filter(d => decisionFilter === "ALL" || d.status === decisionFilter);
+  const openCount = decisions.filter(d => d.status === "open").length;
+  const closedCount = decisions.filter(d => d.status === "closed").length;
+
+  let filters = ["ALL", "open", "closed"].map(f =>
+    `<button class="filter-btn${decisionFilter === f ? ' active' : ''}" onclick="setDecisionFilter('${f}')">${f === "ALL" ? "Toutes" : f === "open" ? "En attente" : "Prises"}</button>`
+  ).join("");
+
+  let rowsHtml = filtered.map(d => `
+    <div class="decision-row" onclick="openDecisionModal(${d.id})">
+      <div class="decision-date">${d.date ? fmt(d.date) : '—'}</div>
+      <div>
+        <div class="decision-text">${esc(d.decision)}</div>
+        ${d.context ? `<div class="decision-context">${esc(d.context)}</div>` : ''}
+      </div>
+      <div class="decision-by" style="text-align:right">${esc(d.by)}</div>
+      <div style="text-align:center"><span class="${d.status === 'open' ? 'decision-open' : 'decision-closed'}">${d.status === 'open' ? 'En attente' : 'Prise ✓'}</span></div>
+    </div>
+  `).join("");
+
+  return `
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">
+      <div><div class="section-title">Journal des décisions</div><div class="section-sub">${openCount} en attente · ${closedCount} prises</div></div>
+      <button class="btn btn-primary" style="margin-top:8px" onclick="openDecisionModal()">+ Logger</button>
+    </div>
+    <div class="filter-bar">${filters}</div>
+    <div class="card" style="padding:0">
+      <div style="padding:12px 20px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:120px 1fr 100px 90px;gap:16px">
+        <div class="card-label">Date</div><div class="card-label">Décision</div><div class="card-label" style="text-align:right">Par</div><div class="card-label" style="text-align:center">Statut</div>
+      </div>
+      ${rowsHtml}
+    </div>
+  `;
+}
+
+function setDecisionFilter(f) { decisionFilter = f; renderActiveTab(); }
+
+// ─── Dependencies ────────────────────────────────────────────────────────────
+
+function renderDeps() {
+  const statusInfo = { ready: { label: "Prêt ✓", cls: "dep-ready" }, pending: { label: "En cours", cls: "dep-pending" }, waiting: { label: "En attente", cls: "dep-waiting" } };
+
+  let cardsHtml = deps.map(dep => {
+    let itemsHtml = dep.items.map(item => `
+      <div class="dep-item">
+        <div>
+          <div class="dep-item-name">${esc(item.name)}</div>
+          ${item.note ? `<div style="font-family:var(--font-mono);font-size:10px;color:var(--dim);margin-top:2px">${esc(item.note)}</div>` : ''}
+        </div>
+        <span class="dep-item-status ${statusInfo[item.status]?.cls || ''}">${statusInfo[item.status]?.label || item.status}</span>
+      </div>
+    `).join("");
+    return `<div class="dep-card">
+      <div class="dep-card-title">${esc(dep.title)}</div>
+      <div class="dep-card-owner">${esc(dep.owner)}</div>
+      ${itemsHtml}
+    </div>`;
+  }).join("");
+
+  return `
+    <div class="section-title">Dépendances & Assets</div>
+    <div class="section-sub">Ce dont Rached a besoin pour avancer</div>
+    <div class="dep-grid">${cardsHtml}</div>
+  `;
+}
+
+// ─── Modals ──────────────────────────────────────────────────────────────────
+
+function closeModal() { document.getElementById("modal-root").innerHTML = ""; }
+
+function openTaskModal(taskId) {
+  const task = taskId ? tasks.find(t => t.id === taskId) : null;
+  const f = task || { title: "", phase: "0", status: "todo", owner: "R", due: "", block: "", notes: "" };
+  const phaseOptions = PHASES.map(p => `<option value="${p.id}"${f.phase === p.id ? ' selected' : ''}>${p.id} — ${p.label.split('—')[1]?.trim() || p.label}</option>`).join("");
+
+  document.getElementById("modal-root").innerHTML = `
+    <div class="modal-overlay" onclick="if(event.target===this)closeModal()">
+      <div class="modal">
+        <div class="modal-title">${task ? 'Modifier la tâche' : 'Nouvelle tâche'}</div>
+        <div class="form-field"><label>Titre</label><input id="m-title" value="${esc(f.title)}" /></div>
+        <div class="form-row">
+          <div><label>Phase</label><select id="m-phase">${phaseOptions}</select></div>
+          <div><label>Statut</label><select id="m-status">
+            <option value="todo"${f.status==='todo'?' selected':''}>À faire</option>
+            <option value="in-progress"${f.status==='in-progress'?' selected':''}>En cours</option>
+            <option value="review"${f.status==='review'?' selected':''}>En revue</option>
+            <option value="done"${f.status==='done'?' selected':''}>Fait</option>
+            <option value="blocked"${f.status==='blocked'?' selected':''}>Bloqué</option>
+          </select></div>
+        </div>
+        <div class="form-row">
+          <div><label>Responsable</label><select id="m-owner">
+            <option value="R"${f.owner==='R'?' selected':''}>Rached</option>
+            <option value="E"${f.owner==='E'?' selected':''}>Elyssa</option>
+            <option value="L"${f.owner==='L'?' selected':''}>Lilia</option>
+            <option value="ALL"${f.owner==='ALL'?' selected':''}>Tous</option>
+          </select></div>
+          <div><label>Échéance</label><input id="m-due" type="date" value="${f.due}" /></div>
+        </div>
+        <div class="form-row"><div><label>Bloc</label><input id="m-block" value="${esc(f.block)}" placeholder="ex: Développement" /></div></div>
+        <div class="form-field"><label>Notes</label><textarea id="m-notes" rows="3">${esc(f.notes)}</textarea></div>
+        <div class="modal-actions">
+          ${task ? `<button class="btn btn-danger" onclick="deleteTask(${task.id})">Supprimer</button>` : ''}
+          <button class="btn btn-ghost" onclick="closeModal()">Annuler</button>
+          <button class="btn btn-primary" onclick="saveTask(${task ? task.id : 'null'})">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function saveTask(existingId) {
+  const title = document.getElementById("m-title").value.trim();
+  if (!title) return;
+  const data = {
+    title,
+    phase: document.getElementById("m-phase").value,
+    status: document.getElementById("m-status").value,
+    owner: document.getElementById("m-owner").value,
+    due: document.getElementById("m-due").value,
+    block: document.getElementById("m-block").value,
+    notes: document.getElementById("m-notes").value,
+  };
+  if (existingId) {
+    tasks = tasks.map(t => t.id === existingId ? { ...t, ...data } : t);
+  } else {
+    tasks.push({ ...data, id: Date.now() });
+  }
+  persist("dsa-tasks", tasks);
+  closeModal();
+  renderActiveTab();
+}
+
+function deleteTask(id) { tasks = tasks.filter(t => t.id !== id); persist("dsa-tasks", tasks); closeModal(); renderActiveTab(); }
+
+function openDecisionModal(decId) {
+  const dec = decId ? decisions.find(d => d.id === decId) : null;
+  const f = dec || { date: new Date().toISOString().slice(0,10), decision: "", context: "", by: "Rached + Elyssa", status: "closed" };
+
+  document.getElementById("modal-root").innerHTML = `
+    <div class="modal-overlay" onclick="if(event.target===this)closeModal()">
+      <div class="modal">
+        <div class="modal-title">${dec ? 'Modifier la décision' : 'Logger une décision'}</div>
+        <div class="form-field"><label>Décision</label><textarea id="md-decision" rows="2">${esc(f.decision)}</textarea></div>
+        <div class="form-field"><label>Contexte / Raison</label><input id="md-context" value="${esc(f.context)}" /></div>
+        <div class="form-row">
+          <div><label>Date</label><input id="md-date" type="date" value="${f.date}" /></div>
+          <div><label>Décidé par</label><input id="md-by" value="${esc(f.by)}" /></div>
+        </div>
+        <div class="form-field"><label>Statut</label><select id="md-status">
+          <option value="closed"${f.status==='closed'?' selected':''}>Prise ✓</option>
+          <option value="open"${f.status==='open'?' selected':''}>En attente</option>
+        </select></div>
+        <div class="modal-actions">
+          <button class="btn btn-ghost" onclick="closeModal()">Annuler</button>
+          <button class="btn btn-primary" onclick="saveDecision(${dec ? dec.id : 'null'})">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function saveDecision(existingId) {
+  const decision = document.getElementById("md-decision").value.trim();
+  if (!decision) return;
+  const data = {
+    decision,
+    context: document.getElementById("md-context").value,
+    date: document.getElementById("md-date").value,
+    by: document.getElementById("md-by").value,
+    status: document.getElementById("md-status").value,
+  };
+  if (existingId) {
+    decisions = decisions.map(d => d.id === existingId ? { ...d, ...data } : d);
+  } else {
+    decisions.push({ ...data, id: Date.now() });
+  }
+  persist("dsa-decisions", decisions);
+  closeModal();
+  renderActiveTab();
+}
+
+function openBudgetModal(trackKey) {
+  const trackName = budget[trackKey].name;
+  document.getElementById("modal-root").innerHTML = `
+    <div class="modal-overlay" onclick="if(event.target===this)closeModal()">
+      <div class="modal">
+        <div class="modal-title">Ajouter une dépense — ${esc(trackName)}</div>
+        <div class="form-field"><label>Description</label><input id="mb-name" value="" /></div>
+        <div class="form-row">
+          <div><label>Montant (TND)</label><input id="mb-amount" type="number" value="" /></div>
+          <div><label>Date</label><input id="mb-date" type="date" value="${new Date().toISOString().slice(0,10)}" /></div>
+        </div>
+        <div class="form-field"><label>Statut</label><select id="mb-status">
+          <option value="prévu">Prévu</option><option value="engagé">Engagé</option><option value="payé">Payé</option>
+        </select></div>
+        <div class="modal-actions">
+          <button class="btn btn-ghost" onclick="closeModal()">Annuler</button>
+          <button class="btn btn-primary" onclick="saveBudgetEntry('${trackKey}')">Ajouter</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function saveBudgetEntry(trackKey) {
+  const name = document.getElementById("mb-name").value.trim();
+  const amount = parseFloat(document.getElementById("mb-amount").value);
+  if (!name || !amount) return;
+  budget[trackKey].entries.push({
+    id: Date.now(),
+    name,
+    amount,
+    date: document.getElementById("mb-date").value,
+    status: document.getElementById("mb-status").value,
+  });
+  persist("dsa-budget", budget);
+  closeModal();
+  renderActiveTab();
+}
+
+// ─── Boot ────────────────────────────────────────────────────────────────────
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderNav();
+  renderActiveTab();
+  document.getElementById("sync-status").textContent = "✦ Synchronisé";
+});
+</script>
+</body>
+</html>

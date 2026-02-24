@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DSA Dashboard — Design A (All Tabs)</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍊</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap">
+  <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+
+  :root {
+    /* Surface & text */
+    --bg: #f5f0e6; --surface: #faf7f2; --card: #faf7f2;
+    --border: #e0d5c4; --border-light: #ebe3d6;
+    --text: #2a2218; --text-sec: #6a5a42; --text-muted: #9a8a70;
+
+    /* ── People (identity) ── */
+    --c-rached: #b89630; --c-rached-bg: #faf3e0;
+    --c-elyssa: #2a5a6a; --c-elyssa-bg: #e8f0f2;
+    --c-lilia: #7a2a3a;  --c-lilia-bg: #f8eaee;
+    --c-tous: #5a7a4a;   --c-tous-bg: #eef4ea;
+
+    /* ── Statuts (semantic) ── */
+    --s-todo: #78869b;    --s-todo-bg: #edf0f4;
+    --s-progress: #d08c15; --s-progress-bg: #fdf2dc;
+    --s-review: #7c5cb8;  --s-review-bg: #f0ecf9;
+    --s-done: #2a8a55;    --s-done-bg: #e6f4ed;
+    --s-blocked: #c44040; --s-blocked-bg: #fce8e8;
+
+    /* ── Phases (warm→cool gradient) ── */
+    --p0: #c4784a; --p0-bg: #faf0e8;
+    --p1: #3a7a5a; --p1-bg: #e8f2ec;
+    --p1b: #5080a0; --p1b-bg: #e8eff6;
+    --p2: #905080; --p2-bg: #f2eaf0;
+    --p3: #6a6a6a; --p3-bg: #efefef;
+
+    /* ── Budget envelopes ── */
+    --b-digital: #3a60c0;  --b-digital-bg: #e8edf8;
+    --b-reno: #b05a3a;     --b-reno-bg: #f8ede8;
+    --b-content: #6a8030;  --b-content-bg: #eff4e6;
+    --b-ops: #a04080;      --b-ops-bg: #f4e8f0;
+
+    /* Fonts */
+    --font-display: 'Cormorant Garamond', serif;
+    --font-mono: 'DM Mono', monospace;
+    --font-body: 'Jost', sans-serif;
+  }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-body); }
+
+  /* Header */
+  .header {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 22px 40px; display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-brand { display: flex; align-items: baseline; gap: 16px; }
+  .header-title { font-family: var(--font-display); font-size: 24px; font-weight: 400; color: var(--text); letter-spacing: 0.03em; }
+  .header-sub { font-family: var(--font-mono); font-size: 10px; color: var(--c-rached); letter-spacing: 0.14em; text-transform: uppercase; }
+  .header-right { display: flex; align-items: center; gap: 16px; }
+  .header-date { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+
+  /* Color legend dropdown */
+  .legend-wrap { position: relative; }
+  .legend-toggle {
+    display: flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 4px;
+    border: 1px solid var(--border); background: var(--surface); cursor: pointer;
+    font-family: var(--font-mono); font-size: 10px; color: var(--text-sec);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .legend-toggle:hover { border-color: var(--c-rached); color: var(--c-rached); }
+  .legend-toggle .material-symbols-outlined { font-size: 16px; }
+  .legend-panel {
+    display: none; position: absolute; top: calc(100% + 8px); right: 0;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    padding: 20px 24px; width: 340px; box-shadow: 0 8px 24px rgba(42,34,24,0.12);
+    z-index: 200; max-height: 80vh; overflow-y: auto;
+  }
+  .legend-panel.open { display: block; }
+  .legend-title { font-family: var(--font-display); font-size: 16px; color: var(--text); margin-bottom: 14px; }
+  .legend-section { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-top: 14px; margin-bottom: 8px; padding-top: 10px; border-top: 1px solid var(--border-light); }
+  .legend-section:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+  .legend-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .legend-swatch { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+  .legend-label { font-family: var(--font-body); font-size: 12px; color: var(--text-sec); }
+
+  /* Nav */
+  .nav { display: flex; gap: 2px; padding: 0 40px; background: var(--surface); border-bottom: 1px solid var(--border); overflow-x: auto; }
+  .nav-tab {
+    padding: 14px 22px; font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);
+    border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-tab:hover { color: var(--text); }
+  .nav-tab.active { color: var(--c-rached); border-bottom-color: var(--c-rached); }
+
+  /* Main */
+  .main { padding: 40px; max-width: 1400px; margin: 0 auto; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* Typography */
+  .section-title { font-family: var(--font-display); font-size: 34px; font-weight: 400; color: var(--text); margin-bottom: 4px; }
+  .section-sub { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 36px; }
+  .section-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+
+  /* Grid */
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  /* Card */
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 28px; }
+  .card-sm { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 18px; }
+  .card-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-sec); margin-bottom: 20px; }
+
+  /* Metrics */
+  .metric { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 22px; position: relative; overflow: hidden; }
+  .metric-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-sec); margin-bottom: 10px; }
+  .metric-value { font-family: var(--font-display); font-size: 40px; font-weight: 400; color: var(--text); line-height: 1; }
+  .metric-value span { font-size: 18px; color: var(--text-muted); }
+  .metric-note { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); margin-top: 6px; }
+
+  /* Phase bar */
+  .phase-block { margin-bottom: 18px; }
+  .phase-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .phase-name { font-family: var(--font-display); font-size: 15px; font-weight: 500; color: var(--text); }
+  .phase-info { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); }
+  .bar-track { height: 5px; background: var(--border-light); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; transition: width 0.6s; }
+
+  /* People badges */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-family: var(--font-mono); font-size: 10px; }
+  .badge-r { background: var(--c-rached-bg); color: var(--c-rached); }
+  .badge-e { background: var(--c-elyssa-bg); color: var(--c-elyssa); }
+  .badge-l { background: var(--c-lilia-bg); color: var(--c-lilia); }
+  .badge-all { background: var(--c-tous-bg); color: var(--c-tous); }
+
+  /* Status badges */
+  .badge-todo { background: var(--s-todo-bg); color: var(--s-todo); }
+  .badge-progress { background: var(--s-progress-bg); color: var(--s-progress); }
+  .badge-review { background: var(--s-review-bg); color: var(--s-review); }
+  .badge-done { background: var(--s-done-bg); color: var(--s-done); }
+  .badge-blocked { background: var(--s-blocked-bg); color: var(--s-blocked); }
+
+  .overdue { color: var(--s-blocked) !important; }
+
+  /* Deadline rows */
+  .deadline-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border-light); }
+  .deadline-row:last-child { border-bottom: none; }
+  .deadline-title { font-size: 13px; color: var(--text); margin-bottom: 4px; }
+  .deadline-meta { display: flex; gap: 8px; align-items: center; }
+  .deadline-date { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+
+  /* Buttons */
+  .btn { padding: 8px 18px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border: none; transition: all 0.2s; }
+  .btn-primary { background: var(--c-rached); color: white; }
+  .btn-primary:hover { background: #c9a84c; }
+  .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+  .btn-ghost:hover { color: var(--text); border-color: var(--text-muted); }
+
+  /* Filter bar */
+  .filter-bar { display: flex; gap: 8px; margin-bottom: 24px; align-items: center; flex-wrap: wrap; }
+  .filter-label { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); text-transform: uppercase; }
+  .filter-btn { padding: 5px 14px; border-radius: 20px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--text-muted); }
+  .filter-btn:hover { border-color: var(--text-muted); color: var(--text); }
+  .filter-btn.active { color: var(--text); border-color: var(--c-rached); background: var(--c-rached-bg); }
+
+  /* ── Kanban ── */
+  .kanban { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: start; }
+  .kanban-col { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 14px; min-height: 120px; transition: background 0.15s, border-color 0.15s; }
+  .kanban-col.drag-over { background: var(--s-progress-bg); border-color: var(--s-progress); border-style: dashed; }
+  .kanban-col-header { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+  .kanban-count { background: var(--border-light); padding: 1px 6px; border-radius: 10px; font-size: 10px; }
+  .task-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 12px; margin-bottom: 10px;
+    cursor: grab; user-select: none; transition: box-shadow 0.15s, opacity 0.15s, transform 0.15s;
+  }
+  .task-card:hover { box-shadow: 0 2px 8px rgba(42,34,24,0.08); }
+  .task-card.dragging { opacity: 0.4; transform: scale(0.96); }
+  .task-title { font-size: 13px; color: var(--text); line-height: 1.4; margin-bottom: 8px; }
+  .task-meta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .task-due { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); }
+  .phase-tag { font-family: var(--font-mono); font-size: 9px; }
+  .task-note { font-size: 11px; color: var(--text-muted); margin-top: 6px; font-style: italic; }
+  .kanban-empty { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); text-align: center; padding: 20px 0; font-style: italic; }
+
+  /* Status dot on column header */
+  .col-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+
+  /* Timeline */
+  .tl-month { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; color: var(--text-muted); padding: 8px 4px; text-align: center; text-transform: uppercase; border-left: 1px solid var(--border); }
+  .tl-month.current { color: var(--s-progress); background: var(--s-progress-bg); }
+  .tl-bar-label { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); text-align: right; padding-right: 12px; letter-spacing: 0.04em; }
+  .tl-cell { height: 24px; border-left: 1px solid var(--border); }
+  .milestone-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 14px; border-left: 3px solid; }
+
+  /* Budget */
+  .budget-track { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 24px; margin-bottom: 20px; }
+  .budget-name { font-family: var(--font-display); font-size: 18px; font-weight: 400; color: var(--text); }
+  .budget-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
+  .budget-amounts { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .budget-entry { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--bg); border-radius: 4px; margin-bottom: 6px; }
+  .budget-entry-name { font-size: 13px; color: var(--text); }
+  .budget-entry-detail { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); }
+  .budget-entry-amount { font-family: var(--font-mono); font-size: 12px; font-weight: 500; }
+  .budget-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 18px; border-top: 3px solid; }
+
+  /* Decisions */
+  .decision-table { background: var(--card); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .decision-header-row { padding: 12px 20px; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 100px 1fr 100px 90px; gap: 16px; }
+  .decision-row { padding: 16px 20px; border-bottom: 1px solid var(--border-light); display: grid; grid-template-columns: 100px 1fr 100px 90px; gap: 16px; align-items: start; }
+  .decision-row:last-child { border-bottom: none; }
+  .decision-date { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+  .decision-text { font-size: 13px; color: var(--text); line-height: 1.5; }
+  .decision-context { font-size: 12px; color: var(--text-muted); margin-top: 4px; font-style: italic; }
+  .decision-by { font-family: var(--font-mono); font-size: 11px; color: var(--c-rached); text-align: right; }
+  .decision-open { font-family: var(--font-mono); font-size: 10px; color: var(--s-blocked); border: 1px solid var(--s-blocked); padding: 2px 6px; border-radius: 3px; }
+  .decision-closed { font-family: var(--font-mono); font-size: 10px; color: var(--s-done); border: 1px solid var(--s-done); padding: 2px 6px; border-radius: 3px; }
+
+  /* Dependencies */
+  .dep-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .dep-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 18px; }
+  .dep-card-title { font-family: var(--font-display); font-size: 16px; color: var(--text); margin-bottom: 4px; }
+  .dep-card-owner { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); margin-bottom: 14px; }
+  .dep-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border-light); }
+  .dep-item:last-child { border-bottom: none; }
+  .dep-item-name { font-size: 12px; color: var(--text); }
+  .dep-item-note { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+  .dep-ready { font-family: var(--font-mono); font-size: 10px; color: var(--s-done); }
+  .dep-pending { font-family: var(--font-mono); font-size: 10px; color: var(--s-progress); }
+  .dep-waiting { font-family: var(--font-mono); font-size: 10px; color: var(--s-todo); }
+
+  /* Save toast */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(60px);
+    background: var(--text); color: var(--bg); padding: 10px 24px; border-radius: 6px;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em;
+    opacity: 0; transition: all 0.3s ease; z-index: 500; pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .kanban { grid-template-columns: 1fr 1fr; }
+    .grid-4 { grid-template-columns: 1fr 1fr; }
+    .grid-3, .dep-grid { grid-template-columns: 1fr; }
+    .decision-row, .decision-header-row { grid-template-columns: 1fr; gap: 6px; }
+  }
+  @media (max-width: 600px) {
+    .main { padding: 16px; }
+    .header { padding: 14px 16px; }
+    .nav { padding: 0 16px; }
+    .kanban, .grid-2, .grid-4 { grid-template-columns: 1fr; }
+    .nav-tab { padding: 12px 14px; font-size: 10px; }
+  }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-brand">
+      <div class="header-title">Domaine Sidi Abdallah</div>
+      <div class="header-sub">Tableau de bord projet</div>
+    </div>
+    <div class="header-right">
+      <div class="header-date">&#10022; fevrier 2026</div>
+      <div class="legend-wrap">
+        <button class="legend-toggle" onclick="toggleLegend()">
+          <span class="material-symbols-outlined">palette</span> Legende
+          <span class="material-symbols-outlined" style="font-size:14px">expand_more</span>
+        </button>
+        <div class="legend-panel" id="legend-panel">
+          <div class="legend-title">Code couleurs</div>
+
+          <div class="legend-section">Responsables</div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--c-rached)"></div><div class="legend-label"><strong>Rached</strong> &mdash; developpement & tech</div></div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--c-elyssa)"></div><div class="legend-label"><strong>Elyssa</strong> &mdash; contenu & operations</div></div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--c-lilia)"></div><div class="legend-label"><strong>Lilia</strong> &mdash; strategie & validation</div></div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--c-tous)"></div><div class="legend-label"><strong>Tous</strong> &mdash; decision collective</div></div>
+
+          <div class="legend-section">Statuts des taches</div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--s-todo)"></div><div class="legend-label">A faire</div></div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--s-progress)"></div><div class="legend-label">En cours</div></div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--s-review)"></div><div class="legend-label">En revue</div></div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--s-done)"></div><div class="legend-label">Fait / Pret</div></div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--s-blocked)"></div><div class="legend-label">Bloque</div></div>
+
+          <div class="legend-section">Phases du projet</div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--p0)"></div><div class="legend-label">Phase 0 &mdash; Fondations</div></div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--p1)"></div><div class="legend-label">Phase 1 &mdash; Build & Lancement</div></div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--p1b)"></div><div class="legend-label">Phase 1b &mdash; Soft Launch</div></div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--p2)"></div><div class="legend-label">Phase 2 &mdash; Ouverture Hotel</div></div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--p3)"></div><div class="legend-label">Phase 3 &mdash; Systemes Avances</div></div>
+
+          <div class="legend-section">Enveloppes budget</div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--b-digital)"></div><div class="legend-label">Digital & Tech</div></div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--b-reno)"></div><div class="legend-label">Renovation & Construction</div></div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--b-content)"></div><div class="legend-label">Production Contenu</div></div>
+          <div class="legend-row"><div class="legend-swatch" style="background:var(--b-ops)"></div><div class="legend-label">Operations & Marketing</div></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Nav -->
+  <nav class="nav" id="nav"></nav>
+
+  <div class="main"></div>
+
+  <!-- Save toast -->
+  <div class="toast" id="toast">Sauvegarde automatique &#10003;</div>
+
+<script>
+// ─── Data ───────────────────────────────────────────────────────────────────
+
+var INITIAL_TASKS = [
+  { id: 1,  title: "Enregistrer les domaines (.tn + .com)", phase: "0", status: "todo", owner: "R", due: "2026-03-05", block: "Infrastructure", notes: "" },
+  { id: 2,  title: "Configurer Google Business Profile", phase: "0", status: "todo", owner: "R", due: "2026-03-05", block: "Infrastructure", notes: "" },
+  { id: 3,  title: "Configurer WhatsApp Business", phase: "0", status: "todo", owner: "R", due: "2026-03-10", block: "Infrastructure", notes: "" },
+  { id: 4,  title: "Lancer le compte Instagram + premiers posts making-of", phase: "0", status: "todo", owner: "E", due: "2026-03-31", block: "Contenu", notes: "" },
+  { id: 5,  title: "Shooting photos Phase I (oranges sur les arbres)", phase: "0", status: "in-progress", owner: "E", due: "2026-03-15", block: "Contenu", notes: "A faire avant que les oranges tombent" },
+  { id: 6,  title: "Relecture version FR des textes", phase: "0", status: "in-progress", owner: "L", due: "2026-03-01", block: "Contenu", notes: "Lilia \u2192 retours a Rached" },
+  { id: 7,  title: "Valider les 5 propositions de logos (choix final)", phase: "0", status: "in-progress", owner: "ALL", due: "2026-03-15", block: "Branding", notes: "Mid-March deadline" },
+  { id: 8,  title: "Choisir direction design site web (1 parmi 5)", phase: "0", status: "todo", owner: "ALL", due: "2026-03-20", block: "Design", notes: "Apres resultats recherche concurrentielle" },
+  { id: 9,  title: "Confirmer tech stack + CMS", phase: "0", status: "done", owner: "R", due: "2026-02-23", block: "Technique", notes: "React/Node/TypeScript decide" },
+  { id: 10, title: "Recherche concurrentielle (proprietes integrees)", phase: "0", status: "in-progress", owner: "R", due: "2026-03-05", block: "Strategie", notes: "Aman, Babylonstoren, concurrents TN" },
+  { id: 11, title: "Developper le site vitrine (4 piliers)", phase: "1", status: "todo", owner: "R", due: "2026-04-30", block: "Developpement", notes: "Demarrage apres validation logo + design" },
+  { id: 12, title: "Integrer photos Phase I au site", phase: "1", status: "todo", owner: "R", due: "2026-05-01", block: "Developpement", notes: "" },
+  { id: 13, title: "Mise en ligne site web (showcase + contact)", phase: "1", status: "todo", owner: "R", due: "2026-05-15", block: "Lancement", notes: "" },
+  { id: 14, title: "Activer capture email Brevo", phase: "1", status: "todo", owner: "R", due: "2026-05-15", block: "Marketing", notes: "" },
+  { id: 15, title: "Demarrage renovation maison principale", phase: "1", status: "todo", owner: "E", due: "2026-04-06", block: "Travaux", notes: "Semaine du 6 avril" },
+  { id: 16, title: "Etude batiment Wellness (ancienne etable)", phase: "1", status: "in-progress", owner: "E", due: "2026-04-30", block: "Travaux", notes: "Plans pas encore finalises" },
+  { id: 17, title: "Shooting Phase II \u2014 Making-of renovation", phase: "1", status: "todo", owner: "E", due: "2026-06-30", block: "Contenu", notes: "2 jours: debut + milieu travaux" },
+  { id: 18, title: "Activer reservation restaurant + wellness", phase: "1b", status: "todo", owner: "R", due: "2026-08-01", block: "Developpement", notes: "Soft launch piliers" },
+  { id: 19, title: "Systeme de reservation des chambres", phase: "2", status: "todo", owner: "R", due: "2026-11-01", block: "Developpement", notes: "Dar Saad \u2014 6 chambres" },
+  { id: 20, title: "Integration paiement Konnect + Stripe", phase: "2", status: "todo", owner: "R", due: "2026-11-01", block: "Developpement", notes: "" },
+  { id: 21, title: "Listings OTA (Booking.com, Airbnb)", phase: "2", status: "todo", owner: "E", due: "2026-11-15", block: "Distribution", notes: "" },
+  { id: 22, title: "Shooting Phase III \u2014 Produit final", phase: "2", status: "todo", owner: "E", due: "2026-10-01", block: "Contenu", notes: "Chambres decorees + espaces finis" },
+  { id: 23, title: "Lancement Agrumia + evenement de lancement", phase: "2", status: "todo", owner: "ALL", due: "2026-07-01", block: "Strategie", notes: "Summer 2026" },
+];
+
+var STATUS_COLS = [
+  { key: "todo", label: "A faire", dot: "var(--s-todo)" },
+  { key: "in-progress", label: "En cours", dot: "var(--s-progress)" },
+  { key: "review", label: "En revue", dot: "var(--s-review)" },
+  { key: "done", label: "Fait", dot: "var(--s-done)" },
+];
+
+var TABS = [
+  { id: "dashboard", label: "Vue d'ensemble" },
+  { id: "tasks", label: "Taches" },
+  { id: "timeline", label: "Timeline" },
+  { id: "budget", label: "Budget" },
+  { id: "decisions", label: "Decisions" },
+  { id: "deps", label: "Dependances" },
+];
+
+// ─── State ──────────────────────────────────────────────────────────────────
+
+function load(key, fallback) {
+  try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : JSON.parse(JSON.stringify(fallback)); }
+  catch(e) { return JSON.parse(JSON.stringify(fallback)); }
+}
+function save(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); showToast(); } catch(e) {}
+}
+
+var tasks = load("dsa-tasks-v2", INITIAL_TASKS);
+var activeTab = "dashboard";
+var filterOwner = "ALL";
+var filterPhase = "ALL";
+
+// ─── Helpers ────────────────────────────────────────────────────────────────
+
+function ownerBadge(o) {
+  var map = { R: ["Rached","badge-r"], E: ["Elyssa","badge-e"], L: ["Lilia","badge-l"], ALL: ["Tous","badge-all"] };
+  var m = map[o] || ["?",""];
+  return '<span class="badge '+m[1]+'">'+m[0]+'</span>';
+}
+function statusBadge(s) {
+  var map = { "todo": ["A faire","badge-todo"], "in-progress": ["En cours","badge-progress"], "review": ["En revue","badge-review"], "done": ["Fait","badge-done"], "blocked": ["Bloque","badge-blocked"] };
+  var m = map[s] || ["?",""];
+  return '<span class="badge '+m[1]+'">'+m[0]+'</span>';
+}
+function phaseColor(p) {
+  return { "0":"var(--p0)","1":"var(--p1)","1b":"var(--p1b)","2":"var(--p2)","3":"var(--p3)" }[p] || "var(--p3)";
+}
+function fmtDate(d) {
+  if (!d) return "";
+  var parts = d.split("-");
+  var months = ["jan","fev","mars","avr","mai","juin","jul","aou","sep","oct","nov","dec"];
+  return parseInt(parts[2])+" "+months[parseInt(parts[1])-1]+" "+parts[0].slice(2);
+}
+function isOverdue(d) {
+  if (!d) return false;
+  return new Date(d) < new Date("2026-02-23");
+}
+function showToast() {
+  var t = document.getElementById("toast");
+  t.classList.add("show");
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 1800);
+}
+
+// ─── Tab Nav ────────────────────────────────────────────────────────────────
+
+function buildNav() {
+  var nav = document.getElementById("nav");
+  nav.innerHTML = TABS.map(function(t) {
+    return '<button class="nav-tab'+(t.id===activeTab?' active':'')+'" data-tab="'+t.id+'">'+t.label+'</button>';
+  }).join("");
+  nav.addEventListener("click", function(e) {
+    var btn = e.target.closest(".nav-tab");
+    if (!btn) return;
+    activeTab = btn.dataset.tab;
+    nav.querySelectorAll(".nav-tab").forEach(function(b){ b.classList.remove("active"); });
+    btn.classList.add("active");
+    renderActiveTab();
+  });
+}
+
+function renderActiveTab() {
+  var main = document.querySelector(".main");
+  switch(activeTab) {
+    case "dashboard": main.innerHTML = renderDashboard(); break;
+    case "tasks": main.innerHTML = renderTasks(); initDragAndDrop(); break;
+    case "timeline": main.innerHTML = renderTimeline(); break;
+    case "budget": main.innerHTML = renderBudget(); break;
+    case "decisions": main.innerHTML = renderDecisions(); break;
+    case "deps": main.innerHTML = renderDeps(); break;
+  }
+}
+
+// ─── Dashboard ──────────────────────────────────────────────────────────────
+
+function renderDashboard() {
+  var done = tasks.filter(function(t){ return t.status==="done"; }).length;
+  var prog = tasks.filter(function(t){ return t.status==="in-progress"; }).length;
+  var phases = [
+    { name:"Phase 0 \u2014 Fondations", id:"0", dates:"Fev \u2013 Mars 2026" },
+    { name:"Phase 1 \u2014 Build & Lancement", id:"1", dates:"Avr \u2013 Mai 2026" },
+    { name:"Phase 1b \u2014 Soft Launch", id:"1b", dates:"Jun \u2013 Sep 2026" },
+    { name:"Phase 2 \u2014 Ouverture Hotel", id:"2", dates:"Oct \u2013 Dec 2026" },
+    { name:"Phase 3 \u2014 Systemes Avances", id:"3", dates:"2027+" },
+  ];
+  var upcoming = tasks.filter(function(t){ return t.status!=="done"; }).sort(function(a,b){ return a.due>b.due?1:-1; }).slice(0,5);
+
+  var h = '';
+  h += '<div class="section-title">Vue d\'ensemble</div>';
+  h += '<div class="section-sub">Domaine Sidi Abdallah &middot; fevrier 2026</div>';
+
+  // Metrics
+  h += '<div class="grid-4" style="margin-bottom:32px">';
+  h += '<div class="metric" style="border-top:3px solid var(--s-done)"><div class="metric-label">Taches accomplies</div><div class="metric-value">'+done+'<span>/'+tasks.length+'</span></div><div class="metric-note">'+Math.round(done/tasks.length*100)+'% du total</div></div>';
+  h += '<div class="metric" style="border-top:3px solid var(--s-progress)"><div class="metric-label">En cours</div><div class="metric-value">'+prog+'</div><div class="metric-note">taches actives</div></div>';
+  h += '<div class="metric" style="border-top:3px solid var(--s-blocked)"><div class="metric-label">Decisions en attente</div><div class="metric-value">5</div><div class="metric-note">a trancher</div></div>';
+  h += '<div class="metric" style="border-top:3px solid var(--s-todo)"><div class="metric-label">Bloquees</div><div class="metric-value">0</div><div class="metric-note">necessitent attention</div></div>';
+  h += '</div>';
+
+  // Phases + Deadlines
+  h += '<div class="grid-2" style="margin-bottom:32px">';
+  h += '<div class="card"><div class="card-label">Avancement par phase</div>';
+  phases.forEach(function(ph) {
+    var total = tasks.filter(function(t){ return t.phase===ph.id; }).length;
+    var d = tasks.filter(function(t){ return t.phase===ph.id && t.status==="done"; }).length;
+    var pct = total ? Math.round(d/total*100) : 0;
+    h += '<div class="phase-block"><div class="phase-header"><span class="phase-name">'+ph.name+'</span><span class="phase-info">'+d+'/'+total+' &middot; '+ph.dates+'</span></div>';
+    h += '<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+phaseColor(ph.id)+'"></div></div></div>';
+  });
+  h += '</div>';
+
+  h += '<div class="card"><div class="card-label">Prochaines echeances</div>';
+  upcoming.forEach(function(t) {
+    var od = isOverdue(t.due);
+    h += '<div class="deadline-row"><div><div class="deadline-title">'+t.title+'</div><div class="deadline-meta">'+ownerBadge(t.owner)+statusBadge(t.status)+'</div></div>';
+    h += '<div class="deadline-date'+(od?' overdue':'')+'">'+fmtDate(t.due)+'</div></div>';
+  });
+  h += '</div></div>';
+
+  // Budget summary
+  h += '<div class="card"><div class="card-label">Recapitulatif budget</div><div class="grid-4">';
+  h += '<div class="budget-card" style="border-top-color:var(--b-digital)"><div class="metric-label">Digital & Tech</div><div style="font-family:var(--font-mono);font-size:16px;color:var(--text);margin-bottom:6px">140 000 TND</div><div class="bar-track" style="margin-bottom:8px"><div class="bar-fill" style="width:84%;background:var(--b-digital)"></div></div><div class="metric-note">0 paye &middot; 118 000 engage</div></div>';
+  h += '<div class="budget-card" style="border-top-color:var(--b-reno)"><div class="metric-label">Renovation</div><div style="font-family:var(--font-mono);font-size:16px;color:var(--text);margin-bottom:6px">A definir</div><div class="metric-note">0 paye &middot; 0 engage</div></div>';
+  h += '<div class="budget-card" style="border-top-color:var(--b-content)"><div class="metric-label">Contenu</div><div style="font-family:var(--font-mono);font-size:16px;color:var(--text);margin-bottom:6px">A definir</div><div class="metric-note">0 paye &middot; 0 engage</div></div>';
+  h += '<div class="budget-card" style="border-top-color:var(--b-ops)"><div class="metric-label">Ops & Marketing</div><div style="font-family:var(--font-mono);font-size:16px;color:var(--text);margin-bottom:6px">A definir</div><div class="metric-note">0 paye &middot; 0 engage</div></div>';
+  h += '</div></div>';
+
+  return h;
+}
+
+// ─── Tasks (Kanban with Drag & Drop) ────────────────────────────────────────
+
+function getFilteredTasks() {
+  return tasks.filter(function(t) {
+    if (filterOwner !== "ALL" && t.owner !== filterOwner) return false;
+    if (filterPhase !== "ALL" && t.phase !== filterPhase) return false;
+    return true;
+  });
+}
+
+function renderTasks() {
+  var filtered = getFilteredTasks();
+
+  var h = '<div class="section-header"><div><div class="section-title">Tableau des taches</div><div class="section-sub">Kanban &middot; '+tasks.length+' taches &middot; glisser-deposer pour changer le statut</div></div></div>';
+
+  // Filters
+  h += '<div class="filter-bar">';
+  h += '<span class="filter-label">Responsable:</span>';
+  ["ALL","R","E","L"].forEach(function(v) {
+    var lbl = {ALL:"Tous",R:"Rached",E:"Elyssa",L:"Lilia"}[v];
+    h += '<span class="filter-btn'+(filterOwner===v?' active':'')+'" data-filter-owner="'+v+'">'+lbl+'</span>';
+  });
+  h += '<span class="filter-label" style="margin-left:10px">Phase:</span>';
+  ["ALL","0","1","1b","2"].forEach(function(v) {
+    var lbl = v==="ALL"?"Toutes":"Phase "+v;
+    h += '<span class="filter-btn'+(filterPhase===v?' active':'')+'" data-filter-phase="'+v+'">'+lbl+'</span>';
+  });
+  h += '</div>';
+
+  // Kanban
+  h += '<div class="kanban">';
+  STATUS_COLS.forEach(function(col) {
+    var colTasks = filtered.filter(function(t){ return t.status===col.key; });
+    h += '<div class="kanban-col" data-status="'+col.key+'">';
+    h += '<div class="kanban-col-header"><span><span class="col-dot" style="background:'+col.dot+'"></span>'+col.label+'</span><span class="kanban-count">'+colTasks.length+'</span></div>';
+    if (colTasks.length === 0) {
+      h += '<div class="kanban-empty">Deposer ici</div>';
+    }
+    colTasks.forEach(function(t) {
+      var od = isOverdue(t.due) && t.status !== "done";
+      h += '<div class="task-card" draggable="true" data-task-id="'+t.id+'">';
+      h += '<div class="task-title">'+t.title+'</div>';
+      h += '<div class="task-meta">'+ownerBadge(t.owner);
+      if (t.due) h += '<span class="task-due'+(od?' overdue':'')+'">'+fmtDate(t.due)+'</span>';
+      if (t.block) h += '<span class="phase-tag" style="color:'+phaseColor(t.phase)+'">#'+t.block+'</span>';
+      h += '</div>';
+      if (t.notes) h += '<div class="task-note">'+t.notes+'</div>';
+      h += '</div>';
+    });
+    h += '</div>';
+  });
+  h += '</div>';
+
+  return h;
+}
+
+function initDragAndDrop() {
+  var main = document.querySelector(".main");
+
+  // Filter clicks
+  main.addEventListener("click", function(e) {
+    var ownerBtn = e.target.closest("[data-filter-owner]");
+    if (ownerBtn) { filterOwner = ownerBtn.dataset.filterOwner; renderActiveTab(); return; }
+    var phaseBtn = e.target.closest("[data-filter-phase]");
+    if (phaseBtn) { filterPhase = phaseBtn.dataset.filterPhase; renderActiveTab(); return; }
+  });
+
+  // Drag and drop
+  var draggedId = null;
+
+  main.addEventListener("dragstart", function(e) {
+    var card = e.target.closest(".task-card");
+    if (!card) return;
+    draggedId = parseInt(card.dataset.taskId);
+    card.classList.add("dragging");
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", String(draggedId));
+  });
+
+  main.addEventListener("dragend", function(e) {
+    var card = e.target.closest(".task-card");
+    if (card) card.classList.remove("dragging");
+    document.querySelectorAll(".kanban-col").forEach(function(col) { col.classList.remove("drag-over"); });
+    draggedId = null;
+  });
+
+  main.querySelectorAll(".kanban-col").forEach(function(col) {
+    col.addEventListener("dragover", function(e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "move";
+      col.classList.add("drag-over");
+    });
+    col.addEventListener("dragleave", function(e) {
+      if (!col.contains(e.relatedTarget)) {
+        col.classList.remove("drag-over");
+      }
+    });
+    col.addEventListener("drop", function(e) {
+      e.preventDefault();
+      col.classList.remove("drag-over");
+      var id = parseInt(e.dataTransfer.getData("text/plain"));
+      var newStatus = col.dataset.status;
+      var task = tasks.find(function(t){ return t.id === id; });
+      if (task && task.status !== newStatus) {
+        task.status = newStatus;
+        save("dsa-tasks-v2", tasks);
+        renderActiveTab();
+      }
+    });
+  });
+}
+
+// ─── Timeline ───────────────────────────────────────────────────────────────
+
+function renderTimeline() {
+  var months = ["Fev 26","Mar 26","Avr 26","Mai 26","Jun 26","Jul 26","Aou 26","Sep 26","Oct 26","Nov 26","Dec 26","2027+"];
+  var bars = [
+    { label:"Phase 0 \u2014 Fondations", start:0, span:2, color:"var(--p0)" },
+    { label:"Phase 1 \u2014 Build", start:2, span:2, color:"var(--p1)" },
+    { label:"Renovation maison", start:2, span:5, color:"var(--p2)" },
+    { label:"Phase 1b \u2014 Soft Launch", start:4, span:4, color:"var(--p1b)" },
+    { label:"Phase 2 \u2014 Hotel", start:8, span:3, color:"var(--p2)" },
+  ];
+
+  var h = '<div class="section-title">Timeline du projet</div>';
+  h += '<div class="section-sub">Fev 2026 &rarr; 2027+</div>';
+  h += '<div class="card" style="overflow-x:auto;padding:20px"><div style="min-width:800px">';
+
+  // Month headers
+  h += '<div style="display:grid;grid-template-columns:160px repeat(12,1fr);border-bottom:1px solid var(--border);margin-bottom:16px"><div></div>';
+  months.forEach(function(m,i) {
+    h += '<div class="tl-month'+(i===0?' current':'')+'">'+m+'</div>';
+  });
+  h += '</div>';
+
+  // Bars
+  bars.forEach(function(bar) {
+    h += '<div style="display:grid;grid-template-columns:160px repeat(12,1fr);margin-bottom:6px;align-items:center">';
+    h += '<div class="tl-bar-label">'+bar.label+'</div>';
+    for (var i=0; i<12; i++) {
+      if (i === bar.start && bar.span === 1) {
+        h += '<div class="tl-cell"><div style="height:18px;width:100%;background:color-mix(in srgb, '+bar.color+' 20%, transparent);border:2px solid '+bar.color+';border-radius:4px"></div></div>';
+      } else if (i === bar.start) {
+        h += '<div class="tl-cell"><div style="height:18px;width:100%;background:color-mix(in srgb, '+bar.color+' 20%, transparent);border:2px solid '+bar.color+';border-right:none;border-radius:4px 0 0 4px"></div></div>';
+      } else if (i > bar.start && i < bar.start + bar.span - 1) {
+        h += '<div class="tl-cell"><div style="height:18px;width:100%;background:color-mix(in srgb, '+bar.color+' 20%, transparent);border-top:2px solid '+bar.color+';border-bottom:2px solid '+bar.color+'"></div></div>';
+      } else if (i === bar.start + bar.span - 1) {
+        h += '<div class="tl-cell"><div style="height:18px;width:100%;background:color-mix(in srgb, '+bar.color+' 20%, transparent);border-top:2px solid '+bar.color+';border-bottom:2px solid '+bar.color+';border-right:2px solid '+bar.color+';border-radius:0 4px 4px 0"></div></div>';
+      } else {
+        h += '<div class="tl-cell"></div>';
+      }
+    }
+    h += '</div>';
+  });
+
+  // Today marker
+  h += '<div style="display:grid;grid-template-columns:160px repeat(12,1fr);margin-top:10px">';
+  h += '<div class="tl-bar-label" style="color:var(--s-progress)">\u25C6 Aujourd\'hui</div>';
+  h += '<div style="border-left:2px dashed var(--s-progress);height:12px;opacity:0.6"></div>';
+  h += '</div></div></div>';
+
+  // Milestones
+  var milestones = [
+    { date:"Mi-mars 2026", label:"Logos valides", color:"var(--p0)" },
+    { date:"Mars 2026", label:"Direction design choisie", color:"var(--p0)" },
+    { date:"6 avril 2026", label:"Demarrage renovations", color:"var(--p2)" },
+    { date:"Mai 2026", label:"Site web en ligne", color:"var(--p1)" },
+    { date:"Ete 2026", label:"Ouverture restaurant + wellness", color:"var(--p1)" },
+    { date:"Ete 2026", label:"Lancement Agrumia Club", color:"var(--p1b)" },
+    { date:"Post-Ramadan 2026", label:"Ouverture hotel (Dar Saad)", color:"var(--p2)" },
+    { date:"T4 2026", label:"Reservation en ligne operationnelle", color:"var(--p2)" },
+    { date:"2027+", label:"Systemes avances & fidelisation", color:"var(--p3)" },
+  ];
+
+  h += '<div style="margin-top:28px"><div class="card-label" style="margin-bottom:16px">Jalons cles</div><div class="grid-3">';
+  milestones.forEach(function(m) {
+    h += '<div class="milestone-card" style="border-left-color:'+m.color+'"><div style="font-family:var(--font-mono);font-size:10px;color:'+m.color+';margin-bottom:4px">'+m.date+'</div><div style="font-size:13px">'+m.label+'</div></div>';
+  });
+  h += '</div></div>';
+
+  return h;
+}
+
+// ─── Budget ─────────────────────────────────────────────────────────────────
+
+function renderBudget() {
+  var tracks = [
+    { name:"Digital & Tech", color:"var(--b-digital)", total:140000, spent:0, committed:118000, entries:[
+      { name:"Developpement site vitrine", amount:25000, date:"1 mai 26", status:"prevu" },
+      { name:"Systeme reservation + paiement", amount:45000, date:"1 nov 26", status:"prevu" },
+      { name:"Dashboard interne + systemes avances", amount:40000, date:"1 jan 27", status:"prevu" },
+      { name:"SaaS / outils (Brevo, Konnect, etc.)", amount:8000, date:"1 mai 26", status:"prevu" },
+    ]},
+    { name:"Renovation & Construction", color:"var(--b-reno)", total:0, spent:0, committed:0, entries:[] },
+    { name:"Production Contenu", color:"var(--b-content)", total:0, spent:0, committed:0, entries:[] },
+    { name:"Operations & Marketing", color:"var(--b-ops)", total:0, spent:0, committed:0, entries:[] },
+  ];
+
+  var h = '<div class="section-title">Suivi budget</div>';
+  h += '<div class="section-sub">4 enveloppes &middot; 140 000 TND total estime</div>';
+
+  // Summary
+  h += '<div class="grid-3" style="margin-bottom:32px">';
+  h += '<div class="card-sm" style="border-left:3px solid var(--b-digital)"><div class="metric-label">Budget total</div><div class="metric-value" style="font-size:28px">140 000<span style="font-size:14px;margin-left:6px">TND</span></div></div>';
+  h += '<div class="card-sm" style="border-left:3px solid var(--s-progress)"><div class="metric-label">Engage / prevu</div><div class="metric-value" style="font-size:28px">118 000<span style="font-size:14px;margin-left:6px">TND</span></div></div>';
+  h += '<div class="card-sm" style="border-left:3px solid var(--s-done)"><div class="metric-label">Paye</div><div class="metric-value" style="font-size:28px">0<span style="font-size:14px;margin-left:6px">TND</span></div></div>';
+  h += '</div>';
+
+  tracks.forEach(function(track) {
+    h += '<div class="budget-track">';
+    h += '<div class="budget-header"><div class="budget-name" style="border-left:4px solid '+track.color+';padding-left:12px">'+track.name+'</div>';
+    h += '<div style="display:flex;gap:12px;align-items:center"><span class="budget-amounts">'+(track.total ? track.total.toLocaleString()+" TND" : "Budget a definir")+'</span><button class="btn btn-ghost">+ Depense</button></div></div>';
+    if (track.total) {
+      var pct = Math.round(track.committed/track.total*100);
+      h += '<div class="bar-track" style="height:8px;margin-bottom:6px"><div class="bar-fill" style="width:'+pct+'%;background:'+track.color+';height:100%"></div></div>';
+      h += '<div style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);margin-bottom:14px">'+track.spent.toLocaleString()+' TND paye &middot; '+track.committed.toLocaleString()+' TND prevu/engage &middot; '+pct+'% utilise</div>';
+      track.entries.forEach(function(entry) {
+        h += '<div class="budget-entry"><div><div class="budget-entry-name">'+entry.name+'</div><div class="budget-entry-detail">'+entry.date+' &middot; '+entry.status+'</div></div><div class="budget-entry-amount" style="color:'+track.color+'">'+entry.amount.toLocaleString()+' TND</div></div>';
+      });
+    } else {
+      h += '<div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);font-style:italic">Aucune depense enregistree</div>';
+    }
+    h += '</div>';
+  });
+
+  return h;
+}
+
+// ─── Decisions ──────────────────────────────────────────────────────────────
+
+function renderDecisions() {
+  var decisions = [
+    { date:"23 fev 26", text:"Rached developpe tout lui-meme (React/Node/TypeScript)", ctx:"Cout, controle, coherence technique", by:"Rached", status:"closed" },
+    { date:"23 fev 26", text:"Site unique geo-adaptatif (une URL, contenu selon pays visiteur)", ctx:"FR pour Tunisie, EN pour international", by:"Rached + Elyssa", status:"closed" },
+    { date:"23 fev 26", text:"Suppression portail membre Agrumia \u2014 wellness en pay-per-visit", ctx:"Simplification Phase 1, no digital membership", by:"Rached + Elyssa", status:"closed" },
+    { date:"\u2014", text:"Nom de domaine: .tn primaire + .com redirect ?", ctx:"Recommandation: oui aux deux", by:"Rached + Elyssa", status:"open" },
+    { date:"\u2014", text:"Choix direction design (1 des 5 propositions)", ctx:"Apres resultats recherche concurrentielle", by:"Lilia + Elyssa + Rached", status:"open" },
+    { date:"\u2014", text:"Approche CMS: Markdown ou Sanity.io ?", ctx:"Sanity si Elyssa doit editer contenu elle-meme", by:"Rached", status:"open" },
+  ];
+
+  var h = '<div class="section-header"><div><div class="section-title">Journal des decisions</div><div class="section-sub">5 en attente &middot; 5 prises</div></div>';
+  h += '<button class="btn btn-primary" style="margin-top:8px">+ Logger</button></div>';
+  h += '<div class="filter-bar"><span class="filter-btn active">Toutes</span><span class="filter-btn">En attente</span><span class="filter-btn">Prises</span></div>';
+
+  h += '<div class="decision-table">';
+  h += '<div class="decision-header-row"><div class="metric-label">Date</div><div class="metric-label">Decision</div><div class="metric-label" style="text-align:right">Par</div><div class="metric-label" style="text-align:center">Statut</div></div>';
+  decisions.forEach(function(d) {
+    h += '<div class="decision-row"><div class="decision-date">'+d.date+'</div>';
+    h += '<div><div class="decision-text">'+d.text+'</div><div class="decision-context">'+d.ctx+'</div></div>';
+    h += '<div class="decision-by">'+d.by+'</div>';
+    h += '<div style="text-align:center"><span class="decision-'+(d.status==="closed"?"closed":"open")+'">'+(d.status==="closed"?"Prise \u2713":"En attente")+'</span></div>';
+    h += '</div>';
+  });
+  h += '</div>';
+
+  return h;
+}
+
+// ─── Dependencies ───────────────────────────────────────────────────────────
+
+function renderDeps() {
+  var deps = [
+    { title:"Textes Site Web", owner:"Lilia \u2192 Rached", items:[
+      { name:"Version FR (structure + contenu)", status:"ready", note:"Pret, en attente relecture Lilia" },
+      { name:"Relecture & validation Lilia", status:"pending", note:"En cours" },
+      { name:"Version EN", status:"ready", note:"Prete" },
+      { name:"Prix finalises", status:"waiting", note:"A determiner" },
+    ]},
+    { title:"Logos & Identite", owner:"Agence \u2192 Rached", items:[
+      { name:"5 propositions livrees", status:"ready", note:"En revue" },
+      { name:"Feedback equipe", status:"pending", note:"En cours" },
+      { name:"Validation finale", status:"pending", note:"Mi-mars 2026" },
+      { name:"Fichiers finaux livres", status:"waiting", note:"Post-validation" },
+    ]},
+    { title:"Photos & Videos Phase I", owner:"Elyssa \u2192 Rached", items:[
+      { name:"Shooting propriete (oranges)", status:"pending", note:"Fev/Mars 2026" },
+      { name:"Edition + livrable Drive", status:"waiting", note:"Post-shooting" },
+      { name:"Integration site web", status:"waiting", note:"Depend Phase I photos" },
+    ]},
+    { title:"Photos & Videos Phase II", owner:"Elyssa \u2192 Rached", items:[
+      { name:"Shooting Making-of (debut travaux)", status:"waiting", note:"Avr/Mai 2026" },
+      { name:"Shooting Making-of (milieu travaux)", status:"waiting", note:"Mai/Juin 2026" },
+      { name:"Contenu teasers Instagram", status:"waiting", note:"En parallele" },
+    ]},
+    { title:"Renovation & Espaces", owner:"Elyssa \u2192 equipe", items:[
+      { name:"Devis maison principale", status:"ready", note:"Obtenu" },
+      { name:"Demarrage travaux maison", status:"pending", note:"Semaine du 6 avril" },
+      { name:"Plans espace Wellness", status:"pending", note:"En cours d'etudes" },
+      { name:"Calendrier travaux Wellness", status:"waiting", note:"Pas encore finalise" },
+    ]},
+    { title:"Direction Design Site", owner:"Tous \u2192 Rached", items:[
+      { name:"Recherche concurrentielle", status:"pending", note:"En cours" },
+      { name:"Choix direction (1/5)", status:"waiting", note:"Reunion Mars 2026" },
+      { name:"Developpement site", status:"waiting", note:"Post-decision design" },
+    ]},
+  ];
+
+  var statusMap = { ready:["Pret \u2713","dep-ready"], pending:["En cours","dep-pending"], waiting:["En attente","dep-waiting"] };
+
+  var h = '<div class="section-title">Dependances & Assets</div>';
+  h += '<div class="section-sub">Ce dont Rached a besoin pour avancer</div>';
+  h += '<div class="dep-grid">';
+  deps.forEach(function(dep) {
+    h += '<div class="dep-card"><div class="dep-card-title">'+dep.title+'</div><div class="dep-card-owner">'+dep.owner+'</div>';
+    dep.items.forEach(function(item) {
+      var s = statusMap[item.status];
+      h += '<div class="dep-item"><div><div class="dep-item-name">'+item.name+'</div><div class="dep-item-note">'+item.note+'</div></div>';
+      h += '<span class="'+s[1]+'">'+s[0]+'</span></div>';
+    });
+    h += '</div>';
+  });
+  h += '</div>';
+
+  return h;
+}
+
+// ─── Legend ──────────────────────────────────────────────────────────────────
+
+function toggleLegend() {
+  document.getElementById("legend-panel").classList.toggle("open");
+}
+document.addEventListener("click", function(e) {
+  if (!e.target.closest(".legend-toggle") && !e.target.closest(".legend-panel")) {
+    document.getElementById("legend-panel").classList.remove("open");
+  }
+});
+
+// ─── Boot ───────────────────────────────────────────────────────────────────
+
+buildNav();
+renderActiveTab();
+</script>
+</body>
+</html>
