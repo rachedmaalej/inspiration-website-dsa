@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Domaine Sidi Abdallah — Master Timeline 2026–2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,300,0,0&display=swap" rel="stylesheet">
+<style>
+/* ─── MATERIAL ICONS ─── */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal; font-style: normal; font-size: 18px;
+  line-height: 1; letter-spacing: normal; text-transform: none;
+  display: inline-block; white-space: nowrap; word-wrap: normal; direction: ltr;
+  -webkit-font-feature-settings: 'liga'; font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream:     #F7F3EC;
+  --parchment: #EDE6D8;
+  --ink:       #1C1A17;
+  --grove:     #2C4035;
+  --gold:      #C4A35A;
+  --dust:      #A89880;
+  --mist:      #D6CFC4;
+  --terracotta:#B5623A;
+  --white:     #FFFFFF;
+
+  /* Category colors */
+  --c-renovation:  #8B6914;
+  --c-branding:    #9B4D7C;
+  --c-digital:     #2C6B8A;
+  --c-marketing:   #B5623A;
+  --c-restaurant:  #7A5C3E;
+  --c-wellness:    #4A7A6B;
+  --c-hotel:       #5C6B8A;
+  --c-retreats:    #8A6B5C;
+  --c-hr:          #6B7A4A;
+  --c-finance:     #6A5C8A;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── PROGRESS BAR ─── */
+.progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--grove), var(--gold), var(--terracotta));
+  width: 0%; z-index: 1000;
+  transition: width 0.1s linear;
+}
+
+/* ─── HEADER ─── */
+header {
+  position: relative;
+  padding: 60px 40px 50px;
+  text-align: center;
+  border-bottom: 1px solid var(--mist);
+  background: var(--cream);
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(196,163,90,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.site-label {
+  font-weight: 200; font-size: 10px;
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--dust); margin-bottom: 16px;
+}
+
+.site-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300; font-size: clamp(28px, 5vw, 46px);
+  color: var(--grove); letter-spacing: 0.02em; line-height: 1.15; margin-bottom: 8px;
+}
+.site-title em { font-style: italic; color: var(--terracotta); }
+
+.site-subtitle {
+  font-weight: 200; font-size: 12px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--dust); margin-top: 12px;
+}
+
+.header-ornament {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin: 20px auto 0; width: fit-content;
+}
+.header-ornament span { display: block; height: 1px; width: 60px; background: var(--mist); }
+.header-ornament svg { color: var(--gold); }
+
+/* ─── STICKY HEADER GROUP ─── */
+.sticky-header {
+  position: sticky; top: 2px; z-index: 900;
+  background: rgba(247,243,236,0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--mist);
+  box-shadow: 0 2px 16px rgba(28,26,23,0);
+  transition: box-shadow 0.3s ease;
+}
+.sticky-header.scrolled {
+  box-shadow: 0 2px 16px rgba(28,26,23,0.06);
+}
+
+/* ─── NAV ─── */
+.category-nav {
+  padding: 10px 20px 6px;
+  display: flex; flex-wrap: wrap;
+  justify-content: center; gap: 6px;
+}
+
+.nav-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 14px; border-radius: 20px;
+  font-size: 11px; font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--dust); background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer; transition: all 0.25s ease;
+  text-decoration: none;
+}
+.nav-pill .material-symbols-outlined { font-size: 14px; }
+.nav-pill:hover, .nav-pill.active {
+  border-color: var(--pill-color, var(--dust));
+  color: var(--pill-color, var(--dust));
+  background: rgba(0,0,0,0.02);
+}
+.nav-pill.active {
+  background: rgba(0,0,0,0.04);
+  font-weight: 500;
+}
+
+/* ─── MONTH INDICATOR BAR ─── */
+.month-bar {
+  max-width: 1100px; margin: 0 auto;
+  padding: 4px 30px 8px 230px; /* 30px content padding + 200px label column */
+  display: flex; gap: 2px;
+}
+.month-cell {
+  flex: 1; text-align: center;
+  padding: 8px 0 6px;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--dust);
+  border-bottom: 2px solid var(--mist);
+  position: relative;
+  transition: all 0.2s;
+}
+.month-cell.current {
+  color: var(--terracotta);
+  border-bottom-color: var(--terracotta);
+  font-weight: 500;
+}
+.month-cell.current::after {
+  content: '';
+  position: absolute; bottom: -6px; left: 50%;
+  transform: translateX(-50%);
+  width: 6px; height: 6px;
+  background: var(--terracotta);
+  border-radius: 50%;
+}
+
+/* ─── MAIN CONTENT ─── */
+.content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 30px 80px;
+}
+
+/* ─── CATEGORY SECTION ─── */
+.category-section {
+  margin-top: 50px;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.category-section.visible { opacity: 1; transform: translateY(0); }
+
+.category-header {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--mist);
+}
+
+.category-icon {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  color: var(--cat-color, var(--dust));
+  background: rgba(0,0,0,0.04);
+}
+.category-icon .material-symbols-outlined { font-size: 20px; }
+
+.category-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400; font-size: 26px;
+  color: var(--ink); letter-spacing: 0.01em;
+}
+
+.category-subtitle {
+  font-size: 11px; font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--dust); margin-top: 2px;
+}
+
+/* ─── GANTT SWIM LANE ─── */
+.swim-lane {
+  display: flex; flex-direction: column; gap: 8px;
+  overflow: visible;
+}
+
+.gantt-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0;
+  min-height: 42px;
+  align-items: center;
+  overflow: visible;
+}
+
+.gantt-label {
+  font-size: 12px; font-weight: 300;
+  color: #59534E;
+  padding-right: 16px;
+  display: flex; align-items: center; gap: 8px;
+  line-height: 1.35;
+}
+.gantt-label .material-symbols-outlined {
+  font-size: 15px;
+  color: var(--cat-color, var(--dust));
+  flex-shrink: 0;
+}
+
+.gantt-track {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2px;
+  position: relative;
+  height: 100%;
+  align-items: center;
+  overflow: visible;
+}
+
+/* Subtle month grid lines */
+.gantt-track::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    to right,
+    transparent 0%,
+    transparent calc(100% / 12 - 1px),
+    rgba(0,0,0,0.03) calc(100% / 12 - 1px),
+    rgba(0,0,0,0.03) calc(100% / 12)
+  );
+  pointer-events: none;
+  border-radius: 3px;
+}
+
+.gantt-bar {
+  height: 26px;
+  border-radius: 4px;
+  background: var(--cat-color, var(--dust));
+  opacity: 0.18;
+  position: relative;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  cursor: default;
+}
+.gantt-bar:hover {
+  opacity: 0.35;
+  transform: scaleY(1.15);
+}
+
+/* Milestones (trophy icon) */
+.gantt-milestone {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: rgba(196,163,90,0.12);
+  justify-self: center;
+  cursor: default;
+  transition: transform 0.25s ease, background 0.25s ease;
+  position: relative;
+  z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+}
+.gantt-milestone::after {
+  font-family: 'Material Symbols Outlined';
+  content: '\ea65'; /* workspace_premium = medal */
+  font-size: 15px;
+  color: var(--gold);
+  line-height: 1;
+}
+.gantt-milestone:hover {
+  transform: scale(1.25);
+  background: rgba(196,163,90,0.22);
+}
+
+/* Bar with text */
+.gantt-bar-filled {
+  height: 28px; border-radius: 4px;
+  background: var(--cat-color, var(--dust));
+  display: flex; align-items: center;
+  padding: 0 10px;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  white-space: nowrap;
+  cursor: default;
+  transition: all 0.25s ease;
+  position: relative; z-index: 2;
+  overflow: visible;
+}
+.gantt-bar-filled:hover {
+  filter: brightness(1.1);
+  transform: scaleY(1.08);
+  z-index: 50;
+}
+
+/* Tooltip (bars only) */
+.gantt-bar-filled[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 10px); left: 50%;
+  background: var(--ink);
+  color: var(--cream);
+  font-family: 'Jost', sans-serif;
+  font-size: 11.5px; font-weight: 300;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+  padding: 8px 14px;
+  border-radius: 5px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  transform: translateX(-50%) translateY(4px);
+  z-index: 200;
+  box-shadow: 0 4px 16px rgba(28,26,23,0.15);
+}
+.gantt-bar-filled[data-tip]::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 4px); left: 50%;
+  border: 5px solid transparent;
+  border-top-color: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  transform: translateX(-50%) translateY(4px);
+  z-index: 201;
+}
+.gantt-bar-filled:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.gantt-bar-filled:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Milestone card tooltip (JS-powered) */
+.milestone-tooltip {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  background: var(--white);
+  border-radius: 3px;
+  padding: 16px 20px;
+  border-left: 3px solid var(--cat-color, var(--dust));
+  box-shadow: 0 4px 24px rgba(28,26,23,0.12);
+  width: 240px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.milestone-tooltip.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.milestone-tooltip-date {
+  font-family: 'Jost', sans-serif;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--cat-color, var(--dust));
+  margin-bottom: 5px;
+}
+.milestone-tooltip-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500; font-size: 17px;
+  color: var(--ink); margin-bottom: 5px;
+  line-height: 1.25;
+}
+.milestone-tooltip-desc {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px; font-weight: 300;
+  color: #6B6560; line-height: 1.5;
+}
+
+/* ─── KEY MILESTONES HORIZONTAL TIMELINE ─── */
+.milestones-section {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid var(--mist);
+}
+
+.h-timeline {
+  position: relative;
+  margin-top: 40px;
+  padding: 0 0 60px;
+}
+
+/* Month labels above the line */
+.h-timeline-months {
+  display: flex;
+  margin-bottom: 12px;
+}
+.h-timeline-month {
+  flex: 1;
+  text-align: center;
+  font-size: 9px; font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dust);
+}
+
+/* The horizontal track line */
+.h-timeline-track {
+  position: relative;
+  height: 3px;
+  background: linear-gradient(to right, var(--mist), var(--gold) 15%, var(--gold) 85%, var(--mist));
+  border-radius: 2px;
+}
+
+/* Milestone marker on the track */
+.h-timeline-marker {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  cursor: default;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  z-index: 5;
+  box-shadow: 0 2px 8px rgba(28,26,23,0.08);
+}
+.h-timeline-marker .material-symbols-outlined {
+  font-size: 17px;
+  color: var(--gold);
+  transition: color 0.3s ease;
+}
+.h-timeline-marker:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+  box-shadow: 0 4px 18px rgba(196,163,90,0.25);
+  border-color: var(--marker-color, var(--gold));
+  z-index: 10;
+}
+.h-timeline-marker:hover .material-symbols-outlined {
+  color: var(--marker-color, var(--gold));
+}
+
+/* Stem dropping below each marker */
+.h-timeline-stem {
+  position: absolute;
+  top: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 22px;
+  background: var(--mist);
+  z-index: 1;
+}
+/* Short label beneath stem */
+.h-timeline-label {
+  position: absolute;
+  top: calc(50% + 28px);
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 9px; font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--dust);
+  white-space: nowrap;
+  z-index: 1;
+}
+
+/* ─── LEGEND ─── */
+.legend {
+  margin-top: 50px;
+  padding: 24px 28px;
+  background: var(--white);
+  border-radius: 3px;
+  box-shadow: 0 2px 12px rgba(28,26,23,0.05);
+}
+.legend-title {
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--dust); margin-bottom: 14px;
+}
+.legend-items {
+  display: flex; flex-wrap: wrap; gap: 16px;
+}
+.legend-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; color: #59534E;
+}
+.legend-swatch {
+  width: 28px; height: 10px;
+  border-radius: 3px;
+  opacity: 0.7;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  text-align: center; padding: 40px;
+  border-top: 1px solid var(--mist);
+  font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dust); font-weight: 200;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 800px) {
+  header { padding: 50px 20px 40px; }
+  .content { padding: 16px 16px 60px; }
+  .month-bar { padding: 4px 16px 8px 156px; /* 16px + 140px label */ }
+  .month-cell { font-size: 8px; letter-spacing: 0.08em; }
+  .gantt-row { grid-template-columns: 140px 1fr; }
+  .gantt-label { font-size: 11px; }
+  .gantt-bar-filled { font-size: 9px; padding: 0 6px; }
+  .category-name { font-size: 22px; }
+  .milestones-grid { grid-template-columns: 1fr; }
+  .category-nav { gap: 4px; padding: 8px 12px 4px; }
+  .nav-pill { font-size: 10px; padding: 4px 10px; }
+}
+
+@media (max-width: 500px) {
+  .gantt-row { grid-template-columns: 1fr; gap: 4px; }
+  .gantt-label { padding-bottom: 0; }
+  .month-bar { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header>
+  <p class="site-label">Master Timeline · Confidentiel</p>
+  <h1 class="site-title">Domaine <em>Sidi Abdallah</em></h1>
+  <div class="header-ornament">
+    <span></span>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <circle cx="7" cy="7" r="2" fill="currentColor"/>
+      <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="0.8"/>
+    </svg>
+    <span></span>
+  </div>
+  <p class="site-subtitle">Mars 2026 — Février 2027 · 10 chantiers en parallèle</p>
+</header>
+
+<!-- ═══════════════ STICKY HEADER (NAV + MONTHS) ═══════════════ -->
+<div class="sticky-header" id="stickyHeader">
+<nav class="category-nav" id="nav">
+  <a class="nav-pill" href="#renovation" style="--pill-color:var(--c-renovation)">
+    <span class="material-symbols-outlined">construction</span> Rénovation
+  </a>
+  <a class="nav-pill" href="#branding" style="--pill-color:var(--c-branding)">
+    <span class="material-symbols-outlined">palette</span> Branding
+  </a>
+  <a class="nav-pill" href="#digital" style="--pill-color:var(--c-digital)">
+    <span class="material-symbols-outlined">code</span> Digital
+  </a>
+  <a class="nav-pill" href="#marketing" style="--pill-color:var(--c-marketing)">
+    <span class="material-symbols-outlined">campaign</span> Marketing
+  </a>
+  <a class="nav-pill" href="#restaurant" style="--pill-color:var(--c-restaurant)">
+    <span class="material-symbols-outlined">restaurant</span> Restaurant
+  </a>
+  <a class="nav-pill" href="#wellness" style="--pill-color:var(--c-wellness)">
+    <span class="material-symbols-outlined">spa</span> Bien-être
+  </a>
+  <a class="nav-pill" href="#hotel" style="--pill-color:var(--c-hotel)">
+    <span class="material-symbols-outlined">bed</span> Hôtel
+  </a>
+  <a class="nav-pill" href="#retreats" style="--pill-color:var(--c-retreats)">
+    <span class="material-symbols-outlined">self_improvement</span> Retraites
+  </a>
+  <a class="nav-pill" href="#hr" style="--pill-color:var(--c-hr)">
+    <span class="material-symbols-outlined">group</span> RH
+  </a>
+  <a class="nav-pill" href="#finance" style="--pill-color:var(--c-finance)">
+    <span class="material-symbols-outlined">account_balance</span> Finance
+  </a>
+</nav>
+
+<div class="month-bar" id="monthBar">
+  <div class="month-cell current">Mars '26</div>
+  <div class="month-cell">Avr '26</div>
+  <div class="month-cell">Mai '26</div>
+  <div class="month-cell">Juin '26</div>
+  <div class="month-cell">Juil '26</div>
+  <div class="month-cell">Août '26</div>
+  <div class="month-cell">Sept '26</div>
+  <div class="month-cell">Oct '26</div>
+  <div class="month-cell">Nov '26</div>
+  <div class="month-cell">Déc '26</div>
+  <div class="month-cell">Jan '27</div>
+  <div class="month-cell">Fév '27</div>
+</div>
+</div><!-- /sticky-header -->
+
+<!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+<div class="content">
+
+<!-- ════════════════════════════════════════════ -->
+<!-- 1. RÉNOVATION & CONSTRUCTION               -->
+<!-- ════════════════════════════════════════════ -->
+<section class="category-section" id="renovation" style="--cat-color:var(--c-renovation)">
+  <div class="category-header">
+    <div class="category-icon"><span class="material-symbols-outlined">construction</span></div>
+    <div>
+      <div class="category-name">Rénovation & Construction</div>
+      <div class="category-subtitle">Travaux physiques sur le domaine — Dar Saad, Agrumia, espaces communs</div>
+    </div>
+  </div>
+  <div class="swim-lane">
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">engineering</span>
+        Plans architecte finaux
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 1/3;" class="gantt-bar-filled" data-tip="Mars – Avril · Finalisation des plans Bayram Zgolli">Plans finaux</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">foundation</span>
+        Gros œuvre & structure
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 2/6;" class="gantt-bar-filled" data-tip="Avril – Juillet · Démolition, maçonnerie, charpente">Gros œuvre</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">water_drop</span>
+        Plomberie & électricité
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 4/8;" class="gantt-bar-filled" data-tip="Juin – Septembre · Second œuvre technique">Second œuvre</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">format_paint</span>
+        Finitions & décoration
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 7/10;" class="gantt-bar-filled" data-tip="Sept – Nov · Peinture, revêtements, aménagement">Finitions</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">yard</span>
+        Aménagement extérieur
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 8/11;" class="gantt-bar-filled" data-tip="Oct – Déc · Jardins, terrasses, éclairage extérieur">Extérieurs</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">spa</span>
+        Équipement spa (Agrumia)
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 8/11;" class="gantt-bar-filled" data-tip="Oct – Déc · Hammam, sauna, hydromassage, salle fitness">Installation spa</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">check_circle</span>
+        Réception & snag list
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 10/12;" class="gantt-bar-filled" data-tip="Déc – Jan · Inspection finale, corrections, levée de réserves">Réception</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">flag</span>
+        Début des travaux — 6 avril
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 2/3;" class="gantt-milestone" data-date="6 Avril 2026" data-title="Début des Travaux" data-desc="Coup d'envoi de la rénovation sur le terrain. Gros œuvre, restructuration des espaces."></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- 2. BRANDING & IDENTITÉ VISUELLE            -->
+<!-- ════════════════════════════════════════════ -->
+<section class="category-section" id="branding" style="--cat-color:var(--c-branding)">
+  <div class="category-header">
+    <div class="category-icon"><span class="material-symbols-outlined">palette</span></div>
+    <div>
+      <div class="category-name">Branding & Identité Visuelle</div>
+      <div class="category-subtitle">Logos, charte graphique, photographie, direction artistique</div>
+    </div>
+  </div>
+  <div class="swim-lane">
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">brand_awareness</span>
+        Logos (Emna)
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 1/2;" class="gantt-bar-filled" data-tip="Mars · Validation finale des 4 logos — mi-mars">Validation logos</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">style</span>
+        Direction artistique
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 1/2;" class="gantt-bar-filled" data-tip="Mars · Choix parmi les 5 propositions design — réunion Lilia/Elyssa/Rached">Choix direction</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">auto_awesome</span>
+        Charte graphique complète
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 2/4;" class="gantt-bar-filled" data-tip="Avril – Mai · Typographies, palettes, règles d'usage">Charte graphique</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">photo_camera</span>
+        Phase I — Orangers & jardins
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 1/2;" class="gantt-bar-filled" data-tip="Mars · Shooting pendant la saison des agrumes — fruits sur les branches">Photo Phase I</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">videocam</span>
+        Phase II — Making-of chantier
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 3/7;" class="gantt-bar-filled" data-tip="Mai – Août · Documentation du chantier, avant/après">Photo/Vidéo Phase II</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">photo_library</span>
+        Phase III — Shooting final
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 10/12;" class="gantt-bar-filled" data-tip="Déc – Jan · Photos magazine du domaine achevé">Photo Phase III</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">flag</span>
+        Logos validés — mi-mars
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 1/2;" class="gantt-milestone" data-date="Mi-mars 2026" data-title="Logos & Direction Artistique" data-desc="Validation des 4 logos (Emna) et choix définitif parmi les 5 propositions de design."></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- 3. DIGITAL & SITE WEB                      -->
+<!-- ════════════════════════════════════════════ -->
+<section class="category-section" id="digital" style="--cat-color:var(--c-digital)">
+  <div class="category-header">
+    <div class="category-icon"><span class="material-symbols-outlined">code</span></div>
+    <div>
+      <div class="category-name">Digital & Site Web</div>
+      <div class="category-subtitle">Site web, réservation en ligne, infrastructure technique, paiements</div>
+    </div>
+  </div>
+  <div class="swim-lane">
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">language</span>
+        Domaine .tn & .com
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 1/2;" class="gantt-bar-filled" data-tip="Mars · Enregistrement des noms de domaine">Domaine</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">mail</span>
+        Email pro (Zoho Mail)
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 1/2;" class="gantt-bar-filled" data-tip="Mars · 5 adresses email professionnelles">Setup email</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">web</span>
+        Site vitrine (Next.js)
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 2/4;" class="gantt-bar-filled" data-tip="Avril – Mai · 4 pages pilier, géo-détection FR/EN, formulaires contact">Développement site</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">restaurant_menu</span>
+        Réservation restaurant
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 4/6;" class="gantt-bar-filled" data-tip="Juin – Juillet · Système capacitaire, WhatsApp + email confirmation">Booking resto</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">calendar_month</span>
+        Réservation bien-être
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 5/7;" class="gantt-bar-filled" data-tip="Juillet – Août · Créneaux praticiens, tampons 15 min">Booking spa</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">bed</span>
+        Réservation chambres
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 8/10;" class="gantt-bar-filled" data-tip="Oct – Nov · 6 chambres, calendrier couleur, dépôt/paiement complet">Booking hôtel</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">credit_card</span>
+        Paiements (Konnect + Stripe)
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 8/11;" class="gantt-bar-filled" data-tip="Oct – Déc · Konnect (TND) + Stripe (EUR/USD), dépôts retraites">Intégration paiement</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">sync</span>
+        OTA sync (Booking/Airbnb)
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 10/12;" class="gantt-bar-filled" data-tip="Déc – Jan · iCal sync ou Channex.io API">Sync OTA</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">flag</span>
+        Site en ligne — mai
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 3/4;" class="gantt-milestone" data-date="Mai 2026" data-title="Site Web en Ligne" data-desc="Site vitrine accessible au public. 4 pages pilier, géo-détection FR/EN, newsletter."></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- 4. MARKETING & COMMUNICATION               -->
+<!-- ════════════════════════════════════════════ -->
+<section class="category-section" id="marketing" style="--cat-color:var(--c-marketing)">
+  <div class="category-header">
+    <div class="category-icon"><span class="material-symbols-outlined">campaign</span></div>
+    <div>
+      <div class="category-name">Marketing & Communication</div>
+      <div class="category-subtitle">Instagram, email, presse, Google, acquisition clients</div>
+    </div>
+  </div>
+  <div class="swim-lane">
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">travel_explore</span>
+        Étude concurrentielle
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 1/2;" class="gantt-bar-filled" data-tip="Mars · Analyse des domaines et hôtels comparables en Tunisie">Benchmark</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">photo_filter</span>
+        Instagram — Coulisses
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 1/7;" class="gantt-bar-filled" data-tip="Mars – Août · Making-of chantier, ambiance, équipe">Contenu coulisses</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">mark_email_read</span>
+        Newsletter (Brevo)
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 3/12;" class="gantt-bar-filled" data-tip="Mai – Fév · Capture emails → newsletters mensuelles → séquences automatisées">Email marketing</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">store</span>
+        Google Business Profile
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 3/5;" class="gantt-bar-filled" data-tip="Mai – Juin · Création fiche, photos, catégories, lien site">Fiche Google</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">newspaper</span>
+        Relations presse
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 7/11;" class="gantt-bar-filled" data-tip="Sept – Déc · Outreach médias, invitations presse, articles">RP & Presse</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">star</span>
+        Google Reviews (obj: 20+)
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 7/12;" class="gantt-bar-filled" data-tip="Sept – Fév · Accumulation avis clients, objectif 20+ en 3 mois">Avis Google</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">flag</span>
+        1 000 abonnés Instagram
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 7/8;" class="gantt-milestone" data-date="Septembre 2026" data-title="1 000 Abonnés Instagram" data-desc="La communauté grandit. Le contenu coulisses du chantier porte ses fruits."></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- 5. RESTAURANT (DÉGUSTER)                   -->
+<!-- ════════════════════════════════════════════ -->
+<section class="category-section" id="restaurant" style="--cat-color:var(--c-restaurant)">
+  <div class="category-header">
+    <div class="category-icon"><span class="material-symbols-outlined">restaurant</span></div>
+    <div>
+      <div class="category-name">Déguster — Restaurant</div>
+      <div class="category-subtitle">Chef Jérôme, menus farm-to-table, fournisseurs, service</div>
+    </div>
+  </div>
+  <div class="swim-lane">
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">menu_book</span>
+        Conception menus & carte
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 2/5;" class="gantt-bar-filled" data-tip="Avril – Juillet · Menus saisonniers, carte des vins, formules déjeuner/dîner">Menus & carte</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">local_shipping</span>
+        Réseau fournisseurs
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 2/6;" class="gantt-bar-filled" data-tip="Avril – Août · Producteurs locaux, marché Mohammadia, circuits courts">Fournisseurs</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">kitchen</span>
+        Équipement cuisine
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 5/8;" class="gantt-bar-filled" data-tip="Juillet – Sept · Achat et installation du matériel de cuisine">Équipement</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">dining</span>
+        Vaisselle & arts de table
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 6/8;" class="gantt-bar-filled" data-tip="Août – Sept · Sélection vaisselle artisanale, SAFI, potiers locaux">Arts de table</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">science</span>
+        Tests & ajustements menu
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 7/9;" class="gantt-bar-filled" data-tip="Sept – Oct · Dégustation, ajustements recettes, feedback">Tests menu</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">flag</span>
+        Ouverture restaurant
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 8/9;" class="gantt-milestone" data-date="Octobre 2026" data-title="Ouverture Restaurant" data-desc="Premier service. Cuisine farm-to-table par Jérôme. Réservation en ligne active."></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- 6. BIEN-ÊTRE (AGRUMIA)                     -->
+<!-- ════════════════════════════════════════════ -->
+<section class="category-section" id="wellness" style="--cat-color:var(--c-wellness)">
+  <div class="category-header">
+    <div class="category-icon"><span class="material-symbols-outlined">spa</span></div>
+    <div>
+      <div class="category-name">Se Détendre — Agrumia</div>
+      <div class="category-subtitle">Spa, hammam, yoga, fitness, abonnements, praticiens</div>
+    </div>
+  </div>
+  <div class="swim-lane">
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">architecture</span>
+        Plans Agrumia (Bayram)
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 1/3;" class="gantt-bar-filled" data-tip="Mars – Avril · Plans finaux centre bien-être avec Bayram Zgolli">Plans wellness</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">inventory</span>
+        Sélection produits spa
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 4/7;" class="gantt-bar-filled" data-tip="Juin – Août · Huiles, soins, produits hammam, fournisseurs bien-être">Produits spa</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">self_improvement</span>
+        Recrutement praticiens
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 5/8;" class="gantt-bar-filled" data-tip="Juillet – Sept · Masseurs, prof yoga, prof fitness, thérapeutes">Recrutement</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">sell</span>
+        Grille tarifaire spa
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 6/8;" class="gantt-bar-filled" data-tip="Août – Sept · Prix spa, day passes, forfaits, packages">Tarifs</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">fitness_center</span>
+        Équipement fitness & yoga
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 7/10;" class="gantt-bar-filled" data-tip="Sept – Nov · Tapis, machines, accessoires yoga, son ambiant">Équipement</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">flag</span>
+        Ouverture Agrumia
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 10/11;" class="gantt-milestone" data-date="Décembre 2026" data-title="Ouverture Agrumia" data-desc="Centre bien-être opérationnel : hammam, sauna, massages, yoga, fitness."></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- 7. HÔTEL (DAR SAAD)                        -->
+<!-- ════════════════════════════════════════════ -->
+<section class="category-section" id="hotel" style="--cat-color:var(--c-hotel)">
+  <div class="category-header">
+    <div class="category-icon"><span class="material-symbols-outlined">bed</span></div>
+    <div>
+      <div class="category-name">Séjourner — Dar Saad</div>
+      <div class="category-subtitle">6 chambres aux noms d'agrumes, linge, petit-déjeuner, accueil</div>
+    </div>
+  </div>
+  <div class="swim-lane">
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">design_services</span>
+        Décoration chambres
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 5/9;" class="gantt-bar-filled" data-tip="Juillet – Oct · Mobilier, linge (BEH), décoration intérieure par chambre">Déco chambres</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">local_laundry_service</span>
+        Linge & vaisselle
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 6/9;" class="gantt-bar-filled" data-tip="Août – Oct · Draps, serviettes, peignoirs, vaisselle petit-déjeuner">Linge & vaisselle</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">free_breakfast</span>
+        Fournisseurs petit-déj
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 7/10;" class="gantt-bar-filled" data-tip="Sept – Nov · Sélection boulanger, produits frais, menu petit-déjeuner">Petit-déjeuner</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">sell</span>
+        Tarification définitive
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 8/10;" class="gantt-bar-filled" data-tip="Oct – Nov · Prix par chambre, saisonnalité, early bird, weekend premium">Tarifs chambres</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">travel_explore</span>
+        Listing Booking & Airbnb
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 10/12;" class="gantt-bar-filled" data-tip="Déc – Jan · Création fiches OTA, photos, descriptions, tarifs">Listing OTA</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">flag</span>
+        Ouverture Dar Saad
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 11/12;" class="gantt-milestone" data-date="Janvier 2027" data-title="Ouverture Dar Saad" data-desc="6 chambres aux noms d'agrumes. Réservation en ligne, Booking.com & Airbnb actifs."></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- 8. RETRAITES & ÉVÉNEMENTS                  -->
+<!-- ════════════════════════════════════════════ -->
+<section class="category-section" id="retreats" style="--cat-color:var(--c-retreats)">
+  <div class="category-header">
+    <div class="category-icon"><span class="material-symbols-outlined">self_improvement</span></div>
+    <div>
+      <div class="category-name">S'évader — Retraites & Événements</div>
+      <div class="category-subtitle">Yoga, fitness, spa, agrumes, crochet, team buildings, événements privés</div>
+    </div>
+  </div>
+  <div class="swim-lane">
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">edit_note</span>
+        Conception programmes
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 4/8;" class="gantt-bar-filled" data-tip="Juin – Sept · Contenu retraites yoga, fitness, spa, crochet, agrumes">Design programmes</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">handshake</span>
+        Partenaires & intervenants
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 5/9;" class="gantt-bar-filled" data-tip="Juillet – Oct · Prof yoga, coach fitness, artisans crochet, guides agro">Partenaires</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">sell</span>
+        Forfaits & tarification
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 8/10;" class="gantt-bar-filled" data-tip="Oct – Nov · Packages 2/3/4 nuits, journées, team buildings">Forfaits</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">event</span>
+        Calendrier S1 2027
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 10/12;" class="gantt-bar-filled" data-tip="Déc – Jan · Programmation des retraites du premier semestre 2027">Planning S1</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">groups</span>
+        Offre team building
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 7/10;" class="gantt-bar-filled" data-tip="Sept – Nov · Packages corporate, devis PDF, outreach LinkedIn">Team building</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">flag</span>
+        Première retraite
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 12/13;" class="gantt-milestone" data-date="Février 2027" data-title="Première Retraite" data-desc="Lancement des retraites thématiques. Le domaine fonctionne dans sa plénitude."></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- 9. RH & OPÉRATIONS                         -->
+<!-- ════════════════════════════════════════════ -->
+<section class="category-section" id="hr" style="--cat-color:var(--c-hr)">
+  <div class="category-header">
+    <div class="category-icon"><span class="material-symbols-outlined">group</span></div>
+    <div>
+      <div class="category-name">RH & Opérations</div>
+      <div class="category-subtitle">Recrutement, formation, plannings, outils internes</div>
+    </div>
+  </div>
+  <div class="swim-lane">
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">description</span>
+        Fiches de poste
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 1/3;" class="gantt-bar-filled" data-tip="Mars – Avril · Finalisation de toutes les fiches de poste">Fiches de poste</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">person_search</span>
+        Recrutement vague 1
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 5/8;" class="gantt-bar-filled" data-tip="Juillet – Sept · Réceptionniste, employé(e) de maison, community manager">Recrutement V1</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">school</span>
+        Formation équipe
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 8/10;" class="gantt-bar-filled" data-tip="Oct – Nov · Formation accueil, standards de service, outils digitaux">Formation</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">table_chart</span>
+        Outils internes (Sheets)
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 7/10;" class="gantt-bar-filled" data-tip="Sept – Nov · Google Sheets opérationnel, WhatsApp 'DSA Équipe', procédures">Outils internes</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">schedule</span>
+        Plannings & shifts
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 9/11;" class="gantt-bar-filled" data-tip="Nov – Déc · Organisation des shifts, rotations, jours de repos">Plannings</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">flag</span>
+        Équipe opérationnelle
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 10/11;" class="gantt-milestone" data-date="Décembre 2026" data-title="Équipe Complète" data-desc="Réceptionniste, employé(e) de maison, community manager — formés et opérationnels."></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- 10. FINANCE & JURIDIQUE                    -->
+<!-- ════════════════════════════════════════════ -->
+<section class="category-section" id="finance" style="--cat-color:var(--c-finance)">
+  <div class="category-header">
+    <div class="category-icon"><span class="material-symbols-outlined">account_balance</span></div>
+    <div>
+      <div class="category-name">Finance & Juridique</div>
+      <div class="category-subtitle">Budget, licences, assurances, contrats, suivi investissements</div>
+    </div>
+  </div>
+  <div class="swim-lane">
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">calculate</span>
+        Budget prévisionnel
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 1/3;" class="gantt-bar-filled" data-tip="Mars – Avril · Budget global, allocation par pilier, trésorerie">Budget</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">gavel</span>
+        Licences & autorisations
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 2/6;" class="gantt-bar-filled" data-tip="Avril – Juillet · Permis de construire, licence hôtelière, restaurant, débit boissons">Autorisations</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">verified_user</span>
+        Assurances
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 7/9;" class="gantt-bar-filled" data-tip="Sept – Oct · RC pro, multirisque, assurance activité spa">Assurances</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">contract</span>
+        Contrats fournisseurs
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 5/9;" class="gantt-bar-filled" data-tip="Juillet – Oct · Contrats restauration, spa, linge, entretien">Contrats</div>
+      </div>
+    </div>
+
+    <div class="gantt-row">
+      <div class="gantt-label">
+        <span class="material-symbols-outlined">monitoring</span>
+        Suivi investissements
+      </div>
+      <div class="gantt-track">
+        <div style="grid-column: 1/12;" class="gantt-bar" style="opacity:0.12;"></div>
+        <div style="grid-column: 1/12; position:absolute; text-align:center; width:100%; font-size:10px; color:var(--c-finance); letter-spacing:0.1em; font-weight:400;">CONTINU — SUIVI MENSUEL</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ KEY MILESTONES ═══════════════ -->
+<section class="milestones-section">
+  <div class="category-header">
+    <div class="category-icon" style="background:rgba(196,163,90,0.12);">
+      <span class="material-symbols-outlined" style="color:var(--gold);">workspace_premium</span>
+    </div>
+    <div>
+      <div class="category-name">Jalons Clés</div>
+      <div class="category-subtitle">Les moments décisifs du projet sur 12 mois</div>
+    </div>
+  </div>
+
+  <div class="h-timeline">
+    <!-- Month scale -->
+    <div class="h-timeline-months">
+      <div class="h-timeline-month">Mars</div>
+      <div class="h-timeline-month">Avr</div>
+      <div class="h-timeline-month">Mai</div>
+      <div class="h-timeline-month">Juin</div>
+      <div class="h-timeline-month">Juil</div>
+      <div class="h-timeline-month">Août</div>
+      <div class="h-timeline-month">Sept</div>
+      <div class="h-timeline-month">Oct</div>
+      <div class="h-timeline-month">Nov</div>
+      <div class="h-timeline-month">Déc</div>
+      <div class="h-timeline-month">Jan</div>
+      <div class="h-timeline-month">Fév</div>
+    </div>
+
+    <!-- Track with positioned markers -->
+    <div class="h-timeline-track">
+
+      <!-- Mi-mars 2026 → 0.5/12 ≈ 4.2% -->
+      <div class="h-timeline-marker" style="left:4.2%; --marker-color:var(--c-branding);"
+           data-date="Mi-mars 2026" data-title="Logos & Direction Artistique"
+           data-desc="Validation des 4 logos (Emna) et choix définitif parmi les 5 propositions de design.">
+        <span class="material-symbols-outlined">workspace_premium</span>
+      </div>
+      <div class="h-timeline-stem" style="left:4.2%;"></div>
+      <div class="h-timeline-label" style="left:4.2%;">Logos</div>
+
+      <!-- 6 Avril 2026 → 1.2/12 ≈ 10% -->
+      <div class="h-timeline-marker" style="left:10%; --marker-color:var(--c-renovation);"
+           data-date="6 Avril 2026" data-title="Début des Travaux"
+           data-desc="Coup d'envoi de la rénovation sur le terrain. Gros œuvre, restructuration des espaces.">
+        <span class="material-symbols-outlined">workspace_premium</span>
+      </div>
+      <div class="h-timeline-stem" style="left:10%;"></div>
+      <div class="h-timeline-label" style="left:10%;">Travaux</div>
+
+      <!-- Mai 2026 → 2/12 ≈ 16.7% -->
+      <div class="h-timeline-marker" style="left:16.7%; --marker-color:var(--c-digital);"
+           data-date="Mai 2026" data-title="Site Web en Ligne"
+           data-desc="Site vitrine accessible au public. 4 pages pilier, géo-détection FR/EN, newsletter.">
+        <span class="material-symbols-outlined">workspace_premium</span>
+      </div>
+      <div class="h-timeline-stem" style="left:16.7%;"></div>
+      <div class="h-timeline-label" style="left:16.7%;">Site web</div>
+
+      <!-- Septembre 2026 → 6/12 = 50% -->
+      <div class="h-timeline-marker" style="left:50%; --marker-color:var(--c-marketing);"
+           data-date="Septembre 2026" data-title="1 000 Abonnés Instagram"
+           data-desc="La communauté grandit. Le contenu coulisses du chantier porte ses fruits.">
+        <span class="material-symbols-outlined">workspace_premium</span>
+      </div>
+      <div class="h-timeline-stem" style="left:50%;"></div>
+      <div class="h-timeline-label" style="left:50%;">Instagram</div>
+
+      <!-- Octobre 2026 → 7/12 ≈ 58.3% -->
+      <div class="h-timeline-marker" style="left:58.3%; --marker-color:var(--c-restaurant);"
+           data-date="Octobre 2026" data-title="Ouverture Restaurant"
+           data-desc="Premier service. Cuisine farm-to-table par Jérôme. Réservation en ligne active.">
+        <span class="material-symbols-outlined">workspace_premium</span>
+      </div>
+      <div class="h-timeline-stem" style="left:58.3%;"></div>
+      <div class="h-timeline-label" style="left:58.3%;">Restaurant</div>
+
+      <!-- Décembre 2026 — Équipe → 9/12 = 75% (offset slightly left) -->
+      <div class="h-timeline-marker" style="left:73%; --marker-color:var(--c-hr);"
+           data-date="Décembre 2026" data-title="Équipe Complète"
+           data-desc="Réceptionniste, employé(e) de maison, community manager — formés et opérationnels.">
+        <span class="material-symbols-outlined">workspace_premium</span>
+      </div>
+      <div class="h-timeline-stem" style="left:73%;"></div>
+      <div class="h-timeline-label" style="left:73%;">Équipe</div>
+
+      <!-- Décembre 2026 — Agrumia → 9/12 = 75% (offset slightly right) -->
+      <div class="h-timeline-marker" style="left:77%; --marker-color:var(--c-wellness);"
+           data-date="Décembre 2026" data-title="Ouverture Agrumia"
+           data-desc="Centre bien-être opérationnel : hammam, sauna, massages, yoga, fitness.">
+        <span class="material-symbols-outlined">workspace_premium</span>
+      </div>
+      <div class="h-timeline-stem" style="left:77%;"></div>
+      <div class="h-timeline-label" style="left:77%;">Agrumia</div>
+
+      <!-- Janvier 2027 → 10/12 ≈ 83.3% -->
+      <div class="h-timeline-marker" style="left:83.3%; --marker-color:var(--c-hotel);"
+           data-date="Janvier 2027" data-title="Ouverture Dar Saad"
+           data-desc="6 chambres aux noms d'agrumes. Réservation en ligne, Booking.com & Airbnb actifs.">
+        <span class="material-symbols-outlined">workspace_premium</span>
+      </div>
+      <div class="h-timeline-stem" style="left:83.3%;"></div>
+      <div class="h-timeline-label" style="left:83.3%;">Dar Saad</div>
+
+      <!-- Février 2027 → 11/12 ≈ 91.7% -->
+      <div class="h-timeline-marker" style="left:91.7%; --marker-color:var(--c-retreats);"
+           data-date="Février 2027" data-title="Première Retraite"
+           data-desc="Lancement des retraites thématiques. Le domaine fonctionne dans sa plénitude.">
+        <span class="material-symbols-outlined">workspace_premium</span>
+      </div>
+      <div class="h-timeline-stem" style="left:91.7%;"></div>
+      <div class="h-timeline-label" style="left:91.7%;">Retraites</div>
+
+    </div><!-- /h-timeline-track -->
+  </div><!-- /h-timeline -->
+</section>
+
+<!-- ═══════════════ LEGEND ═══════════════ -->
+<div class="legend">
+  <div class="legend-title">Légende</div>
+  <div class="legend-items">
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--c-renovation)"></div> Rénovation</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--c-branding)"></div> Branding</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--c-digital)"></div> Digital</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--c-marketing)"></div> Marketing</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--c-restaurant)"></div> Restaurant</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--c-wellness)"></div> Bien-être</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--c-hotel)"></div> Hôtel</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--c-retreats)"></div> Retraites</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--c-hr)"></div> RH</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:var(--c-finance)"></div> Finance</div>
+    <div class="legend-item"><span class="material-symbols-outlined" style="font-size:14px;color:var(--gold);">workspace_premium</span> Jalon clé</div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  © 2026 Domaine Sidi Abdallah &nbsp;·&nbsp; Master Timeline · Document de travail confidentiel
+</footer>
+
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<script>
+// ── Scroll progress bar + sticky shadow
+const bar = document.getElementById('progress');
+const stickyHeader = document.getElementById('stickyHeader');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  bar.style.width = Math.min(pct * 100, 100) + '%';
+  stickyHeader.classList.toggle('scrolled', window.scrollY > 200);
+});
+
+// ── Intersection observer for fade-in
+const sections = document.querySelectorAll('.category-section, .milestones-section');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+sections.forEach(s => io.observe(s));
+
+// ── Active nav pill on scroll
+const navPills = document.querySelectorAll('.nav-pill');
+const sectionEls = document.querySelectorAll('.category-section');
+
+function updateActiveNav() {
+  let current = '';
+  sectionEls.forEach(s => {
+    const rect = s.getBoundingClientRect();
+    if (rect.top <= 160) current = s.id;
+  });
+  navPills.forEach(p => {
+    p.classList.toggle('active', p.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', updateActiveNav);
+updateActiveNav();
+
+// ── Smooth scroll for nav pills
+navPills.forEach(pill => {
+  pill.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(pill.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ── Milestone card tooltips
+const tooltip = document.createElement('div');
+tooltip.className = 'milestone-tooltip';
+tooltip.innerHTML = '<div class="milestone-tooltip-date"></div><div class="milestone-tooltip-title"></div><div class="milestone-tooltip-desc"></div>';
+document.body.appendChild(tooltip);
+
+const ttDate = tooltip.querySelector('.milestone-tooltip-date');
+const ttTitle = tooltip.querySelector('.milestone-tooltip-title');
+const ttDesc = tooltip.querySelector('.milestone-tooltip-desc');
+
+// Shared tooltip handler for both gantt milestones and horizontal timeline markers
+function attachTooltip(el) {
+  el.addEventListener('mouseenter', () => {
+    // Get color from --cat-color (gantt) or --marker-color (h-timeline)
+    const section = el.closest('.category-section');
+    let color;
+    if (section) {
+      color = getComputedStyle(section).getPropertyValue('--cat-color').trim();
+    } else {
+      color = getComputedStyle(el).getPropertyValue('--marker-color').trim();
+    }
+    tooltip.style.borderLeftColor = color;
+    ttDate.style.color = color;
+    ttDate.textContent = el.dataset.date;
+    ttTitle.textContent = el.dataset.title;
+    ttDesc.textContent = el.dataset.desc;
+    tooltip.classList.add('show');
+  });
+
+  el.addEventListener('mousemove', (e) => {
+    const tw = 240;
+    const th = tooltip.offsetHeight;
+    let x = e.clientX - tw / 2;
+    let y = e.clientY - th - 18;
+    if (x < 8) x = 8;
+    if (x + tw > window.innerWidth - 8) x = window.innerWidth - tw - 8;
+    if (y < 8) y = e.clientY + 22;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top = y + 'px';
+  });
+
+  el.addEventListener('mouseleave', () => {
+    tooltip.classList.remove('show');
+  });
+}
+
+document.querySelectorAll('.gantt-milestone, .h-timeline-marker').forEach(attachTooltip);
+</script>
+
+</body>
+</html>
