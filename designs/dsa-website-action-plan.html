@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Domaine Sidi Abdallah — Plan d'Action Site Web</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,300,0,0&display=swap" rel="stylesheet">
+<style>
+/* ─── MATERIAL ICONS ─── */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal; font-style: normal; font-size: 18px;
+  line-height: 1; letter-spacing: normal; text-transform: none;
+  display: inline-block; white-space: nowrap; word-wrap: normal; direction: ltr;
+  -webkit-font-feature-settings: 'liga'; font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream:     #F7F3EC;
+  --parchment: #EDE6D8;
+  --ink:       #1C1A17;
+  --grove:     #2C4035;
+  --gold:      #C4A35A;
+  --dust:      #A89880;
+  --mist:      #D6CFC4;
+  --terracotta:#B5623A;
+  --white:     #FFFFFF;
+
+  /* Responsibility colors */
+  --c-dev:       #2C6B8A;   /* Rached — dev blue */
+  --c-content:   #4A7A6B;   /* Elyssa — content green */
+  --c-approval:  #C4A35A;   /* Lilia — approval gold */
+  --c-external:  #B5623A;   /* External — terracotta */
+
+  /* Phase accent colors */
+  --phase0: #8B6914;
+  --phase1: #2C6B8A;
+  --phase1b: #4A7A6B;
+  --phase2: #9B4D7C;
+  --phase3: #8A6B5C;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ─── PROGRESS BAR ─── */
+.progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--grove), var(--gold), var(--terracotta));
+  width: 0%; z-index: 1000;
+  transition: width 0.1s linear;
+}
+
+/* ─── HEADER ─── */
+header {
+  position: relative;
+  padding: 60px 40px 50px;
+  text-align: center;
+  border-bottom: 1px solid var(--mist);
+  background: var(--cream);
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(196,163,90,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.site-label {
+  font-weight: 200; font-size: 10px;
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--dust); margin-bottom: 16px;
+}
+.site-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300; font-size: clamp(28px, 5vw, 46px);
+  color: var(--grove); letter-spacing: 0.02em; line-height: 1.15; margin-bottom: 8px;
+}
+.site-title em { font-style: italic; color: var(--terracotta); }
+.site-subtitle {
+  font-weight: 200; font-size: 12px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--dust); margin-top: 12px;
+}
+
+.header-ornament {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin: 20px auto 0; width: fit-content;
+}
+.header-ornament span { display: block; height: 1px; width: 60px; background: var(--mist); }
+.header-ornament svg { color: var(--gold); }
+
+/* ─── STICKY NAV ─── */
+.sticky-header {
+  position: sticky; top: 0; z-index: 900;
+  background: rgba(247,243,236,0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--mist);
+  box-shadow: 0 2px 16px rgba(28,26,23,0);
+  transition: box-shadow 0.3s ease;
+}
+.sticky-header.scrolled {
+  box-shadow: 0 2px 16px rgba(28,26,23,0.06);
+}
+
+.category-nav {
+  padding: 10px 20px 8px;
+  display: flex; flex-wrap: wrap;
+  justify-content: center; gap: 6px;
+}
+
+.nav-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 14px; border-radius: 20px;
+  font-size: 11px; font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--dust); background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer; transition: all 0.25s ease;
+  text-decoration: none;
+}
+.nav-pill .material-symbols-outlined { font-size: 14px; }
+.nav-pill:hover, .nav-pill.active {
+  border-color: var(--pill-color, var(--dust));
+  color: var(--pill-color, var(--dust));
+  background: rgba(0,0,0,0.02);
+}
+.nav-pill.active {
+  background: rgba(0,0,0,0.04);
+  font-weight: 500;
+}
+
+/* ─── MAIN CONTENT ─── */
+.content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 30px 80px;
+}
+
+/* ─── SECTION ANIMATIONS ─── */
+.section {
+  margin-top: 56px;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.section.visible { opacity: 1; transform: translateY(0); }
+
+.section-header {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--mist);
+}
+.section-icon {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  background: rgba(0,0,0,0.04);
+}
+.section-icon .material-symbols-outlined { font-size: 20px; }
+.section-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400; font-size: 26px;
+  color: var(--ink); letter-spacing: 0.01em;
+}
+.section-subtitle {
+  font-size: 11px; font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--dust); margin-top: 2px;
+}
+
+/* ─── PHASE OVERVIEW CARDS ─── */
+.phases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.phase-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid var(--mist);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: default;
+}
+.phase-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+.phase-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--phase-color, var(--gold));
+}
+
+.phase-number {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--phase-color, var(--gold));
+  margin-bottom: 8px;
+}
+.phase-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500; font-size: 20px;
+  color: var(--ink); margin-bottom: 4px;
+}
+.phase-dates {
+  font-size: 12px; font-weight: 300;
+  color: var(--dust); margin-bottom: 14px;
+}
+.phase-goal {
+  font-size: 13px; font-weight: 300;
+  color: #59534E; line-height: 1.55;
+  margin-bottom: 16px;
+}
+.phase-deliverables {
+  list-style: none; padding: 0;
+}
+.phase-deliverables li {
+  font-size: 12px; font-weight: 300;
+  color: #59534E; line-height: 1.5;
+  padding: 3px 0 3px 20px;
+  position: relative;
+}
+.phase-deliverables li::before {
+  content: '';
+  position: absolute; left: 0; top: 10px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid var(--phase-color, var(--gold));
+}
+
+/* ─── SPRINT BOARD ─── */
+.sprint-group {
+  margin-bottom: 36px;
+}
+.sprint-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  user-select: none;
+}
+.sprint-header:hover .sprint-title { color: var(--ink); }
+
+.sprint-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  font-size: 11px; font-weight: 500;
+  color: var(--white);
+  background: var(--phase-color, var(--gold));
+  flex-shrink: 0;
+}
+.sprint-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400; font-size: 20px;
+  color: #59534E;
+  transition: color 0.2s;
+}
+.sprint-dates {
+  font-size: 11px; font-weight: 300;
+  color: var(--dust);
+  letter-spacing: 0.05em;
+  margin-left: auto;
+}
+.sprint-toggle {
+  color: var(--dust);
+  transition: transform 0.3s ease;
+  font-size: 20px;
+}
+.sprint-toggle.open { transform: rotate(180deg); }
+
+.sprint-content {
+  display: none;
+  padding-left: 0;
+}
+.sprint-content.open {
+  display: block;
+  animation: slideDown 0.3s ease;
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sprint-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 8px;
+}
+.sprint-table th {
+  font-size: 9px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--dust);
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--mist);
+}
+.sprint-table td {
+  font-size: 12.5px; font-weight: 300;
+  color: #59534E;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.sprint-table tr:last-child td { border-bottom: none; }
+.sprint-table tr:hover td { background: rgba(0,0,0,0.015); }
+
+.owner-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 10px; border-radius: 12px;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.owner-tag.dev { background: rgba(44,107,138,0.1); color: var(--c-dev); }
+.owner-tag.content { background: rgba(74,122,107,0.1); color: var(--c-content); }
+.owner-tag.approval { background: rgba(196,163,90,0.15); color: #8B7232; }
+.owner-tag.external { background: rgba(181,98,58,0.1); color: var(--c-external); }
+
+.sprint-gate {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(196,163,90,0.08), rgba(196,163,90,0.04));
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  margin-top: 8px;
+}
+.sprint-gate .material-symbols-outlined { color: var(--gold); font-size: 18px; }
+.sprint-gate-text {
+  font-size: 12px; font-weight: 400; color: #59534E;
+}
+.sprint-gate-text strong { font-weight: 500; color: var(--ink); }
+
+/* ─── APPROVAL GATES TIMELINE ─── */
+.gates-timeline {
+  position: relative;
+  padding: 20px 0;
+}
+.gates-track {
+  position: relative;
+  padding-left: 40px;
+}
+.gates-track::before {
+  content: '';
+  position: absolute;
+  left: 15px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), var(--mist));
+}
+
+.gate-item {
+  position: relative;
+  padding: 0 0 32px 0;
+}
+.gate-item:last-child { padding-bottom: 0; }
+
+.gate-marker {
+  position: absolute;
+  left: -40px; top: 2px;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 600;
+  color: var(--gold);
+  z-index: 2;
+}
+.gate-marker.critical {
+  background: var(--gold);
+  color: var(--white);
+}
+
+.gate-card {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 18px 22px;
+  border: 1px solid var(--mist);
+  transition: box-shadow 0.25s ease;
+}
+.gate-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+.gate-card.critical {
+  border-color: rgba(196,163,90,0.4);
+  background: linear-gradient(135deg, var(--white), rgba(196,163,90,0.03));
+}
+
+.gate-date {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 4px;
+}
+.gate-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500; font-size: 18px;
+  color: var(--ink); margin-bottom: 6px;
+}
+.gate-who {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 400;
+  color: var(--dust); margin-bottom: 8px;
+}
+.gate-who .material-symbols-outlined { font-size: 14px; }
+.gate-desc {
+  font-size: 12.5px; font-weight: 300;
+  color: #59534E; line-height: 1.55;
+  margin-bottom: 10px;
+}
+.gate-how {
+  font-size: 11.5px; font-weight: 300;
+  color: var(--dust);
+  background: rgba(0,0,0,0.02);
+  padding: 8px 12px;
+  border-radius: 6px;
+  line-height: 1.5;
+}
+.gate-how strong { font-weight: 400; color: #59534E; }
+
+/* ─── ASSET DEPENDENCY TABLE ─── */
+.asset-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--mist);
+}
+.asset-table thead th {
+  font-size: 9px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--dust);
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--mist);
+  background: rgba(0,0,0,0.015);
+}
+.asset-table tbody td {
+  font-size: 12.5px; font-weight: 300;
+  color: #59534E;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.asset-table tbody tr:last-child td { border-bottom: none; }
+.asset-table tbody tr:hover td { background: rgba(0,0,0,0.01); }
+
+.status-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 10px;
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 0.03em;
+}
+.status-badge.ready { background: rgba(74,122,107,0.12); color: #3D6B5A; }
+.status-badge.in-progress { background: rgba(196,163,90,0.15); color: #8B7232; }
+.status-badge.planned { background: rgba(44,107,138,0.1); color: var(--c-dev); }
+.status-badge.not-started { background: rgba(181,98,58,0.1); color: var(--c-external); }
+
+.status-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+.status-badge.ready .status-dot { background: #4A7A6B; }
+.status-badge.in-progress .status-dot { background: var(--gold); }
+.status-badge.planned .status-dot { background: var(--c-dev); }
+.status-badge.not-started .status-dot { background: var(--c-external); }
+
+.fallback-text {
+  font-size: 11px;
+  color: var(--dust);
+  font-style: italic;
+}
+
+/* ─── RISK REGISTER ─── */
+.risk-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
+}
+.risk-card {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 18px 20px;
+  border: 1px solid var(--mist);
+  transition: box-shadow 0.25s ease;
+}
+.risk-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+.risk-top {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px;
+}
+.risk-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.risk-icon.medium { background: rgba(196,163,90,0.12); color: var(--gold); }
+.risk-icon.high { background: rgba(181,98,58,0.12); color: var(--terracotta); }
+.risk-icon .material-symbols-outlined { font-size: 16px; }
+.risk-title {
+  font-size: 13px; font-weight: 400;
+  color: var(--ink);
+}
+.risk-prob {
+  font-size: 10px; font-weight: 400;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 8px;
+  margin-left: auto;
+}
+.risk-prob.medium { background: rgba(196,163,90,0.1); color: #8B7232; }
+.risk-prob.high { background: rgba(181,98,58,0.1); color: var(--c-external); }
+.risk-mitigation {
+  font-size: 12px; font-weight: 300;
+  color: #59534E; line-height: 1.55;
+  padding-left: 42px;
+}
+
+/* ─── COMMUNICATION TEMPLATES ─── */
+.comm-card {
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--mist);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.comm-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 20px;
+  background: rgba(0,0,0,0.015);
+  border-bottom: 1px solid var(--mist);
+  cursor: pointer;
+  user-select: none;
+}
+.comm-header:hover { background: rgba(0,0,0,0.025); }
+.comm-gate-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 2px 10px; border-radius: 10px;
+  font-size: 10px; font-weight: 500;
+  background: rgba(196,163,90,0.15); color: #8B7232;
+}
+.comm-title {
+  font-size: 13px; font-weight: 400;
+  color: var(--ink); flex: 1;
+}
+.comm-toggle {
+  color: var(--dust);
+  transition: transform 0.3s ease;
+}
+.comm-toggle.open { transform: rotate(180deg); }
+
+.comm-body {
+  display: none;
+  padding: 18px 20px;
+}
+.comm-body.open {
+  display: block;
+  animation: slideDown 0.3s ease;
+}
+.comm-label {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--dust); margin-bottom: 6px;
+}
+.whatsapp-msg {
+  background: #DCF8C6;
+  border-radius: 0 12px 12px 12px;
+  padding: 14px 16px;
+  font-size: 13px; font-weight: 300;
+  color: var(--ink);
+  line-height: 1.6;
+  max-width: 500px;
+  position: relative;
+  margin-bottom: 12px;
+}
+.whatsapp-msg::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -8px;
+  border-width: 0 8px 10px 0;
+  border-style: solid;
+  border-color: transparent #DCF8C6 transparent transparent;
+}
+.comm-note {
+  font-size: 11px; font-weight: 300;
+  color: var(--dust); font-style: italic;
+  margin-top: 6px;
+}
+
+/* ─── LEGEND ─── */
+.legend {
+  display: flex; flex-wrap: wrap;
+  gap: 20px; padding: 20px 0;
+  border-top: 1px solid var(--mist);
+  margin-top: 30px;
+}
+.legend-group {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.legend-title {
+  font-size: 9px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--dust);
+}
+.legend-items {
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+.legend-item {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 300; color: #59534E;
+}
+.legend-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  border-top: 1px solid var(--mist);
+  color: var(--dust);
+  font-size: 11px; font-weight: 300;
+  letter-spacing: 0.06em;
+}
+footer a { color: var(--gold); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* ─── PRINT STYLES ─── */
+@media print {
+  .progress-bar, .sticky-header { display: none; }
+  .section { opacity: 1 !important; transform: none !important; }
+  .sprint-content { display: block !important; }
+  .comm-body { display: block !important; }
+  .phase-card, .gate-card, .risk-card, .comm-card { break-inside: avoid; }
+  body { font-size: 11px; }
+  .site-title { font-size: 28px; }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 800px) {
+  header { padding: 40px 20px 36px; }
+  .content { padding: 16px 16px 60px; }
+  .phases-grid { grid-template-columns: 1fr; }
+  .risk-grid { grid-template-columns: 1fr; }
+  .sprint-table { font-size: 11px; }
+  .sprint-table th, .sprint-table td { padding: 8px 8px; }
+  .category-nav { gap: 4px; padding: 8px 12px 6px; }
+  .nav-pill { font-size: 10px; padding: 4px 10px; }
+  .asset-table { font-size: 11px; }
+  .asset-table thead th, .asset-table tbody td { padding: 10px 10px; }
+  .gate-card { padding: 14px 16px; }
+  .gates-track { padding-left: 36px; }
+  .gates-track::before { left: 13px; }
+  .gate-marker { left: -36px; width: 26px; height: 26px; font-size: 9px; }
+  .section-name { font-size: 22px; }
+}
+
+@media (max-width: 520px) {
+  .sprint-dates { display: none; }
+  .sprint-table .col-details { display: none; }
+  .asset-table .col-fallback { display: none; }
+  .whatsapp-msg { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="site-label">Domaine Sidi Abdallah</div>
+  <h1 class="site-title">Plan d'Action <em>Site Web</em></h1>
+  <p class="site-subtitle">Feuille de Route Digitale &mdash; Mars 2026 &ndash; Fevrier 2027</p>
+  <div class="header-ornament">
+    <span></span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4m-8.5-10h4m12 0h4m-2.64-7.36-2.83 2.83m-9.9 9.9-2.83 2.83m0-15.56 2.83 2.83m9.9 9.9 2.83 2.83"/></svg>
+    <span></span>
+  </div>
+</header>
+
+<!-- ═══ STICKY NAV ═══ -->
+<div class="sticky-header" id="stickyHeader">
+  <nav class="category-nav">
+    <a href="#phases" class="nav-pill" style="--pill-color: var(--gold);">
+      <span class="material-symbols-outlined">view_timeline</span> Phases
+    </a>
+    <a href="#sprints" class="nav-pill" style="--pill-color: var(--c-dev);">
+      <span class="material-symbols-outlined">sprint</span> Sprints
+    </a>
+    <a href="#approvals" class="nav-pill" style="--pill-color: var(--c-approval);">
+      <span class="material-symbols-outlined">approval</span> Approbations
+    </a>
+    <a href="#assets" class="nav-pill" style="--pill-color: var(--c-content);">
+      <span class="material-symbols-outlined">inventory_2</span> Assets
+    </a>
+    <a href="#risks" class="nav-pill" style="--pill-color: var(--c-external);">
+      <span class="material-symbols-outlined">warning</span> Risques
+    </a>
+    <a href="#messages" class="nav-pill" style="--pill-color: #4A7A6B;">
+      <span class="material-symbols-outlined">chat</span> Messages
+    </a>
+  </nav>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 1: PHASE OVERVIEW
+     ═══════════════════════════════════════════════ -->
+<div class="section" id="phases">
+  <div class="section-header">
+    <div class="section-icon" style="color: var(--gold);">
+      <span class="material-symbols-outlined">view_timeline</span>
+    </div>
+    <div>
+      <div class="section-name">Vue d'Ensemble des Phases</div>
+      <div class="section-subtitle">4 phases alignees sur les ouvertures operationnelles</div>
+    </div>
+  </div>
+
+  <div class="phases-grid">
+
+    <!-- Phase 0 -->
+    <div class="phase-card" style="--phase-color: var(--phase0);">
+      <div class="phase-number">Phase 0</div>
+      <div class="phase-title">Fondations</div>
+      <div class="phase-dates">26 Fev &ndash; 15 Mars 2026 &middot; 3 semaines</div>
+      <div class="phase-goal">Toutes les decisions pre-developpement et l'infrastructure technique en place. Zero blocage quand le dev commence.</div>
+      <ul class="phase-deliverables">
+        <li>Domaine .tn + .com enregistre</li>
+        <li>Emails professionnels (Zoho)</li>
+        <li>Projet Next.js initialise sur GitHub</li>
+        <li>Direction artistique choisie (1 sur 5)</li>
+        <li>Texte FR valide par Lilia</li>
+        <li>Photos Phase I (orangers en fruit)</li>
+      </ul>
+    </div>
+
+    <!-- Phase 1 -->
+    <div class="phase-card" style="--phase-color: var(--phase1);">
+      <div class="phase-number">Phase 1</div>
+      <div class="phase-title">Site Vitrine</div>
+      <div class="phase-dates">16 Mars &ndash; 3 Mai 2026 &middot; 7 semaines</div>
+      <div class="phase-goal">Site complet en FR/EN avec geo-detection, 7 pages, newsletter, et CTAs WhatsApp. Hotel et retraites en &laquo; Coming Soon &raquo;.</div>
+      <ul class="phase-deliverables">
+        <li>7 pages live (Homepage, Sejour, Se Detendre, Deguster, S'evader, Notre Histoire, Contact)</li>
+        <li>Geo-detection (TN vs international)</li>
+        <li>Newsletter Brevo + Waitlist</li>
+        <li>Google Business Profile</li>
+        <li>Lighthouse 95+, SEO, Analytics</li>
+      </ul>
+    </div>
+
+    <!-- Phase 1b -->
+    <div class="phase-card" style="--phase-color: var(--phase1b);">
+      <div class="phase-number">Phase 1b</div>
+      <div class="phase-title">Systemes de Reservation</div>
+      <div class="phase-dates">Mai &ndash; Oct 2026 &middot; 22 semaines</div>
+      <div class="phase-goal">Moteurs de reservation restaurant et bien-etre construits et actives au fur et a mesure des ouvertures.</div>
+      <ul class="phase-deliverables">
+        <li>Reservation restaurant (Oct)</li>
+        <li>Reservation bien-etre/spa (Dec)</li>
+        <li>Dashboard admin per pilier</li>
+        <li>Confirmations WhatsApp automatiques</li>
+        <li>Contenu chef + catalogue wellness</li>
+      </ul>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="phase-card" style="--phase-color: var(--phase2);">
+      <div class="phase-number">Phase 2</div>
+      <div class="phase-title">Paiements &amp; Hotel</div>
+      <div class="phase-dates">Oct 2026 &ndash; Jan 2027 &middot; 13 semaines</div>
+      <div class="phase-goal">Systeme de reservation chambres avec paiement en ligne, integration OTA, et photos finales.</div>
+      <ul class="phase-deliverables">
+        <li>Reservation 6 chambres avec calendrier</li>
+        <li>Stripe (EUR/USD) + Konnect (TND)</li>
+        <li>Sync OTA (Booking.com, Airbnb)</li>
+        <li>Photos finales Phase III integrees</li>
+        <li>Emails automatiques (pre-arrival, post-stay)</li>
+      </ul>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="phase-card" style="--phase-color: var(--phase3);">
+      <div class="phase-number">Phase 3</div>
+      <div class="phase-title">Retraites &amp; Blog</div>
+      <div class="phase-dates">Jan &ndash; Fev 2027+ &middot; en cours</div>
+      <div class="phase-goal">Reservation composite retraites, blog SEO, et premiere retraite thematique lancee.</div>
+      <ul class="phase-deliverables">
+        <li>Booking retraites (forfaits integres)</li>
+        <li>Blog /journal (MDX)</li>
+        <li>SEO: agritourisme tunisie, retraite yoga</li>
+        <li>Premiere retraite lancee (Fev 2027)</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 2: SPRINT BOARD
+     ═══════════════════════════════════════════════ -->
+<div class="section" id="sprints">
+  <div class="section-header">
+    <div class="section-icon" style="color: var(--c-dev);">
+      <span class="material-symbols-outlined">sprint</span>
+    </div>
+    <div>
+      <div class="section-name">Sprints Hebdomadaires</div>
+      <div class="section-subtitle">Cliquer pour ouvrir les details de chaque semaine</div>
+    </div>
+  </div>
+
+  <!-- ── PHASE 0 ── -->
+  <div style="margin-bottom: 40px;">
+    <div style="font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--phase0); margin-bottom: 16px;">Phase 0 &mdash; Fondations</div>
+
+    <!-- Week 1 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase0);">S1</div>
+        <div class="sprint-title">Infrastructure &amp; Lancement des Demandes</div>
+        <div class="sprint-dates">26 Fev &ndash; 1 Mars</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Enregistrer domaines .tn + .com</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Confirmer nom avec Elyssa avant achat. Budget : ~30-60 TND/an. DNS via Cloudflare</td></tr>
+            <tr><td>Email pro (Zoho Mail)</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">contact@, reservations@, info@ sur le .tn. Gratuit jusqu'a 5 comptes</td></tr>
+            <tr><td>Initialiser projet Next.js</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">App Router + TypeScript + Tailwind CSS. Repo GitHub prive. Projet Vercel configure</td></tr>
+            <tr><td>Tooling (ESLint, Prettier, next-intl)</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Structure MDX pour contenu FR/EN. Pre-commit hooks</td></tr>
+            <tr><td>Envoyer texte FR a Lilia</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">WhatsApp + lien Drive. Demande claire : &laquo; a valider avant le 8 mars &raquo;</td></tr>
+            <tr><td>Coordonner shooting Phase I</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Urgence saisonniere : oranges sur les arbres. Doit etre fait avant mi-mars</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Week 2 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase0);">S2</div>
+        <div class="sprint-title">Squelette du Site &amp; Geo-Detection</div>
+        <div class="sprint-dates">2 &ndash; 8 Mars</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>7 routes avec pages placeholder</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">/, /sejour, /bien-etre, /restaurant, /retraites, /notre-histoire, /contact. Routing FR/EN</td></tr>
+            <tr><td>Middleware geo-detection</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Vercel Edge : detecter pays, cookie audience=tn|intl. Toggle manuel. Test VPN</td></tr>
+            <tr><td>Layout partages (Header, Footer)</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Nav + toggle langue + toggle audience, footer, bouton WhatsApp flottant, menu mobile</td></tr>
+            <tr><td>Integration newsletter Brevo</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">API capture email. 2 listes : &laquo; Waitlist &raquo; et &laquo; Newsletter &raquo;</td></tr>
+            <tr><td>Shooting Phase I</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Exterieur, orangeraies, batiments, jardins. Jbel Ressas en arriere-plan. 50-100 photos brutes</td></tr>
+            <tr><td>Relancer Lilia texte FR</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Si pas de reponse au 7 mars : rappel WhatsApp</td></tr>
+          </tbody>
+        </table>
+        <div class="sprint-gate">
+          <span class="material-symbols-outlined">approval</span>
+          <div class="sprint-gate-text"><strong>A1 &mdash; 8 Mars</strong> : Lilia valide le texte FR du site web</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Week 3 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase0);">S3</div>
+        <div class="sprint-title">Design System &amp; Decision Artistique</div>
+        <div class="sprint-dates">9 &ndash; 15 Mars</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Recherche concurrentielle</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Analyser Babylonstoren, Canyon Ranch, Singita, The Newt, Cap Rocat. Brief pour la reunion</td></tr>
+            <tr><td>Presentation comparaison 5 propositions</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Captures d'ecran + video walkthrough pour partage WhatsApp. Inclure recommandation</td></tr>
+            <tr><td>Design system / composants</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Typographie, tokens couleurs, boutons, cartes, layouts. Theme Tailwind custom</td></tr>
+            <tr><td>Integrer feedback texte Lilia</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Appliquer corrections. Produire version FR &laquo; finale &raquo;. Mettre a jour EN</td></tr>
+            <tr><td>Photos Phase I editees</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Selection 30-40 meilleures. Correction couleur. Optimisation WebP</td></tr>
+            <tr><td>Suivi avancement logos Emna</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Verifier avec Emna. Si retard, flaguer immediatement</td></tr>
+          </tbody>
+        </table>
+        <div class="sprint-gate">
+          <span class="material-symbols-outlined">approval</span>
+          <div class="sprint-gate-text"><strong>A2 &mdash; 15 Mars</strong> : Direction artistique choisie (1 proposition sur 5). Lilia + Elyssa + Rached</div>
+        </div>
+        <div class="sprint-gate" style="margin-top: 6px;">
+          <span class="material-symbols-outlined">approval</span>
+          <div class="sprint-gate-text"><strong>A3 &mdash; Mi-Mars</strong> : Validation des 4 logos par Lilia (si livres par Emna)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PHASE 1 ── -->
+  <div style="margin-bottom: 40px;">
+    <div style="font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--phase1); margin-bottom: 16px;">Phase 1 &mdash; Site Vitrine</div>
+
+    <!-- Week 4 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase1);">S4</div>
+        <div class="sprint-title">Homepage &amp; Notre Histoire</div>
+        <div class="sprint-dates">16 &ndash; 22 Mars</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Construire la Homepage</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Hero geo-adapte, cartes 4 piliers, teaser histoire, newsletter, placeholder Instagram</td></tr>
+            <tr><td>Construire Notre Histoire</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Storytelling complet : histoire, vision de Lilia, la terre, les orangeraies, la philosophie</td></tr>
+            <tr><td>Integrer photos Phase I</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Remplacer placeholders IA. Pipeline Next.js Image. Tailles responsives</td></tr>
+            <tr><td>Finaliser texte EN</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Traduire les changements de Lilia vers la version anglaise</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Week 5 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase1);">S5</div>
+        <div class="sprint-title">Sejour, Se Detendre &amp; Logos</div>
+        <div class="sprint-dates">23 &ndash; 29 Mars</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Page Sejour (Dar Saad)</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">6 chambres citrus, descriptions, prix indicatifs. Banner Coming Soon + waitlist email</td></tr>
+            <tr><td>Page Se Detendre (Agrumia)</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Catalogue services, activites, Day Pass. CTA WhatsApp booking</td></tr>
+            <tr><td>Integration logos</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">4 logos en SVG : Domaine (nav), Dar Saad, Agrumia, Restaurant</td></tr>
+            <tr><td>Livraison logos</td><td><span class="owner-tag external">Emna</span></td><td class="col-details">4 logos SVG + PNG. Si non livres : headers typographiques en fallback</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Week 6 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase1);">S6</div>
+        <div class="sprint-title">Deguster, S'evader &amp; Contact</div>
+        <div class="sprint-dates">30 Mars &ndash; 5 Avr</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Page Deguster (Restaurant)</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Concept farm-to-table, section Chef Jerome, philosophie menu saisonnier, CTA reservation</td></tr>
+            <tr><td>Page S'evader (Retraites)</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">5 cartes retraites, timeline &laquo; Une Journee &raquo;, capture email &laquo; Soyez les premiers &raquo;</td></tr>
+            <tr><td>Page Contact</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Formulaire, Google Maps, WhatsApp, telephone, directions depuis Tunis (16km)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Week 7 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase1);">S7</div>
+        <div class="sprint-title">Optimisation Mobile, SEO &amp; Performance</div>
+        <div class="sprint-dates">6 &ndash; 12 Avr</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Test mobile complet</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">iPhone SE/14, Samsung Galaxy, iPad. CTAs mobile. Galeries full-screen. Nav tactile</td></tr>
+            <tr><td>Audit performance Lighthouse 95+</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Lazy loading, font subsetting, Critical CSS inlining</td></tr>
+            <tr><td>SEO fondation</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Meta FR+EN, Open Graph, Schema.org (LocalBusiness, Restaurant, LodgingBusiness), sitemap.xml</td></tr>
+            <tr><td>Analytics setup</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Vercel Analytics. Events : newsletter, WhatsApp clicks, formulaire contact, waitlist</td></tr>
+            <tr><td>Documentation renovation</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Debut capture photos/videos making-of sur chantier (travaux commencent 6 avril)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Week 8 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase1);">S8</div>
+        <div class="sprint-title">QA Interne &amp; Staging pour Review</div>
+        <div class="sprint-dates">13 &ndash; 19 Avr</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>QA complete desktop + mobile</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Walkthrough complet. Tester tous les formulaires, geo-detection, toggle langue</td></tr>
+            <tr><td>Google Business Profile</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Creer/revendiquer le profil. Uploader photos Phase I. Lier au site</td></tr>
+            <tr><td>Preparer URL staging</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Deployer sur Vercel preview. Video walkthrough pour Elyssa a transmettre a Lilia</td></tr>
+          </tbody>
+        </table>
+        <div class="sprint-gate">
+          <span class="material-symbols-outlined">approval</span>
+          <div class="sprint-gate-text"><strong>A4 &mdash; 22 Avr</strong> : Elyssa fait la revue complete du site sur l'URL staging</div>
+        </div>
+        <div class="sprint-gate" style="margin-top: 6px;">
+          <span class="material-symbols-outlined">approval</span>
+          <div class="sprint-gate-text"><strong>A5 &mdash; 25 Avr</strong> : Lilia approuve le visuel / la marque via captures WhatsApp</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Week 9 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase1);">S9</div>
+        <div class="sprint-title">Feedback, Corrections &amp; Lancement</div>
+        <div class="sprint-dates">26 Avr &ndash; 3 Mai</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Implementer feedback Elyssa/Lilia</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Corrections texte, remplacement images, ajustements design. 2-3 jours</td></tr>
+            <tr><td>Checklist pre-lancement finale</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Tous les criteres &laquo; Definition of Done &raquo; Phase 1 valides</td></tr>
+            <tr><td>DNS cutover + lancement</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Pointer domaine vers Vercel. SSL auto. Tester redirections .com vers .tn</td></tr>
+            <tr><td>Annonce reseaux sociaux</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Post Instagram, WhatsApp broadcast, LinkedIn (reseau Lilia)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PHASE 1b ── -->
+  <div style="margin-bottom: 40px;">
+    <div style="font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--phase1b); margin-bottom: 16px;">Phase 1b &mdash; Systemes de Reservation</div>
+
+    <!-- Weeks 10-12 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase1b);">10</div>
+        <div class="sprint-title">Post-Lancement &amp; Architecture Reservation</div>
+        <div class="sprint-dates">4 &ndash; 25 Mai</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Bug fixes post-lancement</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Corriger les problemes remontes par les vrais utilisateurs (2 semaines)</td></tr>
+            <tr><td>Section making-of (optionnel)</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Section &laquo; Journal &raquo; sur la homepage avec photos + legendes du chantier</td></tr>
+            <tr><td>Architecture reservation restaurant</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Schema DB : DayConfig, Booking, Guest. Wireframes UI. Capacite par service/creneau</td></tr>
+            <tr><td>Photos Phase II (making-of)</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Documenter les travaux : avant/pendant. Pour Instagram et contenu site</td></tr>
+            <tr><td>Instagram contenu hebdomadaire</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Poster contenu making-of chaque semaine. Lien vers le site</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Weeks 13-16 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase1b);">13</div>
+        <div class="sprint-title">Moteur Reservation Restaurant</div>
+        <div class="sprint-dates">26 Mai &ndash; 21 Juin</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Backend reservation restaurant</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Supabase PostgreSQL. Gestion capacite par service (dejeuner/diner) et creneau</td></tr>
+            <tr><td>Frontend reservation restaurant</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">3 etapes : date+service+heure+couverts &rarr; nom+tel &rarr; confirmation WhatsApp</td></tr>
+            <tr><td>Integration WhatsApp reservations</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Liens WhatsApp pre-remplis (TN). Email confirmation via Resend (international)</td></tr>
+            <tr><td>Shooting Phase II (mi-renovation)</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Progres renovation, design emergent, details architecturaux</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Weeks 17-20 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase1b);">17</div>
+        <div class="sprint-title">Admin Restaurant &amp; Contenu Chef</div>
+        <div class="sprint-dates">22 Juin &ndash; 19 Juil</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Dashboard admin restaurant</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Liste reservations du jour, couverts par service, mise a jour statut (Confirme/Assis/No-Show)</td></tr>
+            <tr><td>Rappels WhatsApp automatiques</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Message automatique J-1 : &laquo; Confirmez votre reservation &raquo;</td></tr>
+            <tr><td>Tests end-to-end reservation</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Client reserve &rarr; admin voit &rarr; rappel envoye &rarr; client confirme</td></tr>
+            <tr><td>Contenu menu preliminaire</td><td><span class="owner-tag external">Jerome</span></td><td class="col-details">Concept restaurant, philosophie saisonniere, bio chef, approvisionnement. Via Elyssa</td></tr>
+          </tbody>
+        </table>
+        <div class="sprint-gate">
+          <span class="material-symbols-outlined">approval</span>
+          <div class="sprint-gate-text"><strong>Light review</strong> : Elyssa teste le flow de reservation mobile. Jerome valide le contenu restaurant</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weeks 21-22 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase1b);">21</div>
+        <div class="sprint-title">Buffer &amp; Architecture Wellness</div>
+        <div class="sprint-dates">20 Juil &ndash; 2 Aout</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Buffer rattrapage</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Gerer feedback accumule, bug fixes, ajustements design</td></tr>
+            <tr><td>Architecture reservation wellness</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Scheduling multi-ressources : praticien + salle + creneau. Plus complexe que restaurant</td></tr>
+            <tr><td>Catalogue services wellness</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Liste definitive des services Agrumia : Hammam, Sauna, Massage, Yoga, Fitness. Durees</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Weeks 23-26 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase1b);">23</div>
+        <div class="sprint-title">Moteur Reservation Wellness</div>
+        <div class="sprint-dates">3 &ndash; 30 Aout</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Backend reservation wellness</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Disponibilite multi-ressources. Gestion conflits praticien+salle. Seances groupe (yoga, fitness)</td></tr>
+            <tr><td>Frontend reservation wellness</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Catalogue par categorie. Selection date + creneaux. Preference praticien. Confirmation WhatsApp/email</td></tr>
+            <tr><td>Descriptions services finales</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Texte complet par service : duree, a quoi s'attendre, contre-indications si pertinent</td></tr>
+            <tr><td>Tarification wellness (brouillon)</td><td><span class="owner-tag approval">Lilia</span></td><td class="col-details">Au minimum : fourchettes de prix par categorie de service</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Weeks 27-30 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase1b);">27</div>
+        <div class="sprint-title">Hardening &amp; Contenu Restaurant Final</div>
+        <div class="sprint-dates">31 Aout &ndash; 28 Sep</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Dashboard admin wellness</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Planning par praticien (timeline), grille salles, listes inscrits cours, gestion bookings</td></tr>
+            <tr><td>Hardening reservation restaurant</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Load test, gestion erreurs, edge cases (jours complets, annulations, no-shows)</td></tr>
+            <tr><td>Mise a jour page Deguster</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Remplacer contenu placeholder par vrais menus Jerome. CTA vers systeme reservation</td></tr>
+            <tr><td>Menus finalises</td><td><span class="owner-tag external">Jerome</span></td><td class="col-details">Structure dejeuner/diner, 5-10 plats signature avec descriptions, tarification</td></tr>
+            <tr><td>Tarification wellness finale</td><td><span class="owner-tag approval">Lilia</span></td><td class="col-details">Prix approuves pour tous les services</td></tr>
+          </tbody>
+        </table>
+        <div class="sprint-gate">
+          <span class="material-symbols-outlined">approval</span>
+          <div class="sprint-gate-text"><strong>A6 &mdash; 20 Sep</strong> : Jerome valide le contenu de la page restaurant</div>
+        </div>
+        <div class="sprint-gate" style="margin-top: 6px;">
+          <span class="material-symbols-outlined">approval</span>
+          <div class="sprint-gate-text"><strong>A7 &mdash; 25 Sep</strong> : Elyssa + Lilia approuvent le catalogue wellness + tarification</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weeks 31-34 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase1b);">31</div>
+        <div class="sprint-title">Ouverture Restaurant &amp; Reservation Live</div>
+        <div class="sprint-dates">29 Sep &ndash; 26 Oct</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Reservation restaurant GO LIVE</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Activer le systeme sur la page Deguster. Monitorer les premieres vraies reservations</td></tr>
+            <tr><td>Retirer &laquo; Coming Soon &raquo; restaurant</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Basculer CTAs de &laquo; Bientot &raquo; a &laquo; Reservez &raquo;. Banner ouverture</td></tr>
+            <tr><td>Architecture reservation chambres</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">6 chambres, calendrier, moteur tarification saisonniere, systeme depot</td></tr>
+            <tr><td>Contenu ouverture restaurant</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Texte annonce, photos reelles (soft opening), coordination reseaux sociaux</td></tr>
+            <tr><td>Google Reviews</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Post-repas : WhatsApp remerciement + lien Google Review</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PHASE 2 ── -->
+  <div style="margin-bottom: 40px;">
+    <div style="font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--phase2); margin-bottom: 16px;">Phase 2 &mdash; Paiements &amp; Hotel</div>
+
+    <!-- Weeks 35-38 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase2);">35</div>
+        <div class="sprint-title">Reservation Chambres &amp; Paiements</div>
+        <div class="sprint-dates">27 Oct &ndash; 23 Nov</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Backend reservation chambres</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Calendar-table : 1 ligne par chambre/date. Moteur tarification : base &times; saison &times; duree &times; early-bird &times; weekend</td></tr>
+            <tr><td>Frontend reservation chambres</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">3 etapes : dates + dispo &rarr; selection chambre (6 cartes) &rarr; details + paiement</td></tr>
+            <tr><td>Integration Stripe</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">EUR/USD. Depot 30% et prepaiement total. Stripe Elements dans le checkout</td></tr>
+            <tr><td>Integration Konnect</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">TND en millimes (250 TND = 250000). Webhook confirmation paiement. Test sandbox</td></tr>
+            <tr><td>Tarification chambres finale</td><td><span class="owner-tag approval">Lilia</span></td><td class="col-details">Prix approuves 6 chambres par saison. Remises duree sejour. Refundable vs non-refundable</td></tr>
+            <tr><td>Descriptions chambres finales</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Chaque chambre : nom, description, type lit, capacite, equipements, particularite</td></tr>
+          </tbody>
+        </table>
+        <div class="sprint-gate">
+          <span class="material-symbols-outlined">approval</span>
+          <div class="sprint-gate-text"><strong>A8 &mdash; 15 Nov</strong> : Lilia approuve la tarification chambres + politique d'annulation</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weeks 39-42 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase2);">39</div>
+        <div class="sprint-title">Admin Chambres, OTA &amp; Wellness Live</div>
+        <div class="sprint-dates">24 Nov &ndash; 21 Dec</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Dashboard admin chambres</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Grille 6 chambres &times; dates. Statuts : disponible/reserve/bloque. Gestion reservations + remboursements</td></tr>
+            <tr><td>Sync OTA (iCal)</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Export .ics par chambre. Import calendriers Booking.com + Airbnb. Polling 30 min</td></tr>
+            <tr><td>Pipeline emails automatiques</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">4 templates Resend : confirmation, pre-arrivee (J-7), check-in (J-2), post-sejour (J+1)</td></tr>
+            <tr><td>Reservation wellness GO LIVE</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Activer booking page Se Detendre. Basculer &laquo; Coming Soon &raquo; a &laquo; Ouvert &raquo;</td></tr>
+            <tr><td>Planning shooting Phase III</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Coordonner photographe pour photos finales magazine. Cible : fin dec / debut jan</td></tr>
+            <tr><td>Listings OTA</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Creer profils Booking.com et Airbnb. Uploader photos, ecrire descriptions, fixer prix</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Weeks 43-48 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase2);">43</div>
+        <div class="sprint-title">Photos Finales, Hardening &amp; Ouverture Hotel</div>
+        <div class="sprint-dates">22 Dec &ndash; 25 Jan '27</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Hardening reservation chambres</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Load test, reservations concurrentes, echecs paiement, expiration holds</td></tr>
+            <tr><td>Systeme &laquo; Book Direct &raquo;</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Avantages : transfert aeroport, welcome drink, early check-in. Box comparaison sur la page</td></tr>
+            <tr><td>Integration photos Phase III</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Remplacer TOUS les placeholders IA restants. Refonte visuelle complete du site</td></tr>
+            <tr><td>Reservation chambres GO LIVE</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Activer booking + paiement. Monitorer premieres vraies reservations. Hotfixes</td></tr>
+            <tr><td>Shooting Phase III</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Photos finales pro : chambres, restaurant, wellness, jardins. 100+ photos</td></tr>
+            <tr><td>Annonce lancement Dar Saad</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Push marketing complet : Instagram, newsletter waitlist, WhatsApp broadcast</td></tr>
+          </tbody>
+        </table>
+        <div class="sprint-gate">
+          <span class="material-symbols-outlined">approval</span>
+          <div class="sprint-gate-text"><strong>A9 &mdash; 10 Jan '27</strong> : Lilia approuve le site avec les photos finales</div>
+        </div>
+        <div class="sprint-gate" style="margin-top: 6px;">
+          <span class="material-symbols-outlined">approval</span>
+          <div class="sprint-gate-text"><strong>A10 &mdash; 15 Jan '27</strong> : Elyssa teste le systeme de reservation end-to-end (avec paiement test)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PHASE 3 ── -->
+  <div style="margin-bottom: 40px;">
+    <div style="font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--phase3); margin-bottom: 16px;">Phase 3 &mdash; Retraites &amp; Blog</div>
+
+    <!-- Weeks 49-52 -->
+    <div class="sprint-group">
+      <div class="sprint-header" onclick="toggleSprint(this)">
+        <div class="sprint-badge" style="background: var(--phase3);">49</div>
+        <div class="sprint-title">Booking Retraites &amp; Blog SEO</div>
+        <div class="sprint-dates">26 Jan &ndash; 22 Fev '27</div>
+        <span class="material-symbols-outlined sprint-toggle">expand_more</span>
+      </div>
+      <div class="sprint-content">
+        <table class="sprint-table">
+          <thead><tr><th style="width:28%">Tache</th><th style="width:14%">Qui</th><th class="col-details">Details</th></tr></thead>
+          <tbody>
+            <tr><td>Backend reservation retraites</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">RetreatProgram + RetreatDate + RetreatBooking. Prix forfaitaire (chambre + repas + activites)</td></tr>
+            <tr><td>Frontend reservation retraites</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Cartes programmes, timeline &laquo; Une Journee &raquo;, selection date, chambre, depot 30%</td></tr>
+            <tr><td>Dashboard admin retraites</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Participants inscrits, attribution chambres, suivi depots vs solde</td></tr>
+            <tr><td>Blog /journal (MDX)</td><td><span class="owner-tag dev">Rached</span></td><td class="col-details">Articles : &laquo; Comment nous avons construit le Domaine &raquo;, &laquo; Les orangeraies de Mohammedia &raquo;</td></tr>
+            <tr><td>Programme premiere retraite</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Details complets : dates, tarif, planning, inclusions, bio intervenants</td></tr>
+            <tr><td>Marketing lancement retraite</td><td><span class="owner-tag content">Elyssa</span></td><td class="col-details">Campagne Instagram, newsletter, WhatsApp broadcast, presse</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 3: APPROVAL GATES
+     ═══════════════════════════════════════════════ -->
+<div class="section" id="approvals">
+  <div class="section-header">
+    <div class="section-icon" style="color: var(--c-approval);">
+      <span class="material-symbols-outlined">approval</span>
+    </div>
+    <div>
+      <div class="section-name">10 Points d'Approbation</div>
+      <div class="section-subtitle">Chaque checkpoint necessite une validation avant de poursuivre</div>
+    </div>
+  </div>
+
+  <div class="gates-timeline">
+    <div class="gates-track">
+
+      <!-- A1 -->
+      <div class="gate-item">
+        <div class="gate-marker critical">A1</div>
+        <div class="gate-card critical">
+          <div class="gate-date">8 Mars 2026</div>
+          <div class="gate-title">Validation Texte FR</div>
+          <div class="gate-who"><span class="material-symbols-outlined">person</span> Lilia</div>
+          <div class="gate-desc">Lilia valide le texte francais du site web (toutes les pages). Les corrections sont integrees dans la version finale.</div>
+          <div class="gate-how"><strong>Format :</strong> WhatsApp + lien Google Drive. &laquo; Lilia, merci de valider le texte du site avant le 8 mars. &raquo;</div>
+        </div>
+      </div>
+
+      <!-- A2 -->
+      <div class="gate-item">
+        <div class="gate-marker critical">A2</div>
+        <div class="gate-card critical">
+          <div class="gate-date">15 Mars 2026</div>
+          <div class="gate-title">Direction Artistique</div>
+          <div class="gate-who"><span class="material-symbols-outlined">group</span> Lilia + Elyssa + Rached</div>
+          <div class="gate-desc">Choix definitif parmi les 5 propositions de design. Cette decision determine toute l'identite visuelle du site.</div>
+          <div class="gate-how"><strong>Format :</strong> Appel WhatsApp ou reunion en personne. Rached presente la recherche concurrentielle + les 5 propositions. Fallback : si pas de decision, on avance avec la Proposition 3 &laquo; Terre d'Agrumes &raquo; (reskinnable en 1-2 jours).</div>
+        </div>
+      </div>
+
+      <!-- A3 -->
+      <div class="gate-item">
+        <div class="gate-marker">A3</div>
+        <div class="gate-card">
+          <div class="gate-date">Mi-Mars 2026</div>
+          <div class="gate-title">Validation 4 Logos</div>
+          <div class="gate-who"><span class="material-symbols-outlined">person</span> Lilia</div>
+          <div class="gate-desc">Validation des 4 logos livres par Emna : Domaine Sidi Abdallah, Dar Saad, Agrumia, Restaurant.</div>
+          <div class="gate-how"><strong>Format :</strong> Elyssa envoie les logos via WhatsApp avec options claires. Fallback : si logos en retard, on utilise des headers typographiques. Integration = 2h quand les logos arrivent.</div>
+        </div>
+      </div>
+
+      <!-- A4 -->
+      <div class="gate-item">
+        <div class="gate-marker critical">A4</div>
+        <div class="gate-card critical">
+          <div class="gate-date">22 Avril 2026</div>
+          <div class="gate-title">Revue Complete du Site</div>
+          <div class="gate-who"><span class="material-symbols-outlined">person</span> Elyssa</div>
+          <div class="gate-desc">Elyssa navigue sur toutes les pages du site staging. Compile un document de feedback unique : erreurs texte, contenu manquant, retours design, problemes fonctionnels.</div>
+          <div class="gate-how"><strong>Format :</strong> URL staging Vercel + Google Doc de feedback. Categories : texte, images, design, fonctionnel.</div>
+        </div>
+      </div>
+
+      <!-- A5 -->
+      <div class="gate-item">
+        <div class="gate-marker critical">A5</div>
+        <div class="gate-card critical">
+          <div class="gate-date">25 Avril 2026</div>
+          <div class="gate-title">Approbation Visuelle / Marque</div>
+          <div class="gate-who"><span class="material-symbols-outlined">person</span> Lilia</div>
+          <div class="gate-desc">Lilia approuve le look and feel global du site. Couleurs, typographie, ambiance, ton — est-ce que cela represente la marque ?</div>
+          <div class="gate-how"><strong>Format :</strong> Elyssa envoie captures d'ecran des pages cles + lien staging via WhatsApp. Question simple : &laquo; Est-ce que le look te convient ? &raquo;</div>
+        </div>
+      </div>
+
+      <!-- A6 -->
+      <div class="gate-item">
+        <div class="gate-marker">A6</div>
+        <div class="gate-card">
+          <div class="gate-date">20 Septembre 2026</div>
+          <div class="gate-title">Contenu Page Restaurant</div>
+          <div class="gate-who"><span class="material-symbols-outlined">person</span> Jerome via Elyssa</div>
+          <div class="gate-desc">Chef Jerome valide le contenu de la page Deguster : concept, menus, description plats, bio chef.</div>
+          <div class="gate-how"><strong>Format :</strong> Elyssa transmet le lien staging a Jerome. Feedback ecrit via WhatsApp ou email.</div>
+        </div>
+      </div>
+
+      <!-- A7 -->
+      <div class="gate-item">
+        <div class="gate-marker">A7</div>
+        <div class="gate-card">
+          <div class="gate-date">25 Septembre 2026</div>
+          <div class="gate-title">Catalogue Wellness + Tarification</div>
+          <div class="gate-who"><span class="material-symbols-outlined">group</span> Elyssa + Lilia</div>
+          <div class="gate-desc">Validation du catalogue complet Agrumia (services, descriptions, durees) et de la grille tarifaire spa + day pass.</div>
+          <div class="gate-how"><strong>Format :</strong> Elyssa revoit. Lilia approuve les prix via WhatsApp.</div>
+        </div>
+      </div>
+
+      <!-- A8 -->
+      <div class="gate-item">
+        <div class="gate-marker">A8</div>
+        <div class="gate-card">
+          <div class="gate-date">15 Novembre 2026</div>
+          <div class="gate-title">Tarification Chambres + Annulation</div>
+          <div class="gate-who"><span class="material-symbols-outlined">person</span> Lilia</div>
+          <div class="gate-desc">Approbation des prix des 6 chambres par saison, remises duree de sejour, et politique d'annulation (flexible vs non-remboursable).</div>
+          <div class="gate-how"><strong>Format :</strong> Elyssa envoie un tableau de prix clair via WhatsApp. Lilia confirme. Question simple : &laquo; Flexible, non-remboursable, ou les deux ? &raquo;</div>
+        </div>
+      </div>
+
+      <!-- A9 -->
+      <div class="gate-item">
+        <div class="gate-marker">A9</div>
+        <div class="gate-card">
+          <div class="gate-date">10 Janvier 2027</div>
+          <div class="gate-title">Site avec Photos Finales</div>
+          <div class="gate-who"><span class="material-symbols-outlined">person</span> Lilia</div>
+          <div class="gate-desc">Lilia approuve le site mis a jour avec les vraies photos professionnelles (Phase III) remplacant tous les placeholders.</div>
+          <div class="gate-how"><strong>Format :</strong> Captures d'ecran WhatsApp des pages cles. &laquo; Lilia, voici le site avec les vraies photos. Est-ce que ca te plait ? &raquo;</div>
+        </div>
+      </div>
+
+      <!-- A10 -->
+      <div class="gate-item">
+        <div class="gate-marker critical">A10</div>
+        <div class="gate-card critical">
+          <div class="gate-date">15 Janvier 2027</div>
+          <div class="gate-title">Demo Systeme de Reservation</div>
+          <div class="gate-who"><span class="material-symbols-outlined">person</span> Elyssa</div>
+          <div class="gate-desc">Elyssa teste le systeme de reservation complet end-to-end : reservation chambre + paiement test + confirmation email + vue admin.</div>
+          <div class="gate-how"><strong>Format :</strong> En personne ou appel video. Elyssa fait 3 vraies reservations test. Confirme que l'admin fonctionne.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 4: ASSET DEPENDENCY TRACKER
+     ═══════════════════════════════════════════════ -->
+<div class="section" id="assets">
+  <div class="section-header">
+    <div class="section-icon" style="color: var(--c-content);">
+      <span class="material-symbols-outlined">inventory_2</span>
+    </div>
+    <div>
+      <div class="section-name">Suivi des Assets &amp; Dependances</div>
+      <div class="section-subtitle">Ce qui est pret, ce qui est attendu, de qui, et les fallbacks</div>
+    </div>
+  </div>
+
+  <table class="asset-table">
+    <thead>
+      <tr>
+        <th>Asset</th>
+        <th>De qui</th>
+        <th>Necessaire pour</th>
+        <th>Statut</th>
+        <th class="col-fallback">Fallback si retard</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Texte FR site complet</strong></td>
+        <td>Lilia (review)</td>
+        <td>8 Mars</td>
+        <td><span class="status-badge ready"><span class="status-dot"></span>Brouillon pret</span></td>
+        <td class="col-fallback"><span class="fallback-text">Lancer avec la version actuelle. Mise a jour post-lancement (30 min)</span></td>
+      </tr>
+      <tr>
+        <td><strong>Texte EN site complet</strong></td>
+        <td>Elyssa</td>
+        <td>22 Mars</td>
+        <td><span class="status-badge ready"><span class="status-dot"></span>Pret</span></td>
+        <td class="col-fallback"><span class="fallback-text">—</span></td>
+      </tr>
+      <tr>
+        <td><strong>Direction artistique (1 sur 5)</strong></td>
+        <td>Lilia + Elyssa</td>
+        <td>15 Mars</td>
+        <td><span class="status-badge ready"><span class="status-dot"></span>5 propositions pretes</span></td>
+        <td class="col-fallback"><span class="fallback-text">Defaut : Proposition 3 &laquo; Terre d'Agrumes &raquo;. Reskinnable en 1-2 jours</span></td>
+      </tr>
+      <tr>
+        <td><strong>4 logos (SVG + PNG)</strong></td>
+        <td>Emna via Elyssa</td>
+        <td>Mi-Mars</td>
+        <td><span class="status-badge in-progress"><span class="status-dot"></span>En cours</span></td>
+        <td class="col-fallback"><span class="fallback-text">Headers typographiques. Swap logos en 2h quand livres</span></td>
+      </tr>
+      <tr>
+        <td><strong>Photos Phase I (orangeraies)</strong></td>
+        <td>Photographe</td>
+        <td>Mi-Mars</td>
+        <td><span class="status-badge planned"><span class="status-dot"></span>Shooting planifie</span></td>
+        <td class="col-fallback"><span class="fallback-text">29 images IA de haute qualite deja existantes</span></td>
+      </tr>
+      <tr>
+        <td><strong>Photos Phase II (making-of)</strong></td>
+        <td>Elyssa</td>
+        <td>Mai – Aout</td>
+        <td><span class="status-badge planned"><span class="status-dot"></span>Planifie</span></td>
+        <td class="col-fallback"><span class="fallback-text">Contenu Instagram peut servir. Qualite moindre acceptable</span></td>
+      </tr>
+      <tr>
+        <td><strong>Contenu menus Chef Jerome</strong></td>
+        <td>Jerome via Elyssa</td>
+        <td>Juil – Sep</td>
+        <td><span class="status-badge not-started"><span class="status-dot"></span>Pas commence</span></td>
+        <td class="col-fallback"><span class="fallback-text">Texte philosophie farm-to-table existant. Menus en PDF ajoutes plus tard</span></td>
+      </tr>
+      <tr>
+        <td><strong>Catalogue services wellness</strong></td>
+        <td>Elyssa</td>
+        <td>Aout – Sep</td>
+        <td><span class="status-badge in-progress"><span class="status-dot"></span>Brouillon existe</span></td>
+        <td class="col-fallback"><span class="fallback-text">Utiliser les descriptions brouillon existantes</span></td>
+      </tr>
+      <tr>
+        <td><strong>Tarification wellness</strong></td>
+        <td>Lilia</td>
+        <td>Septembre</td>
+        <td><span class="status-badge in-progress"><span class="status-dot"></span>Brouillon existe</span></td>
+        <td class="col-fallback"><span class="fallback-text">&laquo; A partir de X TND &raquo; — prix exacts mis a jour plus tard</span></td>
+      </tr>
+      <tr>
+        <td><strong>Tarification chambres finale</strong></td>
+        <td>Lilia</td>
+        <td>Novembre</td>
+        <td><span class="status-badge in-progress"><span class="status-dot"></span>Brouillon existe</span></td>
+        <td class="col-fallback"><span class="fallback-text">&laquo; A partir de X TND/nuit &raquo; — ajustement saisonnier plus tard</span></td>
+      </tr>
+      <tr>
+        <td><strong>Photos Phase III (finales)</strong></td>
+        <td>Photographe</td>
+        <td>Dec – Jan '27</td>
+        <td><span class="status-badge planned"><span class="status-dot"></span>Planifie</span></td>
+        <td class="col-fallback"><span class="fallback-text">Garder les placeholders IA plus longtemps. Swap progressif</span></td>
+      </tr>
+      <tr>
+        <td><strong>Programmes retraites detailles</strong></td>
+        <td>Elyssa</td>
+        <td>Nov – Jan '27</td>
+        <td><span class="status-badge in-progress"><span class="status-dot"></span>Descriptions existent</span></td>
+        <td class="col-fallback"><span class="fallback-text">Utiliser les descriptions existantes (yoga, spa, fitness, crochet, agrumes)</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 5: RISK REGISTER
+     ═══════════════════════════════════════════════ -->
+<div class="section" id="risks">
+  <div class="section-header">
+    <div class="section-icon" style="color: var(--c-external);">
+      <span class="material-symbols-outlined">warning</span>
+    </div>
+    <div>
+      <div class="section-name">Registre des Risques</div>
+      <div class="section-subtitle">Risques identifies et mitigations pre-planifiees</div>
+    </div>
+  </div>
+
+  <div class="risk-grid">
+
+    <div class="risk-card">
+      <div class="risk-top">
+        <div class="risk-icon medium"><span class="material-symbols-outlined">palette</span></div>
+        <div class="risk-title">Logos en retard (apres mars)</div>
+        <div class="risk-prob medium">Moyen</div>
+      </div>
+      <div class="risk-mitigation">Headers typographiques en fallback. Integration logos = 2h max une fois livres. Ne bloque pas le developpement.</div>
+    </div>
+
+    <div class="risk-card">
+      <div class="risk-top">
+        <div class="risk-icon medium"><span class="material-symbols-outlined">brush</span></div>
+        <div class="risk-title">Direction artistique non choisie au 15 mars</div>
+        <div class="risk-prob medium">Moyen</div>
+      </div>
+      <div class="risk-mitigation">Defaut : Proposition 3 &laquo; Terre d'Agrumes &raquo; (la plus polyvalente). Le skin visuel est changeable en 1-2 jours sans toucher a la structure.</div>
+    </div>
+
+    <div class="risk-card">
+      <div class="risk-top">
+        <div class="risk-icon high"><span class="material-symbols-outlined">chat_bubble</span></div>
+        <div class="risk-title">Lilia non-responsive pour les approbations</div>
+        <div class="risk-prob high">Eleve</div>
+      </div>
+      <div class="risk-mitigation">Elyssa escalade. Messages WhatsApp avec captures + question oui/non + defaut recommande. &laquo; Si pas de reponse avant [date], on avance avec notre recommandation. &raquo;</div>
+    </div>
+
+    <div class="risk-card">
+      <div class="risk-top">
+        <div class="risk-icon medium"><span class="material-symbols-outlined">photo_camera</span></div>
+        <div class="risk-title">Shooting Phase I retarde (meteo/dispo)</div>
+        <div class="risk-prob medium">Moyen</div>
+      </div>
+      <div class="risk-mitigation">29 images IA placeholder de haute qualite existent deja. Les vraies photos sont swappees quand disponibles. Pas de blocage.</div>
+    </div>
+
+    <div class="risk-card">
+      <div class="risk-top">
+        <div class="risk-icon medium"><span class="material-symbols-outlined">construction</span></div>
+        <div class="risk-title">Renovation retardee (ouverture restaurant apres octobre)</div>
+        <div class="risk-prob medium">Moyen</div>
+      </div>
+      <div class="risk-mitigation">Le systeme de reservation restaurant est pret et en attente. Zero travail perdu. On lance quand le restaurant est pret.</div>
+    </div>
+
+    <div class="risk-card">
+      <div class="risk-top">
+        <div class="risk-icon high"><span class="material-symbols-outlined">restaurant</span></div>
+        <div class="risk-title">Contenu Chef Jerome en retard</div>
+        <div class="risk-prob high">Eleve</div>
+      </div>
+      <div class="risk-mitigation">Texte philosophie farm-to-table deja existant. Page restaurant fonctionnelle sans menus specifiques. Menus peuvent etre un PDF downloadable ajoute plus tard.</div>
+    </div>
+
+    <div class="risk-card">
+      <div class="risk-top">
+        <div class="risk-icon medium"><span class="material-symbols-outlined">expand</span></div>
+        <div class="risk-title">Scope creep systeme reservation</div>
+        <div class="risk-prob medium">Moyen</div>
+      </div>
+      <div class="risk-mitigation">Phase 1 = WhatsApp + formulaires seulement. Pas de moteur de reservation avant octobre. Construire incrementalement par pilier.</div>
+    </div>
+
+    <div class="risk-card">
+      <div class="risk-top">
+        <div class="risk-icon medium"><span class="material-symbols-outlined">edit_note</span></div>
+        <div class="risk-title">Texte FR non valide par Lilia au 8 mars</div>
+        <div class="risk-prob medium">Moyen</div>
+      </div>
+      <div class="risk-mitigation">Avancer avec le texte actuel. Les modifications texte = 30 minutes de deploiement. Le site est un document vivant.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     SECTION 6: COMMUNICATION TEMPLATES
+     ═══════════════════════════════════════════════ -->
+<div class="section" id="messages">
+  <div class="section-header">
+    <div class="section-icon" style="color: #4A7A6B;">
+      <span class="material-symbols-outlined">chat</span>
+    </div>
+    <div>
+      <div class="section-name">Messages Types WhatsApp</div>
+      <div class="section-subtitle">Templates prets a envoyer pour chaque point d'approbation</div>
+    </div>
+  </div>
+
+  <!-- A1 -->
+  <div class="comm-card">
+    <div class="comm-header" onclick="toggleComm(this)">
+      <div class="comm-gate-badge">A1</div>
+      <div class="comm-title">Envoi texte FR a Lilia (avant 8 mars)</div>
+      <span class="material-symbols-outlined comm-toggle">expand_more</span>
+    </div>
+    <div class="comm-body">
+      <div class="comm-label">Message WhatsApp (Elyssa &rarr; Lilia)</div>
+      <div class="whatsapp-msg">
+        Bonjour Lilia,<br><br>
+        Voici le texte du site web en francais :<br>
+        [lien Google Drive]<br><br>
+        Peux-tu le relire et me dire si des modifications sont necessaires ? L'ideal serait d'avoir ton retour avant le 8 mars pour qu'on puisse commencer a integrer le contenu dans le site.<br><br>
+        Si c'est bon tel quel, un simple &laquo; OK &raquo; suffit !
+      </div>
+      <div class="comm-note">Si pas de reponse au 7 mars : relancer avec &laquo; Lilia, on avance avec la version actuelle sauf avis contraire de ta part ? &raquo;</div>
+    </div>
+  </div>
+
+  <!-- A2 -->
+  <div class="comm-card">
+    <div class="comm-header" onclick="toggleComm(this)">
+      <div class="comm-gate-badge">A2</div>
+      <div class="comm-title">Reunion direction artistique (15 mars)</div>
+      <span class="material-symbols-outlined comm-toggle">expand_more</span>
+    </div>
+    <div class="comm-body">
+      <div class="comm-label">Message WhatsApp (Elyssa &rarr; Lilia)</div>
+      <div class="whatsapp-msg">
+        Lilia,<br><br>
+        On a 5 propositions de design pour le site web. Rached a prepare une analyse comparative avec des sites de reference internationaux.<br><br>
+        Est-ce qu'on peut se faire un appel de 20 min cette semaine (avant le 15 mars) pour choisir la direction ?<br><br>
+        Rached recommande la Proposition 3 &laquo; Terre d'Agrumes &raquo; — chaleureuse, mediterraneenne, qui met en valeur le terroir.<br><br>
+        Tu preferes un appel ou je t'envoie les screenshots pour que tu choisisses ?
+      </div>
+    </div>
+  </div>
+
+  <!-- A5 -->
+  <div class="comm-card">
+    <div class="comm-header" onclick="toggleComm(this)">
+      <div class="comm-gate-badge">A5</div>
+      <div class="comm-title">Approbation visuelle avant lancement (25 avril)</div>
+      <span class="material-symbols-outlined comm-toggle">expand_more</span>
+    </div>
+    <div class="comm-body">
+      <div class="comm-label">Message WhatsApp (Elyssa &rarr; Lilia)</div>
+      <div class="whatsapp-msg">
+        Lilia, voici le site en avant-premiere :<br>
+        [lien staging URL]<br><br>
+        Captures d'ecran des pages principales :<br>
+        [Screenshot Homepage]<br>
+        [Screenshot Sejour]<br>
+        [Screenshot Restaurant]<br><br>
+        Est-ce que le look et le ton te conviennent ?<br><br>
+        Points specifiques a valider :<br>
+        1. La direction visuelle (couleurs, typographie, ambiance)<br>
+        2. Le texte principal de la homepage<br>
+        3. Les descriptions des chambres<br><br>
+        Notre recommandation : approuver et lancer en mai. Des modifications restent possibles apres le lancement.
+      </div>
+    </div>
+  </div>
+
+  <!-- A8 -->
+  <div class="comm-card">
+    <div class="comm-header" onclick="toggleComm(this)">
+      <div class="comm-gate-badge">A8</div>
+      <div class="comm-title">Validation tarification chambres (15 novembre)</div>
+      <span class="material-symbols-outlined comm-toggle">expand_more</span>
+    </div>
+    <div class="comm-body">
+      <div class="comm-label">Message WhatsApp (Elyssa &rarr; Lilia)</div>
+      <div class="whatsapp-msg">
+        Lilia,<br><br>
+        Pour l'ouverture de Dar Saad en janvier, on a besoin de valider les tarifs des 6 chambres :<br><br>
+        Mandarine : 160$/470 TND<br>
+        Clementine : 180$/530 TND<br>
+        Tangerine : 180$/530 TND<br>
+        Citron : 200$/590 TND<br>
+        Orange : 200$/590 TND<br>
+        Bergamote : 240$/710 TND<br><br>
+        Et la politique d'annulation :<br>
+        - Flexible (annulation gratuite 48h avant) ?<br>
+        - Non-remboursable (-10% de reduction) ?<br>
+        - Les deux options ?<br><br>
+        Notre recommandation : proposer les deux options au client.
+      </div>
+    </div>
+  </div>
+
+  <!-- A9 -->
+  <div class="comm-card">
+    <div class="comm-header" onclick="toggleComm(this)">
+      <div class="comm-gate-badge">A9</div>
+      <div class="comm-title">Site avec photos finales (10 janvier 2027)</div>
+      <span class="material-symbols-outlined comm-toggle">expand_more</span>
+    </div>
+    <div class="comm-body">
+      <div class="comm-label">Message WhatsApp (Elyssa &rarr; Lilia)</div>
+      <div class="whatsapp-msg">
+        Lilia, voici le site avec les vraies photos du Domaine :<br>
+        [lien site]<br><br>
+        [Screenshot chambre Bergamote]<br>
+        [Screenshot restaurant]<br>
+        [Screenshot Agrumia]<br><br>
+        Est-ce que ca te plait ? On lance les reservations en ligne des que tu valides.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ LEGEND ═══ -->
+<div class="legend">
+  <div class="legend-group">
+    <div class="legend-title">Responsabilite</div>
+    <div class="legend-items">
+      <div class="legend-item"><div class="legend-dot" style="background: var(--c-dev);"></div> Rached (Dev)</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--c-content);"></div> Elyssa (Contenu)</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--c-approval);"></div> Lilia (Approbation)</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--c-external);"></div> Externe</div>
+    </div>
+  </div>
+  <div class="legend-group">
+    <div class="legend-title">Statut</div>
+    <div class="legend-items">
+      <div class="legend-item"><div class="legend-dot" style="background: #4A7A6B;"></div> Pret</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--gold);"></div> En cours</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--c-dev);"></div> Planifie</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--c-external);"></div> Pas commence</div>
+    </div>
+  </div>
+  <div class="legend-group">
+    <div class="legend-title">Phases</div>
+    <div class="legend-items">
+      <div class="legend-item"><div class="legend-dot" style="background: var(--phase0);"></div> Phase 0</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--phase1);"></div> Phase 1</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--phase1b);"></div> Phase 1b</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--phase2);"></div> Phase 2</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--phase3);"></div> Phase 3</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- .content -->
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  Domaine Sidi Abdallah &middot; Plan d'Action Site Web &middot; Genere le 26 Fevrier 2026<br>
+  <a href="dsa-master-timeline.html">Voir le Master Timeline du Projet</a>
+</footer>
+
+<script>
+/* ─── Progress Bar ─── */
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+});
+
+/* ─── Sticky Header Shadow ─── */
+const stickyObs = new IntersectionObserver(
+  ([e]) => document.getElementById('stickyHeader').classList.toggle('scrolled', !e.isIntersecting),
+  { threshold: [1] }
+);
+stickyObs.observe(document.querySelector('header'));
+
+/* ─── Section Fade-In ─── */
+const sectionObs = new IntersectionObserver(
+  entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+  { threshold: 0.08 }
+);
+document.querySelectorAll('.section').forEach(s => sectionObs.observe(s));
+
+/* ─── Active Nav Pill ─── */
+const sections = document.querySelectorAll('.section[id]');
+const navPills = document.querySelectorAll('.nav-pill');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 140) current = s.id;
+  });
+  navPills.forEach(p => {
+    p.classList.toggle('active', p.getAttribute('href') === '#' + current);
+  });
+});
+
+/* ─── Toggle Sprint ─── */
+function toggleSprint(header) {
+  const content = header.nextElementSibling;
+  const toggle = header.querySelector('.sprint-toggle');
+  content.classList.toggle('open');
+  toggle.classList.toggle('open');
+}
+
+/* ─── Toggle Communication ─── */
+function toggleComm(header) {
+  const body = header.nextElementSibling;
+  const toggle = header.querySelector('.comm-toggle');
+  body.classList.toggle('open');
+  toggle.classList.toggle('open');
+}
+</script>
+
+</body>
+</html>
