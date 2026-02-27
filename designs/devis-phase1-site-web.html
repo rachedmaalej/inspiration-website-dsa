@@ -217,6 +217,56 @@ body {
   width: 110px;
 }
 
+/* ─── COLLAPSIBLE DETAIL (En savoir plus) ─── */
+.item-detail {
+  margin-top: 8px;
+}
+.item-detail summary {
+  font-size: 10.5px;
+  font-weight: 400;
+  color: var(--gold);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  user-select: none;
+}
+.item-detail summary::-webkit-details-marker { display: none; }
+.item-detail summary::after {
+  content: '+';
+  font-size: 13px;
+  font-weight: 300;
+  transition: transform 0.2s ease;
+}
+.item-detail[open] summary::after {
+  content: '\2212'; /* minus sign */
+}
+.item-detail summary:hover {
+  color: var(--terracotta);
+}
+.item-detail-body {
+  margin-top: 8px;
+  padding: 12px 14px;
+  background: var(--cream);
+  border-radius: 6px;
+  border-left: 2px solid var(--gold);
+  font-size: 11.5px;
+  font-weight: 300;
+  color: #59534E;
+  line-height: 1.65;
+  animation: detailFade 0.25s ease;
+}
+@keyframes detailFade {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.item-detail-body strong {
+  font-weight: 400;
+  color: var(--ink);
+}
+
 /* ─── TOTAL BLOCK ─── */
 .total-block {
   display: flex;
@@ -467,6 +517,7 @@ body {
   .payment-card, .timeline-step { break-inside: avoid; }
   .signatures { break-inside: avoid; }
   .conditions { break-inside: avoid; }
+  .item-detail { display: none; }
 
   @page {
     size: A4;
@@ -539,7 +590,7 @@ body {
   <h1 class="doc-title">Devis &mdash; Site Web <em>Phase 1</em></h1>
   <p class="doc-subtitle">
     Conception et developpement d'un site vitrine bilingue (FR/EN) pour le Domaine Sidi Abdallah.
-    7 pages, design sur mesure, optimise mobile, geo-detection automatique, integrations newsletter et WhatsApp.
+    7 templates de pages, design sur mesure, optimise mobile, geo-detection automatique, integrations newsletter et WhatsApp.
     Technologie : Next.js 14+, Tailwind CSS, deploiement Vercel.
   </p>
 
@@ -559,6 +610,12 @@ body {
         <td>
           <div class="item-title">Audit, Strategie &amp; Direction Artistique</div>
           <div class="item-desc">Analyse concurrentielle (benchmarks internationaux), choix de la direction design parmi les 5 propositions existantes, recherche UX, definition de l'architecture d'information</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              Avant de construire quoi que ce soit, nous etudions les meilleurs sites de maisons d'hotes et domaines de luxe dans le monde (Babylonstoren, Cap Rocat, The Newt&hellip;) pour comprendre ce qui fonctionne. Nous choisissons ensuite la direction visuelle du site parmi les 5 propositions deja preparees, et definissons comment les visiteurs navigueront sur chaque page. <strong>C'est le plan architectural avant la construction.</strong>
+            </div>
+          </details>
         </td>
         <td class="item-amount">2 500 TND</td>
       </tr>
@@ -566,7 +623,13 @@ body {
         <td class="item-number">02</td>
         <td>
           <div class="item-title">Design UX/UI</div>
-          <div class="item-desc">Wireframes des 7 pages, maquettes haute-fidelite desktop et mobile, creation du design system complet (typographie, couleurs, composants, grilles), adaptation responsive</div>
+          <div class="item-desc">Wireframes des 7 templates de pages, maquettes haute-fidelite desktop et mobile, creation du design system complet (typographie, couleurs, composants, grilles), adaptation responsive</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              C'est la creation visuelle du site : a quoi ressemblera chaque page, sur ordinateur et sur telephone. Nous definissons les couleurs, les polices, la disposition des elements &mdash; comme un architecte d'interieur qui dessine chaque piece avant les travaux. Un &laquo; design system &raquo; est un ensemble de regles visuelles (boutons, cartes, typographie) qui <strong>garantit que tout le site a une identite coherente</strong>, et qui accelere la creation des futures pages (reservations, retraites).
+            </div>
+          </details>
         </td>
         <td class="item-amount">6 000 TND</td>
       </tr>
@@ -574,7 +637,13 @@ body {
         <td class="item-number">03</td>
         <td>
           <div class="item-title">Developpement Frontend (Next.js 14+)</div>
-          <div class="item-desc">Integration des 7 pages : Accueil, Sejourner (Dar Saad), Se Detendre (Agrumia), Deguster, S'evader, Notre Histoire, Contact. Architecture bilingue FR/EN avec routage i18n, geo-detection via Vercel Edge Middleware, composants reactifs, pipeline d'optimisation des images</div>
+          <div class="item-desc">Integration des 7 templates de pages : Accueil, Sejourner (Dar Saad), Se Detendre (Agrumia), Deguster, S'evader, Notre Histoire, Contact. Architecture bilingue FR/EN avec routage i18n, geo-detection via Vercel Edge Middleware, composants reactifs, pipeline d'optimisation des images</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              C'est la construction du site : transformer les maquettes visuelles en pages web interactives et fonctionnelles. Le site <strong>detectera automatiquement si le visiteur est tunisien ou etranger</strong> et adaptera la langue, le contenu et les appels a l'action en consequence (WhatsApp pour les tunisiens, formulaire pour les internationaux). Chaque photo sera optimisee pour se charger rapidement, meme sur une connexion mobile.
+            </div>
+          </details>
         </td>
         <td class="item-amount">9 000 TND</td>
       </tr>
@@ -583,14 +652,26 @@ body {
         <td>
           <div class="item-title">Integrations</div>
           <div class="item-desc">Newsletter Brevo (2 listes : waitlist + newsletter), boutons WhatsApp avec messages pre-remplis, formulaire de contact, capture email waitlist pour hotel et retraites, analytics (Vercel Analytics)</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              Ce sont les connexions entre le site et les outils qui le font fonctionner au quotidien : la <strong>collecte d'emails</strong> pour la newsletter et la liste d'attente (hotel, retraites), les <strong>boutons WhatsApp</strong> qui ouvrent un message pre-ecrit selon la page consultee (ex : &laquo; Je souhaite reserver une table&hellip; &raquo;), le <strong>formulaire de contact</strong> qui envoie un email a l'equipe, et le <strong>suivi statistique</strong> pour savoir combien de personnes visitent chaque page et cliquent sur chaque bouton.
+            </div>
+          </details>
         </td>
         <td class="item-amount">2 500 TND</td>
       </tr>
       <tr>
         <td class="item-number">05</td>
         <td>
-          <div class="item-title">SEO &amp; Optimisation Performance</div>
+          <div class="item-title">SEO (referencement) &amp; Optimisation Performance (rapidite)</div>
           <div class="item-desc">Donnees structurees Schema.org (LocalBusiness, LodgingBusiness, Restaurant), sitemap.xml, balises meta FR/EN, Open Graph pour partage social, optimisation Core Web Vitals, objectif Lighthouse 95+</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              Le <strong>referencement (SEO)</strong> permet au site d'apparaitre dans les resultats Google quand quelqu'un cherche &laquo; agritourisme Tunisie &raquo; ou &laquo; maison d'hotes Tunis. &raquo; Nous ajoutons aussi les informations qui permettent a Google Maps, WhatsApp et Facebook d'afficher une belle carte de previsualisation quand le lien est partage. L'<strong>optimisation performance</strong> garantit un chargement en moins de 2 secondes &mdash; essentiel car plus de la moitie des visiteurs mobiles quittent un site qui met plus de 3 secondes a charger.
+            </div>
+          </details>
         </td>
         <td class="item-amount">2 000 TND</td>
       </tr>
@@ -599,6 +680,12 @@ body {
         <td>
           <div class="item-title">Recette &amp; Mise en Production</div>
           <div class="item-desc">Tests cross-browser (Chrome, Safari, Firefox, Edge), tests mobile (iOS, Android), QA bilingue, configuration DNS et certificat SSL, deploiement sur Vercel, creation Google Business Profile</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              C'est la verification finale avant l'ouverture au public : tester le site sur <strong>tous les navigateurs et telephones</strong>, verifier que les deux langues fonctionnent correctement partout, configurer l'adresse web definitive (domainesidiabdallah.tn), et creer le <strong>profil Google Maps</strong> du Domaine pour qu'il apparaisse dans les recherches locales. C'est l'equivalent de la visite de reception avant la remise des cles.
+            </div>
+          </details>
         </td>
         <td class="item-amount">1 500 TND</td>
       </tr>
@@ -607,6 +694,12 @@ body {
         <td>
           <div class="item-title">Gestion de Projet</div>
           <div class="item-desc">Coordination avec les parties prenantes, reporting d'avancement, organisation de 2 points d'approbation formels (revue staging + validation visuelle), gestion des retours et iterations</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              La coordination entre les parties prenantes pendant les 9 semaines : envoyer les <strong>demandes de contenu au bon moment</strong> (textes, logos, photos), organiser les <strong>deux revues formelles</strong> du site (une version d'essai pour Elyssa, puis une validation visuelle pour Lilia), gerer les retours et les priorites, et s'assurer que le projet reste dans les delais malgre les imprevus.
+            </div>
+          </details>
         </td>
         <td class="item-amount">1 500 TND</td>
       </tr>
@@ -680,7 +773,7 @@ body {
     <div class="scope-col inclusions">
       <h4>Inclus dans ce devis</h4>
       <ul class="scope-list">
-        <li>7 pages integrees (FR + EN)</li>
+        <li>7 templates de pages integres (FR + EN)</li>
         <li>Design sur mesure (desktop + mobile)</li>
         <li>Architecture bilingue avec geo-detection</li>
         <li>Newsletter + waitlist (Brevo)</li>
