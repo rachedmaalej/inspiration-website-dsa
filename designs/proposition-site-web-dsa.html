@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposition — Site Web Domaine Sidi Abdallah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   PROPOSITION TECHNIQUE ET COMMERCIALE
+   Domaine Sidi Abdallah — Site Web
+   ═══════════════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream:      #F7F3EC;
+  --parchment:  #EDE6D8;
+  --ink:        #1C1A17;
+  --grove:      #2C4035;
+  --gold:       #C4A35A;
+  --gold-light: rgba(196,163,90,0.12);
+  --dust:       #A89880;
+  --mist:       #D6CFC4;
+  --terracotta: #B5623A;
+  --white:      #FFFFFF;
+
+  --phase1:     #2C4035;
+  --phase1-bg:  rgba(44,64,53,0.06);
+  --phase2:     #2C6B8A;
+  --phase2-bg:  rgba(44,107,138,0.06);
+  --phase3:     #B5623A;
+  --phase3-bg:  rgba(181,98,58,0.06);
+}
+
+html { font-size: 14px; }
+
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── PAGE LAYOUT ─── */
+.page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 50px 60px;
+}
+
+/* ─── HEADER ─── */
+.prop-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 30px;
+  border-bottom: 2px solid var(--gold);
+  margin-bottom: 30px;
+}
+.provider { flex: 1; }
+.provider-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--grove);
+  margin-bottom: 2px;
+}
+.provider-title {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--dust);
+  margin-bottom: 12px;
+}
+.provider-info {
+  font-size: 11.5px;
+  font-weight: 300;
+  color: #59534E;
+  line-height: 1.7;
+}
+.client { text-align: right; flex: 1; }
+.client-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dust);
+  margin-bottom: 6px;
+}
+.client-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--grove);
+  margin-bottom: 4px;
+}
+.client-info {
+  font-size: 11.5px;
+  font-weight: 300;
+  color: #59534E;
+  line-height: 1.7;
+}
+
+/* ─── DOCUMENT META ─── */
+.doc-meta {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 32px;
+}
+.meta-block { display: flex; flex-direction: column; }
+.meta-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dust);
+  margin-bottom: 3px;
+}
+.meta-value {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink);
+}
+
+/* ─── DOCUMENT TITLE ─── */
+.doc-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 30px;
+  color: var(--grove);
+  margin-bottom: 6px;
+}
+.doc-title em { font-style: italic; color: var(--terracotta); }
+.doc-subtitle {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: #59534E;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  max-width: 580px;
+}
+
+/* ─── PART HEADERS ─── */
+.part-header {
+  margin-top: 48px;
+  margin-bottom: 28px;
+  padding: 20px 0 14px;
+  border-top: 2px solid var(--gold);
+}
+.part-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.part-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 24px;
+  color: var(--grove);
+}
+
+/* ─── SECTION TITLES ─── */
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--grove);
+  margin-bottom: 14px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--mist);
+}
+
+/* ─── PROSE TEXT ─── */
+.prose {
+  font-size: 13px;
+  font-weight: 300;
+  color: #3D3A36;
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+.prose strong { font-weight: 400; color: var(--ink); }
+.prose em { font-style: italic; color: var(--grove); }
+
+/* ─── DELIVERABLES GRID ─── */
+.deliverables-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 32px;
+}
+.deliverable-card {
+  background: var(--cream);
+  border-radius: 10px;
+  padding: 18px 18px;
+  border: 1px solid var(--mist);
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.deliverable-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 28px;
+  color: var(--gold);
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.deliverable-title {
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.deliverable-desc {
+  font-size: 11px;
+  font-weight: 300;
+  color: #7A756E;
+  line-height: 1.5;
+}
+
+/* ─── AUDIENCE CARDS ─── */
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 32px;
+}
+.audience-card {
+  background: var(--cream);
+  border-radius: 10px;
+  padding: 18px 16px;
+  border: 1px solid var(--mist);
+}
+.audience-icon { font-size: 22px; margin-bottom: 8px; }
+.audience-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 5px;
+}
+.audience-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--grove);
+  margin-bottom: 7px;
+}
+.audience-desc {
+  font-size: 11px;
+  font-weight: 300;
+  color: #59534E;
+  line-height: 1.55;
+}
+
+/* ─── JOURNEY FLOW ─── */
+.journey-flow {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 32px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--mist);
+}
+.journey-step {
+  flex: 1;
+  padding: 16px 14px;
+  text-align: center;
+  border-right: 1px solid var(--mist);
+  background: var(--white);
+  position: relative;
+}
+.journey-step:last-child { border-right: none; }
+.journey-step::after {
+  content: '\2192';
+  position: absolute;
+  right: -9px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  font-size: 14px;
+  z-index: 1;
+  background: var(--white);
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  border-radius: 50%;
+}
+.journey-step:last-child::after { display: none; }
+.journey-number {
+  font-size: 18px;
+  font-weight: 200;
+  color: var(--gold);
+  margin-bottom: 3px;
+}
+.journey-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--grove);
+  margin-bottom: 3px;
+}
+.journey-desc {
+  font-size: 10px;
+  font-weight: 300;
+  color: #7A756E;
+  line-height: 1.4;
+}
+
+/* ─── VERTICAL SLICE EXPLAINER ─── */
+.slice-explainer {
+  background: var(--gold-light);
+  border: 1px solid rgba(196,163,90,0.25);
+  border-radius: 10px;
+  padding: 20px 22px;
+  margin-bottom: 28px;
+}
+.slice-explainer-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--grove);
+  margin-bottom: 10px;
+}
+.slice-explainer p {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: #3D3A36;
+  line-height: 1.7;
+}
+.slice-explainer p + p { margin-top: 8px; }
+.slice-explainer strong { font-weight: 400; color: var(--ink); }
+
+/* ─── PHASE CARDS ─── */
+.phase-card {
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 20px;
+  border: 1px solid var(--mist);
+  position: relative;
+}
+.phase-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  border-radius: 10px 0 0 10px;
+}
+.phase-card.phase-1 { background: var(--phase1-bg); }
+.phase-card.phase-1::before { background: var(--phase1); }
+.phase-card.phase-2 { background: var(--phase2-bg); }
+.phase-card.phase-2::before { background: var(--phase2); }
+.phase-card.phase-3 { background: var(--phase3-bg); }
+.phase-card.phase-3::before { background: var(--phase3); }
+
+.phase-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.phase-1 .phase-badge { background: var(--phase1); }
+.phase-2 .phase-badge { background: var(--phase2); }
+.phase-3 .phase-badge { background: var(--phase3); }
+
+.phase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.phase-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--ink);
+}
+.phase-cost-pill {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--white);
+  padding: 4px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.phase-1 .phase-cost-pill { background: var(--phase1); }
+.phase-2 .phase-cost-pill { background: var(--phase2); }
+.phase-3 .phase-cost-pill { background: var(--phase3); }
+
+.phase-dates {
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--dust);
+  margin-bottom: 12px;
+}
+.phase-promise {
+  font-size: 12.5px;
+  font-weight: 300;
+  color: #3D3A36;
+  line-height: 1.65;
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 6px;
+}
+.phase-promise strong { font-weight: 400; color: var(--ink); }
+
+.phase-deliverables {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  columns: 2;
+  column-gap: 20px;
+}
+.phase-deliverables li {
+  font-size: 11.5px;
+  font-weight: 300;
+  color: #59534E;
+  line-height: 1.5;
+  padding: 3px 0 3px 16px;
+  position: relative;
+  break-inside: avoid;
+}
+.phase-deliverables li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 9px;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+.phase-1 .phase-deliverables li::before { background: var(--phase1); }
+.phase-2 .phase-deliverables li::before { background: var(--phase2); }
+.phase-3 .phase-deliverables li::before { background: var(--phase3); }
+
+/* ─── COLLAPSIBLE DETAIL ─── */
+.item-detail { margin-top: 10px; }
+.item-detail summary {
+  font-size: 10.5px;
+  font-weight: 400;
+  color: var(--gold);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  user-select: none;
+}
+.item-detail summary::-webkit-details-marker { display: none; }
+.item-detail summary::after { content: '+'; font-size: 13px; font-weight: 300; }
+.item-detail[open] summary::after { content: '\2212'; }
+.item-detail summary:hover { color: var(--terracotta); }
+.item-detail-body {
+  margin-top: 8px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 6px;
+  border-left: 2px solid var(--gold);
+  font-size: 11.5px;
+  font-weight: 300;
+  color: #59534E;
+  line-height: 1.65;
+  animation: detailFade 0.25s ease;
+}
+@keyframes detailFade {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.item-detail-body strong { font-weight: 400; color: var(--ink); }
+
+/* ─── FEUILLE DE ROUTE ─── */
+.roadmap-wrap { margin-bottom: 36px; }
+.roadmap {
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--mist);
+  margin-bottom: 10px;
+}
+.roadmap-phase {
+  padding: 16px 14px;
+  text-align: center;
+}
+.roadmap-phase.rp-1 { flex: 11; background: var(--phase1-bg); border-right: 1px solid var(--mist); }
+.roadmap-phase.rp-2 { flex: 11; background: var(--phase2-bg); border-right: 1px solid var(--mist); }
+.roadmap-phase.rp-3 { flex: 7; background: var(--phase3-bg); }
+.roadmap-date {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.rp-1 .roadmap-date { color: var(--phase1); }
+.rp-2 .roadmap-date { color: var(--phase2); }
+.rp-3 .roadmap-date { color: var(--phase3); }
+.roadmap-label {
+  font-size: 11px;
+  font-weight: 300;
+  color: #59534E;
+  line-height: 1.4;
+}
+.roadmap-weeks {
+  font-size: 9px;
+  font-weight: 400;
+  color: var(--dust);
+  margin-top: 4px;
+}
+.roadmap-note {
+  font-size: 10.5px;
+  font-weight: 300;
+  color: var(--dust);
+  font-style: italic;
+  text-align: center;
+}
+
+/* ─── LINE ITEMS TABLE ─── */
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 0;
+}
+.items-table thead th {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dust);
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--mist);
+}
+.items-table thead th:last-child { text-align: right; }
+.items-table tbody td {
+  padding: 14px 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  vertical-align: top;
+  line-height: 1.55;
+}
+.items-table tbody tr:last-child td { border-bottom: 1px solid var(--mist); }
+.item-number { font-size: 11px; font-weight: 500; color: var(--gold); width: 30px; }
+.item-title { font-size: 13px; font-weight: 400; color: var(--ink); margin-bottom: 3px; }
+.item-desc { font-size: 11.5px; font-weight: 300; color: #7A756E; line-height: 1.5; }
+.item-amount { font-size: 13px; font-weight: 400; color: var(--ink); text-align: right; white-space: nowrap; width: 110px; }
+
+/* ─── TOTAL BLOCK ─── */
+.total-block { display: flex; justify-content: flex-end; margin-top: 0; margin-bottom: 32px; }
+.total-table { width: 280px; border-collapse: collapse; }
+.total-table td { padding: 8px 12px; font-size: 12.5px; font-weight: 300; color: #59534E; }
+.total-table td:last-child { text-align: right; font-weight: 400; }
+.total-table .total-row td {
+  padding-top: 12px;
+  border-top: 2px solid var(--gold);
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--grove);
+}
+.total-table .tva-note td {
+  padding: 4px 12px;
+  font-size: 10.5px;
+  font-weight: 300;
+  color: var(--dust);
+  font-style: italic;
+  border: none;
+}
+
+/* ─── ESTIMATION BADGE & NOTE ─── */
+.estimation-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: rgba(196,163,90,0.15);
+  color: var(--gold);
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.estimation-note {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--dust);
+  font-style: italic;
+  margin-bottom: 28px;
+  padding: 10px 14px;
+  background: var(--cream);
+  border-radius: 6px;
+  border-left: 2px solid var(--mist);
+  line-height: 1.6;
+}
+
+/* ─── ESTIMATION TABLE ─── */
+.items-table.estimation .item-number { color: var(--dust); }
+.items-table.estimation tbody td { border-bottom: 1px dashed rgba(0,0,0,0.07); }
+.items-table.estimation tbody tr:last-child td { border-bottom: 1px dashed var(--mist); }
+
+/* ─── PAYMENT SCHEDULE ─── */
+.payment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 36px;
+}
+.payment-card {
+  background: var(--cream);
+  border-radius: 10px;
+  padding: 18px 16px;
+  text-align: center;
+  border: 1px solid var(--mist);
+}
+.payment-label {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.payment-amount {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: var(--grove);
+  margin-bottom: 4px;
+}
+.payment-pct { font-size: 11px; font-weight: 400; color: var(--dust); margin-bottom: 8px; }
+.payment-trigger { font-size: 11px; font-weight: 300; color: #59534E; line-height: 1.5; }
+
+/* ─── RECAP CARD ─── */
+.recap-card {
+  background: var(--cream);
+  border: 1px solid var(--mist);
+  border-radius: 12px;
+  padding: 28px 24px;
+  margin-bottom: 36px;
+}
+.recap-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.recap-row:last-child { border-bottom: none; }
+.recap-row.recap-total {
+  border-top: 2px solid var(--gold);
+  border-bottom: none;
+  margin-top: 8px;
+  padding-top: 14px;
+}
+.recap-phase { display: flex; align-items: center; gap: 10px; }
+.recap-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.recap-dot.dot-1 { background: var(--phase1); }
+.recap-dot.dot-2 { background: var(--phase2); }
+.recap-dot.dot-3 { background: var(--phase3); }
+.recap-dot.dot-m { background: var(--dust); }
+.recap-label { font-size: 13px; font-weight: 300; color: #3D3A36; }
+.recap-label small { font-size: 10.5px; color: var(--dust); font-weight: 300; }
+.recap-amount { font-size: 14px; font-weight: 400; color: var(--ink); white-space: nowrap; }
+.recap-total .recap-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--grove);
+}
+.recap-total .recap-amount {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--grove);
+}
+
+/* ─── SCOPE ─── */
+.scope-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+.scope-col h4 {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--grove);
+  margin-bottom: 10px;
+}
+.scope-col.later h4 { color: var(--dust); }
+.scope-list { list-style: none; padding: 0; }
+.scope-list li {
+  font-size: 12px;
+  font-weight: 300;
+  color: #59534E;
+  line-height: 1.5;
+  padding: 4px 0 4px 18px;
+  position: relative;
+}
+.scope-list li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 11px;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+}
+.scope-col.inclusions .scope-list li::before { background: var(--gold); }
+.scope-col.later .scope-list li::before { border: 1.5px solid var(--mist); background: transparent; }
+.phase-ref { font-size: 10px; font-weight: 400; color: var(--dust); margin-left: 4px; }
+
+/* ─── CONDITIONS ─── */
+.conditions { margin-bottom: 40px; }
+.conditions ol { padding-left: 20px; }
+.conditions li {
+  font-size: 11.5px;
+  font-weight: 300;
+  color: #59534E;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+.conditions li strong { font-weight: 400; color: var(--ink); }
+
+/* ─── SIGNATURES ─── */
+.signatures {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid var(--mist);
+}
+.sig-label { font-size: 9px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dust); margin-bottom: 4px; }
+.sig-name { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 16px; color: var(--grove); margin-bottom: 6px; }
+.sig-role { font-size: 11px; font-weight: 300; color: #59534E; margin-bottom: 30px; }
+.sig-line { border-bottom: 1px solid var(--mist); margin-bottom: 6px; height: 50px; }
+.sig-date-label { font-size: 10px; font-weight: 300; color: var(--dust); }
+
+/* ─── FOOTER ─── */
+.prop-footer {
+  margin-top: 40px;
+  padding-top: 16px;
+  border-top: 1px solid var(--mist);
+  text-align: center;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--dust);
+  line-height: 1.7;
+}
+
+/* ─── PRINT ─── */
+@media print {
+  html { font-size: 12px; }
+  body { background: white; }
+  .page { max-width: none; padding: 30px 40px; margin: 0; }
+  .prop-header { padding-bottom: 20px; margin-bottom: 20px; }
+  .part-header { page-break-before: always; margin-top: 0; padding-top: 30px; }
+  .part-header:first-of-type { page-break-before: auto; }
+  .phase-card, .payment-card, .roadmap, .recap-card, .signatures,
+  .audience-card, .deliverable-card { break-inside: avoid; }
+  .item-detail { display: none; }
+  .journey-step::after { background: white; }
+  @page { size: A4; margin: 15mm 12mm; }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 640px) {
+  .page { padding: 24px 20px; }
+  .prop-header { flex-direction: column; gap: 20px; }
+  .client { text-align: left; }
+  .doc-meta { flex-wrap: wrap; gap: 16px; }
+  .deliverables-grid, .audience-grid { grid-template-columns: 1fr; }
+  .journey-flow { flex-direction: column; }
+  .journey-step { border-right: none; border-bottom: 1px solid var(--mist); }
+  .journey-step::after { display: none; }
+  .roadmap { flex-direction: column; }
+  .roadmap-phase { border-right: none !important; border-bottom: 1px solid var(--mist); }
+  .roadmap-phase:last-child { border-bottom: none; }
+  .payment-grid, .scope-grid, .signatures { grid-template-columns: 1fr; }
+  .phase-deliverables { columns: 1; }
+  .phase-header { flex-direction: column; }
+  .items-table thead th:first-child,
+  .items-table tbody td:first-child { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══ HEADER ═══ -->
+  <div class="prop-header">
+    <div class="provider">
+      <div class="provider-name">Rached Maalej</div>
+      <div class="provider-title">Developpeur Web Senior &amp; Consultant Digital</div>
+      <div class="provider-info">
+        Tunis, Tunisie<br>
+        rached.maalej@gmail.com<br>
+        +216 XX XXX XXX
+      </div>
+    </div>
+    <div class="client">
+      <div class="client-label">Client</div>
+      <div class="client-name">Domaine Sidi Abdallah</div>
+      <div class="client-info">
+        Mohammedia, Gouvernorat de Ben Arous<br>
+        Tunisie
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ META ═══ -->
+  <div class="doc-meta">
+    <div class="meta-block">
+      <div class="meta-label">Reference</div>
+      <div class="meta-value">PROP-2026-001</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Date</div>
+      <div class="meta-value">28 Fevrier 2026</div>
+    </div>
+    <div class="meta-block">
+      <div class="meta-label">Validite</div>
+      <div class="meta-value">30 jours</div>
+    </div>
+  </div>
+
+  <h1 class="doc-title">Proposition Technique et Commerciale</h1>
+  <p class="doc-subtitle">
+    Conception et developpement de la plateforme digitale du Domaine Sidi Abdallah &mdash; de la vitrine au systeme de reservation complet, construit progressivement par tranches operationnelles.
+  </p>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       PART A — COMPREHENSION DU BRIEF
+       ═══════════════════════════════════════════════════════ -->
+  <div class="part-header">
+    <div class="part-label">Partie A</div>
+    <div class="part-title">Comprehension de votre projet</div>
+  </div>
+
+  <div class="section-title">Votre Vision</div>
+  <div class="prose">
+    Le Domaine Sidi Abdallah est bien plus qu'un lieu &mdash; c'est une <em>experience</em>. Niché dans un domaine agricole de 10 hectares a Mohammedia, le projet rassemble quatre univers complementaires : sejour dans une maison d'hotes de charme (Dar Saad), detente et bien-etre (Agrumia), gastronomie du terroir, et retraites thematiques. Le tout, porte par les valeurs de l'agritourisme, de l'artisanat et d'une agriculture respectueuse.
+  </div>
+  <div class="prose">
+    Le site web doit incarner cette vision. Il ne s'agit pas d'une simple brochure en ligne, mais d'un <strong>outil qui fait vivre l'experience avant meme l'arrivee du visiteur</strong> &mdash; puis qui lui permet de reserver et de payer en toute autonomie, pendant que l'equipe pilote toutes les activites depuis un seul espace de gestion.
+  </div>
+
+  <div class="section-title">Les 4 Livraisons Attendues</div>
+  <div class="deliverables-grid">
+    <div class="deliverable-card">
+      <div class="deliverable-num">1</div>
+      <div>
+        <div class="deliverable-title">Un site vitrine</div>
+        <div class="deliverable-desc">Elegant, simple, mobile-first, bilingue FR/EN. Presente les 3 piliers + les evenements et retraites. Guide le visiteur naturellement vers la reservation.</div>
+      </div>
+    </div>
+    <div class="deliverable-card">
+      <div class="deliverable-num">2</div>
+      <div>
+        <div class="deliverable-title">La reservation en ligne</div>
+        <div class="deliverable-desc">Pour toutes les activites : restaurant, spa &amp; wellness, hotel, retraites. Parcours court &mdash; decouvrir → comprendre → reserver → payer.</div>
+      </div>
+    </div>
+    <div class="deliverable-card">
+      <div class="deliverable-num">3</div>
+      <div>
+        <div class="deliverable-title">Le paiement en ligne</div>
+        <div class="deliverable-desc">Deux systemes distincts : Konnect en TND pour les clients tunisiens, Stripe en EUR/USD pour les clients internationaux. Detection automatique.</div>
+      </div>
+    </div>
+    <div class="deliverable-card">
+      <div class="deliverable-num">4</div>
+      <div>
+        <div class="deliverable-title">Un back-office centralise</div>
+        <div class="deliverable-desc">Un espace de gestion unique pour que l'equipe supervise toutes les reservations (restaurant, spa, hotel, retraites) depuis une seule plateforme.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Vos Publics</div>
+  <div class="audience-grid">
+    <div class="audience-card">
+      <div class="audience-icon">&#9728;</div>
+      <div class="audience-label">Public 1</div>
+      <div class="audience-title">Tunisiens &mdash; journee</div>
+      <div class="audience-desc">Venir dejeuner, profiter du spa, participer a un evenement. Veulent reserver vite, payer facilement (Konnect / click to pay), depuis leur telephone.</div>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon">&#127769;</div>
+      <div class="audience-label">Public 2</div>
+      <div class="audience-title">Tunisiens &mdash; sejour</div>
+      <div class="audience-desc">Planifier un week-end ou une retraite. Comprendre les forfaits, visualiser l'experience, reserver un sejour complet (staycation).</div>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon">&#9992;</div>
+      <div class="audience-label">Public 3</div>
+      <div class="audience-title">Touristes internationaux</div>
+      <div class="audience-desc">Decouvrir le domaine via Google. Site en anglais, philosophie claire, reservation et paiement en EUR/USD sans friction.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Le Parcours Visiteur</div>
+  <div class="journey-flow">
+    <div class="journey-step">
+      <div class="journey-number">01</div>
+      <div class="journey-title">Decouvrir</div>
+      <div class="journey-desc">Arriver sur le site,<br>etre immediatement seduit</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-number">02</div>
+      <div class="journey-title">Comprendre</div>
+      <div class="journey-desc">Explorer l'offre,<br>les tarifs, les disponibilites</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-number">03</div>
+      <div class="journey-title">Reserver</div>
+      <div class="journey-desc">Choisir et bloquer<br>une date, une prestation</div>
+    </div>
+    <div class="journey-step">
+      <div class="journey-number">04</div>
+      <div class="journey-title">Payer</div>
+      <div class="journey-desc">Regler en ligne<br>en TND, EUR ou USD</div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       PART B — NOTRE PROPOSITION
+       ═══════════════════════════════════════════════════════ -->
+  <div class="part-header">
+    <div class="part-label">Partie B</div>
+    <div class="part-title">Notre Proposition</div>
+  </div>
+
+  <div class="section-title">L'Approche : Tranches Verticales</div>
+
+  <div class="slice-explainer">
+    <div class="slice-explainer-title">Pourquoi ne pas commencer par un site vitrine, puis ajouter la reservation ?</div>
+    <p>
+      L'approche intuitive consiste a construire d'abord un beau site vitrine, puis a ajouter la reservation, puis le paiement, puis le back-office. En pratique, cette approche force a <strong>reconstruire les fondations a chaque phase</strong> : le site vitrine n'est pas prevu pour gerer des reservations, donc quand vient la Phase 2, une grande partie du travail est a refaire.
+    </p>
+    <p>
+      Nous proposons de construire par <strong>tranches verticales</strong> &mdash; chaque tranche livre un flux complet de bout en bout : <em>voir → reserver → payer → gerer</em>. On commence par le restaurant (le plus simple), puis on etend au wellness et a l'hotel, puis aux retraites. <strong>Rien n'est jamais reconstruit &mdash; tout s'etend.</strong>
+    </p>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase-card phase-1">
+    <div class="phase-badge">Phase 1 &mdash; Devis ferme</div>
+    <div class="phase-header">
+      <div>
+        <div class="phase-title">Fondation + Site Vitrine + Restaurant</div>
+        <div class="phase-dates">Avril &ndash; Juin 2026 &middot; ~10 a 12 semaines</div>
+      </div>
+      <div class="phase-cost-pill">34 000 TND</div>
+    </div>
+    <div class="phase-promise">
+      A la fin de cette phase, le site est en ligne ET le restaurant peut <strong>prendre des reservations et encaisser des paiements en ligne</strong>. Ce n'est pas une brochure en attente de fonctionnalites &mdash; c'est un outil operationnel des le premier jour.
+    </div>
+    <ul class="phase-deliverables">
+      <li>7 pages bilingues FR/EN (design sur mesure)</li>
+      <li>Architecture full-stack (serveur, base de donnees)</li>
+      <li>Geo-detection automatique visiteur</li>
+      <li>Module reservation Restaurant</li>
+      <li>Paiement en ligne Konnect (TND)</li>
+      <li>Back-office v1 (gestion des reservations restaurant)</li>
+      <li>Emails de confirmation automatiques</li>
+      <li>Boutons WhatsApp + newsletter + waitlist</li>
+      <li>SEO technique + Google Business Profile</li>
+      <li>Performance optimisee (mobile &lt; 2 sec)</li>
+      <li>Deploiement + configuration domaine</li>
+      <li>30 jours de support post-lancement</li>
+    </ul>
+    <details class="item-detail">
+      <summary>En savoir plus &mdash; pourquoi le restaurant en premier ?</summary>
+      <div class="item-detail-body">
+        <strong>Le restaurant est la brique la plus simple a modeliser</strong> : une date, un creneau horaire, un nombre de convives. C'est le meilleur point de depart pour construire et valider toute la chaine technique &mdash; de la reservation au paiement en passant par le back-office &mdash; avant d'aborder des cas plus complexes (multi-ressources du spa, calendrier hotel, forfaits retraites).<br><br>
+        <strong>C'est aussi ce qui ouvre en premier.</strong> Le restaurant et les activites bien-etre accueilleront des clients bien avant que les chambres de Dar Saad ne soient prates. En livrant la reservation restaurant en Phase 1, le site genere de la valeur immediate.
+      </div>
+    </details>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-card phase-2">
+    <div class="phase-badge">Phase 2 &mdash; Estimation</div>
+    <div class="phase-header">
+      <div>
+        <div class="phase-title">Wellness, Spa &amp; Hotel (Dar Saad)</div>
+        <div class="phase-dates">Juillet &ndash; Octobre 2026 &middot; ~10 a 12 semaines</div>
+      </div>
+      <div class="phase-cost-pill">~22 000 TND</div>
+    </div>
+    <div class="phase-promise">
+      Le systeme de reservation s'etend au spa, au wellness et a l'hotel. Les clients internationaux peuvent desormais reserver et payer en EUR/USD. Le back-office regroupe toutes les activites dans un seul calendrier unifie.
+    </div>
+    <ul class="phase-deliverables">
+      <li>Module reservation Wellness &amp; Spa (multi-ressources)</li>
+      <li>Module reservation Dar Saad &mdash; 6 chambres</li>
+      <li>Tarifs saisonniers et politique d'annulation</li>
+      <li>Paiement international Stripe (EUR/USD)</li>
+      <li>Back-office v2 &mdash; calendrier unifie toutes activites</li>
+      <li>Statistiques et rapports de frequentation</li>
+    </ul>
+    <details class="item-detail">
+      <summary>En savoir plus &mdash; spa et hotel, pourquoi plus complexe ?</summary>
+      <div class="item-detail-body">
+        <strong>Le spa (Agrumia)</strong> est plus complexe que le restaurant car chaque prestation a ses propres ressources : le hammam a une capacite, les cabines de massage sont en nombre limite, les cours de yoga ont un maximum de participants. Le systeme doit gerer ces contraintes simultanement et en temps reel.<br><br>
+        <strong>L'hotel (Dar Saad)</strong> necessite un calendrier de disponibilite par chambre, avec des tarifs qui varient selon la saison, les evenements speciaux, et les forfaits combines. C'est aussi le produit principal qui interesse les touristes internationaux, d'ou l'integration de Stripe (paiement en EUR/USD) dans cette phase.<br><br>
+        <strong>Stripe vs Konnect :</strong> Konnect est la passerelle de paiement tunisienne (TND). Stripe est la reference internationale (EUR, USD, cartes etrangeres). Les deux coexistent &mdash; le site detecte automatiquement le profil du client et propose le bon systeme.
+      </div>
+    </details>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase-card phase-3">
+    <div class="phase-badge">Phase 3 &mdash; Estimation</div>
+    <div class="phase-header">
+      <div>
+        <div class="phase-title">Retraites, OTA &amp; Contenu Final</div>
+        <div class="phase-dates">Novembre &ndash; Decembre 2026 &middot; ~6 a 8 semaines</div>
+      </div>
+      <div class="phase-cost-pill">~12 000 TND</div>
+    </div>
+    <div class="phase-promise">
+      Le module le plus complexe (retraites = chambres + repas + activites en forfait) est ajoute. Le site est connecte a Booking.com et Airbnb. Le contenu definitif (photos et videos professionnelles) remplace les visuels provisoires.
+    </div>
+    <ul class="phase-deliverables">
+      <li>Module reservation Retraites (forfaits composes)</li>
+      <li>Verification disponibilite croisee (chambre + activites)</li>
+      <li>Connexion OTA (Booking.com, Airbnb)</li>
+      <li>Synchronisation calendrier anti-double-reservation</li>
+      <li>Integration contenu final (photos, videos, textes)</li>
+      <li>Optimisation SEO avec contenu definitif</li>
+      <li>Analytics avances + premiers reviews</li>
+    </ul>
+    <details class="item-detail">
+      <summary>En savoir plus &mdash; retraites et OTA</summary>
+      <div class="item-detail-body">
+        <strong>Les retraites</strong> sont le produit le plus complexe a gerer en ligne car elles combinent plusieurs elements : une chambre (disponibilite hotel), des repas (cuisine), et des activites (yoga, spa, atelier). La reservation d'une retraite doit verifier simultanement que tous ces elements sont disponibles, calculer le prix du forfait, et bloquer les ressources dans chaque module.<br><br>
+        <strong>Les OTA (Online Travel Agencies)</strong> &mdash; Booking.com, Airbnb &mdash; sont des plateformes de voyage que des millions de voyageurs utilisent pour planifier leurs sejours. En connectant Dar Saad a ces plateformes, les chambres apparaissent dans leurs resultats de recherche, ce qui genere des reservations supplementaires sans effort marketing. Le calendrier du site et des OTA est synchronise en temps reel pour eviter les doubles reservations.
+      </div>
+    </details>
+  </div>
+
+  <!-- FEUILLE DE ROUTE -->
+  <div class="section-title">Feuille de Route 2026</div>
+  <div class="roadmap-wrap">
+    <div class="roadmap">
+      <div class="roadmap-phase rp-1">
+        <div class="roadmap-date">Avr &ndash; Jun</div>
+        <div class="roadmap-label">Site + Fondation<br>+ Restaurant</div>
+        <div class="roadmap-weeks">~10 &ndash; 12 semaines</div>
+      </div>
+      <div class="roadmap-phase rp-2">
+        <div class="roadmap-date">Jul &ndash; Oct</div>
+        <div class="roadmap-label">Wellness, Spa<br>&amp; Hotel</div>
+        <div class="roadmap-weeks">~10 &ndash; 12 semaines</div>
+      </div>
+      <div class="roadmap-phase rp-3">
+        <div class="roadmap-date">Nov &ndash; Dec</div>
+        <div class="roadmap-label">Retraites, OTA<br>&amp; Contenu final</div>
+        <div class="roadmap-weeks">~6 &ndash; 8 semaines</div>
+      </div>
+    </div>
+    <div class="roadmap-note">Calendrier indicatif &mdash; demarre a reception de la Tranche 1 et des elements de contenu Phase 1 (textes valides, logos)</div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       PART C — INVESTISSEMENT
+       ═══════════════════════════════════════════════════════ -->
+  <div class="part-header">
+    <div class="part-label">Partie C</div>
+    <div class="part-title">Investissement</div>
+  </div>
+
+  <!-- ─── PHASE 1 DEVIS ─── -->
+  <div class="section-title">Devis Phase 1 &mdash; Fondation, Site Vitrine &amp; Restaurant</div>
+  <table class="items-table">
+    <thead>
+      <tr>
+        <th style="width:30px">#</th>
+        <th>Poste</th>
+        <th style="text-align:right; width:110px">Montant</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="item-number">01</td>
+        <td>
+          <div class="item-title">Audit, Strategie &amp; Direction Artistique</div>
+          <div class="item-desc">Analyse concurrentielle (benchmarks internationaux), choix de la direction design, architecture d'information, definition des parcours utilisateurs par audience</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              Avant de construire quoi que ce soit, nous etudions les meilleurs sites de domaines et maisons d'hotes de luxe (Babylonstoren, Cap Rocat, The Newt&hellip;) pour comprendre ce qui fonctionne. Nous choisissons la direction visuelle du site et definissons comment chaque type de visiteur va naviguer et trouver ce qu'il cherche. <strong>C'est le plan architectural avant la construction.</strong>
+            </div>
+          </details>
+        </td>
+        <td class="item-amount">2 500 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">02</td>
+        <td>
+          <div class="item-title">Design UX/UI</div>
+          <div class="item-desc">Maquettes haute-fidelite desktop et mobile des 7 pages + module de reservation restaurant + interface back-office v1. Creation du design system complet (typographie, couleurs, composants)</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              C'est la creation visuelle de tout ce que Phase 1 livrera : les 7 pages du site, mais aussi l'interface de reservation restaurant et l'espace de gestion pour l'equipe. Le design system &mdash; l'ensemble des regles visuelles &mdash; est cree une seule fois et reutilise dans toutes les phases suivantes. <strong>Pas besoin de redesigner en Phase 2 ou 3.</strong>
+            </div>
+          </details>
+        </td>
+        <td class="item-amount">7 000 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">03</td>
+        <td>
+          <div class="item-title">Architecture &amp; Developpement Full-Stack</div>
+          <div class="item-desc">Mise en place de l'infrastructure complete (serveur, base de donnees, API), integration des 7 templates de pages, architecture bilingue FR/EN, geo-detection, composants reactifs, optimisation images</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              C'est la brique la plus importante de tout le projet. Nous construisons l'<strong>infrastructure qui supporte tout le reste</strong> : le serveur qui fait tourner le site, la base de donnees qui stocke les reservations, l'API qui fait communiquer toutes les parties entre elles. Cette fondation est construite une seule fois &mdash; les Phases 2 et 3 s'y connectent simplement. Par comparaison, une approche site vitrine d'abord forcerait a tout reconstruire quand vient la reservation.
+            </div>
+          </details>
+        </td>
+        <td class="item-amount">12 000 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">04</td>
+        <td>
+          <div class="item-title">Module Reservation Restaurant &amp; Paiement Konnect</div>
+          <div class="item-desc">Systeme de reservation restaurant (date, creneau, convives, confirmation), integration paiement Konnect (TND), back-office v1 (liste et calendrier des reservations, notifications)</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              Le visiteur choisit une date, un creneau horaire et le nombre de convives. Le systeme verifie en temps reel qu'une table est disponible, confirme la reservation et envoie un email de confirmation automatique. Il peut aussi encaisser un acompte en ligne via Konnect (la plateforme de paiement tunisienne).<br><br>
+              Le back-office v1 permet a l'equipe du Domaine de voir toutes les reservations du restaurant sur un calendrier, de les modifier, et de recevoir des alertes. C'est simple &mdash; pense pour quelqu'un qui n'est pas informaticien.
+            </div>
+          </details>
+        </td>
+        <td class="item-amount">4 000 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">05</td>
+        <td>
+          <div class="item-title">Integrations</div>
+          <div class="item-desc">Newsletter Brevo, boutons WhatsApp avec messages pre-remplis par page, formulaire de contact, liste d'attente hotel et retraites, Vercel Analytics</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              Les connexions entre le site et les outils du quotidien : la <strong>collecte d'emails</strong> pour la newsletter et la liste d'attente pour l'hotel et les retraites (avant que la reservation soit disponible), les <strong>boutons WhatsApp</strong> qui ouvrent un message pre-ecrit selon la page consultee, et les <strong>statistiques de visite</strong> pour savoir quelles pages fonctionnent.
+            </div>
+          </details>
+        </td>
+        <td class="item-amount">2 500 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">06</td>
+        <td>
+          <div class="item-title">SEO (referencement) &amp; Performance (rapidite)</div>
+          <div class="item-desc">Donnees structurees Schema.org, sitemap.xml, balises meta FR/EN, Open Graph, Core Web Vitals, objectif Lighthouse 95+, Google Business Profile</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              Le <strong>referencement</strong> permet au site d'apparaitre dans Google quand quelqu'un cherche &laquo; agritourisme Tunisie &raquo;, &laquo; restaurant farm-to-table Tunis &raquo; ou &laquo; maison d'hotes Mohammedia &raquo;. Nous crerons aussi le profil Google Maps du Domaine. L'<strong>optimisation performance</strong> garantit un chargement en moins de 2 secondes &mdash; essentiel pour les visiteurs sur mobile avec une connexion variable.
+            </div>
+          </details>
+        </td>
+        <td class="item-amount">2 000 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">07</td>
+        <td>
+          <div class="item-title">Recette &amp; Mise en Production</div>
+          <div class="item-desc">Tests cross-browser et mobile, QA bilingue, tests du flux de reservation et paiement, configuration DNS et SSL, deploiement</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              La verification complete avant ouverture au public : tester le site sur tous les navigateurs et telephones, verifier que les deux langues fonctionnent, <strong>simuler des reservations et des paiements de bout en bout</strong>, configurer l'adresse web definitive. L'equivalent de la visite de reception avant la remise des cles.
+            </div>
+          </details>
+        </td>
+        <td class="item-amount">2 000 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">08</td>
+        <td>
+          <div class="item-title">Gestion de Projet</div>
+          <div class="item-desc">Coordination parties prenantes sur 10-12 semaines, reporting d'avancement, 2 points d'approbation formels (staging + lancement), gestion des retours</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              La coordination tout au long de la phase : envoyer les demandes de contenu au bon moment (textes, logos, photos de Phase 1), organiser les deux revues formelles du site, gerer les retours et les priorites. Une phase plus longue (10-12 semaines) et plus dense techniquement justifie un budget de coordination legerement superieur a un projet purement vitrine.
+            </div>
+          </details>
+        </td>
+        <td class="item-amount">2 000 TND</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="total-block">
+    <table class="total-table">
+      <tr>
+        <td>Sous-total Phase 1</td>
+        <td>34 000 TND</td>
+      </tr>
+      <tr class="tva-note">
+        <td colspan="2">TVA non applicable &mdash; Article 44 du code de la TVA</td>
+      </tr>
+      <tr class="total-row">
+        <td>Total Phase 1</td>
+        <td>34 000 TND</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ─── ECHEANCIER PHASE 1 ─── -->
+  <div class="section-title">Echeancier de Paiement &mdash; Phase 1</div>
+  <div class="payment-grid">
+    <div class="payment-card">
+      <div class="payment-label">Tranche 1</div>
+      <div class="payment-amount">10 000 TND</div>
+      <div class="payment-pct">~30%</div>
+      <div class="payment-trigger">A la signature du present devis</div>
+    </div>
+    <div class="payment-card">
+      <div class="payment-label">Tranche 2</div>
+      <div class="payment-amount">14 000 TND</div>
+      <div class="payment-pct">~40%</div>
+      <div class="payment-trigger">A la validation du site &amp; module restaurant sur l'URL de staging</div>
+    </div>
+    <div class="payment-card">
+      <div class="payment-label">Tranche 3</div>
+      <div class="payment-amount">10 000 TND</div>
+      <div class="payment-pct">~30%</div>
+      <div class="payment-trigger">A la mise en ligne sur le domaine definitif</div>
+    </div>
+  </div>
+
+
+  <!-- ─── PHASE 2 ESTIMATION ─── -->
+  <div class="section-title">Estimation Phase 2 &mdash; Wellness, Spa &amp; Hotel <span class="estimation-badge">Estimation</span></div>
+  <table class="items-table estimation">
+    <thead>
+      <tr>
+        <th style="width:30px">#</th>
+        <th>Poste</th>
+        <th style="text-align:right; width:110px">Montant</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="item-number">01</td>
+        <td>
+          <div class="item-title">Design UX/UI &mdash; Wellness, Hotel &amp; Back-office v2</div>
+          <div class="item-desc">Maquettes des parcours de reservation spa/wellness, hotel (Dar Saad), et evolution du back-office vers un calendrier unifie</div>
+        </td>
+        <td class="item-amount">4 000 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">02</td>
+        <td>
+          <div class="item-title">Module Reservation Wellness &amp; Spa</div>
+          <div class="item-desc">Gestion multi-ressources (hammam, sauna, cabines massage, cours yoga/pilates), creneaux par prestation, packages combines, confirmation automatique</div>
+        </td>
+        <td class="item-amount">6 000 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">03</td>
+        <td>
+          <div class="item-title">Module Reservation Dar Saad (hotel)</div>
+          <div class="item-desc">Calendrier de disponibilite pour 6 chambres, tarifs saisonniers, politique d'annulation, gestion des arrhes, confirmation et rappels</div>
+        </td>
+        <td class="item-amount">6 000 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">04</td>
+        <td>
+          <div class="item-title">Integration Paiement Stripe (EUR/USD)</div>
+          <div class="item-desc">Paiement international par carte (EUR, USD, autres devises), detection automatique du profil client, remboursements</div>
+        </td>
+        <td class="item-amount">2 500 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">05</td>
+        <td>
+          <div class="item-title">Back-office v2 &mdash; Calendrier Unifie &amp; Statistiques</div>
+          <div class="item-desc">Vue centralisee restaurant + wellness + hotel, filtres par activite, rapports de frequentation, exports</div>
+        </td>
+        <td class="item-amount">2 000 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">06</td>
+        <td>
+          <div class="item-title">Recette &amp; Mise en Production</div>
+          <div class="item-desc">Tests des nouveaux modules, simulation des flux de reservation et paiement Stripe, QA complete</div>
+        </td>
+        <td class="item-amount">1 500 TND</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="total-block">
+    <table class="total-table">
+      <tr class="total-row">
+        <td>Estimation Phase 2</td>
+        <td>~22 000 TND</td>
+      </tr>
+    </table>
+  </div>
+  <div class="estimation-note">
+    Estimation indicative. Un devis detaille pour la Phase 2 sera etabli a l'issue de la Phase 1, une fois les besoins fonctionnels affines (nombre de ressources spa, politique tarifaire hotel, etc.).
+  </div>
+
+
+  <!-- ─── PHASE 3 ESTIMATION ─── -->
+  <div class="section-title">Estimation Phase 3 &mdash; Retraites, OTA &amp; Contenu Final <span class="estimation-badge">Estimation</span></div>
+  <table class="items-table estimation">
+    <thead>
+      <tr>
+        <th style="width:30px">#</th>
+        <th>Poste</th>
+        <th style="text-align:right; width:110px">Montant</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="item-number">01</td>
+        <td>
+          <div class="item-title">Module Reservation Retraites</div>
+          <div class="item-desc">Forfaits composes (chambre + repas + activites), verification de disponibilite croisee sur tous les modules, selection de formule, calcul dynamique du prix</div>
+        </td>
+        <td class="item-amount">4 000 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">02</td>
+        <td>
+          <div class="item-title">Connexion OTA (Booking.com, Airbnb)</div>
+          <div class="item-desc">Synchronisation du calendrier Dar Saad avec les plateformes de voyage, prevention des doubles reservations, gestion des commissions</div>
+        </td>
+        <td class="item-amount">3 000 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">03</td>
+        <td>
+          <div class="item-title">Integration Contenu Final</div>
+          <div class="item-desc">Remplacement des photos et textes provisoires par le contenu definitif (FR + EN), galleries, videos, optimisation des medias</div>
+        </td>
+        <td class="item-amount">3 000 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">04</td>
+        <td>
+          <div class="item-title">Optimisation SEO &amp; Analytics</div>
+          <div class="item-desc">Ajustement du referencement avec le contenu reel, analyse des donnees de frequentation, ajustements UX bases sur le comportement visiteurs, premiers reviews</div>
+        </td>
+        <td class="item-amount">2 000 TND</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="total-block">
+    <table class="total-table">
+      <tr class="total-row">
+        <td>Estimation Phase 3</td>
+        <td>~12 000 TND</td>
+      </tr>
+    </table>
+  </div>
+  <div class="estimation-note">
+    Estimation indicative. Le montant sera ajuste selon le volume de contenu final et les plateformes OTA choisies.
+  </div>
+
+
+  <!-- ─── RECAPITULATIF ─── -->
+  <div class="section-title">Recapitulatif Financier</div>
+  <div class="recap-card">
+    <div class="recap-row">
+      <div class="recap-phase">
+        <div class="recap-dot dot-1"></div>
+        <div class="recap-label">Phase 1 &mdash; Fondation, Site &amp; Restaurant <small>(devis ferme)</small></div>
+      </div>
+      <div class="recap-amount">34 000 TND</div>
+    </div>
+    <div class="recap-row">
+      <div class="recap-phase">
+        <div class="recap-dot dot-2"></div>
+        <div class="recap-label">Phase 2 &mdash; Wellness, Spa &amp; Hotel <small>(estimation)</small></div>
+      </div>
+      <div class="recap-amount">~22 000 TND</div>
+    </div>
+    <div class="recap-row">
+      <div class="recap-phase">
+        <div class="recap-dot dot-3"></div>
+        <div class="recap-label">Phase 3 &mdash; Retraites, OTA &amp; Contenu Final <small>(estimation)</small></div>
+      </div>
+      <div class="recap-amount">~12 000 TND</div>
+    </div>
+    <div class="recap-row">
+      <div class="recap-phase">
+        <div class="recap-dot dot-m"></div>
+        <div class="recap-label">Maintenance mensuelle <small>(optionnel, a partir de la mise en ligne Phase 1)</small></div>
+      </div>
+      <div class="recap-amount">~600 TND/mois</div>
+    </div>
+    <div class="recap-row recap-total">
+      <div class="recap-phase">
+        <div class="recap-label">Total Projet (hors maintenance)</div>
+      </div>
+      <div class="recap-amount">~68 000 TND</div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       PART D — CADRE & CONDITIONS
+       ═══════════════════════════════════════════════════════ -->
+  <div class="part-header">
+    <div class="part-label">Partie D</div>
+    <div class="part-title">Cadre &amp; Conditions</div>
+  </div>
+
+  <div class="section-title">Perimetre Phase 1</div>
+  <div class="scope-grid">
+    <div class="scope-col inclusions">
+      <h4>Inclus dans la Phase 1</h4>
+      <ul class="scope-list">
+        <li>7 templates de pages bilingues (FR + EN)</li>
+        <li>Design sur mesure desktop + mobile</li>
+        <li>Architecture full-stack (serveur, base de donnees, API)</li>
+        <li>Geo-detection automatique du visiteur</li>
+        <li>Module reservation Restaurant complet</li>
+        <li>Paiement en ligne Konnect (TND)</li>
+        <li>Back-office v1 (gestion reservations restaurant)</li>
+        <li>Emails de confirmation automatiques</li>
+        <li>Newsletter + liste d'attente (Brevo)</li>
+        <li>Boutons WhatsApp + formulaire de contact</li>
+        <li>SEO technique + Google Business Profile</li>
+        <li>Deploiement + configuration DNS</li>
+        <li>2 cycles de revision par approbation</li>
+        <li>30 jours de support correctif post-lancement</li>
+      </ul>
+    </div>
+    <div class="scope-col later">
+      <h4>Couvert dans les phases suivantes</h4>
+      <ul class="scope-list">
+        <li>Module reservation Wellness &amp; Spa <span class="phase-ref">&rarr; Phase 2</span></li>
+        <li>Module reservation Dar Saad (hotel) <span class="phase-ref">&rarr; Phase 2</span></li>
+        <li>Paiement international Stripe (EUR/USD) <span class="phase-ref">&rarr; Phase 2</span></li>
+        <li>Calendrier unifie toutes activites <span class="phase-ref">&rarr; Phase 2</span></li>
+        <li>Module reservation Retraites <span class="phase-ref">&rarr; Phase 3</span></li>
+        <li>Connexion OTA (Booking.com, Airbnb) <span class="phase-ref">&rarr; Phase 3</span></li>
+        <li>Contenu final (photos et videos definitives) <span class="phase-ref">&rarr; Phase 3</span></li>
+        <li>Redaction de contenu (texte fourni par le client)</li>
+        <li>Photographie et production video</li>
+        <li>Nom de domaine et hebergement email (~60 TND/an)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">Conditions Generales</div>
+  <div class="conditions">
+    <ol>
+      <li><strong>Propriete intellectuelle :</strong> L'ensemble du code source, des maquettes et du design system sont cedes au client a la reception du paiement integral de chaque phase. Le prestataire conserve le droit de mentionner le projet dans son portfolio.</li>
+      <li><strong>Contenu :</strong> Le client fournit textes (FR et EN), logos et photographies necessaires. Tout retard dans la fourniture du contenu peut entrainer un decalage du calendrier.</li>
+      <li><strong>Revisions :</strong> 2 cycles de revision sont inclus apres chaque point d'approbation (staging et lancement). Les demandes depassant le perimetre defini feront l'objet d'un avenant.</li>
+      <li><strong>Delais :</strong> Le calendrier previsionnel court a compter de la reception de la Tranche 1 et de la fourniture des elements de contenu (textes valides, logos).</li>
+      <li><strong>Engagement par phase :</strong> L'acceptation de la presente proposition vaut engagement pour la Phase 1 uniquement. Les Phases 2 et 3 feront l'objet de devis detailles separes, etablis en fin de phase precedente.</li>
+      <li><strong>Annulation :</strong> En cas d'annulation apres demarrage des travaux, la Tranche 1 reste acquise au prestataire. Les travaux deja livres restent la propriete du client proportionnellement aux paiements effectues.</li>
+      <li><strong>Confidentialite :</strong> Le prestataire s'engage a traiter comme confidentielles toutes les informations communiquees dans le cadre de cette mission.</li>
+      <li><strong>Support post-lancement :</strong> 30 jours de support correctif (bugs, ajustements mineurs) sont inclus a compter de la mise en ligne de chaque phase. Au-dela, un contrat de maintenance peut etre propose.</li>
+    </ol>
+  </div>
+
+  <div class="signatures">
+    <div class="sig-block">
+      <div class="sig-label">Le prestataire</div>
+      <div class="sig-name">Rached Maalej</div>
+      <div class="sig-role">Developpeur Web Senior</div>
+      <div class="sig-line"></div>
+      <div class="sig-date-label">Date et signature</div>
+    </div>
+    <div class="sig-block">
+      <div class="sig-label">Le client</div>
+      <div class="sig-name">Domaine Sidi Abdallah</div>
+      <div class="sig-role">Represente par</div>
+      <div class="sig-line"></div>
+      <div class="sig-date-label">Date, nom et signature</div>
+    </div>
+  </div>
+
+  <div class="prop-footer">
+    Rached Maalej &middot; Developpeur Web Senior &amp; Consultant Digital &middot; Tunis, Tunisie<br>
+    Proposition PROP-2026-001 &middot; Valable jusqu'au 30 Mars 2026
+  </div>
+
+</div>
+</body>
+</html>

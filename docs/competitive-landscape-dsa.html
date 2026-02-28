@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Références Design & Paysage Concurrentiel — Domaine Sidi Abdallah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #F7F0E3;
+    --parchment-dark: #EDE4D1;
+    --grove: #2C4035;
+    --grove-light: #3a5447;
+    --terracotta: #B5623A;
+    --gold: #C4A35A;
+    --ink: #1C1A17;
+    --ink-soft: #3d3a36;
+    --white: #FDFAF5;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--grove);
+    padding: 0 3rem;
+    display: flex; align-items: center; gap: 2rem;
+    height: 52px;
+  }
+  nav a {
+    color: rgba(247,240,227,0.7);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--gold); }
+  nav .sep { color: rgba(247,240,227,0.2); font-size: 0.7rem; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--grove);
+    color: var(--parchment);
+    padding: 5rem 3rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center top, rgba(196,163,90,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--parchment);
+    margin-bottom: 1.5rem;
+    max-width: 720px;
+    margin-left: auto; margin-right: auto;
+  }
+  .hero-rule {
+    width: 48px; height: 1px;
+    background: var(--gold);
+    margin: 0 auto 1.5rem;
+  }
+  .hero p {
+    max-width: 580px;
+    margin: 0 auto;
+    color: rgba(247,240,227,0.75);
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+  .hero-meta {
+    margin-top: 2.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: rgba(247,240,227,0.4);
+    text-transform: uppercase;
+  }
+
+  /* ── LEAF DIVIDER ── */
+  .leaf-divider {
+    display: flex; justify-content: center; align-items: center;
+    gap: 1.2rem; padding: 2.5rem 0 1rem;
+    color: var(--gold);
+  }
+  .leaf-divider svg { opacity: 0.6; }
+  .leaf-divider .line { flex: 1; max-width: 80px; height: 1px; background: var(--gold); opacity: 0.3; }
+
+  /* ── SECTION ── */
+  section { padding: 4rem 3rem; max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 0.6rem;
+    font-weight: 500;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 400;
+    color: var(--grove);
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+  }
+  .section-intro {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    max-width: 640px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  /* ── REFERENCE GRID ── */
+  .ref-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .ref-card {
+    background: var(--white);
+    border: 1px solid rgba(44,64,53,0.1);
+    padding: 1.8rem;
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .ref-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(44,64,53,0.08);
+  }
+  .ref-card.tier-1 { border-top: 3px solid var(--terracotta); }
+  .ref-card.tier-2 { border-top: 3px solid var(--gold); }
+
+  .card-tier {
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+  }
+  .tier-1 .card-tier { color: var(--terracotta); }
+  .tier-2 .card-tier { color: var(--gold); }
+
+  .card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--grove);
+    margin-bottom: 0.2rem;
+  }
+  .card-location {
+    font-size: 0.78rem;
+    color: rgba(28,26,23,0.45);
+    margin-bottom: 1rem;
+    letter-spacing: 0.04em;
+  }
+  .card-url {
+    font-size: 0.72rem;
+    color: var(--terracotta);
+    font-family: monospace;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+  .card-url a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(181,98,58,0.4);
+    transition: border-color 0.2s, opacity 0.2s;
+  }
+  .card-url a:hover { opacity: 1; border-color: var(--terracotta); }
+  .card-concept {
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--ink-soft);
+    border-left: 2px solid var(--gold);
+    padding-left: 0.9rem;
+    margin-bottom: 1.1rem;
+    line-height: 1.6;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+  }
+  .card-lessons { list-style: none; }
+  .card-lessons li {
+    font-size: 0.83rem;
+    color: var(--ink-soft);
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(44,64,53,0.06);
+    display: flex; gap: 0.6rem;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+  .card-lessons li:last-child { border-bottom: none; }
+  .card-lessons li::before { content: '→'; color: var(--gold); flex-shrink: 0; font-size: 0.8rem; margin-top: 0.05rem; }
+
+  .card-takeaway {
+    margin-top: 1rem;
+    background: rgba(44,64,53,0.04);
+    border-radius: 2px;
+    padding: 0.8rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--grove);
+  }
+  .card-takeaway strong { display: block; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 0.3rem; }
+
+  /* ── DIRECTIVES ── */
+  .directives-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+  @media (max-width: 700px) { .directives-grid { grid-template-columns: 1fr; } }
+
+  .directive-card {
+    background: var(--grove);
+    color: var(--parchment);
+    padding: 2rem;
+  }
+  .directive-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: rgba(196,163,90,0.25);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .directive-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+    color: var(--gold);
+  }
+  .directive-body {
+    font-size: 0.83rem;
+    color: rgba(247,240,227,0.75);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+  .directive-example {
+    margin-top: 1rem;
+    padding: 0.7rem 0.9rem;
+    background: rgba(247,240,227,0.06);
+    border-left: 2px solid var(--gold);
+    font-size: 0.78rem;
+    color: rgba(247,240,227,0.6);
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+  }
+
+  /* ── QUESTIONS ── */
+  .questions-wrapper { display: flex; flex-direction: column; gap: 2rem; }
+
+  .question-card {
+    background: var(--white);
+    border: 1px solid rgba(44,64,53,0.1);
+    overflow: hidden;
+  }
+  .question-header {
+    background: var(--parchment-dark);
+    padding: 1.4rem 2rem;
+    display: flex; align-items: flex-start; gap: 1.5rem;
+  }
+  .question-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: -0.2rem;
+  }
+  .question-head-text {}
+  .question-stake {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+  .question-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--grove);
+    line-height: 1.25;
+  }
+  .question-body { padding: 1.6rem 2rem; }
+  .question-context {
+    font-size: 0.87rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 1.4rem;
+    font-weight: 300;
+  }
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+  .option {
+    border: 1px solid rgba(44,64,53,0.12);
+    padding: 1rem 1.1rem;
+    cursor: default;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .option:hover {
+    border-color: var(--terracotta);
+    background: rgba(181,98,58,0.03);
+  }
+  .option-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+  }
+  .option-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--grove);
+    margin-bottom: 0.35rem;
+  }
+  .option-desc {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    font-weight: 300;
+  }
+  .question-note {
+    background: rgba(181,98,58,0.06);
+    border-left: 2px solid var(--terracotta);
+    padding: 0.7rem 1rem;
+    font-size: 0.8rem;
+    color: var(--terracotta);
+    line-height: 1.6;
+  }
+  .question-note strong { font-weight: 500; }
+
+  /* ── POSITIONING BOX ── */
+  .positioning-block {
+    background: var(--grove);
+    color: var(--parchment);
+    padding: 3.5rem;
+    margin: 2rem 0;
+    text-align: center;
+  }
+  .positioning-block .p-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+  .positioning-block h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 300;
+    line-height: 1.35;
+    margin-bottom: 1.5rem;
+    max-width: 680px;
+    margin-left: auto; margin-right: auto;
+  }
+  .positioning-block p {
+    font-size: 0.9rem;
+    color: rgba(247,240,227,0.65);
+    max-width: 560px;
+    margin: 0 auto;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  /* ── REFERENCE FRAME ── */
+  .ref-frame {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-top: 2rem;
+  }
+  @media (max-width: 600px) { .ref-frame { grid-template-columns: 1fr; } }
+  .ref-frame-card {
+    padding: 1.8rem;
+    border: 1px solid rgba(44,64,53,0.12);
+    background: var(--white);
+  }
+  .rfc-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .rfc-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--grove);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  .rfc-body {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(247,240,227,0.4);
+    text-align: center;
+    padding: 2.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    line-height: 2;
+  }
+  footer strong { color: rgba(247,240,227,0.7); }
+
+  /* ── DIVIDER LINE ── */
+  .hr { height: 1px; background: rgba(44,64,53,0.12); margin: 0 3rem; }
+
+  /* ── CADRAGE ── */
+  .cadrage-bg {
+    background: var(--parchment-dark);
+    padding: 4rem 3rem;
+  }
+  .cadrage-inner { max-width: 1100px; margin: 0 auto; }
+  .rh-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.2rem;
+    margin-top: 2.5rem;
+  }
+  .rh-q {
+    padding: 2rem;
+    border-top: 3px solid var(--terracotta);
+    background: var(--white);
+  }
+  .rh-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.8rem;
+    font-weight: 300;
+    color: rgba(181,98,58,0.12);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .rh-question {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--grove);
+    line-height: 1.3;
+    margin-bottom: 0.7rem;
+  }
+  .rh-sub {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+  .cadrage-note {
+    margin-top: 2.5rem;
+    padding: 1.2rem 1.5rem;
+    border-left: 2px solid var(--gold);
+    background: rgba(196,163,90,0.06);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 680px;
+  }
+  .cadrage-note em { font-style: italic; color: var(--grove); }
+
+  /* ── DEUX CHEMINS ── */
+  .chemins-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+  .chemins-intro { margin-bottom: 2rem; }
+  .chemins-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  @media (max-width: 720px) { .chemins-grid { grid-template-columns: 1fr; } }
+
+  .chemin-card { padding: 2.5rem; }
+  .chemin-card.chemin-a {
+    background: #EFEDE9;
+    border: 1px solid rgba(0,0,0,0.07);
+  }
+  .chemin-card.chemin-b {
+    background: var(--grove);
+  }
+  .chemin-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+  .chemin-a .chemin-label { color: #aaa; }
+  .chemin-b .chemin-label { color: var(--gold); }
+
+  .chemin-badge {
+    display: inline-block;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+  .chemin-a .chemin-badge { background: rgba(0,0,0,0.07); color: #999; }
+  .chemin-b .chemin-badge { background: rgba(196,163,90,0.2); color: var(--gold); }
+
+  .chemin-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem;
+    font-weight: 400;
+    margin-bottom: 1.2rem;
+    line-height: 1.2;
+  }
+  .chemin-a .chemin-title { color: #4a4640; }
+  .chemin-b .chemin-title { color: var(--parchment); }
+
+  .chemin-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    padding: 0.9rem 1.1rem;
+  }
+  .chemin-a .chemin-quote {
+    border-left: 2px solid #ccc;
+    color: #666;
+    background: rgba(0,0,0,0.03);
+  }
+  .chemin-b .chemin-quote {
+    border-left: 2px solid var(--gold);
+    color: rgba(247,240,227,0.75);
+    background: rgba(247,240,227,0.04);
+  }
+
+  .chemin-rows { list-style: none; margin-bottom: 1.5rem; }
+  .chemin-rows li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid;
+    font-size: 0.82rem;
+    display: flex;
+    gap: 0.6rem;
+    line-height: 1.55;
+    font-weight: 300;
+  }
+  .chemin-rows li:last-child { border-bottom: none; }
+  .chemin-rows li .row-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    flex-shrink: 0;
+    width: 80px;
+    padding-top: 0.1rem;
+  }
+  .chemin-a .chemin-rows li { border-color: rgba(0,0,0,0.06); color: #777; }
+  .chemin-a .chemin-rows li .row-label { color: #bbb; }
+  .chemin-b .chemin-rows li { border-color: rgba(247,240,227,0.08); color: rgba(247,240,227,0.65); }
+  .chemin-b .chemin-rows li .row-label { color: var(--gold); opacity: 0.7; }
+
+  .chemin-verdict {
+    padding: 1rem 1.2rem;
+    font-size: 0.82rem;
+    font-weight: 400;
+    line-height: 1.65;
+  }
+  .chemin-a .chemin-verdict {
+    background: rgba(0,0,0,0.04);
+    color: #888;
+    border-left: 2px solid #ccc;
+  }
+  .chemin-b .chemin-verdict {
+    background: rgba(196,163,90,0.1);
+    color: rgba(247,240,227,0.8);
+    border-left: 2px solid var(--gold);
+  }
+  .chemin-verdict strong {
+    display: block;
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+  .chemin-a .chemin-verdict strong { color: #aaa; }
+  .chemin-b .chemin-verdict strong { color: var(--gold); }
+
+  .chemins-bridge {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 3rem;
+    border-top: 1px solid rgba(44,64,53,0.12);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .chemins-bridge-arrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .chemins-bridge p {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+  .chemins-bridge p strong { color: var(--grove); font-weight: 500; }
+
+  /* ── FULL WIDTH WRAPPER ── */
+  .full { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 1.2rem; gap: 1rem; }
+    section, .full { padding-left: 1.4rem; padding-right: 1.4rem; }
+    .hero { padding: 3rem 1.4rem 2.5rem; }
+    .question-header { flex-direction: column; gap: 0.5rem; }
+    .question-body { padding: 1.2rem 1.4rem; }
+    .positioning-block { padding: 2.5rem 1.4rem; }
+    .directives-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#fondamental">Cadrage</a>
+  <span class="sep">·</span>
+  <a href="#chemins">Deux chemins</a>
+  <span class="sep">·</span>
+  <a href="#references">Références</a>
+  <span class="sep">·</span>
+  <a href="#directives">Principes</a>
+  <span class="sep">·</span>
+  <a href="#questions">Décisions</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Domaine Sidi Abdallah · Recherche Design</div>
+  <h1>Références mondiales &amp; positionnement concurrentiel</h1>
+  <div class="hero-rule"></div>
+  <p>Analyse de 14 propriétés d'agritourisme de luxe dans le monde pour définir où se situe le Domaine Sidi Abdallah — et quelle direction visuelle lui permettra de se distinguer.</p>
+  <div class="hero-meta">Préparé par Rached · Février 2026 · Pour Elyssa &amp; Lilia</div>
+</div>
+
+<!-- INTRO SECTION -->
+<section>
+  <div class="section-label">Contexte</div>
+  <h2 class="section-title">Pourquoi cette analyse</h2>
+  <p class="section-intro">
+    La direction artistique choisie — <em>Terre d'Agrumes</em> — est validée. Avant de passer au développement (avril), trois décisions structurantes restent à prendre avec Elyssa et Lilia. Ce document cartographie les meilleures références mondiales, puis pose les questions exactes qui éviteront de devoir changer de cap en cours de route.
+  </p>
+</section>
+
+<!-- CADRAGE -->
+<div class="cadrage-bg" id="fondamental">
+  <div class="cadrage-inner">
+    <div class="section-label">Avant les références</div>
+    <h2 class="section-title">Trois questions avant de regarder quoi que ce soit</h2>
+    <p class="section-intro">Ces questions n'ont pas de bonne réponse. Mais vos réponses — les premières qui vous viennent — vont révéler exactement quel type de site le Domaine a besoin. Gardez-les en tête en parcourant les références.</p>
+
+    <div class="rh-grid">
+      <div class="rh-q">
+        <div class="rh-num">01</div>
+        <div class="rh-question">Qu'est-ce qu'un visiteur tunisien doit comprendre en 5 secondes — sans lire un seul mot ?</div>
+        <div class="rh-sub">Pas la liste des services. Pas le prix. L'essence du lieu. Ce qui fait que Sidi Abdallah n'est pas un autre endroit. Si la réponse ne peut pas s'exprimer en une seule image, on n'a pas encore trouvé l'identité du Domaine.</div>
+      </div>
+      <div class="rh-q">
+        <div class="rh-num">02</div>
+        <div class="rh-question">En quoi le Domaine est-il différent — pas meilleur, différent — de tout ce qui existe à 16km de Tunis ?</div>
+        <div class="rh-sub">Cette différence doit être visible sur la première page. Si elle nécessite d'être expliquée dans un paragraphe, ce n'est pas encore une identité visuelle — c'est un argumentaire de vente. Ce sont deux choses très différentes.</div>
+      </div>
+      <div class="rh-q">
+        <div class="rh-num">03</div>
+        <div class="rh-question">L'orangeraie est-elle le décor ou le personnage principal ?</div>
+        <div class="rh-sub">Ce n'est pas une question rhétorique. La réponse change tout : la navigation, la photographie, la langue, l'ordre des priorités. Un décor s'efface. Un personnage principal structure tout autour de lui.</div>
+      </div>
+    </div>
+
+    <div class="cadrage-note">
+      <em>Pourquoi ces questions d'abord ?</em> Dans l'hôtellerie de luxe, les mauvaises décisions de design viennent presque toujours du même endroit : on commence par les couleurs et les polices avant d'avoir répondu à ces trois questions. Le résultat est beau mais interchangeable. Les 14 propriétés ci-dessous ont toutes répondu à ces questions correctement — et leur design en découle naturellement.
+    </div>
+  </div>
+</div>
+
+<!-- DEUX CHEMINS -->
+<div style="padding: 4rem 0 0;" id="chemins">
+  <div class="chemins-wrapper">
+    <div class="chemins-intro">
+      <div class="section-label">La décision centrale</div>
+      <h2 class="section-title">Le même Domaine, deux identités possibles</h2>
+      <p class="section-intro">Ces deux descriptions parlent de la même propriété — Domaine Sidi Abdallah, Mohammedia, 16km de Tunis. L'une est le site que l'on pourrait construire par défaut. L'autre est le site que la recherche de référence nous permet de construire.</p>
+    </div>
+  </div>
+
+  <div class="chemins-grid">
+
+    <!-- CHEMIN A -->
+    <div class="chemin-card chemin-a">
+      <div class="chemin-label">Chemin A</div>
+      <div class="chemin-badge">Le chemin par défaut</div>
+      <div class="chemin-title">Un bel établissement de luxe avec une orangeraie</div>
+      <div class="chemin-quote">"Bienvenue au Domaine Sidi Abdallah — hôtel boutique 5 étoiles à 16km de Tunis. Un havre de luxe et de sérénité au cœur d'une nature préservée."</div>
+      <ul class="chemin-rows">
+        <li><span class="row-label">Navigation</span>Hébergement · Spa &amp; Bien-être · Restaurant · Événements · Réservation</li>
+        <li><span class="row-label">Restaurant</span>"Savourez une cuisine raffinée dans un cadre exceptionnel"</li>
+        <li><span class="row-label">Chambres</span>"Nos 6 suites luxueusement équipées vous accueillent dans un écrin de sérénité"</li>
+        <li><span class="row-label">Spa</span>"Offrez-vous une parenthèse de bien-être dans notre espace dédié"</li>
+        <li><span class="row-label">Photographie</span>Intérieurs soignés, piscine mise en valeur, plats photographiés en studio</li>
+        <li><span class="row-label">CTA</span>"Réservez votre séjour · À partir de X TND"</li>
+      </ul>
+      <div class="chemin-verdict">
+        <strong>Ce que ça dit — et ce que ça ne dit pas</strong>
+        "Nous sommes beaux. Nous sommes luxueux." Vrai, mais interchangeable avec 40 autres propriétés dans la région. Le visiteur ne sait pas pourquoi il devrait venir ici plutôt qu'ailleurs.
+      </div>
+    </div>
+
+    <!-- CHEMIN B -->
+    <div class="chemin-card chemin-b">
+      <div class="chemin-label">Chemin B · Direction retenue</div>
+      <div class="chemin-badge">Terre d'Agrumes</div>
+      <div class="chemin-title">Une maison née de l'orangeraie</div>
+      <div class="chemin-quote">"L'orangeraie de Sidi Abdallah. Cent ans d'histoire, seize kilomètres de Tunis — et la seule propriété en Tunisie où c'est la grove qui décide."</div>
+      <ul class="chemin-rows">
+        <li><span class="row-label">Navigation</span>Le Domaine · Séjourner · Déguster · Se Détendre · S'Évader</li>
+        <li><span class="row-label">Restaurant</span>"La grove dicte le menu de ce soir. La saison décide du reste."</li>
+        <li><span class="row-label">Chambres</span>"Six chambres. Chacune porte le nom d'une variété d'agrume cultivée ici depuis des décennies."</li>
+        <li><span class="row-label">Spa</span>"Les soins de la saison : huile essentielle de néroli cueillie sur place en février."</li>
+        <li><span class="row-label">Photographie</span>Lumière à travers le feuillage à l'aube, mains sur les fruits, la table dressée sous les arbres</li>
+        <li><span class="row-label">CTA</span>"Découvrir la saison · Réserver au restaurant"</li>
+      </ul>
+      <div class="chemin-verdict">
+        <strong>Ce que ça dit — et ce que personne d'autre ne peut dire</strong>
+        "Il n'y a pas d'autre endroit comme celui-ci." Le visiteur comprend immédiatement ce qui est unique. L'identité est ancrée dans ce lieu, ce moment, cette famille — et elle est impossible à copier.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="chemins-bridge">
+    <div class="chemins-bridge-arrow">→</div>
+    <p>Les <strong>14 propriétés analysées ci-dessous</strong> ont toutes emprunté le Chemin B. Certaines avec peu de moyens au départ, certaines avec des intérieurs imparfaits, certaines sans budget de production. Ce qui les unit : elles ont répondu clairement aux trois questions du début — et leur design en a découlé naturellement.</p>
+  </div>
+</div>
+
+<div class="hr"></div>
+
+<!-- TIER 1 REFERENCES -->
+<section id="references">
+  <div class="section-label">Références · Niveau 1</div>
+  <h2 class="section-title">Les cinq références primaires</h2>
+  <p class="section-intro">Ces propriétés partagent le plus de terrain avec DSA : agritourisme à échelle boutique, identité fondée sur la terre, restaurant + hébergement + bien-être. Ce sont les sites à étudier en priorité.</p>
+
+  <div class="ref-grid">
+
+    <div class="ref-card tier-1">
+      <div class="card-tier">Référence prioritaire · 5/5</div>
+      <div class="card-name">Kasbah Bab Ourika</div>
+      <div class="card-location">Maroc — 35 km de Marrakech</div>
+      <div class="card-url"><a href="https://www.kasbahbabourika.com" target="_blank" rel="noopener">kasbahbabourika.com</a></div>
+      <div class="card-concept">Kasbah organique de 10 chambres en altitude, ferme certifiée biologique, cuisine farm-to-table, hammam — à distance de voiture d'une grande ville nord-africaine.</div>
+      <ul class="card-lessons">
+        <li>Palette terre/terracotta/argile presque identique à Terre d'Agrumes</li>
+        <li>Navigation : "Ferme &amp; Jardin" au même niveau que l'hébergement</li>
+        <li>Photographies agricoles (mains, légumes, lumière dorée) sans honte des imperfections</li>
+        <li>Texte posé, typographie serif calme — confiance sans flatterie</li>
+      </ul>
+      <div class="card-takeaway">
+        <strong>Ce que DSA en tire</strong>
+        Le jumeau conceptuel le plus proche. Même échelle, même logique de distance-d'une-capitale, même identité agricole de luxe discret. La référence de base.
+      </div>
+    </div>
+
+    <div class="ref-card tier-1">
+      <div class="card-tier">Référence prioritaire · 5/5</div>
+      <div class="card-name">Babylonstoren</div>
+      <div class="card-location">Afrique du Sud — Franschhoek, Cap</div>
+      <div class="card-url"><a href="https://www.babylonstoren.com" target="_blank" rel="noopener">babylonstoren.com</a></div>
+      <div class="card-concept">Domaine agricole du Cap de 200 hectares : 47 cottages, jardin botanique de 300 espèces, 2 restaurants, spa aux plantes du jardin, boutique mondiale de produits de la ferme.</div>
+      <ul class="card-lessons">
+        <li>"Farm" est le <em>premier</em> item de navigation — avant "Stay" ou "Eat"</li>
+        <li>Un seul vert botanique profond, utilisé avec une discipline absolue</li>
+        <li>Boutique de produits de la ferme (huile, confiture, skincare) = extension de marque mondiale</li>
+        <li>Le calendrier agricole saisonnier génère 12 mois de contenu naturel</li>
+      </ul>
+      <div class="card-takeaway">
+        <strong>Ce que DSA en tire</strong>
+        Le plafond aspirationnel à 10 ans. Le modèle "jus d'orange / marmelade / eau florale de néroli" de DSA suit exactement leur logique boutique. La discipline couleur est exemplaire.
+      </div>
+    </div>
+
+    <div class="ref-card tier-1">
+      <div class="card-tier">Référence prioritaire · 5/5</div>
+      <div class="card-name">Beldi Country Club</div>
+      <div class="card-location">Maroc — Marrakech</div>
+      <div class="card-url"><a href="https://www.beldicountryclub.com" target="_blank" rel="noopener">beldicountryclub.com</a></div>
+      <div class="card-concept">20 hectares d'oliveraies et jardins autour de Marrakech : club ouvert à la journée, hôtel, restaurant, spa — le modèle multi-piliers le plus proche de DSA commercialement.</div>
+      <ul class="card-lessons">
+        <li>Accès journée (spa, piscine, restaurant) clairement séparé de l'hébergement dans la nav</li>
+        <li>WhatsApp listé comme canal de contact officiel, sans excuse</li>
+        <li>Preuves que ce modèle multi-piliers fonctionne en Afrique du Nord</li>
+        <li>Faiblesse : fonctionnel mais pas poétique — l'opportunité de DSA</li>
+      </ul>
+      <div class="card-takeaway">
+        <strong>Ce que DSA en tire</strong>
+        Le modèle business. Beldi prouve que le visiteur à la journée tunisien/marocain est prêt à réserver en ligne. DSA peut être ce que Beldi est — en plus poétique.
+      </div>
+    </div>
+
+    <div class="ref-card tier-1">
+      <div class="card-tier">Référence prioritaire · 5/5</div>
+      <div class="card-name">Masseria Il Frantoio</div>
+      <div class="card-location">Italie — Puglia, Fasano</div>
+      <div class="card-url"><a href="https://www.masseriailfrantoio.it" target="_blank" rel="noopener">masseriailfrantoio.it</a></div>
+      <div class="card-concept">Domaine oléicole de 400 ans avec 9 km de murs en pierre sèche : les dîners à la ferme sont le produit principal, pas un service annexe à l'hébergement.</div>
+      <ul class="card-lessons">
+        <li>L'identité de la propriété rayonne entièrement depuis le pressoir à olives</li>
+        <li>Zéro langage hôtelier — "authentique", "famille", "récolte", pas "expérience premium"</li>
+        <li>Le dîner est le premier item de navigation, à égalité avec les chambres</li>
+        <li>Longue forme éditoriale : histoire de chaque chambre, de chaque variété d'olive</li>
+      </ul>
+      <div class="card-takeaway">
+        <strong>Ce que DSA en tire</strong>
+        La logique narrative. Le restaurant de DSA doit s'exprimer comme "le produit de la grove", pas comme "notre restaurant". L'oliveraie devient l'orangeraie.
+      </div>
+    </div>
+
+    <div class="ref-card tier-1">
+      <div class="card-tier">Référence prioritaire · 5/5</div>
+      <div class="card-name">Adrère Amellal</div>
+      <div class="card-location">Égypte — Oasis de Siwa</div>
+      <div class="card-url"><a href="https://www.adrereamellal.net" target="_blank" rel="noopener">adrereamellal.net</a></div>
+      <div class="card-concept">Écolodge de 40 chambres sans électricité, construit en kershef (roche de sel et argile), entouré de palmeraies et du lac salé de Siwa — le "luxe off-grid" originel d'Afrique du Nord.</div>
+      <ul class="card-lessons">
+        <li>Nomme la géologie et la botanique spécifiques du lieu (kershef, le lac, les palmiers)</li>
+        <li>Le site lui-même se déplace lentement — reflète l'éthique sans électricité</li>
+        <li>Aucune séparation entre "la propriété" et "le paysage" — ils sont la même chose</li>
+        <li>Pas de widget de réservation : formulaire de contact uniquement, comme signal de luxe</li>
+      </ul>
+      <div class="card-takeaway">
+        <strong>Ce que DSA en tire</strong>
+        La philosophie de narration. Nommer la géologie de Siwa = nommer les variétés d'orangers à Mohammedia, l'âge des arbres, la saison de la fleur de néroli en février.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TIER 2 -->
+<div class="hr"></div>
+<section>
+  <div class="section-label">Références · Niveau 2</div>
+  <h2 class="section-title">Les références d'appui</h2>
+  <p class="section-intro">Chacune apporte une leçon précise, sans être un modèle global pour DSA.</p>
+
+  <div class="ref-grid">
+
+    <div class="ref-card tier-2">
+      <div class="card-tier">Référence d'appui · 4/5</div>
+      <div class="card-name">Hacienda de San Rafael</div>
+      <div class="card-location">Espagne — Séville</div>
+      <div class="card-url"><a href="https://www.haciendadesanrafael.com" target="_blank" rel="noopener">haciendadesanrafael.com</a></div>
+      <div class="card-concept">12 chambres dans une hacienda oléicole et tournesols à 30 min de Séville, avec une cuisine familiale andalouse et un jardin.</div>
+      <ul class="card-lessons">
+        <li>"The House" pas "The Hotel" — "Dining &amp; Kitchen" pas "Restaurant"</li>
+        <li>L'éthos de maison privée se lit dans chaque choix de mot</li>
+        <li>Typographie serif chaude et littéraire, palette Andalousie proche de DSA</li>
+      </ul>
+    </div>
+
+    <div class="ref-card tier-2">
+      <div class="card-tier">Référence d'appui · 4/5</div>
+      <div class="card-name">Dar Ahlam</div>
+      <div class="card-location">Maroc — Skoura</div>
+      <div class="card-url"><a href="https://www.darahlam.com" target="_blank" rel="noopener">darahlam.com</a></div>
+      <div class="card-concept">10 chambres dans une kasbah restaurée au cœur d'une palmeraie, avec une cuisine improvisée chaque matin selon ce que le jardin offre.</div>
+      <ul class="card-lessons">
+        <li>"Ce que le jardin offre aujourd'hui" — la langue parfaite pour un restaurant farm-to-table</li>
+        <li>La dépendance de la cuisine au jardin vivant = signal de luxe ultime</li>
+        <li>Serif didone + sans humaniste : paire typographique raffinée</li>
+      </ul>
+    </div>
+
+    <div class="ref-card tier-2">
+      <div class="card-tier">Référence d'appui · 4/5</div>
+      <div class="card-name">La Pause</div>
+      <div class="card-location">Maroc — Désert Agafay</div>
+      <div class="card-url"><a href="https://www.lapause-marrakech.com" target="_blank" rel="noopener">lapause-marrakech.com</a></div>
+      <div class="card-concept">Éco-retraite dans le désert de pierres à 30km de Marrakech, sans TV ni Wi-Fi, avec hammam solaire et nuits sous les étoiles.</div>
+      <ul class="card-lessons">
+        <li>WhatsApp listé en premier, aux côtés de l'email — sans s'en excuser</li>
+        <li>Toutes les photos à la même température de lumière dorée = cohérence visuelle forte</li>
+        <li>Même avec peu de photos, une grove DSA à heure dorée donne des années de contenu</li>
+      </ul>
+    </div>
+
+    <div class="ref-card tier-2">
+      <div class="card-tier">Référence d'appui · 4/5</div>
+      <div class="card-name">Susafa</div>
+      <div class="card-location">Italie — Sicile intérieure</div>
+      <div class="card-url"><a href="https://www.susafa.com" target="_blank" rel="noopener">susafa.com</a></div>
+      <div class="card-concept">13 chambres dans un agriturismo sicilien de blé et légumineuses, cuisine entièrement issue du domaine, lenteur revendiquée.</div>
+      <ul class="card-lessons">
+        <li>Navigation ultra-minimale (4 items) — confiance absolue sans énumérer</li>
+        <li>Plans larges : la propriété est petite dans le cadre, la terre est vaste → les imperfections disparaissent</li>
+        <li>Zéro langage d'hôtel : on nomme les producteurs, jamais les équipements</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- POSITIONING BLOCK -->
+<div class="full" id="cadre">
+  <div class="positioning-block">
+    <div class="p-label">Le constat central</div>
+    <h2>"Ce que la terre produit<br>avant ce que la propriété propose."</h2>
+    <p>Dans tous les sites de niveau 1, l'hôte est présenté comme le bénéficiaire de la générosité de la terre — et non comme un consommateur de prestations hôtelières. C'est ce cadre narratif que l'orangeraie de Sidi Abdallah rend possible. Et c'est un cadre que personne d'autre en Tunisie n'occupe encore.</p>
+
+    <div class="ref-frame">
+      <div class="ref-frame-card">
+        <div class="rfc-label">Référence immédiate</div>
+        <div class="rfc-name">Kasbah Bab Ourika × Hacienda de San Rafael</div>
+        <div class="rfc-body">La palette nord-africaine et l'honnêteté agricole de la première. L'éthos de maison chaleureuse et la langue littéraire de la seconde. Ce croisement donne le ton du DSA de 2026.</div>
+      </div>
+      <div class="ref-frame-card">
+        <div class="rfc-label">Plafond aspirationnel</div>
+        <div class="rfc-name">Babylonstoren</div>
+        <div class="rfc-body">L'architecture de marque où la ferme est première, les produits D2C (jus, marmelade, eau florale) étendent la marque, et le calendrier agricole saisonnier est moteur de contenu. Le DSA de 2030.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DIRECTIVES -->
+<section id="directives">
+  <div class="section-label">Ce que les meilleurs font différemment</div>
+  <h2 class="section-title">Cinq principes qui séparent les références de niveau 1 des autres</h2>
+  <p class="section-intro">Ces patterns se retrouvent systématiquement dans les sites les plus efficaces. Ils ne sont pas décoratifs — ils structurent la navigation, la typographie, et la photographie.</p>
+
+  <div class="directives-grid">
+
+    <div class="directive-card">
+      <div class="directive-num">01</div>
+      <div class="directive-title">La terre arrive en premier dans la navigation</div>
+      <div class="directive-body">Babylonstoren : <em>Farm</em> / Stay / Eat / Spa / Shop. Kasbah Bab Ourika : <em>The Kasbah</em> / Stay / Dine / Farm &amp; Garden. L'identité agricole précède les prestations — c'est un signal de positionnement, pas seulement une organisation de contenu.</div>
+      <div class="directive-example">Pour DSA : Le Domaine / Séjourner / Déguster / Se Détendre / S'Évader — 5 items, l'orangeraie vit dans "Le Domaine".</div>
+    </div>
+
+    <div class="directive-card">
+      <div class="directive-num">02</div>
+      <div class="directive-title">Une couleur d'ancrage, une discipline absolue</div>
+      <div class="directive-body">Babylonstoren possède un vert botanique précis. Hacienda San Rafael possède une terre brûlée. La palette photographique fournit toute la texture chromatique secondaire. Le gold utilisé largement = luxe hôtelier générique. Le gold en détail fin = raffinement discret.</div>
+      <div class="directive-example">Pour DSA : vert grove #2C4035 comme ancre. Parchemin #F7F0E3 comme champ. Terracotta pour les accents graphiques. Gold uniquement pour les filets et icônes fines.</div>
+    </div>
+
+    <div class="directive-card">
+      <div class="directive-num">03</div>
+      <div class="directive-title">La photographie de lancement ne nécessite pas d'intérieurs finis</div>
+      <div class="directive-body">Susafa et Kasbah Bab Ourika ont bâti leur identité visuelle initiale sur : des plans larges de la terre à heure dorée (l'architecture est petite dans le cadre) et la photographie du processus agricole (mains, fruits, lumière à travers le feuillage).</div>
+      <div class="directive-example">Pour DSA : la fenêtre floraison/néroli de février–mars et la récolte d'octobre–décembre sont les moments clés. Un jour de photos dans la grove produit des années de contenu.</div>
+    </div>
+
+    <div class="directive-card">
+      <div class="directive-num">04</div>
+      <div class="directive-title">WhatsApp comme canal premier, pas comme repli</div>
+      <div class="directive-body">La Pause et Beldi listent WhatsApp au même niveau que l'email, sans s'en excuser. "Réserver votre table par WhatsApp" est un énoncé de positionnement pour le marché tunisien — pas une contrainte technique. Le public tunisien réserve par WhatsApp. Le site doit le célébrer.</div>
+      <div class="directive-example">Pour DSA : le CTA principal du restaurant pour le public tunisien est WhatsApp. La réservation en ligne arrive en complément, pas en remplacement.</div>
+    </div>
+
+    <div class="directive-card" style="grid-column: 1 / -1;">
+      <div class="directive-num">05</div>
+      <div class="directive-title">Quatre flux de réservation séparés — jamais un seul widget</div>
+      <div class="directive-body">La faute classique des propriétés multi-piliers : un seul widget de réservation qui force tout dans le même flux. Les sites de niveau 1 traitent chaque type différemment :<br><br>
+      <strong style="color:var(--gold)">Chambres</strong> → widget date/disponibilité en temps réel (rapide, sans friction) ·
+      <strong style="color:var(--gold)">Restaurant</strong> → formulaire + WhatsApp (pour le marché TN) ·
+      <strong style="color:var(--gold)">Spa/Bien-être</strong> → intégré dans le séjour ou formulaire de demande ·
+      <strong style="color:var(--gold)">Retraites</strong> → demande uniquement, avec une page "ce qui est inclus" détaillée avant le formulaire. Les retraites sont des produits de réflexion, pas d'impulsion.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="hr"></div>
+
+<!-- QUESTIONS SECTION -->
+<section id="questions">
+  <div class="section-label">Pour Elyssa &amp; Lilia</div>
+  <h2 class="section-title">Questions stratégiques avant le lancement</h2>
+  <p class="section-intro">Ces huit questions doivent être tranchées avant le 7 avril — date de début du développement. Chaque réponse conditionne des choix d'architecture, de typographie ou de contenu qui seraient coûteux à modifier en cours de route. Il n'y a pas de mauvaise réponse — il y a des réponses cohérentes ou incohérentes avec la vision du Domaine.</p>
+
+  <div class="questions-wrapper">
+
+    <!-- Q1 -->
+    <div class="question-card">
+      <div class="question-header">
+        <div class="question-num">01</div>
+        <div class="question-head-text">
+          <div class="question-stake">Ce qui est en jeu · Langue &amp; Ton</div>
+          <div class="question-title">Le Domaine parle-t-il comme une maison ou comme un établissement ?</div>
+        </div>
+      </div>
+      <div class="question-body">
+        <p class="question-context">La langue utilisée sur le site — chaque titre, chaque CTA, chaque description — découle d'un choix de ton fondamental. Hacienda de San Rafael dit "The House", pas "The Hotel" ; "Dining &amp; Kitchen", pas "Restaurant". Ce n'est pas un détail : c'est ce qui donne l'impression que l'on arrive chez quelqu'un, pas dans un établissement.</p>
+        <div class="options-grid">
+          <div class="option">
+            <div class="option-label">Option A</div>
+            <div class="option-title">La Maison</div>
+            <div class="option-desc">Langage personnel et chaleureux. "Notre cuisine", "vos hôtes", "la maison vous reçoit". Sentiment d'être invité chez une famille.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Option B</div>
+            <div class="option-title">Le Domaine</div>
+            <div class="option-desc">Langage de domaine agricole établi. "La propriété", "les suites", "l'équipe". Plus institutionnel, suggère une longévité et une structure.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Option C</div>
+            <div class="option-title">La Terre parle</div>
+            <div class="option-desc">"L'orangeraie vous attend", "la saison dicte le menu". La terre comme narrateur. Le plus distinctif, le plus risqué.</div>
+          </div>
+        </div>
+        <div class="question-note"><strong>Pourquoi maintenant :</strong> Ce choix conditionne la rédaction de tous les textes FR et EN. Les textes finaux doivent être livrés avant fin mars — ils doivent être rédigés dans ce ton.</div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="question-card">
+      <div class="question-header">
+        <div class="question-num">02</div>
+        <div class="question-head-text">
+          <div class="question-stake">Ce qui est en jeu · Photographie</div>
+          <div class="question-title">Lance-t-on avec les photos de la grove, ou attend-on les intérieurs finis ?</div>
+        </div>
+      </div>
+      <div class="question-body">
+        <p class="question-context">La recherche montre que Susafa et Kasbah Bab Ourika ont bâti leur réputation avec des intérieurs imparfaits, compensés par des photographies exceptionnelles de leur terre agricole. La fenêtre néroli (floraison de l'oranger) de février–mars est l'équivalent pour DSA. Manquer cette fenêtre signifie attendre octobre pour la récolte.</p>
+        <div class="options-grid">
+          <div class="option">
+            <div class="option-label">Option A</div>
+            <div class="option-title">Lancement avec la grove</div>
+            <div class="option-desc">Shooting urgent en mars : orangeraie à heure dorée, processus agricole, lumière à travers le feuillage. Le site ouvre en mai avec cette identité visuelle forte.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Option B</div>
+            <div class="option-title">Attendre les intérieurs</div>
+            <div class="option-desc">Le site ouvre avec les photos finales de la propriété rénovée — probablement fin 2026. Le lancement de mai devient une page "coming soon" ou un teaser minimal.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Option C</div>
+            <div class="option-title">Grove + making-of</div>
+            <div class="option-desc">Photos de la grove en mars + vidéos/photos "making-of" de la rénovation en cours. Le chantier devient du storytelling. Ouverture en mai avec cette double narration.</div>
+          </div>
+        </div>
+        <div class="question-note"><strong>Pourquoi maintenant :</strong> Si l'Option A ou C est choisie, le shooting doit être planifié dans les deux prochaines semaines — la floraison ne revient pas avant 2027.</div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="question-card">
+      <div class="question-header">
+        <div class="question-num">03</div>
+        <div class="question-head-text">
+          <div class="question-stake">Ce qui est en jeu · Identité de marque</div>
+          <div class="question-title">Dar Saad et Agrumia : sous-marques visibles ou noms internes ?</div>
+        </div>
+      </div>
+      <div class="question-body">
+        <p class="question-context">Les noms Dar Saad (l'hébergement) et Agrumia (le bien-être) ont été développés comme sous-marques distinctes. La question est : à quel niveau apparaissent-ils sur le site ? Cela détermine si on construit un système visuel pour chacun, ou si "Domaine Sidi Abdallah" est la seule marque visible publiquement.</p>
+        <div class="options-grid">
+          <div class="option">
+            <div class="option-label">Option A</div>
+            <div class="option-title">DSA domine, sous-marques en subtitle</div>
+            <div class="option-desc">"Séjourner au Domaine" avec "Dar Saad" en mention secondaire. L'umbrella brand porte tout. Simplicité maximum.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Option B</div>
+            <div class="option-title">Co-marques à égalité</div>
+            <div class="option-desc">Dar Saad et Agrumia ont chacun leur page dédiée avec leur propre typographie et couleur accent. DSA est le lien fédérateur.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Option C</div>
+            <div class="option-title">Noms réservés à l'usage interne</div>
+            <div class="option-desc">Le public voit "Séjourner" et "Se Détendre". Dar Saad et Agrumia apparaissent seulement dans les confirmations et sur place.</div>
+          </div>
+        </div>
+        <div class="question-note"><strong>Pourquoi maintenant :</strong> Si l'Option B est choisie, Rached doit construire un système de design étendu pour chaque sous-marque. C'est 2–3 semaines de travail supplémentaires qui doivent être anticipées dans le planning.</div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="question-card">
+      <div class="question-header">
+        <div class="question-num">04</div>
+        <div class="question-head-text">
+          <div class="question-stake">Ce qui est en jeu · Navigation</div>
+          <div class="question-title">Comment présente-t-on les piliers "pas encore ouverts" au lancement ?</div>
+        </div>
+      </div>
+      <div class="question-body">
+        <p class="question-context">En mai 2026, seul le restaurant est opérationnel. Les chambres, le spa et les retraites existent mais n'ouvrent pas encore. Le site doit présenter les quatre piliers sans mentir sur leur disponibilité — et sans décourager le visiteur qui découvre le Domaine.</p>
+        <div class="options-grid">
+          <div class="option">
+            <div class="option-label">Option A</div>
+            <div class="option-title">Pages complètes + badge "Bientôt"</div>
+            <div class="option-desc">Chaque pilier a sa page avec du contenu storytelling complet, mais un overlay ou badge "Ouverture Automne 2026" remplace le bouton de réservation par un formulaire de liste d'attente.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Option B</div>
+            <div class="option-title">Navigation réduite au lancement</div>
+            <div class="option-desc">Seuls les piliers ouverts apparaissent dans la navigation principale. Les autres sont dans une section "Le Domaine complet" avec une date d'ouverture annoncée.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Option C</div>
+            <div class="option-title">Teasing progressif</div>
+            <div class="option-desc">Page d'accueil avec les 4 piliers présentés, mais 3 cliquent sur des pages de "pré-inscription" qui capturent l'email et créent l'impatience plutôt que la frustration.</div>
+          </div>
+        </div>
+        <div class="question-note"><strong>Pourquoi maintenant :</strong> Ce choix détermine combien de pages de contenu doivent être prêtes avant le 16 mai. L'Option A nécessite 4 pages complètes. L'Option B n'en nécessite que 2 au lancement.</div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="question-card">
+      <div class="question-header">
+        <div class="question-num">05</div>
+        <div class="question-head-text">
+          <div class="question-stake">Ce qui est en jeu · Typographie</div>
+          <div class="question-title">La typographie doit-elle transmettre la chaleur ou la rigueur ?</div>
+        </div>
+      </div>
+      <div class="question-body">
+        <p class="question-context">Cormorant Garamond est déjà choisi. Mais l'intention derrière ce choix doit être confirmée. La même police peut être utilisée de manière très différente : grasse et dense comme un domaine qui a de l'histoire, ou fine et espacée comme une maison éditoriale moderne.</p>
+        <div class="options-grid">
+          <div class="option">
+            <div class="option-label">Option A</div>
+            <div class="option-title">Chaleur et chaleur</div>
+            <div class="option-desc">Titres à grande échelle, légèrement rapprochés, corps de texte généreux. Impression de lettre écrite à la main, de correspondance personnelle. Kasbah Bab Ourika.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Option B</div>
+            <div class="option-title">Rigueur éditoriale</div>
+            <div class="option-desc">Titres fins et très espacés, corps compact. Impression de magazine de luxe, de revue architecturale. Plus froid, plus international. Dar Ahlam.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Option C</div>
+            <div class="option-title">Contraste dramatique</div>
+            <div class="option-desc">Titres en Cormorant à très grande taille (comme Susafa), corps de texte minuscule. Le contraste d'échelle est lui-même la signature graphique.</div>
+          </div>
+        </div>
+        <div class="question-note"><strong>Pourquoi maintenant :</strong> Ce choix conditionne les maquettes des composants clés (hero, cartes, navigation). Rached ne peut pas construire sans cette direction confirmée.</div>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="question-card">
+      <div class="question-header">
+        <div class="question-num">06</div>
+        <div class="question-head-text">
+          <div class="question-stake">Ce qui est en jeu · Hero du site</div>
+          <div class="question-title">Le hero de la page d'accueil est-il statique ou vidéo ?</div>
+        </div>
+      </div>
+      <div class="question-body">
+        <p class="question-context">La majorité des références de niveau 1 utilisent une grande photographie fixe en hero — et non une vidéo. Ce n'est pas par défaut de moyens : c'est un choix éditorial. Une image qui respire communique plus de calme qu'une vidéo en boucle. Mais si des vidéos "making-of" existent et sont bien montées, elles peuvent créer un impact fort.</p>
+        <div class="options-grid">
+          <div class="option">
+            <div class="option-label">Option A</div>
+            <div class="option-title">Photo fixe</div>
+            <div class="option-desc">Une grande photographie de la grove à heure dorée. Rapide à charger, calme à lire, moins risqué sur les connexions mobiles tunisiennes. Le choix de Kasbah Bab Ourika et Susafa.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Option B</div>
+            <div class="option-title">Vidéo en boucle courte</div>
+            <div class="option-desc">Une boucle de 15–20 secondes : lumière à travers les orangers, les mains sur les fruits, la fumée d'un hammam. Plus immersif, mais nécessite une vidéo montée avant le 7 avril.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Option C</div>
+            <div class="option-title">Photo avec vidéo différée</div>
+            <div class="option-desc">Lancement en mai avec photo fixe. Intégration de la vidéo lors d'une mise à jour en septembre–octobre, après la récolte. Le meilleur des deux en termes de timing.</div>
+          </div>
+        </div>
+        <div class="question-note"><strong>Pourquoi maintenant :</strong> Si la vidéo est choisie pour le lancement (Option B), la captation et le montage doivent être planifiés immédiatement — avant ou pendant le shooting de mars.</div>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="question-card">
+      <div class="question-header">
+        <div class="question-num">07</div>
+        <div class="question-head-text">
+          <div class="question-stake">Ce qui est en jeu · Positionnement prix</div>
+          <div class="question-title">Les prix sont-ils affichés sur le site dès le lancement ?</div>
+        </div>
+      </div>
+      <div class="question-body">
+        <p class="question-context">C'est l'une des questions les plus clivantes dans l'hôtellerie de luxe. Les références de niveau 1 se partagent : Babylonstoren et Six Senses affichent les prix clairement (accessibilité, confiance). Dar Ahlam et Adrère Amellal n'affichent rien (exclusivité, mystère). Le choix signale un positionnement.</p>
+        <div class="options-grid">
+          <div class="option">
+            <div class="option-label">Option A</div>
+            <div class="option-title">Prix affichés dès le lancement</div>
+            <div class="option-desc">Transparence totale. Signal de confiance et d'accessibilité. Adapté au public tunisien qui veut savoir avant de contacter. Réduit les demandes de prix par WhatsApp.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Option B</div>
+            <div class="option-title">Prix sur demande</div>
+            <div class="option-desc">Aucun prix visible. Signal de luxe exclusif. Génère plus d'échanges directs (WhatsApp/email) mais peut frustrer un segment du public tunisien habitué à comparer.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Option C</div>
+            <div class="option-title">Fourchettes de prix</div>
+            <div class="option-desc">"À partir de X TND" pour le restaurant, "Séjours à partir de X TND" pour les chambres. Équilibre entre accessibilité et maintien d'une part de mystère.</div>
+          </div>
+        </div>
+        <div class="question-note"><strong>Pourquoi maintenant :</strong> Cette décision conditionne l'architecture des pages de réservation. Un site "sur demande" ne nécessite pas de système de disponibilité en temps réel pour les chambres — ce qui libère du temps de développement.</div>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="question-card">
+      <div class="question-header">
+        <div class="question-num">08</div>
+        <div class="question-head-text">
+          <div class="question-stake">Ce qui est en jeu · Long terme</div>
+          <div class="question-title">Le Domaine a-t-il vocation à vendre ses produits agricoles en ligne ?</div>
+        </div>
+      </div>
+      <div class="question-body">
+        <p class="question-context">Babylonstoren génère une part significative de sa notoriété mondiale via sa boutique en ligne : huile d'olive, confiture de pétales de rose, vinaigres aux herbes, soins botaniques. L'analogie pour DSA est directe : jus d'orange, marmelade d'agrumes, eau florale de néroli, savon à l'orange. Ce n'est pas une question pour 2026 — mais la réponse influence l'architecture du nom de domaine et le système de design dès maintenant.</p>
+        <div class="options-grid">
+          <div class="option">
+            <div class="option-label">Option A</div>
+            <div class="option-title">Oui, c'est la vision</div>
+            <div class="option-desc">La boutique D2C fait partie de la stratégie à moyen terme. On réserve l'espace dans la navigation dès maintenant ("La Boutique" — même si elle ouvre en 2027) et on y pense dans le design system.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Option B</div>
+            <div class="option-title">Peut-être, mais pas maintenant</div>
+            <div class="option-desc">L'idée est intéressante mais pas encore décidée. On ne l'intègre pas dans le design system de phase 1 — on laissera de l'espace pour une extension future.</div>
+          </div>
+          <div class="option">
+            <div class="option-label">Option C</div>
+            <div class="option-title">Non, ce n'est pas la direction</div>
+            <div class="option-desc">Le Domaine reste une expérience sur place. La boutique n'est pas dans la vision. On simplifie l'architecture en conséquence.</div>
+          </div>
+        </div>
+        <div class="question-note"><strong>Pourquoi maintenant :</strong> Si la boutique est dans la vision (Option A), les noms <strong>darsaad.com</strong> et <strong>agrumia.com</strong> doivent être enregistrés cette semaine avant qu'ils ne soient squattés — surtout si le Domaine apparaît sur Instagram dans les prochains mois.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<div class="full" style="padding-bottom:4rem;">
+  <div class="positioning-block" style="padding:2.5rem;">
+    <div class="p-label">Prochaine étape</div>
+    <h2 style="font-size:clamp(1.3rem,2.5vw,1.9rem);margin-bottom:1rem;">Répondre à ces 8 questions avant le 15 mars</h2>
+    <p>Chaque réponse sera intégrée dans les spécifications de design finales avant le début du développement le 7 avril. Plus ces choix sont faits tôt, moins il y aura de retours en arrière coûteux.</p>
+  </div>
+</div>
+
+<footer>
+  <strong>Domaine Sidi Abdallah</strong><br>
+  Analyse concurrentielle &amp; références design · Février 2026<br>
+  Préparé par Rached pour Elyssa &amp; Lilia
+</footer>
+
+</body>
+</html>
