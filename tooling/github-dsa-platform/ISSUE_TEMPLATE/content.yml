@@ -1,0 +1,60 @@
+name: Mise à jour contenu
+description: Modifier du texte, une photo, un prix ou une traduction sur le site
+title: "[CONTENT] "
+labels: ["content"]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type de mise à jour
+      options:
+        - Texte (FR)
+        - Texte (EN)
+        - Photo / Image
+        - Prix
+        - Menu restaurant
+        - Horaires / Disponibilités
+        - Traduction manquante
+    validations:
+      required: true
+
+  - type: dropdown
+    id: page
+    attributes:
+      label: Page concernée
+      options:
+        - Homepage
+        - Séjourner (Dar Saad)
+        - Bien-être (Agrumia)
+        - Restaurant
+        - Retraites
+        - Notre Histoire
+        - Contact
+        - Navigation / Footer
+        - Admin back-office
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: Contenu actuel
+      description: Copier le texte exact ou décrire la photo actuelle
+    validations:
+      required: true
+
+  - type: textarea
+    id: new
+    attributes:
+      label: Nouveau contenu
+      description: Le texte corrigé, la nouvelle photo, le nouveau prix
+    validations:
+      required: true
+
+  - type: input
+    id: approved_by
+    attributes:
+      label: Approuvé par
+      placeholder: "Ex : Elyssa · 2026-05-20"
+    validations:
+      required: true

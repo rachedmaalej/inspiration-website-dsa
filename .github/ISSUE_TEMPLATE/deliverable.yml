@@ -1,0 +1,73 @@
+name: Livrable attendu
+description: Suivre un livrable externe (logos, photos, textes, validations)
+title: "[LIVRABLE] "
+labels: ["livrable"]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type de livrable
+      options:
+        - Logos & identité visuelle
+        - Photographie
+        - Textes & traductions
+        - Validation Elyssa / Lilia
+        - Prestataire (photographe, designer, rédacteur)
+        - Infrastructure (DNS, compte, approbation)
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description du livrable
+      description: Qu'est-ce qui doit être livré exactement ?
+      placeholder: |
+        Ex : Lot 1 photos — orangeraie à heure dorée
+        - Minimum 20 photos JPEG, 3000px minimum
+        - Shooting entre 6h–8h ou 17h–19h
+        - Inclure : feuillage, mains sur fruits, lumière filtrée
+    validations:
+      required: true
+
+  - type: input
+    id: owner
+    attributes:
+      label: Responsable de la livraison
+      placeholder: "Ex : Photographe (Ahmed Ben Ali), Elyssa, Designer"
+    validations:
+      required: true
+
+  - type: input
+    id: deadline
+    attributes:
+      label: Date limite
+      placeholder: "YYYY-MM-DD"
+    validations:
+      required: true
+
+  - type: input
+    id: blocks
+    attributes:
+      label: Ce livrable débloque
+      placeholder: "Ex : Intégration homepage (P1-07), Shooting à planifier si Q-02 Option A"
+
+  - type: textarea
+    id: follow_up
+    attributes:
+      label: Relances effectuées
+      description: Logger les relances ici pour garder une trace.
+      placeholder: |
+        2026-03-01 : Brief envoyé par WhatsApp
+        2026-03-05 : Confirmation reçue, shooting planifié le 12 mars
+
+  - type: checkboxes
+    id: tracking
+    attributes:
+      label: Statut
+      options:
+        - label: Brief envoyé au responsable
+        - label: Confirmation de réception obtenue
+        - label: Date de livraison confirmée
+        - label: Livrable reçu et validé
+        - label: Intégré dans le projet

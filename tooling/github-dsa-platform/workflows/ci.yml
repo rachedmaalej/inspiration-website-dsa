@@ -1,0 +1,88 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [production]
+
+jobs:
+  ci:
+    name: Lint · Type-check · Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      # Minimal env vars for build — real secrets injected in Vercel
+      DATABASE_URL: ${{ secrets.DATABASE_URL_CI }}
+      DIRECT_URL: ${{ secrets.DIRECT_URL_CI }}
+      NEXT_PUBLIC_SITE_URL: https://domainesidiabdallah.com
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Type-check
+        run: npx tsc --noEmit
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: ci
+
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL_CI }}
+      DIRECT_URL: ${{ secrets.DIRECT_URL_CI }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Run unit tests
+        run: npm run test -- --reporter=verbose
+
+# ─────────────────────────────────────────
+# Notes de configuration :
+#
+# 1. Secrets GitHub requis (Settings > Secrets > Actions) :
+#    DATABASE_URL_CI  → Supabase DEV pooler URL (pour le build CI)
+#    DIRECT_URL_CI    → Supabase DEV direct URL (pour prisma generate)
+#
+# 2. Ce workflow valide : lint + types + build + tests
+#    Il ne déploie PAS — Vercel gère le déploiement automatiquement
+#    via l'intégration GitHub (branch main → preview, production → prod)
+#
+# 3. Le merge vers production est bloqué tant que ce workflow échoue
+#    (configurer dans GitHub > Settings > Branches > Branch protection)
+# ─────────────────────────────────────────

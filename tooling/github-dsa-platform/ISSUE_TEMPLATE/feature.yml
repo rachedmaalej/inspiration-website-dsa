@@ -1,0 +1,66 @@
+name: Feature / Composant
+description: Nouvelle fonctionnalité ou nouveau composant à développer
+title: "[FEAT] "
+labels: ["feature"]
+body:
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Phase
+      options:
+        - Phase 1 — Site Web + Restaurant (Avr–Mai 2026)
+        - Phase 1b — Wellness (Juin–Sept 2026)
+        - Phase 2 — Chambres + Paiements (Fin 2026)
+        - Phase 3 — Retraites + Dashboard (2027+)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Domaine
+      multiple: true
+      options:
+        - frontend
+        - backend
+        - database
+        - admin
+        - infra
+        - content
+        - design
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Qu'est-ce que cette feature doit faire ? Rester orienté comportement (ce que l'utilisateur voit/fait), pas implémentation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critères d'acceptation
+      description: Comment savoir que c'est terminé ?
+      placeholder: |
+        - [ ] Le formulaire envoie un email de confirmation
+        - [ ] Les créneaux pleins s'affichent en grisé
+        - [ ] Fonctionne sur mobile (iPhone Safari + Android Chrome)
+    validations:
+      required: true
+
+  - type: input
+    id: estimate
+    attributes:
+      label: Estimation
+      placeholder: "Ex : 4h, 1 jour, 2 jours"
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dépendances
+      placeholder: |
+        Bloqué par : DEC-01 (design tokens), CONTENT-01 (textes FR)
+        Débloque : P1-16 (UI réservation)

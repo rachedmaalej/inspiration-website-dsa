@@ -1,0 +1,68 @@
+name: Décision stratégique
+description: Enregistrer une décision de design, de contenu ou d'architecture
+title: "[DEC] "
+labels: ["décision"]
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: Catégorie
+      options:
+        - Design & identité visuelle
+        - Contenu & ton
+        - Architecture technique
+        - Phasage & planning
+        - Prestataire externe
+    validations:
+      required: true
+
+  - type: textarea
+    id: decision
+    attributes:
+      label: La décision
+      description: Décrivez clairement ce qui a été décidé (une seule décision par issue).
+      placeholder: "Ex : La direction artistique retenue est Terre d'Agrumes avec la palette Parchment + Grove + Terracotta."
+    validations:
+      required: true
+
+  - type: input
+    id: approved_by
+    attributes:
+      label: Approuvé par
+      placeholder: "Ex : Elyssa, Lilia, Rached"
+    validations:
+      required: true
+
+  - type: input
+    id: approved_on
+    attributes:
+      label: Date de validation
+      placeholder: "YYYY-MM-DD"
+    validations:
+      required: true
+
+  - type: textarea
+    id: options_considered
+    attributes:
+      label: Options considérées
+      description: Quelles alternatives ont été étudiées et pourquoi ont-elles été écartées ?
+      placeholder: |
+        Option A : ...
+        Option B : ... (écarté parce que...)
+        Option C : ...
+
+  - type: textarea
+    id: implications
+    attributes:
+      label: Implications
+      description: Qu'est-ce que cette décision change ou débloque concrètement ?
+      placeholder: "Ex : Débloque la configuration tailwind.config.ts. La rédaction des textes peut démarrer."
+
+  - type: checkboxes
+    id: notion_updated
+    attributes:
+      label: Suivi
+      options:
+        - label: Notion > Décisions mis à jour
+        - label: Informé Elyssa et Lilia
+        - label: Impact sur le planning vérifié

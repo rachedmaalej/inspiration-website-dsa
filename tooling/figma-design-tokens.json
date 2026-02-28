@@ -1,0 +1,187 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$metadata": {
+    "project": "Domaine Sidi Abdallah",
+    "direction": "Terre d'Agrumes",
+    "version": "1.0.0",
+    "locked": "2026-02-28",
+    "author": "Rached",
+    "figmaPlugin": "Token Studio (formerly Figma Tokens)"
+  },
+
+  "color": {
+    "parchment": {
+      "$value": "#F7F0E3",
+      "$type": "color",
+      "$description": "Fond principal. Blanc chaud, parchemin. Background de toutes les pages."
+    },
+    "grove": {
+      "$value": "#2C4035",
+      "$type": "color",
+      "$description": "Vert orangeraie profond. Couleur principale de la marque. Titres, nav, footer."
+    },
+    "terracotta": {
+      "$value": "#B5623A",
+      "$type": "color",
+      "$description": "Terre cuite. Accent chaud. CTAs, badges, liens actifs, highlights."
+    },
+    "gold": {
+      "$value": "#C4A35A",
+      "$type": "color",
+      "$description": "Or tamis. Accent luxe. Dividers, icônes, éléments décoratifs."
+    },
+    "ink": {
+      "$value": "#1C1A17",
+      "$type": "color",
+      "$description": "Encre profonde. Corps de texte principal. Presque noir, légèrement chaud."
+    },
+    "parchment-dark": {
+      "$value": "#EDE5D4",
+      "$type": "color",
+      "$description": "Parchemin foncé. Fond de cartes, sections alternées, hover états."
+    },
+    "parchment-light": {
+      "$value": "#FAF6EF",
+      "$type": "color",
+      "$description": "Parchemin clair. Inputs, surfaces légères."
+    },
+    "grove-light": {
+      "$value": "#3D5A4C",
+      "$type": "color",
+      "$description": "Grove allégé. Hover état sur les éléments grove."
+    },
+    "terracotta-light": {
+      "$value": "#C97A55",
+      "$type": "color",
+      "$description": "Terracotta clair. Hover état sur les CTAs."
+    },
+    "text-primary": {
+      "$value": "{color.ink}",
+      "$type": "color",
+      "$description": "Texte principal."
+    },
+    "text-secondary": {
+      "$value": "#4A4640",
+      "$type": "color",
+      "$description": "Texte secondaire, labels, métadonnées."
+    },
+    "text-on-grove": {
+      "$value": "{color.parchment}",
+      "$type": "color",
+      "$description": "Texte sur fond grove (nav, footer)."
+    },
+    "text-on-terracotta": {
+      "$value": "#FFFFFF",
+      "$type": "color",
+      "$description": "Texte sur fond terracotta (CTAs)."
+    }
+  },
+
+  "typography": {
+    "fontFamily": {
+      "heading": {
+        "$value": "'Cormorant Garamond', Georgia, 'Times New Roman', serif",
+        "$type": "fontFamily",
+        "$description": "Tous les titres H1–H4. Serif élégant, chargé d'histoire."
+      },
+      "body": {
+        "$value": "'DM Sans', system-ui, -apple-system, sans-serif",
+        "$type": "fontFamily",
+        "$description": "Corps de texte, labels, navigation, formulaires."
+      }
+    },
+    "fontWeight": {
+      "light": { "$value": "300", "$type": "fontWeight" },
+      "regular": { "$value": "400", "$type": "fontWeight" },
+      "medium": { "$value": "500", "$type": "fontWeight" },
+      "semibold": { "$value": "600", "$type": "fontWeight" },
+      "bold": { "$value": "700", "$type": "fontWeight" }
+    },
+    "fontSize": {
+      "xs": { "$value": "0.75rem", "$type": "dimension", "$description": "12px — badges, labels discrets" },
+      "sm": { "$value": "0.875rem", "$type": "dimension", "$description": "14px — captions, métadonnées" },
+      "base": { "$value": "1rem", "$type": "dimension", "$description": "16px — corps de texte standard" },
+      "lg": { "$value": "1.125rem", "$type": "dimension", "$description": "18px — corps élargi, intro" },
+      "xl": { "$value": "1.25rem", "$type": "dimension", "$description": "20px — sous-titres, nav" },
+      "2xl": { "$value": "1.5rem", "$type": "dimension", "$description": "24px — H4" },
+      "3xl": { "$value": "1.875rem", "$type": "dimension", "$description": "30px — H3" },
+      "4xl": { "$value": "2.25rem", "$type": "dimension", "$description": "36px — H2" },
+      "5xl": { "$value": "3rem", "$type": "dimension", "$description": "48px — H1 standard" },
+      "6xl": { "$value": "3.75rem", "$type": "dimension", "$description": "60px — H1 hero mobile" },
+      "7xl": { "$value": "4.5rem", "$type": "dimension", "$description": "72px — H1 hero desktop" },
+      "8xl": { "$value": "6rem", "$type": "dimension", "$description": "96px — Display (si Q-05 Option C)" }
+    },
+    "lineHeight": {
+      "tight": { "$value": "1.1", "$type": "number", "$description": "Grands titres" },
+      "snug": { "$value": "1.3", "$type": "number", "$description": "Sous-titres" },
+      "normal": { "$value": "1.5", "$type": "number", "$description": "Corps de texte" },
+      "relaxed": { "$value": "1.7", "$type": "number", "$description": "Corps long, articles" }
+    },
+    "letterSpacing": {
+      "tight": { "$value": "-0.02em", "$type": "dimension", "$description": "Grands titres" },
+      "normal": { "$value": "0em", "$type": "dimension" },
+      "wide": { "$value": "0.05em", "$type": "dimension", "$description": "Labels, badges uppercase" },
+      "wider": { "$value": "0.1em", "$type": "dimension", "$description": "Section labels" },
+      "widest": { "$value": "0.2em", "$type": "dimension", "$description": "Eyebrows, navigation uppercase" }
+    }
+  },
+
+  "spacing": {
+    "1": { "$value": "0.25rem", "$type": "dimension" },
+    "2": { "$value": "0.5rem", "$type": "dimension" },
+    "3": { "$value": "0.75rem", "$type": "dimension" },
+    "4": { "$value": "1rem", "$type": "dimension" },
+    "5": { "$value": "1.25rem", "$type": "dimension" },
+    "6": { "$value": "1.5rem", "$type": "dimension" },
+    "8": { "$value": "2rem", "$type": "dimension" },
+    "10": { "$value": "2.5rem", "$type": "dimension" },
+    "12": { "$value": "3rem", "$type": "dimension" },
+    "16": { "$value": "4rem", "$type": "dimension" },
+    "20": { "$value": "5rem", "$type": "dimension" },
+    "24": { "$value": "6rem", "$type": "dimension" },
+    "32": { "$value": "8rem", "$type": "dimension" },
+    "40": { "$value": "10rem", "$type": "dimension" },
+    "48": { "$value": "12rem", "$type": "dimension" }
+  },
+
+  "borderRadius": {
+    "none": { "$value": "0", "$type": "dimension" },
+    "sm": { "$value": "0.125rem", "$type": "dimension" },
+    "base": { "$value": "0.25rem", "$type": "dimension" },
+    "md": { "$value": "0.375rem", "$type": "dimension" },
+    "lg": { "$value": "0.5rem", "$type": "dimension" },
+    "xl": { "$value": "0.75rem", "$type": "dimension" },
+    "2xl": { "$value": "1rem", "$type": "dimension" },
+    "full": { "$value": "9999px", "$type": "dimension" }
+  },
+
+  "shadow": {
+    "sm": {
+      "$value": "0 1px 2px rgba(28, 26, 23, 0.05)",
+      "$type": "shadow",
+      "$description": "Ombre légère. Cartes au repos."
+    },
+    "base": {
+      "$value": "0 2px 8px rgba(28, 26, 23, 0.08)",
+      "$type": "shadow",
+      "$description": "Cartes en hover."
+    },
+    "md": {
+      "$value": "0 4px 16px rgba(28, 26, 23, 0.10)",
+      "$type": "shadow",
+      "$description": "Modales, dropdowns."
+    },
+    "none": {
+      "$value": "none",
+      "$type": "shadow"
+    }
+  },
+
+  "breakpoint": {
+    "sm": { "$value": "640px", "$type": "dimension" },
+    "md": { "$value": "768px", "$type": "dimension" },
+    "lg": { "$value": "1024px", "$type": "dimension" },
+    "xl": { "$value": "1280px", "$type": "dimension" },
+    "2xl": { "$value": "1536px", "$type": "dimension" }
+  }
+}
