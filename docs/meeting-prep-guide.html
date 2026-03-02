@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide Reunions M1 &amp; M2 — Domaine Sidi Abdallah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream:      #F7F3EC;
+  --parchment:  #EDE6D8;
+  --ink:        #1C1A17;
+  --grove:      #2C4035;
+  --gold:       #C4A35A;
+  --gold-light: rgba(196,163,90,0.12);
+  --gold-mid:   rgba(196,163,90,0.25);
+  --dust:       #A89880;
+  --mist:       #D6CFC4;
+  --terracotta: #B5623A;
+  --terra-light:rgba(181,98,58,0.10);
+  --white:      #FFFFFF;
+  --red:        #C0392B;
+  --red-light:  rgba(192,57,43,0.08);
+  --green:      #27AE60;
+  --green-light:rgba(39,174,96,0.08);
+}
+
+html { font-size: 14px; scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── NAV ─── */
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--grove);
+  padding: 12px 40px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+.top-nav a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  transition: color 0.2s;
+}
+.top-nav a:hover, .top-nav a.active { color: var(--gold); }
+.top-nav .nav-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--white);
+  margin-right: auto;
+}
+.meeting-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.badge-m1 { background: var(--gold); color: var(--grove); }
+.badge-m2 { background: var(--terracotta); color: var(--white); }
+
+/* ─── LAYOUT ─── */
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 40px 80px;
+}
+
+/* ─── HERO ─── */
+.hero {
+  text-align: center;
+  padding: 60px 20px 50px;
+  border-bottom: 2px solid var(--gold);
+  margin-bottom: 50px;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 36px;
+  color: var(--grove);
+  margin-bottom: 8px;
+}
+.hero h1 em { font-style: italic; color: var(--terracotta); }
+.hero p {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--dust);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+.hero-meetings {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 28px;
+}
+.hero-meeting-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 20px 28px;
+  text-align: center;
+  border: 1px solid var(--mist);
+  min-width: 200px;
+}
+.hero-meeting-card .hmc-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.hero-meeting-card:first-child .hmc-label { color: var(--gold); }
+.hero-meeting-card:last-child .hmc-label { color: var(--terracotta); }
+.hero-meeting-card .hmc-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--grove);
+  margin-bottom: 4px;
+}
+.hero-meeting-card .hmc-meta {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--dust);
+}
+
+/* ─── SECTION HEADERS ─── */
+.section-anchor { scroll-margin-top: 60px; }
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  margin-top: 56px;
+}
+.section-header .sh-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.sh-icon.m1 { background: var(--gold-light); }
+.sh-icon.m2 { background: var(--terra-light); }
+.sh-icon.shared { background: var(--green-light); }
+.section-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--grove);
+}
+.section-header h2 small {
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  color: var(--dust);
+  display: block;
+  margin-top: 2px;
+}
+.section-divider {
+  border: none;
+  height: 1px;
+  background: var(--mist);
+  margin: 50px 0 10px;
+}
+
+/* ─── TIMELINE (visual agenda) ─── */
+.timeline {
+  position: relative;
+  padding-left: 44px;
+  margin-bottom: 36px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), var(--mist));
+  border-radius: 2px;
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 20px;
+}
+.tl-item:last-child { margin-bottom: 0; }
+.tl-dot {
+  position: absolute;
+  left: -32px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2px solid var(--gold);
+}
+.tl-item.highlight .tl-dot {
+  background: var(--gold);
+  box-shadow: 0 0 0 4px var(--gold-light);
+}
+.tl-item.critical .tl-dot {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 4px var(--terra-light);
+}
+.tl-time {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2px;
+}
+.tl-item.critical .tl-time { color: var(--terracotta); }
+.tl-title {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.tl-desc {
+  font-size: 12px;
+  font-weight: 300;
+  color: #7A756E;
+  line-height: 1.55;
+}
+.tl-tip {
+  margin-top: 6px;
+  padding: 8px 12px;
+  background: var(--gold-light);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 300;
+  color: #59534E;
+  line-height: 1.5;
+  border-left: 2px solid var(--gold);
+}
+.tl-tip strong { font-weight: 400; color: var(--ink); }
+
+/* ─── TABS (what to bring) ─── */
+.tabs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+.tab-card {
+  background: var(--white);
+  border: 1px solid var(--mist);
+  border-radius: 10px;
+  padding: 16px 18px;
+  transition: border-color 0.2s;
+}
+.tab-card:hover { border-color: var(--gold); }
+.tab-card .tc-icon {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+.tab-card .tc-name {
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.tab-card .tc-file {
+  font-size: 10.5px;
+  font-weight: 300;
+  color: var(--dust);
+  font-family: 'Courier New', monospace;
+}
+.tab-card .tc-note {
+  margin-top: 6px;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--terracotta);
+  font-style: italic;
+}
+.tab-card.primary { border-color: var(--gold); background: var(--gold-light); }
+.tab-card.hidden-tab { border-style: dashed; opacity: 0.75; }
+.tab-card.hidden-tab .tc-note { color: var(--dust); }
+
+/* ─── DECISION CARDS ─── */
+.decisions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+.decision-card {
+  background: var(--white);
+  border: 1px solid var(--mist);
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.decision-card::before {
+  content: attr(data-q);
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 28px;
+  color: rgba(196,163,90,0.15);
+}
+.dc-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--grove);
+  margin-bottom: 8px;
+  padding-right: 40px;
+}
+.dc-options {
+  list-style: none;
+  margin-bottom: 10px;
+}
+.dc-options li {
+  font-size: 11.5px;
+  font-weight: 300;
+  color: #59534E;
+  padding: 3px 0 3px 16px;
+  position: relative;
+  line-height: 1.45;
+}
+.dc-options li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+}
+.dc-options li:first-child::before { background: var(--gold); border-color: var(--gold); }
+.dc-blocks {
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 10.5px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.dc-blocks.blocker {
+  background: var(--red-light);
+  color: var(--red);
+}
+.dc-blocks.gate {
+  background: var(--gold-light);
+  color: #8B7234;
+}
+.decision-card.urgent {
+  border-color: var(--terracotta);
+  border-width: 2px;
+}
+.dc-urgent-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--terracotta);
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+/* ─── GO/NOGO FRAMEWORK ─── */
+.gonogo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 36px;
+  border: 1px solid var(--mist);
+}
+.gonogo-col {
+  padding: 28px 24px;
+}
+.gonogo-col.go {
+  background: var(--green-light);
+  border-right: 1px solid var(--mist);
+}
+.gonogo-col.nogo {
+  background: var(--red-light);
+}
+.gonogo-col h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 22px;
+  margin-bottom: 14px;
+}
+.gonogo-col.go h3 { color: var(--green); }
+.gonogo-col.nogo h3 { color: var(--red); }
+.gonogo-col ul {
+  list-style: none;
+  padding: 0;
+}
+.gonogo-col li {
+  font-size: 12px;
+  font-weight: 300;
+  color: #59534E;
+  padding: 5px 0 5px 18px;
+  position: relative;
+  line-height: 1.5;
+}
+.gonogo-col.go li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+}
+.gonogo-col.nogo li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--red);
+}
+.gonogo-col li strong { font-weight: 400; color: var(--ink); }
+.gonogo-ask {
+  text-align: center;
+  padding: 20px;
+  background: var(--white);
+  border: 2px solid var(--grove);
+  border-radius: 12px;
+  margin-bottom: 36px;
+}
+.gonogo-ask p {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--grove);
+  font-style: italic;
+  line-height: 1.5;
+}
+.gonogo-ask .ask-note {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--dust);
+  margin-top: 8px;
+  font-style: normal;
+}
+
+/* ─── OBJECTIONS TABLE ─── */
+.objections-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 36px;
+}
+.objections-table th {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dust);
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--mist);
+}
+.objections-table td {
+  padding: 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  vertical-align: top;
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+.objections-table td:first-child {
+  font-weight: 400;
+  color: var(--terracotta);
+  width: 35%;
+}
+.objections-table td:last-child {
+  font-weight: 300;
+  color: #59534E;
+}
+.objections-table td:last-child strong {
+  font-weight: 400;
+  color: var(--ink);
+}
+.objections-table tbody tr:hover td {
+  background: rgba(0,0,0,0.01);
+}
+
+/* ─── RULES ─── */
+.rules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+.rule-card {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 18px;
+  border: 1px solid var(--mist);
+}
+.rule-card .rc-icon { font-size: 20px; margin-bottom: 8px; }
+.rule-card .rc-title {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--grove);
+  margin-bottom: 4px;
+}
+.rule-card .rc-desc {
+  font-size: 11.5px;
+  font-weight: 300;
+  color: #59534E;
+  line-height: 1.55;
+}
+.rule-card.dont {
+  border-color: rgba(192,57,43,0.2);
+  background: var(--red-light);
+}
+.rule-card.dont .rc-title { color: var(--red); }
+.rule-card.do {
+  border-color: rgba(39,174,96,0.2);
+  background: var(--green-light);
+}
+.rule-card.do .rc-title { color: var(--green); }
+
+/* ─── URGENT ACTIONS ─── */
+.urgent-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+.urgent-card {
+  background: var(--white);
+  border: 2px solid var(--terracotta);
+  border-radius: 10px;
+  padding: 18px;
+  position: relative;
+}
+.urgent-card .uc-trigger {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 6px;
+}
+.urgent-card .uc-action {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.urgent-card .uc-deadline {
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--dust);
+}
+.urgent-card .uc-deadline strong {
+  font-weight: 500;
+  color: var(--terracotta);
+}
+
+/* ─── CHECKLIST ─── */
+.checklist-section {
+  margin-bottom: 30px;
+}
+.cl-phase-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--mist);
+}
+.cl-phase-label.m2-label { color: var(--terracotta); }
+.cl-phase-label.between-label { color: var(--grove); }
+.cl-phase-label.after-label { color: var(--green); }
+.checklist {
+  list-style: none;
+  padding: 0;
+}
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 7px 0;
+  font-size: 12.5px;
+  font-weight: 300;
+  color: #59534E;
+  line-height: 1.5;
+}
+.cl-box {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--mist);
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cl-box:hover { border-color: var(--gold); }
+.checklist li.checked .cl-box {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.checklist li.checked .cl-box::after {
+  content: '\2713';
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 600;
+}
+.checklist li.checked .cl-text {
+  text-decoration: line-through;
+  color: var(--mist);
+}
+
+/* ─── CALLOUT ─── */
+.callout {
+  padding: 16px 20px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 300;
+  color: #59534E;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  border-left: 3px solid;
+}
+.callout strong { font-weight: 400; color: var(--ink); }
+.callout.gold { background: var(--gold-light); border-color: var(--gold); }
+.callout.terra { background: var(--terra-light); border-color: var(--terracotta); }
+.callout.green { background: var(--green-light); border-color: var(--green); }
+
+/* ─── PRINT ─── */
+@media print {
+  .top-nav { display: none; }
+  body { background: white; }
+  .page { padding: 20px 30px; }
+  .hero { padding: 30px 20px 30px; }
+  .decision-card, .tab-card, .rule-card, .urgent-card { break-inside: avoid; }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 700px) {
+  .page { padding: 20px; }
+  .top-nav { padding: 10px 16px; gap: 16px; flex-wrap: wrap; }
+  .hero-meetings { flex-direction: column; align-items: center; }
+  .tabs-grid, .decisions-grid, .rules-grid, .urgent-grid, .gonogo-grid { grid-template-columns: 1fr; }
+  .gonogo-col.go { border-right: none; border-bottom: 1px solid var(--mist); }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ TOP NAV ═══ -->
+<nav class="top-nav">
+  <span class="nav-brand">DSA</span>
+  <a href="#m1-agenda">Agenda M1</a>
+  <a href="#m1-tabs">A apporter</a>
+  <a href="#m1-decisions">8 Decisions</a>
+  <a href="#m2-gonogo">Go/NoGo</a>
+  <a href="#objections">Objections</a>
+  <a href="#rules">Regles</a>
+  <a href="#urgent">Urgences</a>
+  <a href="#checklist">Checklist</a>
+</nav>
+
+<div class="page">
+
+  <!-- ═══ HERO ═══ -->
+  <div class="hero">
+    <h1>Guide de Preparation <em>Reunions</em></h1>
+    <p>Deux reunions, deux objectifs. La premiere verrouille l'identite. La seconde lance le projet.</p>
+    <div class="hero-meetings">
+      <div class="hero-meeting-card">
+        <div class="hmc-label">M1</div>
+        <div class="hmc-title">Direction Artistique</div>
+        <div class="hmc-meta">90 min &middot; Avant le 15 mars</div>
+      </div>
+      <div class="hero-meeting-card">
+        <div class="hmc-label">M2</div>
+        <div class="hmc-title">Proposition &amp; Go/NoGo</div>
+        <div class="hmc-meta">60 min &middot; Apres les 8 decisions</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!--              MEETING M1                    -->
+  <!-- ══════════════════════════════════════════ -->
+
+  <!-- ═══ M1 AGENDA ═══ -->
+  <div class="section-anchor" id="m1-agenda"></div>
+  <div class="section-header">
+    <div class="sh-icon m1">&#9200;</div>
+    <h2>Agenda M1 <span class="meeting-badge badge-m1">M1</span><small>Direction Artistique &mdash; 90 minutes</small></h2>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">0:00 &ndash; 0:05 &middot; 5 min</div>
+      <div class="tl-title">Cadrage &mdash; 3 questions provocantes</div>
+      <div class="tl-desc">Afficher les 3 sticky notes jaunes du FigJam (Zone 1). Rien d'autre a l'ecran. Lecture silencieuse.</div>
+      <div class="tl-tip">
+        <strong>Sticky 1 :</strong> &laquo; Dans 5 ans, un journaliste de Conde Nast Traveller ecrit sur le Domaine. Quelle est la premiere phrase ? &raquo;<br>
+        <strong>Sticky 2 :</strong> &laquo; Un client arrive depuis Londres. En 8 secondes, il sait si c'est pour lui. Que doit-il ressentir ? &raquo;<br>
+        <strong>Sticky 3 :</strong> &laquo; Quand on vous demande "c'est quoi le Domaine Sidi Abdallah ?", vous repondez en une phrase. Laquelle ? &raquo;
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">0:05 &ndash; 0:10 &middot; 5 min</div>
+      <div class="tl-title">Reponses individuelles</div>
+      <div class="tl-desc">Chacun repond a voix haute aux 3 questions. Ne pas debattre, juste ecouter. <strong>Noter les mots exacts</strong> qu'elles utilisent &mdash; ca nourrira le copywriting.</div>
+    </div>
+
+    <div class="tl-item highlight">
+      <div class="tl-dot"></div>
+      <div class="tl-time">0:10 &ndash; 0:20 &middot; 10 min</div>
+      <div class="tl-title">Deux chemins</div>
+      <div class="tl-desc">Zone 2 du FigJam. Montrer cote a cote : <strong>Option A</strong> (Etablissement Premium) vs <strong>Option B</strong> (Terre d'Agrumes). Chacun dit lequel lui parle et pourquoi.</div>
+      <div class="tl-tip">
+        <strong>Si hesitation :</strong> &laquo; Si vous deviez montrer le site a votre client ideal &mdash; celui que vous voulez vraiment attirer &mdash; lequel vous lui montrez ? &raquo;
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">0:20 &ndash; 0:45 &middot; 25 min</div>
+      <div class="tl-title">Tour des 6 references</div>
+      <div class="tl-desc">Zone 3 du FigJam + sites ouverts dans les onglets. 4 min par reference : montrer le site, lire la fiche, poser la question &laquo; Est-ce qu'on se voit la-dedans ? &raquo;</div>
+      <div class="tl-tip">
+        <strong>Ordre recommande :</strong> Kasbah Bab Ourika (la plus proche) &rarr; Babylonstoren (le plafond) &rarr; Beldi Country Club &rarr; Masseria Il Frantoio &rarr; Hacienda de San Rafael &rarr; Susafa
+      </div>
+    </div>
+
+    <div class="tl-item critical">
+      <div class="tl-dot"></div>
+      <div class="tl-time">0:45 &ndash; 1:20 &middot; 35 min</div>
+      <div class="tl-title">Vote sur les 8 decisions</div>
+      <div class="tl-desc">Zone 4 du FigJam. 4-5 min par decision. Dots de couleur : <strong style="color: var(--green);">Rached = vert</strong>, <strong style="color: #3498DB;">Elyssa = bleu</strong>, <strong style="color: #E67E22;">Lilia = orange</strong>. Si les 3 dots divergent &rarr; 5 min de discussion &rarr; re-vote.</div>
+      <div class="tl-tip">
+        <strong>Ouvrir <code>mobile-proposals.html</code></strong> uniquement quand Q-05 (typographie) ou Q-06 (hero) sont en discussion. C'est un appui visuel, pas le document principal.
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">1:20 &ndash; 1:30 &middot; 10 min</div>
+      <div class="tl-title">Recap &amp; actions urgentes</div>
+      <div class="tl-desc">Relire les 8 decisions a voix haute. Identifier les actions urgentes declenchees par les votes. Confirmer les deadlines.</div>
+    </div>
+  </div>
+
+
+  <!-- ═══ M1 WHAT TO BRING ═══ -->
+  <div class="section-anchor" id="m1-tabs"></div>
+  <div class="section-header">
+    <div class="sh-icon m1">&#128196;</div>
+    <h2>A Apporter <span class="meeting-badge badge-m1">M1</span><small>Onglets a pre-ouvrir avant la reunion</small></h2>
+  </div>
+
+  <div class="tabs-grid">
+    <div class="tab-card primary">
+      <div class="tc-icon">&#127912;</div>
+      <div class="tc-name">FigJam Board</div>
+      <div class="tc-file">DSA — Direction Artistique · Mars 2026</div>
+      <div class="tc-note">Document principal — partager l'ecran dessus</div>
+    </div>
+    <div class="tab-card primary">
+      <div class="tc-icon">&#127758;</div>
+      <div class="tc-name">Paysage Concurrentiel</div>
+      <div class="tc-file">competitive-landscape-dsa.html</div>
+      <div class="tc-note">Source des references et decisions</div>
+    </div>
+    <div class="tab-card hidden-tab">
+      <div class="tc-icon">&#128241;</div>
+      <div class="tc-name">Propositions Mobile</div>
+      <div class="tc-file">mobile-proposals.html</div>
+      <div class="tc-note">Ouvrir seulement a Q-05 / Q-06</div>
+    </div>
+    <div class="tab-card">
+      <div class="tc-icon">&#128221;</div>
+      <div class="tc-name">Document de notes</div>
+      <div class="tc-file">Carnet / doc vierge</div>
+      <div class="tc-note">Pour noter les decisions en live</div>
+    </div>
+  </div>
+
+  <div class="callout gold">
+    <strong>6 sites de reference a ouvrir dans des onglets :</strong> kasbahbabourika.com &middot; babylonstoren.com &middot; beldicountryclub.com &middot; masseriailfrantoio.it &middot; haciendadesanrafael.com &middot; susafa.com — <strong>Tester le chargement avant la reunion</strong> pour eviter les surprises.
+  </div>
+
+
+  <!-- ═══ 8 DECISIONS ═══ -->
+  <div class="section-anchor" id="m1-decisions"></div>
+  <div class="section-header">
+    <div class="sh-icon m1">&#9878;</div>
+    <h2>Les 8 Decisions <span class="meeting-badge badge-m1">M1</span><small>Chaque decision non tranchee bloque une partie du projet</small></h2>
+  </div>
+
+  <div class="decisions-grid">
+
+    <!-- Q-01 -->
+    <div class="decision-card" data-q="01">
+      <div class="dc-title">Q-01 &mdash; Ton &amp; Langue</div>
+      <ul class="dc-options">
+        <li><strong>A.</strong> La Maison <span style="color:var(--dust);">(intime, &laquo; notre cuisine &raquo;)</span></li>
+        <li><strong>B.</strong> Le Domaine <span style="color:var(--dust);">(institutionnel, permanence)</span></li>
+        <li><strong>C.</strong> La Terre parle <span style="color:var(--dust);">(la terre comme narratrice)</span></li>
+      </ul>
+      <div class="dc-blocks blocker">Bloque : toute la redaction FR/EN</div>
+    </div>
+
+    <!-- Q-02 -->
+    <div class="decision-card urgent" data-q="02">
+      <div class="dc-urgent-badge">Urgent &mdash; floraison neroli</div>
+      <div class="dc-title">Q-02 &mdash; Photo au lancement</div>
+      <ul class="dc-options">
+        <li><strong>A.</strong> Orangeraie seulement <span style="color:var(--dust);">(shoot mars)</span></li>
+        <li><strong>B.</strong> Attendre les interieurs <span style="color:var(--dust);">(retarde le lancement)</span></li>
+        <li><strong>C.</strong> Orangeraie + making-of <span style="color:var(--dust);">(double timeline)</span></li>
+      </ul>
+      <div class="dc-blocks blocker">Bloque : hero imagery. Le neroli ne fleurit qu'en fev-mars.</div>
+    </div>
+
+    <!-- Q-03 -->
+    <div class="decision-card" data-q="03">
+      <div class="dc-title">Q-03 &mdash; Sous-marques</div>
+      <ul class="dc-options">
+        <li><strong>A.</strong> DSA domine <span style="color:var(--dust);">(Dar Saad/Agrumia secondaires)</span></li>
+        <li><strong>B.</strong> Co-marques a egalite <span style="color:var(--dust);">(+2-3 sem. design)</span></li>
+        <li><strong>C.</strong> Noms internes seulement <span style="color:var(--dust);">(public voit &laquo; Sejourner / Se Detendre &raquo;)</span></li>
+      </ul>
+      <div class="dc-blocks gate">Gate : hierarchie visuelle, scope design system</div>
+    </div>
+
+    <!-- Q-04 -->
+    <div class="decision-card" data-q="04">
+      <div class="dc-title">Q-04 &mdash; Navigation au lancement</div>
+      <ul class="dc-options">
+        <li><strong>A.</strong> Pages completes + &laquo; Bientot &raquo; <span style="color:var(--dust);">(4 piliers)</span></li>
+        <li><strong>B.</strong> Nav reduite <span style="color:var(--dust);">(piliers ouverts seulement)</span></li>
+        <li><strong>C.</strong> Teasing progressif <span style="color:var(--dust);">(4 sur homepage, 3 en pre-inscription)</span></li>
+      </ul>
+      <div class="dc-blocks gate">Gate : nombre de pages a livrer en mai</div>
+    </div>
+
+    <!-- Q-05 -->
+    <div class="decision-card" data-q="05">
+      <div class="dc-title">Q-05 &mdash; Typographie</div>
+      <ul class="dc-options">
+        <li><strong>A.</strong> Chaleur <span style="color:var(--dust);">(large, serre &middot; ref: Kasbah)</span></li>
+        <li><strong>B.</strong> Rigueur editoriale <span style="color:var(--dust);">(fin, aere &middot; ref: Dar Ahlam)</span></li>
+        <li><strong>C.</strong> Contraste dramatique <span style="color:var(--dust);">(surdimensionne &middot; ref: Susafa)</span></li>
+      </ul>
+      <div class="dc-blocks gate">Gate : maquettes Figma, design system &rarr; ouvrir mobile-proposals.html</div>
+    </div>
+
+    <!-- Q-06 -->
+    <div class="decision-card urgent" data-q="06">
+      <div class="dc-urgent-badge">Potentiellement urgent</div>
+      <div class="dc-title">Q-06 &mdash; Hero homepage</div>
+      <ul class="dc-options">
+        <li><strong>A.</strong> Photo fixe <span style="color:var(--dust);">(golden hour orangeraie)</span></li>
+        <li><strong>B.</strong> Video en boucle <span style="color:var(--dust);">(15-20 sec, a monter avant le 7 avr)</span></li>
+        <li><strong>C.</strong> Photo maintenant, video plus tard <span style="color:var(--dust);">(sept-oct)</span></li>
+      </ul>
+      <div class="dc-blocks blocker">Bloque : si video &rarr; tournage + montage avant le 7 avril</div>
+    </div>
+
+    <!-- Q-07 -->
+    <div class="decision-card" data-q="07">
+      <div class="dc-title">Q-07 &mdash; Prix affiches</div>
+      <ul class="dc-options">
+        <li><strong>A.</strong> Transparence totale <span style="color:var(--dust);">(ref: Babylonstoren)</span></li>
+        <li><strong>B.</strong> Sur demande <span style="color:var(--dust);">(WhatsApp &middot; ref: Dar Ahlam)</span></li>
+        <li><strong>C.</strong> Fourchettes <span style="color:var(--dust);">(&laquo; a partir de X TND &raquo;)</span></li>
+      </ul>
+      <div class="dc-blocks gate">Gate : architecture des pages, scope developpement</div>
+    </div>
+
+    <!-- Q-08 -->
+    <div class="decision-card urgent" data-q="08">
+      <div class="dc-urgent-badge">Risque squatting</div>
+      <div class="dc-title">Q-08 &mdash; Boutique D2C</div>
+      <ul class="dc-options">
+        <li><strong>A.</strong> Oui, c'est la vision <span style="color:var(--dust);">(registrer domaines maintenant)</span></li>
+        <li><strong>B.</strong> Peut-etre, pas maintenant <span style="color:var(--dust);">(architecture extensible)</span></li>
+        <li><strong>C.</strong> Non <span style="color:var(--dust);">(experience sur place uniquement)</span></li>
+      </ul>
+      <div class="dc-blocks blocker">Bloque : si oui &rarr; registrer darsaad.com + agrumia.com cette semaine</div>
+    </div>
+
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!--              MEETING M2                    -->
+  <!-- ══════════════════════════════════════════ -->
+
+  <hr class="section-divider">
+
+  <!-- ═══ M2 AGENDA ═══ -->
+  <div class="section-anchor" id="m2-agenda"></div>
+  <div class="section-header">
+    <div class="sh-icon m2">&#9200;</div>
+    <h2>Agenda M2 <span class="meeting-badge badge-m2">M2</span><small>Proposition &amp; Go/NoGo &mdash; 60 minutes</small></h2>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">0:00 &ndash; 0:05 &middot; 5 min</div>
+      <div class="tl-title">Recap des 8 decisions</div>
+      <div class="tl-desc">&laquo; Voici ce qu'on a decide ensemble. &raquo; Afficher le resume de M1. Confirmer que rien n'a change depuis.</div>
+    </div>
+
+    <div class="tl-item highlight">
+      <div class="tl-dot"></div>
+      <div class="tl-time">0:05 &ndash; 0:20 &middot; 15 min</div>
+      <div class="tl-title">Presentation de l'approche</div>
+      <div class="tl-desc">Ouvrir <code>proposition-site-web-dsa.html</code>. Expliquer les tranches verticales : chaque phase = un produit complet et operationnel. <strong>Laisser le document faire le travail</strong> &mdash; lire ensemble l'analogie, ne pas la paraphraser.</div>
+      <div class="tl-tip">
+        <strong>Message cle :</strong> &laquo; L'infrastructure est construite une seule fois en Phase 1. Les Phases 2 et 3 s'y branchent &mdash; pas de reconstruction, donc plus rapide et moins cher. &raquo;
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">0:20 &ndash; 0:30 &middot; 10 min</div>
+      <div class="tl-title">Scope Phase 1</div>
+      <div class="tl-desc">Ce qui sera live en mai : site 7 pages + reservation restaurant + paiement Konnect. <strong>Insister : ca genere du revenu des le jour 1.</strong> Une table reservee et payee en avance = un revenu garanti.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">0:30 &ndash; 0:35 &middot; 5 min</div>
+      <div class="tl-title">Apercu Phases 2 &amp; 3</div>
+      <div class="tl-desc">Survol rapide : Phase 2 = wellness + hotel + Stripe (~22k), Phase 3 = retraites + OTA (~12k). <strong>Pas de detail</strong> &mdash; juste la vision pour montrer qu'il y a un plan complet.</div>
+    </div>
+
+    <div class="tl-item critical">
+      <div class="tl-dot"></div>
+      <div class="tl-time">0:35 &ndash; 0:40 &middot; 5 min</div>
+      <div class="tl-title">Go / NoGo</div>
+      <div class="tl-desc">Question directe. Silence. Attendre la reponse. Ne pas combler le vide.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">0:40 &ndash; 0:55 &middot; 15 min</div>
+      <div class="tl-title">Si Go &rarr; Devis</div>
+      <div class="tl-desc">Ouvrir <code>devis-phase1-site-web.html</code>. Parcourir les 8 postes. Expliquer l'echeancier 30%/40%/30% lie a des livrables concrets.</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-time">0:55 &ndash; 1:00 &middot; 5 min</div>
+      <div class="tl-title">Prochaines etapes</div>
+      <div class="tl-desc">Fixer la date de demarrage (7 avril). Lister ce qu'elles doivent fournir (textes, logos, photos). Montrer <code>dsa-master-timeline.html</code> pour la vision complete.</div>
+    </div>
+  </div>
+
+
+  <!-- ═══ M2 WHAT TO BRING ═══ -->
+  <div class="section-header">
+    <div class="sh-icon m2">&#128196;</div>
+    <h2>A Apporter <span class="meeting-badge badge-m2">M2</span><small>Onglets a pre-ouvrir avant la reunion</small></h2>
+  </div>
+
+  <div class="tabs-grid">
+    <div class="tab-card primary">
+      <div class="tc-icon">&#128200;</div>
+      <div class="tc-name">Proposition</div>
+      <div class="tc-file">proposition-site-web-dsa.html</div>
+      <div class="tc-note">Document principal — le Go/NoGo vit ici</div>
+    </div>
+    <div class="tab-card">
+      <div class="tc-icon">&#128221;</div>
+      <div class="tc-name">Recap 8 decisions</div>
+      <div class="tc-file">Captures FigJam ou resume ecrit</div>
+    </div>
+    <div class="tab-card hidden-tab">
+      <div class="tc-icon">&#128176;</div>
+      <div class="tc-name">Devis Phase 1</div>
+      <div class="tc-file">devis-phase1-site-web.html</div>
+      <div class="tc-note">Ouvrir seulement apres le Go</div>
+    </div>
+    <div class="tab-card hidden-tab">
+      <div class="tc-icon">&#128197;</div>
+      <div class="tc-name">Master Timeline</div>
+      <div class="tc-file">dsa-master-timeline.html</div>
+      <div class="tc-note">Ouvrir seulement apres le Go</div>
+    </div>
+  </div>
+
+
+  <!-- ═══ GO/NOGO ═══ -->
+  <div class="section-anchor" id="m2-gonogo"></div>
+  <div class="section-header">
+    <div class="sh-icon m2">&#9889;</div>
+    <h2>Go / NoGo <span class="meeting-badge badge-m2">M2</span><small>La question a poser et les deux scenarios</small></h2>
+  </div>
+
+  <div class="gonogo-ask">
+    <p>&laquo; Est-ce qu'on lance la Phase 1 sur cette base ?<br>Site vitrine + reservation restaurant, operationnel en mai, pour 34 000 TND. &raquo;</p>
+    <div class="ask-note">Poser la question. Ne pas combler le silence. Attendre la reponse.</div>
+  </div>
+
+  <div class="gonogo-grid">
+    <div class="gonogo-col go">
+      <h3>Go</h3>
+      <ul>
+        <li>Signature du devis</li>
+        <li><strong>Tranche 1 : 10 200 TND</strong> (30%)</li>
+        <li>Demarrage 7 avril (sous reserve contenu)</li>
+        <li>Partager <strong>dsa-master-timeline.html</strong></li>
+        <li>Envoyer la liste des contenus a fournir avec deadlines</li>
+        <li>Creer les issues Phase 1 dans Linear</li>
+        <li><strong>Tranche 2 : 13 600 TND</strong> (40%) a la validation staging</li>
+        <li><strong>Tranche 3 : 10 200 TND</strong> (30%) a la mise en ligne</li>
+      </ul>
+    </div>
+    <div class="gonogo-col nogo">
+      <h3>NoGo</h3>
+      <ul>
+        <li>Documenter les objections precises</li>
+        <li>Identifier ce qui doit changer (scope ? budget ? timing ?)</li>
+        <li>Proposer un ajustement sous 48h si possible</li>
+        <li>Rien ne demarre, pas de depense</li>
+        <li>Reprendre quand les conditions sont reunies</li>
+        <li>Le site reste en attente &mdash; pas de penalite</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- ═══ OBJECTIONS ═══ -->
+  <div class="section-anchor" id="objections"></div>
+  <div class="section-header">
+    <div class="sh-icon m2">&#128172;</div>
+    <h2>Objections Probables &amp; Reponses <span class="meeting-badge badge-m2">M2</span><small>Anticiper pour ne pas improviser</small></h2>
+  </div>
+
+  <table class="objections-table">
+    <thead>
+      <tr>
+        <th>Objection</th>
+        <th>Reponse preparee</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&laquo; 34 000 c'est beaucoup pour un site &raquo;</td>
+        <td>Ce n'est pas un site &mdash; c'est un site + un systeme de reservation + un outil de paiement + un back-office. Un site vitrine seul couterait ~15k. Le reste, c'est <strong>l'infrastructure qui evite de payer deux fois plus tard</strong>. Les Phases 2 et 3 coutent moins cher precisement parce que la fondation est deja la.</td>
+      </tr>
+      <tr>
+        <td>&laquo; On peut commencer plus petit ? &raquo;</td>
+        <td>Oui &mdash; on peut retirer le module restaurant (4 000 TND) et revenir a un site vitrine pur a 30 000. Mais le restaurant ouvre avant l'hotel &mdash; <strong>c'est la premiere source de revenus en ligne</strong>. Chaque table reservee et payee en avance, c'est du chiffre d'affaires garanti.</td>
+      </tr>
+      <tr>
+        <td>&laquo; Pourquoi pas WordPress / Squarespace ? &raquo;</td>
+        <td>Pour un site vitrine simple, ces outils fonctionnent. Mais des qu'on ajoute reservation + paiement Konnect + multi-langue + geo-detection, on depasse leurs limites. Et surtout : <strong>on ne pourrait pas y brancher les Phases 2 et 3 sans tout refaire</strong>. Le cout total serait plus eleve.</td>
+      </tr>
+      <tr>
+        <td>&laquo; On peut etaler les paiements autrement ? &raquo;</td>
+        <td>L'echeancier est deja en <strong>3 tranches liees a des livrables concrets</strong>, pas a des dates arbitraires. 30% au demarrage, 40% quand le site est visible sur staging (vous le testez), 30% a la mise en ligne. Chaque paiement correspond a un resultat tangible.</td>
+      </tr>
+      <tr>
+        <td>&laquo; Et si les Phases 2/3 coutent plus cher ? &raquo;</td>
+        <td>Les estimations (~22k et ~12k) seront precisees en devis formel avant chaque phase. <strong>Chaque phase est independante</strong> &mdash; vous n'etes pas engagees sur les 3 d'un coup. La Phase 1 tient debout seule. Le site fonctionne, le restaurant prend des reservations.</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!-- ═══ RULES ═══ -->
+  <hr class="section-divider">
+  <div class="section-anchor" id="rules"></div>
+  <div class="section-header">
+    <div class="sh-icon shared">&#9881;</div>
+    <h2>Regles de Facilitation<small>Ce qu'il faut faire et ne pas faire pendant les reunions</small></h2>
+  </div>
+
+  <div class="rules-grid">
+    <div class="rule-card do">
+      <div class="rc-icon">&#9989;</div>
+      <div class="rc-title">Pas de &laquo; on verra &raquo;</div>
+      <div class="rc-desc">Si blocage : &laquo; Si on ne decide pas aujourd'hui, le defaut est [X], et voila ce que ca implique. &raquo; Forcer une decision concrete.</div>
+    </div>
+    <div class="rule-card do">
+      <div class="rc-icon">&#9989;</div>
+      <div class="rc-title">Ecouter avant de proposer</div>
+      <div class="rc-desc">Les 3 questions d'ouverture (M1) sont la pour qu'Elyssa et Lilia s'expriment en premier. Ne pas orienter les reponses.</div>
+    </div>
+    <div class="rule-card do">
+      <div class="rc-icon">&#9989;</div>
+      <div class="rc-title">Laisser le document parler</div>
+      <div class="rc-desc">La proposition contient l'analogie &laquo; tranches verticales &raquo;. Lire ensemble, ne pas paraphraser. Le document fait le travail de persuasion.</div>
+    </div>
+    <div class="rule-card do">
+      <div class="rc-icon">&#9989;</div>
+      <div class="rc-title">Noter les mots exacts</div>
+      <div class="rc-desc">Les mots qu'Elyssa et Lilia utilisent pour decrire le Domaine nourriront directement le copywriting du site.</div>
+    </div>
+    <div class="rule-card dont">
+      <div class="rc-icon">&#10060;</div>
+      <div class="rc-title">Ne pas montrer le devis avant le Go</div>
+      <div class="rc-desc">Si le devis est le premier document, la conversation devient &laquo; c'est combien &raquo; au lieu de &laquo; c'est quoi et pourquoi &raquo;. Valeur d'abord, prix ensuite.</div>
+    </div>
+    <div class="rule-card dont">
+      <div class="rc-icon">&#10060;</div>
+      <div class="rc-title">Ne pas detailler Phases 2/3</div>
+      <div class="rc-desc">Juste l'apercu. Le detail viendra dans un devis separe apres Phase 1. Trop de detail maintenant cree de l'anxiete sur le scope total.</div>
+    </div>
+    <div class="rule-card dont">
+      <div class="rc-icon">&#10060;</div>
+      <div class="rc-title">Ne pas montrer les docs internes</div>
+      <div class="rc-desc"><code>dsa-website-action-plan.html</code> et <code>dsa-design-proposals.html</code> sont des outils dev. Ils generent des questions sur l'implementation au lieu de decisions strategiques.</div>
+    </div>
+    <div class="rule-card dont">
+      <div class="rc-icon">&#10060;</div>
+      <div class="rc-title">Ne pas negocier en seance</div>
+      <div class="rc-desc">Si elles veulent negocier le montant : &laquo; je vous envoie une version ajustee demain &raquo;. Ne pas brader en direct sous pression.</div>
+    </div>
+  </div>
+
+
+  <!-- ═══ URGENT ACTIONS ═══ -->
+  <div class="section-anchor" id="urgent"></div>
+  <div class="section-header">
+    <div class="sh-icon m1">&#9888;</div>
+    <h2>Actions Urgentes Post-M1<small>Declenchees automatiquement selon les votes</small></h2>
+  </div>
+
+  <div class="urgent-grid">
+    <div class="urgent-card">
+      <div class="uc-trigger">Si Q-02 = A ou C</div>
+      <div class="uc-action">Contacter un photographe pour shoot orangeraie</div>
+      <div class="uc-deadline">Deadline : <strong>sous 48 heures</strong></div>
+    </div>
+    <div class="urgent-card">
+      <div class="uc-trigger">Si Q-06 = B (video)</div>
+      <div class="uc-action">Planifier tournage + montage video hero</div>
+      <div class="uc-deadline">Deadline : <strong>avant le 7 avril</strong> (debut dev)</div>
+    </div>
+    <div class="urgent-card">
+      <div class="uc-trigger">Si Q-08 = A (boutique D2C)</div>
+      <div class="uc-action">Enregistrer darsaad.com + agrumia.com</div>
+      <div class="uc-deadline">Deadline : <strong>cette semaine</strong> (risque de squatting)</div>
+    </div>
+    <div class="urgent-card">
+      <div class="uc-trigger">Toujours (Q-01 tranchee)</div>
+      <div class="uc-action">Briefer le copywriter sur le ton choisi</div>
+      <div class="uc-deadline">Deadline : <strong>fin mars</strong></div>
+    </div>
+  </div>
+
+
+  <!-- ═══ CHECKLIST ═══ -->
+  <hr class="section-divider">
+  <div class="section-anchor" id="checklist"></div>
+  <div class="section-header">
+    <div class="sh-icon shared">&#9745;</div>
+    <h2>Checklist Complete<small>Tout ce qu'il faut faire, dans l'ordre</small></h2>
+  </div>
+
+  <!-- Before M1 -->
+  <div class="checklist-section">
+    <div class="cl-phase-label">Avant M1 &mdash; Direction Artistique</div>
+    <ul class="checklist">
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">FigJam board complet (4 zones remplies)</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">Tester le partage d'ecran avec FigJam (lag, zoom, lisibilite)</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">6 sites de reference ouverts et testes (pas de surprises de chargement)</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text"><code>competitive-landscape-dsa.html</code> ouvert dans un onglet</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text"><code>mobile-proposals.html</code> ouvert dans un onglet (cache, pour Q-05/Q-06)</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">Document vierge pret pour noter les decisions en live</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">Envoyer le lien FigJam a Elyssa et Lilia avant la reunion</span></li>
+    </ul>
+  </div>
+
+  <!-- Between M1 & M2 -->
+  <div class="checklist-section">
+    <div class="cl-phase-label between-label">Entre M1 et M2</div>
+    <ul class="checklist">
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">Envoyer un recap ecrit des 8 decisions (WhatsApp ou email)</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">Recevoir la confirmation ecrite d'Elyssa et Lilia (&laquo; oui, c'est bien ce qu'on a decide &raquo;)</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">Declencher les actions urgentes (photographe, domaines, copywriter si applicable)</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">Mettre a jour le board Notion &laquo; Decisions &raquo; avec les 8 reponses</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">Fixer la date de M2 avec Elyssa et Lilia</span></li>
+    </ul>
+  </div>
+
+  <!-- Before M2 -->
+  <div class="checklist-section">
+    <div class="cl-phase-label m2-label">Avant M2 &mdash; Proposition &amp; Go/NoGo</div>
+    <ul class="checklist">
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">Resume des 8 decisions pret (imprime ou affichable)</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text"><code>proposition-site-web-dsa.html</code> ouvert (document principal)</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text"><code>devis-phase1-site-web.html</code> dans un onglet (cache, pour apres le Go)</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text"><code>dsa-master-timeline.html</code> dans un onglet (cache, pour apres le Go)</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">Calendrier ouvert pour fixer le 7 avril</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">Relire les reponses preparees aux objections (section ci-dessus)</span></li>
+    </ul>
+  </div>
+
+  <!-- After Go -->
+  <div class="checklist-section">
+    <div class="cl-phase-label after-label">Apres M2 &mdash; Si Go</div>
+    <ul class="checklist">
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">Envoyer le devis PDF par email pour signature</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">Partager <code>dsa-master-timeline.html</code> avec Elyssa et Lilia</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">Envoyer la liste des contenus a fournir (textes, logos, photos) avec deadlines</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">Creer les issues Phase 1 dans Linear (deja preparees dans linear-setup.md)</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">Recevoir Tranche 1 (10 200 TND) avant de demarrer</span></li>
+      <li><div class="cl-box" onclick="this.parentElement.classList.toggle('checked')"></div><span class="cl-text">Premier Loom update envoye (Semaine 1)</span></li>
+    </ul>
+  </div>
+
+</div>
+
+</body>
+</html>

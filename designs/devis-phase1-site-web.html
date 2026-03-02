@@ -589,9 +589,9 @@ body {
   <!-- ═══ TITLE ═══ -->
   <h1 class="doc-title">Devis &mdash; Site Web <em>Phase 1</em></h1>
   <p class="doc-subtitle">
-    Conception et developpement d'un site vitrine bilingue (FR/EN) pour le Domaine Sidi Abdallah.
-    7 templates de pages, design sur mesure, optimise mobile, geo-detection automatique, integrations newsletter et WhatsApp.
-    Technologie : Next.js 14+, Tailwind CSS, deploiement Vercel.
+    Conception et developpement du site vitrine bilingue (FR/EN) et du systeme de reservation restaurant avec paiement en ligne pour le Domaine Sidi Abdallah.
+    7 templates de pages, design sur mesure, optimise mobile, geo-detection automatique, module reservation Konnect, integrations newsletter et WhatsApp.
+    Technologie : Next.js 14+, Tailwind CSS, Supabase, deploiement Vercel.
   </p>
 
   <!-- ═══ LINE ITEMS ═══ -->
@@ -631,24 +631,38 @@ body {
             </div>
           </details>
         </td>
-        <td class="item-amount">6 000 TND</td>
+        <td class="item-amount">7 000 TND</td>
       </tr>
       <tr>
         <td class="item-number">03</td>
         <td>
-          <div class="item-title">Developpement Frontend (Next.js 14+)</div>
-          <div class="item-desc">Integration des 7 templates de pages : Accueil, Sejourner (Dar Saad), Se Detendre (Agrumia), Deguster, S'evader, Notre Histoire, Contact. Architecture bilingue FR/EN avec routage i18n, geo-detection via Vercel Edge Middleware, composants reactifs, pipeline d'optimisation des images</div>
+          <div class="item-title">Architecture &amp; Developpement Full-Stack</div>
+          <div class="item-desc">Mise en place de l'infrastructure complete (serveur, base de donnees, API), integration des 7 templates de pages, architecture bilingue FR/EN, geo-detection via Vercel Edge Middleware, composants reactifs, optimisation images</div>
           <details class="item-detail">
             <summary>En savoir plus</summary>
             <div class="item-detail-body">
-              C'est la construction du site : transformer les maquettes visuelles en pages web interactives et fonctionnelles. Le site <strong>detectera automatiquement si le visiteur est tunisien ou etranger</strong> et adaptera la langue, le contenu et les appels a l'action en consequence (WhatsApp pour les tunisiens, formulaire pour les internationaux). Chaque photo sera optimisee pour se charger rapidement, meme sur une connexion mobile.
+              C'est la brique la plus importante de tout le projet. Nous construisons l'<strong>infrastructure qui supporte tout le reste</strong> : le serveur qui fait tourner le site, la base de donnees qui stocke les reservations, l'API qui fait communiquer toutes les parties entre elles. Le site detectera automatiquement si le visiteur est tunisien ou etranger et adaptera la langue et les appels a l'action. Cette fondation est construite une seule fois &mdash; les Phases 2 et 3 s'y connectent simplement, sans reconstruction.
             </div>
           </details>
         </td>
-        <td class="item-amount">9 000 TND</td>
+        <td class="item-amount">12 000 TND</td>
       </tr>
       <tr>
         <td class="item-number">04</td>
+        <td>
+          <div class="item-title">Module Reservation Restaurant &amp; Paiement Konnect</div>
+          <div class="item-desc">Systeme de reservation de table en ligne (calendrier de disponibilites, selection de creneaux, gestion des couverts), paiement par Konnect (carte bancaire tunisienne), emails de confirmation automatiques, tableau de bord de gestion des reservations pour l'equipe</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              Ce module permet aux visiteurs de verifier les creneaux disponibles, choisir leur table et <strong>payer directement en ligne</strong> via Konnect (la plateforme de paiement tunisienne). L'equipe du restaurant recoit les reservations en temps reel sur un tableau de bord simple, peut les confirmer ou les modifier, et les clients recoivent un email de confirmation automatique. <strong>C'est le seul module de Phase 1 qui genere directement du chiffre d'affaires des le lancement</strong> &mdash; une table reservee et payee en avance, c'est un revenu garanti.
+            </div>
+          </details>
+        </td>
+        <td class="item-amount">4 000 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">05</td>
         <td>
           <div class="item-title">Integrations</div>
           <div class="item-desc">Newsletter Brevo (2 listes : waitlist + newsletter), boutons WhatsApp avec messages pre-remplis, formulaire de contact, capture email waitlist pour hotel et retraites, analytics (Vercel Analytics)</div>
@@ -662,7 +676,7 @@ body {
         <td class="item-amount">2 500 TND</td>
       </tr>
       <tr>
-        <td class="item-number">05</td>
+        <td class="item-number">06</td>
         <td>
           <div class="item-title">SEO (referencement) &amp; Optimisation Performance (rapidite)</div>
           <div class="item-desc">Donnees structurees Schema.org (LocalBusiness, LodgingBusiness, Restaurant), sitemap.xml, balises meta FR/EN, Open Graph pour partage social, optimisation Core Web Vitals, objectif Lighthouse 95+</div>
@@ -676,7 +690,7 @@ body {
         <td class="item-amount">2 000 TND</td>
       </tr>
       <tr>
-        <td class="item-number">06</td>
+        <td class="item-number">07</td>
         <td>
           <div class="item-title">Recette &amp; Mise en Production</div>
           <div class="item-desc">Tests cross-browser (Chrome, Safari, Firefox, Edge), tests mobile (iOS, Android), QA bilingue, configuration DNS et certificat SSL, deploiement sur Vercel, creation Google Business Profile</div>
@@ -687,10 +701,10 @@ body {
             </div>
           </details>
         </td>
-        <td class="item-amount">1 500 TND</td>
+        <td class="item-amount">2 000 TND</td>
       </tr>
       <tr>
-        <td class="item-number">07</td>
+        <td class="item-number">08</td>
         <td>
           <div class="item-title">Gestion de Projet</div>
           <div class="item-desc">Coordination avec les parties prenantes, reporting d'avancement, organisation de 2 points d'approbation formels (revue staging + validation visuelle), gestion des retours et iterations</div>
@@ -701,7 +715,7 @@ body {
             </div>
           </details>
         </td>
-        <td class="item-amount">1 500 TND</td>
+        <td class="item-amount">2 000 TND</td>
       </tr>
     </tbody>
   </table>
@@ -711,14 +725,14 @@ body {
     <table class="total-table">
       <tr>
         <td>Sous-total</td>
-        <td>25 000 TND</td>
+        <td>34 000 TND</td>
       </tr>
       <tr class="tva-note">
         <td colspan="2">TVA non applicable &mdash; Article 44 du code de la TVA</td>
       </tr>
       <tr class="total-row">
         <td>Total TTC</td>
-        <td>25 000 TND</td>
+        <td>34 000 TND</td>
       </tr>
     </table>
   </div>
@@ -728,19 +742,19 @@ body {
   <div class="payment-grid">
     <div class="payment-card">
       <div class="payment-label">Tranche 1</div>
-      <div class="payment-amount">7 500 TND</div>
+      <div class="payment-amount">10 200 TND</div>
       <div class="payment-pct">30%</div>
       <div class="payment-trigger">A la signature du present devis</div>
     </div>
     <div class="payment-card">
       <div class="payment-label">Tranche 2</div>
-      <div class="payment-amount">10 000 TND</div>
+      <div class="payment-amount">13 600 TND</div>
       <div class="payment-pct">40%</div>
       <div class="payment-trigger">A la validation du site sur l'URL de staging</div>
     </div>
     <div class="payment-card">
       <div class="payment-label">Tranche 3</div>
-      <div class="payment-amount">7 500 TND</div>
+      <div class="payment-amount">10 200 TND</div>
       <div class="payment-pct">30%</div>
       <div class="payment-trigger">A la mise en ligne sur le domaine definitif</div>
     </div>
@@ -776,6 +790,8 @@ body {
         <li>7 templates de pages integres (FR + EN)</li>
         <li>Design sur mesure (desktop + mobile)</li>
         <li>Architecture bilingue avec geo-detection</li>
+        <li>Module reservation restaurant avec paiement Konnect</li>
+        <li>Tableau de bord gestion des reservations restaurant</li>
         <li>Newsletter + waitlist (Brevo)</li>
         <li>Boutons et liens WhatsApp</li>
         <li>Formulaire de contact fonctionnel</li>
@@ -790,8 +806,9 @@ body {
     <div class="scope-col exclusions">
       <h4>Hors perimetre</h4>
       <ul class="scope-list">
-        <li>Systeme de reservation en ligne (Phase 2)</li>
-        <li>Integration paiement Stripe / Konnect (Phase 2)</li>
+        <li>Reservation chambres (Dar Saad) &mdash; Phase 2</li>
+        <li>Reservation bien-etre (Agrumia) &mdash; Phase 2</li>
+        <li>Integration paiement Stripe international &mdash; Phase 2</li>
         <li>CMS / back-office d'edition de contenu</li>
         <li>Redaction de contenu (texte fourni par le client)</li>
         <li>Photographie et production video</li>
@@ -800,6 +817,47 @@ body {
         <li>Synchronisation OTA (Booking.com, Airbnb)</li>
       </ul>
     </div>
+  </div>
+
+  <!-- ═══ PHASES SUIVANTES ═══ -->
+  <div class="section-title">Phases Suivantes &mdash; Vue d'Ensemble</div>
+  <table class="items-table" style="margin-bottom: 36px;">
+    <thead>
+      <tr>
+        <th style="width:30px">#</th>
+        <th>Phase</th>
+        <th style="text-align:right; width:130px">Estimation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="item-number" style="color: var(--grove);">P1</td>
+        <td>
+          <div class="item-title" style="color: var(--grove);">Phase 1 &mdash; Fondation, Site Vitrine &amp; Restaurant <span style="font-size:11px; font-weight:300; color:var(--gold);">&bull; Devis actuel</span></div>
+          <div class="item-desc">Site vitrine bilingue 7 pages, design sur mesure, reservation restaurant Konnect, SEO, deploiement Vercel. Livraison : 9 semaines (Avr &ndash; Mai 2026)</div>
+        </td>
+        <td class="item-amount" style="color: var(--grove); font-weight: 600;">34 000 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">P2</td>
+        <td>
+          <div class="item-title">Phase 2 &mdash; Wellness, Spa &amp; Hotel</div>
+          <div class="item-desc">Module reservation bien-etre (Agrumia), module reservation chambres (Dar Saad), integration Stripe pour paiements internationaux, back-office v2. Livraison : Juin &ndash; Sept 2026</div>
+        </td>
+        <td class="item-amount">~22 000 TND</td>
+      </tr>
+      <tr>
+        <td class="item-number">P3</td>
+        <td>
+          <div class="item-title">Phase 3 &mdash; Retraites &amp; Dashboard Unifie</div>
+          <div class="item-desc">Programmes de retraites avec gestion de groupes, dashboard unifie multi-activites, synchronisation OTA (Booking.com, Airbnb), reporting analytique. Livraison : 2027</div>
+        </td>
+        <td class="item-amount">~12 000 TND</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="background: var(--cream); border-radius: 8px; border-left: 3px solid var(--gold); padding: 14px 18px; margin-bottom: 36px; font-size: 12px; font-weight: 300; color: #59534E; line-height: 1.65;">
+    <strong style="font-weight: 400; color: var(--ink);">Approche par tranches verticales :</strong> chaque phase est un produit complet et operationnel. La Phase 1 suffit a faire fonctionner le site et le restaurant. Les Phases 2 et 3 s'appuient sur la meme infrastructure &mdash; sans reconstruction. Les estimations des Phases 2 et 3 seront precisees en devis formel apres reception du Go sur la Phase 1.
   </div>
 
   <!-- ═══ CONDITIONS ═══ -->

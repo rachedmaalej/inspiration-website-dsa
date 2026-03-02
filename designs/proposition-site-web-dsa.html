@@ -1276,6 +1276,12 @@ body {
         <td>
           <div class="item-title">Design UX/UI &mdash; Wellness, Hotel &amp; Back-office v2</div>
           <div class="item-desc">Maquettes des parcours de reservation spa/wellness, hotel (Dar Saad), et evolution du back-office vers un calendrier unifie</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              En Phase 1, nous avons cree le design system du Domaine &mdash; les regles visuelles qui definissent chaque couleur, chaque police, chaque composant. En Phase 2, nous <strong>etendons ce systeme aux nouveaux modules</strong> sans le reinventer : les parcours de reservation spa et hotel sont nouveaux, mais ils utilisent les memes elements visuels. Le resultat est une experience coherente pour le visiteur, qui reconnait instinctivement qu'il est toujours sur le meme site.
+            </div>
+          </details>
         </td>
         <td class="item-amount">4 000 TND</td>
       </tr>
@@ -1284,6 +1290,12 @@ body {
         <td>
           <div class="item-title">Module Reservation Wellness &amp; Spa</div>
           <div class="item-desc">Gestion multi-ressources (hammam, sauna, cabines massage, cours yoga/pilates), creneaux par prestation, packages combines, confirmation automatique</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              Une reservation de soin est plus complexe qu'une reservation de table. Quand un client reserver un massage, le systeme doit verifier simultanement qu'un praticien est disponible <strong>et</strong> qu'une cabine est libre a ce creneau. Pour un forfait hammam + massage, il enchaine ces verifications dans l'ordre. Tout cela se passe en coulisse &mdash; le client voit simplement les creneaux disponibles et confirme en quelques secondes. Les cours de yoga et pilates fonctionnent differemment (nombre de places par session) et sont geres avec leur propre logique.
+            </div>
+          </details>
         </td>
         <td class="item-amount">6 000 TND</td>
       </tr>
@@ -1292,6 +1304,12 @@ body {
         <td>
           <div class="item-title">Module Reservation Dar Saad (hotel)</div>
           <div class="item-desc">Calendrier de disponibilite pour 6 chambres, tarifs saisonniers, politique d'annulation, gestion des arrhes, confirmation et rappels</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              Le client choisit ses dates d'arrivee et de depart, le systeme verifie quelles chambres sont disponibles pour ces nuits-la, affiche les tarifs correspondants (qui varient selon la saison), et encaisse les arrhes en ligne. Les 6 chambres de Dar Saad ont chacune leur propre calendrier de disponibilite. Cote equipe : les rappels 48h avant l'arrivee et les emails post-sejour sont <strong>envoyes automatiquement</strong>, sans intervention manuelle. C'est le module le plus couteux a developper car il combine le plus de cas particuliers : annulations, modifications, chambres consecutives, forfaits combines avec le spa.
+            </div>
+          </details>
         </td>
         <td class="item-amount">6 000 TND</td>
       </tr>
@@ -1300,6 +1318,12 @@ body {
         <td>
           <div class="item-title">Integration Paiement Stripe (EUR/USD)</div>
           <div class="item-desc">Paiement international par carte (EUR, USD, autres devises), detection automatique du profil client, remboursements</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              Konnect (integre en Phase 1) couvre parfaitement les paiements en dinars tunisiens. Pour les clients internationaux &mdash; qui preferent payer en euros ou en dollars depuis leur banque de Paris ou de Londres &mdash; Stripe est la reference mondiale. Le site <strong>detecte automatiquement le profil du visiteur</strong> et lui presente la bonne option : Konnect pour les visiteurs tunisiens, Stripe pour les internationaux. Les remboursements en cas d'annulation sont traites depuis le meme espace de gestion, sans manipulation manuelle.
+            </div>
+          </details>
         </td>
         <td class="item-amount">2 500 TND</td>
       </tr>
@@ -1308,6 +1332,12 @@ body {
         <td>
           <div class="item-title">Back-office v2 &mdash; Calendrier Unifie &amp; Statistiques</div>
           <div class="item-desc">Vue centralisee restaurant + wellness + hotel, filtres par activite, rapports de frequentation, exports</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              En Phase 1, l'espace de gestion ne montre que les reservations restaurant. En Phase 2, il devient un <strong>tableau de bord unique</strong> : une seule ecran regroupe toutes les reservations &mdash; restaurant, spa, hotel &mdash; sur le meme calendrier. L'equipe voit d'un coup d'oeil combien de couverts sont reserves ce soir, quelles cabines de soin sont occupees demain matin, et quelles chambres accueillent des clients ce week-end. Les rapports de frequentation permettent de comparer les saisons et d'ajuster les tarifs en consequence.
+            </div>
+          </details>
         </td>
         <td class="item-amount">2 000 TND</td>
       </tr>
@@ -1316,6 +1346,12 @@ body {
         <td>
           <div class="item-title">Recette &amp; Mise en Production</div>
           <div class="item-desc">Tests des nouveaux modules, simulation des flux de reservation et paiement Stripe, QA complete</div>
+          <details class="item-detail">
+            <summary>En savoir plus</summary>
+            <div class="item-detail-body">
+              La meme verification rigoureuse qu'en Phase 1, etendue aux nouveaux modules : simuler des reservations de soin et de chambre sur tous les appareils, tester des paiements reels en euros et en dollars, verifier les annulations et remboursements. Phase 2 ajoute Stripe et plusieurs nouveaux parcours de reservation &mdash; un test approfondi avant mise en ligne est ce qui distingue un lancement sans accroc d'un week-end de corrections d'urgence.
+            </div>
+          </details>
         </td>
         <td class="item-amount">1 500 TND</td>
       </tr>
